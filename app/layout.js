@@ -1,0 +1,85 @@
+import './globals.css';
+import WhatsAppWidget from './components/WhatsAppWidget';
+
+export const metadata = {
+  title: 'ISTS - Institute of Safety & Technical Studies | Professional Safety & HSE Certifications',
+  description: 'Get internationally recognized OSHA, IOSH, OTHM, and HiQual certifications. Professional safety training with expert trainers. Start your career today!',
+  keywords: 'OSHA certification, IOSH course, safety training, HSE course, QA/QC training, NEBOSH, safety officer course, Pakistan',
+  authors: [{ name: 'ISTS Institute' }],
+  openGraph: {
+    title: 'ISTS - Institute of Safety & Technical Studies',
+    description: 'Professional safety and technical certifications for career growth',
+    url: 'https://ists.com',
+    siteName: 'ISTS Institute',
+    images: [
+      {
+        url: '/logo.jpeg',
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    google: 'your-google-verification-code',
+  },
+};
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body className="bg-gray-100 text-gray-800 font-sans">
+        {/* NAVBAR */}
+        <nav className="bg-blue-900 text-white px-6 md:px-10 py-4 flex flex-col md:flex-row justify-between items-center sticky top-0 z-50 shadow-lg">
+          <div className="flex items-center gap-3 mb-4 md:mb-0">
+            <img src="/logo.jpeg" alt="ISTS Logo" className="w-12 h-12 rounded-full" />
+            <h1 className="text-xl md:text-2xl font-bold text-white">ISTS</h1>
+          </div>
+
+          <div className="flex items-center gap-4 md:gap-6 font-medium">
+            <a href="/" className="hover:text-orange-400 transition">Home</a>
+            <a href="/courses" className="hover:text-orange-400 transition">Courses</a>
+            <a href="/about" className="hover:text-orange-400 transition">About</a>
+            <a href="/contact" className="hover:text-orange-400 transition">Contact</a>
+            <a href="/register" className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-5 rounded-full transition duration-300 shadow-lg">
+              Register Now
+            </a>
+            <a href="/admin" className="bg-blue-700 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 border border-blue-500">
+              👑 Admin
+            </a>
+          </div>
+        </nav>
+
+        {/* PAGE CONTENT */}
+        {children}
+
+        {/* FOOTER */}
+        <footer className="bg-blue-900 text-white text-center py-8 mt-16">
+          <div className="max-w-6xl mx-auto px-4">
+            <div className="mb-4">
+              <span className="text-orange-400 font-bold text-xl">ISTS</span>
+              <p className="text-sm mt-1">Institute of Safety & Technical Studies</p>
+            </div>
+            <p className="text-gray-300">Phone: +92 316 1720551 | Email: info@ists.com</p>
+            <p className="text-gray-400 text-sm mt-4">© 2026 ISTS. All rights reserved.</p>
+          </div>
+        </footer>
+
+        {/* WhatsApp Chat Widget */}
+        <WhatsAppWidget />
+      </body>
+    </html>
+  );
+}
