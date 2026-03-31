@@ -6,11 +6,10 @@ export async function GET() {
     try {
         const client = await clientPromise;
         const db = client.db('ists');
-        const courses = await db.collection('courses').find({}).sort({ category: 1, name: 1 }).toArray();
+        const courses = await db.collection('courses').find({}).toArray();
         return NextResponse.json(courses);
     } catch (error) {
-        console.error('GET Error:', error);
-        return NextResponse.json([]);
+        return NextResponse.json({ error: error.message }, { status: 500 });
     }
 }
 
@@ -19,40 +18,26 @@ export async function POST(req) {
         const body = await req.json();
         const client = await clientPromise;
         const db = client.db('ists');
-        const newCourse = { ...body, createdAt: new Date(), updatedAt: new Date() };
-        const result = await db.collection('courses').insertOne(newCourse);
+        const result = await db.collection('courses').insertOne(body);
         return NextResponse.json({ success: true, id: result.insertedId });
     } catch (error) {
-        console.error('POST Error:', error);
-        return NextResponse.json({ error: 'Failed to create course' }, { status: 500 });
+        return NextResponse.json({ error: error.message }, { status: 500 });
     }
 }
 
 export async function PUT(req) {
     try {
         const body = await req.json();
-        const { id, ...updateData } = body;
-
-        if (!id) {
-            return NextResponse.json({ error: 'Course ID is required' }, { status: 400 });
-        }
-
+        const { id, ...data } = body;
         const client = await clientPromise;
         const db = client.db('ists');
-
-        const result = await db.collection('courses').updateOne(
+        await db.collection('courses').updateOne(
             { _id: new ObjectId(id) },
-            { $set: { ...updateData, updatedAt: new Date() } }
+            { $set: data }
         );
-
-        if (result.matchedCount === 0) {
-            return NextResponse.json({ error: 'Course not found' }, { status: 404 });
-        }
-
         return NextResponse.json({ success: true });
     } catch (error) {
-        console.error('PUT Error:', error);
-        return NextResponse.json({ error: 'Failed to update course' }, { status: 500 });
+        return NextResponse.json({ error: error.message }, { status: 500 });
     }
 }
 
@@ -61,10 +46,10 @@ export async function DELETE(req) {
         const url = new URL(req.url);
         const id = url.searchParams.get('id');
 
-        console.log('DELETE request received for ID:', id);
+        console.log('DELETE called with ID:', id);
 
         if (!id) {
-            return NextResponse.json({ error: 'Course ID is required' }, { status: 400 });
+            return NextResponse.json({ error: 'No ID provided' }, { status: 400 });
         }
 
         const client = await clientPromise;
@@ -80,7 +65,7 @@ export async function DELETE(req) {
 
         return NextResponse.json({ success: true, deletedCount: result.deletedCount });
     } catch (error) {
-        console.error('DELETE Error:', error);
-        return NextResponse.json({ error: 'Failed to delete course: ' + error.message }, { status: 500 });
+        console.error('DELETE error:', error);
+        return NextResponse.json({ error: error.message }, { status: 500 });
     }
 }
