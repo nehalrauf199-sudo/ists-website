@@ -15,8 +15,8 @@ export async function GET() {
 
 export async function DELETE(req) {
     try {
-        const { searchParams } = new URL(req.url);
-        const id = searchParams.get('id');
+        const url = new URL(req.url);
+        const id = url.searchParams.get('id');
 
         if (!id) {
             return NextResponse.json({ error: 'No ID provided' }, { status: 400 });
@@ -32,6 +32,25 @@ export async function DELETE(req) {
         }
 
         return NextResponse.json({ success: true });
+    } catch (error) {
+        return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+}
+
+export async function POST(req) {
+    try {
+        const body = await req.json();
+        const client = await clientPromise;
+        const db = client.db('ists');
+
+        const newCourse = {
+            ...body,
+            createdAt: new Date(),
+            updatedAt: new Date()
+        };
+
+        const result = await db.collection('courses').insertOne(newCourse);
+        return NextResponse.json({ success: true, id: result.insertedId });
     } catch (error) {
         return NextResponse.json({ error: error.message }, { status: 500 });
     }
