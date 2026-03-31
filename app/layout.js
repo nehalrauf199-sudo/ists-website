@@ -1,5 +1,6 @@
 import './globals.css';
 import WhatsAppWidget from './components/WhatsAppWidget';
+import Script from 'next/script';
 
 export const metadata = {
   title: 'ISTS - Institute of Safety & Technical Studies | Professional Safety & HSE Certifications',
@@ -37,9 +38,30 @@ export const metadata = {
   },
 };
 
+const GA_MEASUREMENT_ID = 'G-18TJMCKHW1';
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        {/* Google Analytics */}
+        <Script
+          strategy="afterInteractive"
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+        />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${GA_MEASUREMENT_ID}');
+            `,
+          }}
+        />
+      </head>
       <body className="bg-gray-100 text-gray-800 font-sans">
         {/* NAVBAR */}
         <nav className="bg-blue-900 text-white px-6 md:px-10 py-4 flex flex-col md:flex-row justify-between items-center sticky top-0 z-50 shadow-lg">
