@@ -83,7 +83,7 @@ export default function AdminDashboard() {
                 fetch('/api/admin/registrations'),
                 fetch('/api/admin/contacts'),
                 fetch('/api/admin/settings'),
-                fetch('/api/admin/courses'),
+                fetch('/api/manage/courses'),
                 fetch('/api/admin/reviews')
             ]);
 
@@ -156,7 +156,7 @@ export default function AdminDashboard() {
             const method = editingCourse ? 'PUT' : 'POST';
             const body = editingCourse ? { ...courseForm, id: editingCourse._id } : courseForm;
 
-            const response = await fetch('/api/admin/courses', {
+            const response = await fetch('/api/manage/courses', {
                 method,
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(body)
@@ -178,6 +178,8 @@ export default function AdminDashboard() {
                     learningObjectives: []
                 });
                 fetchData();
+            } else {
+                alert('Failed to save course');
             }
         } catch (error) {
             console.error('Error saving course:', error);
@@ -188,7 +190,7 @@ export default function AdminDashboard() {
     const deleteCourse = async (id) => {
         if (confirm('Are you sure you want to delete this course?')) {
             try {
-                const response = await fetch(`/api/admin/courses?id=${id}`, {
+                const response = await fetch(`/api/manage/courses?id=${id}`, {
                     method: 'DELETE'
                 });
                 if (response.ok) {
@@ -497,7 +499,7 @@ export default function AdminDashboard() {
                                     {filteredContacts.length === 0 ? <div className="text-center py-12"><div className="text-4xl mb-4">📭</div><p className="text-gray-500">{contactSearch ? `No contacts matching "${contactSearch}"` : 'No contact messages yet'}</p></div> :
                                         <div className="overflow-x-auto">
                                             <table className="w-full"><thead className="bg-gray-100"><tr><th className="p-4 text-left">Date</th><th className="p-4 text-left">Name</th><th className="p-4 text-left">Email</th><th className="p-4 text-left">Phone</th><th className="p-4 text-left">Message</th></tr></thead>
-                                                <tbody>{filteredContacts.map((contact, index) => (<tr key={index} className="border-b hover:bg-gray-50"><td className="p-4 text-sm">{new Date(contact.submittedAt).toLocaleDateString()}</td><td className="p-4 font-medium">{contact.name}</td><td className="p-4 text-sm text-blue-600">{contact.email}</td><td className="p-4 text-sm">{contact.phone}</td><td className="p-4 text-sm max-w-md">{contact.message}</td></tr>))}</tbody>
+                                                <tbody>{filteredContacts.map((contact, index) => (<tr key={index} className="border-b hover:bg-gray-50"><td className="p-4 text-sm">{new Date(contact.submittedAt).toLocaleDateString()}</td><td className="p-4 font-medium">{contact.name}</td><td className="p-4 text-sm text-blue-600">{contact.email}</td><td className="p-4 text-sm">{contact.phone}</td><td className="p-4 text-sm max-w-md">{contact.message}</td>))}</tbody>
                                             </table>
                                         </div>}
                                 </div>
