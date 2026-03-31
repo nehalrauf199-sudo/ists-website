@@ -18,22 +18,19 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Custom Styles for Better Visual Appeal */
+/* Custom Styles */
 .rounded-2xl {
   border-radius: 1.5rem;
 }
 
-/* Hover effect for course boxes */
 .group:hover .rounded-2xl {
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 }
 
-/* Smooth scrolling */
 html {
   scroll-behavior: smooth;
 }
 
-/* Custom selection color */
 ::selection {
   background-color: #f97316;
   color: white;
@@ -60,12 +57,6 @@ html {
     font-size: 14px;
   }
 
-  .bg-orange-500,
-  .bg-blue-700 {
-    padding: 8px 16px !important;
-    font-size: 14px !important;
-  }
-
   /* Hero Section */
   section.relative {
     padding: 60px 20px !important;
@@ -79,7 +70,7 @@ html {
     font-size: 16px !important;
   }
 
-  /* Grid Layouts - Make all columns single column */
+  /* Grid Layouts - Single column on mobile */
   .grid {
     grid-template-columns: 1fr !important;
     gap: 20px !important;
@@ -177,16 +168,6 @@ html {
     font-size: 28px !important;
   }
 
-  /* About Page */
-  .grid.md\:grid-cols-2 {
-    grid-template-columns: 1fr !important;
-  }
-
-  /* Reviews */
-  .testimonial-card {
-    padding: 20px !important;
-  }
-
   /* Admin Dashboard Tables */
   .overflow-x-auto {
     overflow-x: auto;
@@ -224,6 +205,11 @@ html {
   .bg-white.rounded-2xl {
     margin: 0 5px;
   }
+
+  /* Admin button in navbar - ensure it fits */
+  nav .bg-blue-700 {
+    white-space: nowrap;
+  }
 }
 
 @media (max-width: 480px) {
@@ -252,11 +238,6 @@ html {
     font-size: 12px !important;
   }
 
-  /* Hide some elements if needed */
-  .hidden-mobile {
-    display: none;
-  }
-
   /* Smaller padding for cards */
   .p-8 {
     padding: 20px !important;
@@ -275,7 +256,7 @@ html {
     font-size: 28px !important;
   }
 
-  /* WhatsApp Widget size on very small phones */
+  /* WhatsApp Widget size */
   .w-80 {
     width: 280px !important;
   }
