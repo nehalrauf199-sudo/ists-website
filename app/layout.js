@@ -65,29 +65,33 @@ export default function RootLayout({ children }) {
       </head>
       <body className="bg-gray-100 text-gray-800 font-sans">
         {/* NAVBAR */}
-        <nav className="bg-blue-900 text-white px-4 py-3 flex justify-between items-center sticky top-0 z-50 shadow-lg">
-          {/* Logo on LEFT side */}
-          <div className="flex items-center gap-2">
-            <img src="/logo.jpeg" alt="ISTS Logo" className="w-10 h-10 rounded-full" />
-            <h1 className="text-lg font-bold text-white">ISTS</h1>
-          </div>
+        <nav className="bg-blue-900 text-white px-4 py-3 sticky top-0 z-50 shadow-lg">
+          <div className="flex justify-between items-center w-full">
+            {/* Logo on LEFT */}
+            <div className="flex items-center gap-2">
+              <img src="/logo.jpeg" alt="ISTS Logo" className="w-10 h-10 rounded-full" />
+              <h1 className="text-lg font-bold text-white">ISTS</h1>
+            </div>
 
-          {/* Desktop Menu - Hidden on mobile */}
-          <div className="hidden md:flex items-center gap-4">
-            <a href="/" className="hover:text-orange-400 transition text-sm">Home</a>
-            <a href="/courses" className="hover:text-orange-400 transition text-sm">Courses</a>
-            <a href="/about" className="hover:text-orange-400 transition text-sm">About</a>
-            <a href="/contact" className="hover:text-orange-400 transition text-sm">Contact</a>
-            <a href="/register" className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-1.5 px-4 rounded-full text-sm transition">
-              Register
-            </a>
-            <a href="/admin" className="bg-blue-700 hover:bg-blue-600 text-white font-semibold py-1.5 px-4 rounded-lg text-sm transition border border-blue-500">
-              👑 Admin
-            </a>
-          </div>
+            {/* Desktop Menu - Hidden on mobile */}
+            <div className="hidden md:flex items-center gap-4">
+              <a href="/" className="hover:text-orange-400 transition text-sm">Home</a>
+              <a href="/courses" className="hover:text-orange-400 transition text-sm">Courses</a>
+              <a href="/about" className="hover:text-orange-400 transition text-sm">About</a>
+              <a href="/contact" className="hover:text-orange-400 transition text-sm">Contact</a>
+              <a href="/register" className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-1.5 px-4 rounded-full text-sm transition">
+                Register
+              </a>
+              <a href="/admin" className="bg-blue-700 hover:bg-blue-600 text-white font-semibold py-1.5 px-4 rounded-lg text-sm transition border border-blue-500">
+                👑 Admin
+              </a>
+            </div>
 
-          {/* Mobile Menu Button - on RIGHT side */}
-          <MobileMenu />
+            {/* Mobile Menu Button - on RIGHT */}
+            <div className="md:hidden">
+              <MobileMenu />
+            </div>
+          </div>
         </nav>
 
         {/* PAGE CONTENT */}

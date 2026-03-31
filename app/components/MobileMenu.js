@@ -15,10 +15,10 @@ export default function MobileMenu() {
 
     return (
         <>
-            {/* Hamburger Button - on the RIGHT side */}
+            {/* Hamburger Button - RIGHT side */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="md:hidden flex flex-col items-center justify-center w-10 h-10 rounded-lg hover:bg-blue-800 transition"
+                className="flex flex-col items-center justify-center w-10 h-10 rounded-lg hover:bg-blue-800 transition"
                 aria-label="Menu"
             >
                 <span className={`block w-6 h-0.5 bg-white transition-all duration-300 ${isOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
@@ -28,7 +28,7 @@ export default function MobileMenu() {
 
             {/* Mobile Menu Dropdown */}
             {isOpen && (
-                <div className="absolute top-14 left-0 right-0 bg-blue-900 shadow-lg z-50 md:hidden">
+                <div className="absolute top-14 left-0 right-0 bg-blue-900 shadow-lg z-50">
                     <div className="flex flex-col p-4 space-y-2">
                         {menuItems.map((item, index) => (
                             <a
