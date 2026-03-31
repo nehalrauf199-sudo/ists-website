@@ -106,25 +106,28 @@ export default function Testimonials() {
                             <>
                                 <button
                                     onClick={prevTestimonial}
-                                    className="absolute left-0 top-1/2 -translate-y-1/2 bg-white rounded-full p-2 shadow-lg hover:bg-gray-100 transition"
+                                    className="absolute left-0 top-1/2 -translate-y-1/2 bg-white rounded-full p-2 shadow-lg hover:bg-gray-100 transition text-sm md:text-base"
                                 >
                                     ◀
                                 </button>
                                 <button
                                     onClick={nextTestimonial}
-                                    className="absolute right-0 top-1/2 -translate-y-1/2 bg-white rounded-full p-2 shadow-lg hover:bg-gray-100 transition"
+                                    className="absolute right-0 top-1/2 -translate-y-1/2 bg-white rounded-full p-2 shadow-lg hover:bg-gray-100 transition text-sm md:text-base"
                                 >
                                     ▶
                                 </button>
                             </>
                         )}
 
-                        <div className="flex justify-center gap-2 mt-6">
+                        {/* DOTS - FIXED FOR MOBILE (smaller and better looking) */}
+                        <div className="flex justify-center gap-1.5 md:gap-2 mt-6">
                             {reviews.map((_, idx) => (
                                 <button
                                     key={idx}
                                     onClick={() => setActiveIndex(idx)}
-                                    className={`w-2 h-2 rounded-full transition-all duration-300 ${activeIndex === idx ? 'w-6 bg-orange-500' : 'bg-gray-300 hover:bg-gray-400'
+                                    className={`rounded-full transition-all duration-300 ${activeIndex === idx
+                                        ? 'w-4 md:w-6 h-1.5 md:h-2 bg-orange-500'
+                                        : 'w-1.5 md:w-2 h-1.5 md:h-2 bg-gray-300 hover:bg-gray-400'
                                         }`}
                                 />
                             ))}
