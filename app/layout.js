@@ -66,7 +66,7 @@ export default function RootLayout({ children }) {
       <body className="bg-gray-100 text-gray-800 font-sans">
         {/* NAVBAR */}
         <nav className="bg-blue-900 text-white px-4 py-3 flex justify-between items-center sticky top-0 z-50 shadow-lg">
-          {/* Logo */}
+          {/* Logo on LEFT side */}
           <div className="flex items-center gap-2">
             <img src="/logo.jpeg" alt="ISTS Logo" className="w-10 h-10 rounded-full" />
             <h1 className="text-lg font-bold text-white">ISTS</h1>
@@ -86,7 +86,7 @@ export default function RootLayout({ children }) {
             </a>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button - on RIGHT side */}
           <MobileMenu />
         </nav>
 
