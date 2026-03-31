@@ -64,16 +64,23 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className="bg-gray-100 text-gray-800 font-sans">
-        {/* NAVBAR */}
+        {/* ========== NAVBAR ========== */}
         <nav className="bg-blue-900 text-white px-4 py-3 sticky top-0 z-50 shadow-lg">
+          {/* Flex container to push logo left and hamburger right */}
           <div className="flex justify-between items-center w-full">
-            {/* Logo on LEFT */}
+
+            {/* LEFT SIDE - LOGO */}
             <div className="flex items-center gap-2">
               <img src="/logo.jpeg" alt="ISTS Logo" className="w-10 h-10 rounded-full" />
               <h1 className="text-lg font-bold text-white">ISTS</h1>
             </div>
 
-            {/* Desktop Menu - Hidden on mobile */}
+            {/* RIGHT SIDE - HAMBURGER MENU (visible only on mobile) */}
+            <div className="md:hidden">
+              <MobileMenu />
+            </div>
+
+            {/* DESKTOP MENU (hidden on mobile) */}
             <div className="hidden md:flex items-center gap-4">
               <a href="/" className="hover:text-orange-400 transition text-sm">Home</a>
               <a href="/courses" className="hover:text-orange-400 transition text-sm">Courses</a>
@@ -85,11 +92,6 @@ export default function RootLayout({ children }) {
               <a href="/admin" className="bg-blue-700 hover:bg-blue-600 text-white font-semibold py-1.5 px-4 rounded-lg text-sm transition border border-blue-500">
                 👑 Admin
               </a>
-            </div>
-
-            {/* Mobile Menu Button - on RIGHT */}
-            <div className="md:hidden">
-              <MobileMenu />
             </div>
           </div>
         </nav>
