@@ -14,7 +14,17 @@ export async function POST(req) {
         const settings = await db.collection('settings').findOne({ _id: 'site_settings' });
 
         const directorName = settings?.directorName || 'Arshan Rauf';
-        const signaturePath = settings?.signaturePath || null;
+        const directorTitle = settings?.directorTitle || 'Director';
+
+        // Get signature from MongoDB (not filesystem)
+        let signatureBase64 = '';
+        if (settings?.signatureData) {
+            signatureBase64 = `data:image/png;base64,${settings.signatureData}`;
+        }
+
+        // Get email from settings or fallback to env
+        const senderEmail = settings?.email || process.env.EMAIL_USER;
+        const adminEmail = process.env.ADMIN_EMAIL || senderEmail;
 
         const certificateId = `ISTS-${Date.now()}-${Math.floor(Math.random() * 10000)}`;
 
@@ -41,19 +51,9 @@ export async function POST(req) {
             logoBase64 = `data:image/jpeg;base64,${logoBuffer.toString('base64')}`;
         }
 
-        // Get signature as base64
-        let signatureBase64 = '';
-        if (signaturePath) {
-            const fullSignaturePath = path.join(process.cwd(), 'public', signaturePath);
-            if (fs.existsSync(fullSignaturePath)) {
-                const sigBuffer = fs.readFileSync(fullSignaturePath);
-                signatureBase64 = `data:image/png;base64,${sigBuffer.toString('base64')}`;
-            }
-        }
-
         const certificateViewUrl = `${baseUrl}/api/certificate/view?id=${certificateId}`;
 
-        // Professional Certificate HTML - NO SAVE BUTTON
+        // Professional Certificate HTML
         const certificateHtml = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -86,7 +86,6 @@ export async function POST(req) {
             overflow: hidden;
         }
         
-        /* 4-SIDE GRADIENT BORDER - BLUE + ORANGE */
         .four-side-border {
             background: linear-gradient(135deg, #1e3a8a, #f97316, #1e3a8a, #f97316);
             padding: 12px;
@@ -98,7 +97,6 @@ export async function POST(req) {
             padding: 45px 55px;
         }
         
-        /* Logo */
         .logo-img {
             width: 100px;
             height: 100px;
@@ -130,7 +128,6 @@ export async function POST(req) {
             margin: 12px auto;
         }
         
-        /* Title */
         .cert-title {
             text-align: center;
             font-size: 38px;
@@ -146,7 +143,6 @@ export async function POST(req) {
             color: #4b5563;
         }
         
-        /* Student Name with Lines */
         .student-wrapper {
             display: flex;
             align-items: center;
@@ -174,7 +170,6 @@ export async function POST(req) {
             background: linear-gradient(90deg, #1e3a8a, #f97316);
         }
         
-        /* Course */
         .course-text {
             text-align: center;
             font-size: 15px;
@@ -196,7 +191,6 @@ export async function POST(req) {
             padding-bottom: 5px;
         }
         
-        /* Footer */
         .footer {
             display: flex;
             justify-content: space-between;
@@ -220,7 +214,6 @@ export async function POST(req) {
             margin-top: 5px;
         }
         
-        /* Signature - LARGER SIZE */
         .signature-section {
             text-align: center;
             width: 280px;
@@ -311,7 +304,6 @@ export async function POST(req) {
     <div class="certificate-container">
         <div class="four-side-border">
             <div class="certificate-white">
-                <!-- Logo -->
                 <div>
                     ${logoBase64 ? `<img src="${logoBase64}" class="logo-img">` : '<div style="width:100px;height:100px;background:#1e3a8a;border-radius:50%;margin:0 auto;"></div>'}
                     <div class="institute-name">INSTITUTE OF SAFETY & TECHNICAL STUDIES</div>
@@ -319,23 +311,19 @@ export async function POST(req) {
                     <div class="divider"></div>
                 </div>
                 
-                <!-- Title -->
                 <div class="cert-title">CERTIFICATE OF COMPLETION</div>
                 <div class="present-text">This is to certify that</div>
                 
-                <!-- Student Name with Lines -->
                 <div class="student-wrapper">
                     <div class="line-left"></div>
                     <div class="student-name">${studentName.toUpperCase()}</div>
                     <div class="line-right"></div>
                 </div>
                 
-                <!-- Course -->
                 <div class="course-text">has successfully completed the course</div>
                 <div class="course-name"><span>${courseName}</span></div>
                 <div class="course-text">with demonstrated excellence in occupational safety and technical studies</div>
                 
-                <!-- Footer -->
                 <div class="footer">
                     <div class="date-section">
                         <div class="date-label">ISSUED ON</div>
@@ -344,7 +332,7 @@ export async function POST(req) {
                     <div class="signature-section">
                         ${signatureBase64 ? `<img src="${signatureBase64}" class="signature-img">` : '<div class="signature-line"></div>'}
                         <div class="signature-name">${directorName}</div>
-                        <div class="signature-title">Director</div>
+                        <div class="signature-title">${directorTitle}</div>
                     </div>
                 </div>
             </div>
@@ -353,11 +341,11 @@ export async function POST(req) {
 </body>
 </html>`;
 
-        // Send email
+        // Send email using dynamic sender email from settings
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: process.env.EMAIL_USER,
+                user: senderEmail,
                 pass: process.env.EMAIL_PASS
             }
         });
@@ -396,7 +384,7 @@ export async function POST(req) {
         `;
 
         await transporter.sendMail({
-            from: process.env.EMAIL_USER,
+            from: `"ISTS Institute" <${senderEmail}>`,
             to: studentEmail,
             subject: `🎓 Your Certificate of Completion - ${courseName}`,
             html: emailContent
