@@ -1,7 +1,5 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
-import fs from 'fs';
-import path from 'path';
 import clientPromise from '@/app/lib/mongodb';
 
 export async function POST(req) {
@@ -27,55 +25,36 @@ export async function POST(req) {
             );
         }
 
-        // Handle file upload
-        let fileInfo = null;
+        // Handle file upload - convert to base64 for MongoDB
+        let cvData = null;
+        let cvFileName = null;
 
         if (file && file.size > 0) {
             const bytes = await file.arrayBuffer();
             const buffer = Buffer.from(bytes);
-
-            const uploadDir = path.join(process.cwd(), 'uploads');
-            if (!fs.existsSync(uploadDir)) {
-                fs.mkdirSync(uploadDir, { recursive: true });
-            }
-
-            const timestamp = Date.now();
-            const originalName = file.name;
-            const fileName = `${timestamp}_${originalName}`;
-            const filePath = path.join(uploadDir, fileName);
-
-            fs.writeFileSync(filePath, buffer);
-
-            fileInfo = {
-                originalName: originalName,
-                fileName: fileName,
-                size: file.size,
-                type: file.type
-            };
+            cvData = buffer.toString('base64');
+            cvFileName = file.name;
         }
 
         // Save to database
-        let savedToDB = false;
-        try {
-            const client = await clientPromise;
-            const db = client.db('ists');
-            await db.collection('registrations').insertOne({
-                course,
-                name,
-                phone,
-                email,
-                education,
-                experience: experience || '',
-                message: message || '',
-                cvFileName: fileInfo ? fileInfo.fileName : null,
-                registeredAt: new Date(),
-                status: 'pending'
-            });
-            savedToDB = true;
-            console.log('Saved to database');
-        } catch (dbError) {
-            console.error('Database error:', dbError);
-        }
+        const client = await clientPromise;
+        const db = client.db('ists');
+
+        await db.collection('registrations').insertOne({
+            course,
+            name,
+            phone,
+            email,
+            education,
+            experience: experience || '',
+            message: message || '',
+            cvFileName: cvFileName,
+            cvData: cvData, // Store CV as base64 in database
+            registeredAt: new Date(),
+            status: 'pending'
+        });
+
+        console.log('Saved to database');
 
         // Send email
         const transporter = nodemailer.createTransport({
@@ -100,6 +79,7 @@ export async function POST(req) {
                 <p><strong>Education:</strong> ${education}</p>
                 <p><strong>Experience:</strong> ${experience || 'Not provided'}</p>
                 <p><strong>Message:</strong> ${message || 'No message'}</p>
+                <p><strong>CV Attached:</strong> ${cvFileName || 'No CV uploaded'}</p>
                 <hr>
                 <p>Registration Date: ${new Date().toLocaleString()}</p>
             `
