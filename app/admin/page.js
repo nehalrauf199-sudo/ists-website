@@ -275,6 +275,12 @@ export default function AdminDashboard() {
             return;
         }
 
+        // Validate file size (max 2MB)
+        if (file.size > 2 * 1024 * 1024) {
+            alert('File size too large. Max 2MB');
+            return;
+        }
+
         const formData = new FormData();
         formData.append('signature', file);
 
@@ -287,10 +293,7 @@ export default function AdminDashboard() {
             const result = await response.json();
 
             if (response.ok && result.success) {
-                // Refresh settings to show the uploaded signature
-                const settingsRes = await fetch('/api/admin/settings');
-                const newSettings = await settingsRes.json();
-                setSettings(newSettings);
+                setSettings(result.data);
                 alert('Signature uploaded successfully!');
             } else {
                 alert('Failed to upload signature: ' + (result.error || 'Unknown error'));
@@ -412,7 +415,7 @@ export default function AdminDashboard() {
                                                 <tbody>
                                                     {filteredRegistrations.map((reg, index) => (
                                                         <tr key={index} className="border-b hover:bg-gray-50">
-                                                            <td className="p-4 text-sm">{new Date(reg.registeredAt).toLocaleDateString()} </td>
+                                                            <td className="p-4 text-sm">{new Date(reg.registeredAt).toLocaleDateString()}  </td>
                                                             <td className="p-4 font-medium">{reg.name}</td>
                                                             <td className="p-4 text-sm text-blue-600">{reg.email}</td>
                                                             <td className="p-4 text-sm">{reg.phone}</td>
