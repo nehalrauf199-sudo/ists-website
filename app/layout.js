@@ -1,5 +1,6 @@
 import './globals.css';
 import WhatsAppWidget from './components/WhatsAppWidget';
+import MobileMenu from './components/MobileMenu';
 import Script from 'next/script';
 
 export const metadata = {
@@ -63,25 +64,30 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className="bg-gray-100 text-gray-800 font-sans">
-        {/* NAVBAR - FIXED FOR MOBILE */}
-        <nav className="bg-blue-900 text-white px-4 py-4 flex flex-col md:flex-row justify-between items-center sticky top-0 z-50 shadow-lg">
-          <div className="flex items-center justify-center gap-3 mb-4 md:mb-0 w-full md:w-auto">
-            <img src="/logo.jpeg" alt="ISTS Logo" className="w-10 h-10 md:w-12 md:h-12 rounded-full" />
-            <h1 className="text-lg md:text-xl font-bold text-white">ISTS</h1>
+        {/* NAVBAR */}
+        <nav className="bg-blue-900 text-white px-4 py-3 flex justify-between items-center sticky top-0 z-50 shadow-lg">
+          {/* Logo */}
+          <div className="flex items-center gap-2">
+            <img src="/logo.jpeg" alt="ISTS Logo" className="w-10 h-10 rounded-full" />
+            <h1 className="text-lg font-bold text-white">ISTS</h1>
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-2 md:gap-4">
-            <a href="/" className="hover:text-orange-400 transition text-sm md:text-base px-2 py-1">Home</a>
-            <a href="/courses" className="hover:text-orange-400 transition text-sm md:text-base px-2 py-1">Courses</a>
-            <a href="/about" className="hover:text-orange-400 transition text-sm md:text-base px-2 py-1">About</a>
-            <a href="/contact" className="hover:text-orange-400 transition text-sm md:text-base px-2 py-1">Contact</a>
-            <a href="/register" className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-1 px-3 rounded-full text-sm transition">
+          {/* Desktop Menu - Hidden on mobile */}
+          <div className="hidden md:flex items-center gap-4">
+            <a href="/" className="hover:text-orange-400 transition text-sm">Home</a>
+            <a href="/courses" className="hover:text-orange-400 transition text-sm">Courses</a>
+            <a href="/about" className="hover:text-orange-400 transition text-sm">About</a>
+            <a href="/contact" className="hover:text-orange-400 transition text-sm">Contact</a>
+            <a href="/register" className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-1.5 px-4 rounded-full text-sm transition">
               Register
             </a>
-            <a href="/admin" className="bg-blue-700 hover:bg-blue-600 text-white font-semibold py-1 px-3 rounded-lg text-sm transition border border-blue-500">
+            <a href="/admin" className="bg-blue-700 hover:bg-blue-600 text-white font-semibold py-1.5 px-4 rounded-lg text-sm transition border border-blue-500">
               👑 Admin
             </a>
           </div>
+
+          {/* Mobile Menu Button */}
+          <MobileMenu />
         </nav>
 
         {/* PAGE CONTENT */}
