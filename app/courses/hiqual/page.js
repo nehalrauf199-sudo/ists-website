@@ -14,7 +14,6 @@ export default function HiQual() {
         try {
             const response = await fetch('/api/admin/courses');
             const allCourses = await response.json();
-            // Filter only HiQual courses
             const hiqualCourses = allCourses.filter(course =>
                 course.category === 'HiQual' || course.category === 'HIQUAL' || course.category === 'hiqual'
             );
@@ -45,7 +44,6 @@ export default function HiQual() {
 
     return (
         <div className="min-h-screen bg-gray-50 py-10 px-4">
-            {/* Header */}
             <div className="text-center mb-10">
                 <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-900 to-orange-600 bg-clip-text text-transparent">
                     HiQual Certifications

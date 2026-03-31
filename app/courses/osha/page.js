@@ -14,7 +14,6 @@ export default function OSHA() {
         try {
             const response = await fetch('/api/admin/courses');
             const allCourses = await response.json();
-            // Filter only OSHA courses
             const oshaCourses = allCourses.filter(course =>
                 course.category === 'OSHA' || course.category === 'osha'
             );
@@ -45,7 +44,6 @@ export default function OSHA() {
 
     return (
         <div className="min-h-screen bg-gray-50 py-10 px-4">
-            {/* Header */}
             <div className="text-center mb-10">
                 <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-900 to-orange-600 bg-clip-text text-transparent">
                     OSHA Certification Courses
@@ -59,7 +57,6 @@ export default function OSHA() {
                 </p>
             </div>
 
-            {/* Course Grid - 3 columns */}
             <div className="max-w-7xl mx-auto">
                 {courses.length === 0 ? (
                     <div className="text-center py-12 bg-white rounded-xl shadow-lg">

@@ -45,3 +45,97 @@ html {
   background-color: #f97316;
   color: white;
 }
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+
+  /* Navbar */
+  nav {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+
+  nav .flex.items-center {
+    margin-bottom: 10px;
+  }
+
+  nav a {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  /* Hero Section */
+  section.text-center {
+    padding: 60px 20px !important;
+  }
+
+  section.text-center h1 {
+    font-size: 28px !important;
+  }
+
+  section.text-center p {
+    font-size: 16px !important;
+  }
+
+  /* Grid Layouts */
+  .grid {
+    gap: 20px !important;
+  }
+
+  .grid.md\:grid-cols-2,
+  .grid.md\:grid-cols-3,
+  .grid.md\:grid-cols-4 {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Cards */
+  .bg-white.rounded-xl {
+    padding: 20px !important;
+  }
+
+  /* Buttons */
+  button,
+  a.bg-orange-500,
+  a.bg-blue-900 {
+    padding: 10px 20px !important;
+    font-size: 14px !important;
+  }
+
+  /* Forms */
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+    padding: 12px !important;
+  }
+
+  /* Footer */
+  footer {
+    padding: 30px 20px !important;
+  }
+
+  footer p {
+    font-size: 12px !important;
+  }
+}
+
+@media (max-width: 480px) {
+
+  /* Very small phones */
+  section.text-center h1 {
+    font-size: 24px !important;
+  }
+
+  .text-3xl {
+    font-size: 24px !important;
+  }
+
+  .text-4xl {
+    font-size: 28px !important;
+  }
+
+  .student-name {
+    font-size: 24px !important;
+  }
+}

@@ -1,0 +1,2917 @@
+[
+  {
+    "_id": "69ca916d1581e888f92773b0",
+    "name": "OSHA 10-Hour Construction Safety",
+    "category": "OSHA",
+    "hours": "10 hours",
+    "content": [
+      "Basic hazard recognition",
+      "Fall protection awareness",
+      "PPE basics",
+      "Electrical safety"
+    ],
+    "outcomes": [
+      "Understand workplace hazards",
+      "Follow basic safety rules"
+    ],
+    "eligibility": "No prior experience required. Open to all workers.",
+    "modules": [
+      "Introduction to OSHA",
+      "Fall Protection Basics",
+      "PPE",
+      "Electrical Safety",
+      "Hazard Communication"
+    ],
+    "learningObjectives": [
+      "Recognize construction hazards",
+      "Understand fall protection",
+      "Identify proper PPE",
+      "Follow electrical safety"
+    ],
+    "createdAt": "2026-03-30T15:06:21.833Z",
+    "updatedAt": "2026-03-30T15:06:21.833Z"
+  },
+  {
+    "_id": "69ca916d1581e888f92773b1",
+    "name": "OSHA 30-Hour Construction Safety",
+    "category": "OSHA",
+    "hours": "30 hours",
+    "content": [
+      "Fall protection",
+      "Scaffolding",
+      "Excavation",
+      "Electrical hazards",
+      "PPE"
+    ],
+    "outcomes": [
+      "Identify construction risks",
+      "Apply advanced safety procedures"
+    ],
+    "eligibility": "Construction workers and supervisors.",
+    "modules": [
+      "Advanced Fall Protection",
+      "Scaffolding Safety",
+      "Excavation Safety",
+      "Electrical Safety",
+      "PPE Training"
+    ],
+    "learningObjectives": [
+      "Identify construction hazards",
+      "Implement safety procedures",
+      "Conduct inspections",
+      "Lead safety meetings"
+    ],
+    "createdAt": "2026-03-30T15:06:21.836Z",
+    "updatedAt": "2026-03-30T15:06:21.836Z"
+  },
+  {
+    "_id": "69ca916d1581e888f92773b2",
+    "name": "OSHA 10-Hour General Industry",
+    "category": "OSHA",
+    "hours": "10 hours",
+    "content": [
+      "Workplace safety basics",
+      "Emergency plans",
+      "Hazard communication"
+    ],
+    "outcomes": [
+      "Basic industrial safety awareness"
+    ],
+    "eligibility": "Factory and warehouse workers.",
+    "modules": [
+      "Safety Basics",
+      "Emergency Plans",
+      "Hazard Communication",
+      "Fire Safety",
+      "Walking Surfaces"
+    ],
+    "learningObjectives": [
+      "Understand safety requirements",
+      "Identify hazards",
+      "Respond to emergencies",
+      "Read safety data sheets"
+    ],
+    "createdAt": "2026-03-30T15:06:21.849Z",
+    "updatedAt": "2026-03-30T15:06:21.849Z"
+  },
+  {
+    "_id": "69ca916d1581e888f92773b3",
+    "name": "OSHA 30-Hour General Industry",
+    "category": "OSHA",
+    "hours": "30 hours",
+    "content": [
+      "Machine guarding",
+      "Fire safety",
+      "Chemical safety",
+      "Ergonomics"
+    ],
+    "outcomes": [
+      "Control industrial hazards",
+      "Improve workplace safety"
+    ],
+    "eligibility": "Industrial supervisors.",
+    "modules": [
+      "Machine Guarding",
+      "Fire Safety",
+      "Chemical Safety",
+      "Ergonomics",
+      "Electrical Safety"
+    ],
+    "learningObjectives": [
+      "Implement machine guarding",
+      "Develop fire safety",
+      "Manage chemicals",
+      "Apply ergonomics"
+    ],
+    "createdAt": "2026-03-30T15:06:21.867Z",
+    "updatedAt": "2026-03-30T15:06:21.867Z"
+  },
+  {
+    "_id": "69ca916d1581e888f92773b4",
+    "name": "OSHA 10-Hour Maritime",
+    "category": "OSHA",
+    "hours": "10 hours",
+    "content": [
+      "Shipyard safety",
+      "Marine terminal safety",
+      "Personal flotation devices"
+    ],
+    "outcomes": [
+      "Work safely in maritime"
+    ],
+    "eligibility": "Shipyard workers.",
+    "modules": [
+      "Maritime Safety",
+      "Flotation Devices",
+      "Hazard Communication",
+      "Fire Protection",
+      "Emergency Response"
+    ],
+    "learningObjectives": [
+      "Identify maritime hazards",
+      "Use flotation devices",
+      "Follow safe practices",
+      "Respond to emergencies"
+    ],
+    "createdAt": "2026-03-30T15:06:21.870Z",
+    "updatedAt": "2026-03-30T15:06:21.870Z"
+  },
+  {
+    "_id": "69ca916d1581e888f92773b5",
+    "name": "OSHA 30-Hour Maritime",
+    "category": "OSHA",
+    "hours": "30 hours",
+    "content": [
+      "Advanced shipyard safety",
+      "Marine terminal operations",
+      "Crane safety"
+    ],
+    "outcomes": [
+      "Manage maritime safety"
+    ],
+    "eligibility": "Maritime supervisors.",
+    "modules": [
+      "Shipyard Safety",
+      "Terminal Operations",
+      "Crane Safety",
+      "Confined Space",
+      "Emergency Coordination"
+    ],
+    "learningObjectives": [
+      "Develop safety programs",
+      "Supervise operations",
+      "Manage cranes",
+      "Coordinate emergencies"
+    ],
+    "createdAt": "2026-03-30T15:06:21.874Z",
+    "updatedAt": "2026-03-30T15:06:21.874Z"
+  },
+  {
+    "_id": "69ca916d1581e888f92773b6",
+    "name": "OSHA 15-Hour Disaster Training",
+    "category": "OSHA",
+    "hours": "15 hours",
+    "content": [
+      "Disaster site operations",
+      "Debris removal",
+      "Emergency response"
+    ],
+    "outcomes": [
+      "Work safely at disaster sites"
+    ],
+    "eligibility": "Disaster response workers.",
+    "modules": [
+      "Disaster Safety",
+      "Debris Removal",
+      "Emergency Response",
+      "Hazmat Awareness",
+      "PPE"
+    ],
+    "learningObjectives": [
+      "Identify disaster hazards",
+      "Follow debris removal",
+      "Coordinate response",
+      "Use PPE"
+    ],
+    "createdAt": "2026-03-30T15:06:21.878Z",
+    "updatedAt": "2026-03-30T15:06:21.878Z"
+  },
+  {
+    "_id": "69ca916d1581e888f92773b7",
+    "name": "OSHA 7.5-Hour Disaster Refresher",
+    "category": "OSHA",
+    "hours": "7.5 hours",
+    "content": [
+      "Updated disaster protocols",
+      "Safety refresher"
+    ],
+    "outcomes": [
+      "Maintain certification"
+    ],
+    "eligibility": "Certified disaster workers.",
+    "modules": [
+      "Updated Protocols",
+      "Hazard Recognition",
+      "Emergency Updates",
+      "PPE Refresher"
+    ],
+    "learningObjectives": [
+      "Stay current with standards",
+      "Refresh hazard knowledge",
+      "Maintain readiness"
+    ],
+    "createdAt": "2026-03-30T15:06:21.882Z",
+    "updatedAt": "2026-03-30T15:06:21.882Z"
+  },
+  {
+    "_id": "69ca916d1581e888f92773b8",
+    "name": "OSHA 510 – Construction Standards",
+    "category": "OSHA",
+    "hours": "30 hours",
+    "content": [
+      "Construction standards",
+      "OSHA regulations",
+      "Compliance"
+    ],
+    "outcomes": [
+      "Apply OSHA standards"
+    ],
+    "eligibility": "Safety professionals.",
+    "modules": [
+      "Standards Overview",
+      "29 CFR 1926",
+      "Compliance",
+      "Inspection",
+      "Record keeping"
+    ],
+    "learningObjectives": [
+      "Interpret standards",
+      "Conduct inspections",
+      "Apply regulations",
+      "Maintain records"
+    ],
+    "createdAt": "2026-03-30T15:06:21.884Z",
+    "updatedAt": "2026-03-30T15:06:21.884Z"
+  },
+  {
+    "_id": "69ca916d1581e888f92773b9",
+    "name": "OSHA 511 – General Industry Standards",
+    "category": "OSHA",
+    "hours": "30 hours",
+    "content": [
+      "Industry standards",
+      "OSHA regulations",
+      "Compliance"
+    ],
+    "outcomes": [
+      "Apply industry standards"
+    ],
+    "eligibility": "Industrial safety pros.",
+    "modules": [
+      "Industry Standards",
+      "29 CFR 1910",
+      "Compliance",
+      "Inspection",
+      "Documentation"
+    ],
+    "learningObjectives": [
+      "Interpret standards",
+      "Conduct inspections",
+      "Ensure compliance",
+      "Maintain records"
+    ],
+    "createdAt": "2026-03-30T15:06:21.887Z",
+    "updatedAt": "2026-03-30T15:06:21.887Z"
+  },
+  {
+    "_id": "69ca916d1581e888f92773ba",
+    "name": "OSHA 521 – Industrial Hygiene",
+    "category": "OSHA",
+    "hours": "30 hours",
+    "content": [
+      "Chemical hazards",
+      "Physical agents",
+      "Biological hazards"
+    ],
+    "outcomes": [
+      "Control hygiene hazards"
+    ],
+    "eligibility": "Safety professionals.",
+    "modules": [
+      "Chemical Hazards",
+      "Physical Agents",
+      "Biological Hazards",
+      "Sampling",
+      "Monitoring"
+    ],
+    "learningObjectives": [
+      "Recognize hazards",
+      "Conduct assessments",
+      "Implement controls",
+      "Monitor conditions"
+    ],
+    "createdAt": "2026-03-30T15:06:21.891Z",
+    "updatedAt": "2026-03-30T15:06:21.891Z"
+  },
+  {
+    "_id": "69ca916d1581e888f92773bb",
+    "name": "OSHA Maritime Standards (5410)",
+    "category": "OSHA",
+    "hours": "30 hours",
+    "content": [
+      "Maritime standards",
+      "Shipyard employment",
+      "Marine terminals"
+    ],
+    "outcomes": [
+      "Apply maritime standards"
+    ],
+    "eligibility": "Maritime safety pros.",
+    "modules": [
+      "Maritime Standards",
+      "Shipyard Safety",
+      "Terminal Operations",
+      "Compliance",
+      "Inspection"
+    ],
+    "learningObjectives": [
+      "Interpret standards",
+      "Conduct inspections",
+      "Ensure compliance",
+      "Manage safety"
+    ],
+    "createdAt": "2026-03-30T15:06:21.894Z",
+    "updatedAt": "2026-03-30T15:06:21.894Z"
+  },
+  {
+    "_id": "69ca916d1581e888f92773bc",
+    "name": "OSHA 500 – Trainer Course (Construction)",
+    "category": "OSHA",
+    "hours": "30 hours",
+    "content": [
+      "Training methods",
+      "Construction safety",
+      "Trainer requirements"
+    ],
+    "outcomes": [
+      "Become authorized trainer"
+    ],
+    "eligibility": "Safety pros with 510 certification.",
+    "modules": [
+      "Training Methods",
+      "Construction Safety",
+      "Student Assessment",
+      "Course Development",
+      "Requirements"
+    ],
+    "learningObjectives": [
+      "Deliver courses",
+      "Develop materials",
+      "Assess students",
+      "Maintain status"
+    ],
+    "createdAt": "2026-03-30T15:06:21.905Z",
+    "updatedAt": "2026-03-30T15:06:21.905Z"
+  },
+  {
+    "_id": "69ca916d1581e888f92773bd",
+    "name": "OSHA 501 – Trainer Course (General Industry)",
+    "category": "OSHA",
+    "hours": "30 hours",
+    "content": [
+      "Training methods",
+      "Industry safety",
+      "Trainer requirements"
+    ],
+    "outcomes": [
+      "Become authorized trainer"
+    ],
+    "eligibility": "Safety pros with 511 certification.",
+    "modules": [
+      "Training Methods",
+      "Industry Safety",
+      "Student Assessment",
+      "Course Development",
+      "Requirements"
+    ],
+    "learningObjectives": [
+      "Deliver courses",
+      "Develop materials",
+      "Assess students",
+      "Maintain status"
+    ],
+    "createdAt": "2026-03-30T15:06:21.940Z",
+    "updatedAt": "2026-03-30T15:06:21.941Z"
+  },
+  {
+    "_id": "69ca916d1581e888f92773be",
+    "name": "OSHA 502 / 503 – Trainer Updates",
+    "category": "OSHA",
+    "hours": "18-24 hours",
+    "content": [
+      "Regulation updates",
+      "New standards",
+      "Trainer refresher"
+    ],
+    "outcomes": [
+      "Maintain trainer status"
+    ],
+    "eligibility": "Current authorized trainers.",
+    "modules": [
+      "Regulation Updates",
+      "New Standards",
+      "Technique Refresher",
+      "Case Studies"
+    ],
+    "learningObjectives": [
+      "Stay current",
+      "Update materials",
+      "Improve delivery",
+      "Maintain status"
+    ],
+    "createdAt": "2026-03-30T15:06:21.955Z",
+    "updatedAt": "2026-03-30T15:06:21.955Z"
+  },
+  {
+    "_id": "69ca916d1581e888f92773bf",
+    "name": "Fall Protection",
+    "category": "OSHA",
+    "hours": "4-8 hours",
+    "content": [
+      "Fall hazard recognition",
+      "Guardrail systems",
+      "Safety nets",
+      "Arrest systems"
+    ],
+    "outcomes": [
+      "Prevent falls"
+    ],
+    "eligibility": "Workers at heights.",
+    "modules": [
+      "Hazard Recognition",
+      "Guardrails",
+      "Safety Nets",
+      "Arrest Systems",
+      "Inspection"
+    ],
+    "learningObjectives": [
+      "Identify hazards",
+      "Select systems",
+      "Inspect equipment",
+      "Prevent falls"
+    ],
+    "createdAt": "2026-03-30T15:06:21.958Z",
+    "updatedAt": "2026-03-30T15:06:21.958Z"
+  },
+  {
+    "_id": "69ca916d1581e888f92773c0",
+    "name": "Scaffolding Safety",
+    "category": "OSHA",
+    "hours": "4-8 hours",
+    "content": [
+      "Scaffold erection",
+      "Inspection",
+      "Load capacity",
+      "Fall protection"
+    ],
+    "outcomes": [
+      "Work safely on scaffolds"
+    ],
+    "eligibility": "Construction workers.",
+    "modules": [
+      "Scaffold Types",
+      "Erection",
+      "Inspection",
+      "Load Capacity",
+      "Fall Protection"
+    ],
+    "learningObjectives": [
+      "Identify hazards",
+      "Follow erection",
+      "Conduct inspections",
+      "Ensure loads"
+    ],
+    "createdAt": "2026-03-30T15:06:21.964Z",
+    "updatedAt": "2026-03-30T15:06:21.964Z"
+  },
+  {
+    "_id": "69ca916d1581e888f92773c1",
+    "name": "Excavation & Trenching",
+    "category": "OSHA",
+    "hours": "4-8 hours",
+    "content": [
+      "Soil classification",
+      "Protective systems",
+      "Sloping",
+      "Safe entry"
+    ],
+    "outcomes": [
+      "Prevent trench collapse"
+    ],
+    "eligibility": "Excavation workers.",
+    "modules": [
+      "Soil Classification",
+      "Protective Systems",
+      "Sloping",
+      "Entry/Exit",
+      "Inspection"
+    ],
+    "learningObjectives": [
+      "Classify soil",
+      "Select systems",
+      "Implement sloping",
+      "Conduct inspections"
+    ],
+    "createdAt": "2026-03-30T15:06:21.966Z",
+    "updatedAt": "2026-03-30T15:06:21.966Z"
+  },
+  {
+    "_id": "69ca916d1581e888f92773c2",
+    "name": "Ladder Safety",
+    "category": "OSHA",
+    "hours": "2-4 hours",
+    "content": [
+      "Ladder selection",
+      "Inspection",
+      "Setup",
+      "Climbing techniques"
+    ],
+    "outcomes": [
+      "Prevent ladder falls"
+    ],
+    "eligibility": "All workers.",
+    "modules": [
+      "Ladder Types",
+      "Inspection",
+      "Setup",
+      "Climbing",
+      "Storage"
+    ],
+    "learningObjectives": [
+      "Select ladder",
+      "Inspect",
+      "Set up safely",
+      "Climb correctly"
+    ],
+    "createdAt": "2026-03-30T15:06:21.973Z",
+    "updatedAt": "2026-03-30T15:06:21.973Z"
+  },
+  {
+    "_id": "69ca916d1581e888f92773c3",
+    "name": "Electrical Safety",
+    "category": "OSHA",
+    "hours": "4-8 hours",
+    "content": [
+      "Electrical hazards",
+      "Lockout/tagout",
+      "Arc flash",
+      "Grounding"
+    ],
+    "outcomes": [
+      "Work safely with electricity"
+    ],
+    "eligibility": "Electricians.",
+    "modules": [
+      "Hazard Recognition",
+      "Lockout/Tagout",
+      "Arc Flash",
+      "Grounding",
+      "Safe Practices"
+    ],
+    "learningObjectives": [
+      "Identify hazards",
+      "Implement LOTO",
+      "Protect from arc flash",
+      "Follow practices"
+    ],
+    "createdAt": "2026-03-30T15:06:21.980Z",
+    "updatedAt": "2026-03-30T15:06:21.980Z"
+  },
+  {
+    "_id": "69ca916d1581e888f92773c4",
+    "name": "Lockout/Tagout (LOTO)",
+    "category": "OSHA",
+    "hours": "4-6 hours",
+    "content": [
+      "Energy control",
+      "Lockout devices",
+      "Tagout systems",
+      "Verification"
+    ],
+    "outcomes": [
+      "Prevent startup"
+    ],
+    "eligibility": "Maintenance workers.",
+    "modules": [
+      "Energy Control",
+      "Lockout Devices",
+      "Tagout Systems",
+      "Verification",
+      "Inspections"
+    ],
+    "learningObjectives": [
+      "Develop procedures",
+      "Select devices",
+      "Implement systems",
+      "Verify isolation"
+    ],
+    "createdAt": "2026-03-30T15:06:21.982Z",
+    "updatedAt": "2026-03-30T15:06:21.982Z"
+  },
+  {
+    "_id": "69ca916d1581e888f92773c5",
+    "name": "Machine Guarding",
+    "category": "OSHA",
+    "hours": "4-6 hours",
+    "content": [
+      "Machine hazards",
+      "Guard types",
+      "Safety devices",
+      "Inspection"
+    ],
+    "outcomes": [
+      "Prevent injuries"
+    ],
+    "eligibility": "Machine operators.",
+    "modules": [
+      "Hazard Recognition",
+      "Guard Types",
+      "Safety Devices",
+      "Inspection",
+      "Maintenance"
+    ],
+    "learningObjectives": [
+      "Identify hazards",
+      "Select guards",
+      "Implement devices",
+      "Conduct inspections"
+    ],
+    "createdAt": "2026-03-30T15:06:21.985Z",
+    "updatedAt": "2026-03-30T15:06:21.985Z"
+  },
+  {
+    "_id": "69ca916d1581e888f92773c6",
+    "name": "Forklift Safety",
+    "category": "OSHA",
+    "hours": "6-8 hours",
+    "content": [
+      "Forklift operation",
+      "Load handling",
+      "Stability",
+      "Pedestrian safety"
+    ],
+    "outcomes": [
+      "Operate safely"
+    ],
+    "eligibility": "Forklift operators.",
+    "modules": [
+      "Operation",
+      "Load Handling",
+      "Stability",
+      "Pedestrian Safety",
+      "Inspection"
+    ],
+    "learningObjectives": [
+      "Operate safely",
+      "Handle loads",
+      "Maintain stability",
+      "Protect pedestrians"
+    ],
+    "createdAt": "2026-03-30T15:06:21.987Z",
+    "updatedAt": "2026-03-30T15:06:21.987Z"
+  },
+  {
+    "_id": "69ca916d1581e888f92773c7",
+    "name": "Hazard Communication",
+    "category": "OSHA",
+    "hours": "2-4 hours",
+    "content": [
+      "SDS",
+      "Chemical labeling",
+      "GHS",
+      "Training"
+    ],
+    "outcomes": [
+      "Understand chemicals"
+    ],
+    "eligibility": "All workers.",
+    "modules": [
+      "SDS",
+      "Labeling",
+      "GHS Standards",
+      "Training",
+      "Program Development"
+    ],
+    "learningObjectives": [
+      "Read SDS",
+      "Identify labels",
+      "Apply GHS",
+      "Train workers"
+    ],
+    "createdAt": "2026-03-30T15:06:21.990Z",
+    "updatedAt": "2026-03-30T15:06:21.990Z"
+  },
+  {
+    "_id": "69ca916d1581e888f92773c8",
+    "name": "Industrial Hygiene",
+    "category": "OSHA",
+    "hours": "6-10 hours",
+    "content": [
+      "Chemical agents",
+      "Physical agents",
+      "Biological agents",
+      "Monitoring"
+    ],
+    "outcomes": [
+      "Control health hazards"
+    ],
+    "eligibility": "Safety pros.",
+    "modules": [
+      "Chemical Agents",
+      "Physical Agents",
+      "Biological Agents",
+      "Monitoring",
+      "Controls"
+    ],
+    "learningObjectives": [
+      "Recognize hazards",
+      "Conduct monitoring",
+      "Implement controls",
+      "Evaluate conditions"
+    ],
+    "createdAt": "2026-03-30T15:06:21.994Z",
+    "updatedAt": "2026-03-30T15:06:21.994Z"
+  },
+  {
+    "_id": "69ca916d1581e888f92773c9",
+    "name": "Asbestos Awareness",
+    "category": "OSHA",
+    "hours": "4 hours",
+    "content": [
+      "Asbestos identification",
+      "Health effects",
+      "Regulations",
+      "Safe practices"
+    ],
+    "outcomes": [
+      "Work safely around asbestos"
+    ],
+    "eligibility": "Construction workers.",
+    "modules": [
+      "Identification",
+      "Health Effects",
+      "Regulations",
+      "Safe Practices",
+      "PPE"
+    ],
+    "learningObjectives": [
+      "Identify materials",
+      "Understand risks",
+      "Follow practices",
+      "Use PPE"
+    ],
+    "createdAt": "2026-03-30T15:06:21.997Z",
+    "updatedAt": "2026-03-30T15:06:21.997Z"
+  },
+  {
+    "_id": "69ca916d1581e888f92773ca",
+    "name": "Lead Safety",
+    "category": "OSHA",
+    "hours": "4-6 hours",
+    "content": [
+      "Lead exposure",
+      "Health effects",
+      "Protective measures",
+      "Medical surveillance"
+    ],
+    "outcomes": [
+      "Prevent lead poisoning"
+    ],
+    "eligibility": "Construction workers.",
+    "modules": [
+      "Exposure Sources",
+      "Health Effects",
+      "Protective Measures",
+      "Surveillance",
+      "PPE"
+    ],
+    "learningObjectives": [
+      "Identify sources",
+      "Understand effects",
+      "Implement measures",
+      "Follow surveillance"
+    ],
+    "createdAt": "2026-03-30T15:06:21.999Z",
+    "updatedAt": "2026-03-30T15:06:21.999Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773cb",
+    "name": "Silica Safety",
+    "category": "OSHA",
+    "hours": "2-4 hours",
+    "content": [
+      "Silica dust",
+      "Control measures",
+      "Respiratory protection",
+      "Monitoring"
+    ],
+    "outcomes": [
+      "Prevent silica diseases"
+    ],
+    "eligibility": "Construction workers.",
+    "modules": [
+      "Dust Hazards",
+      "Control Measures",
+      "Respiratory Protection",
+      "Monitoring",
+      "Housekeeping"
+    ],
+    "learningObjectives": [
+      "Recognize hazards",
+      "Implement controls",
+      "Use protection",
+      "Follow monitoring"
+    ],
+    "createdAt": "2026-03-30T15:06:22.001Z",
+    "updatedAt": "2026-03-30T15:06:22.001Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773cc",
+    "name": "Fire Safety",
+    "category": "OSHA",
+    "hours": "2-4 hours",
+    "content": [
+      "Fire prevention",
+      "Extinguisher use",
+      "Evacuation",
+      "Emergency planning"
+    ],
+    "outcomes": [
+      "Prevent and respond to fires"
+    ],
+    "eligibility": "All employees.",
+    "modules": [
+      "Prevention",
+      "Extinguishers",
+      "Evacuation",
+      "Planning",
+      "Alarms"
+    ],
+    "learningObjectives": [
+      "Prevent fires",
+      "Use extinguishers",
+      "Follow evacuation",
+      "Develop plans"
+    ],
+    "createdAt": "2026-03-30T15:06:22.004Z",
+    "updatedAt": "2026-03-30T15:06:22.004Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773cd",
+    "name": "Emergency Response",
+    "category": "OSHA",
+    "hours": "4-6 hours",
+    "content": [
+      "Action plans",
+      "First aid",
+      "CPR",
+      "AED use"
+    ],
+    "outcomes": [
+      "Respond to emergencies"
+    ],
+    "eligibility": "All employees.",
+    "modules": [
+      "Action Plans",
+      "First Aid",
+      "CPR",
+      "AED",
+      "Communication"
+    ],
+    "learningObjectives": [
+      "Implement plans",
+      "Provide first aid",
+      "Perform CPR",
+      "Use AED"
+    ],
+    "createdAt": "2026-03-30T15:06:22.013Z",
+    "updatedAt": "2026-03-30T15:06:22.013Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773ce",
+    "name": "Crane & Rigging Safety",
+    "category": "OSHA",
+    "hours": "4-8 hours",
+    "content": [
+      "Crane operation",
+      "Rigging techniques",
+      "Load calculation",
+      "Signals"
+    ],
+    "outcomes": [
+      "Work safely with cranes"
+    ],
+    "eligibility": "Operators and riggers.",
+    "modules": [
+      "Operation",
+      "Rigging",
+      "Load Calculation",
+      "Signals",
+      "Inspection"
+    ],
+    "learningObjectives": [
+      "Operate cranes",
+      "Perform rigging",
+      "Calculate loads",
+      "Communicate signals"
+    ],
+    "createdAt": "2026-03-30T15:06:22.016Z",
+    "updatedAt": "2026-03-30T15:06:22.016Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773cf",
+    "name": "Confined Space Entry",
+    "category": "OSHA",
+    "hours": "4-8 hours",
+    "content": [
+      "Space identification",
+      "Atmospheric testing",
+      "Entry permits",
+      "Rescue"
+    ],
+    "outcomes": [
+      "Enter safely"
+    ],
+    "eligibility": "Entry workers.",
+    "modules": [
+      "Identification",
+      "Testing",
+      "Permits",
+      "Entry Procedures",
+      "Rescue"
+    ],
+    "learningObjectives": [
+      "Identify spaces",
+      "Conduct testing",
+      "Follow permits",
+      "Perform rescue"
+    ],
+    "createdAt": "2026-03-30T15:06:22.019Z",
+    "updatedAt": "2026-03-30T15:06:22.019Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773d0",
+    "name": "H2S Safety",
+    "category": "OSHA",
+    "hours": "4-6 hours",
+    "content": [
+      "H2S hazards",
+      "Detection",
+      "Protective equipment",
+      "Emergency response"
+    ],
+    "outcomes": [
+      "Work safely in H2S"
+    ],
+    "eligibility": "Oil and gas workers.",
+    "modules": [
+      "Hazards",
+      "Detection",
+      "Protective Equipment",
+      "Emergency Response",
+      "Rescue"
+    ],
+    "learningObjectives": [
+      "Recognize hazards",
+      "Use detection",
+      "Select PPE",
+      "Respond to emergencies"
+    ],
+    "createdAt": "2026-03-30T15:06:22.022Z",
+    "updatedAt": "2026-03-30T15:06:22.022Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773d1",
+    "name": "Job Safety Analysis (JSA)",
+    "category": "OSHA",
+    "hours": "4-6 hours",
+    "content": [
+      "Task analysis",
+      "Hazard identification",
+      "Risk assessment",
+      "Controls"
+    ],
+    "outcomes": [
+      "Conduct JSAs"
+    ],
+    "eligibility": "Supervisors.",
+    "modules": [
+      "Task Analysis",
+      "Hazard ID",
+      "Risk Assessment",
+      "Controls",
+      "Documentation"
+    ],
+    "learningObjectives": [
+      "Break down tasks",
+      "Identify hazards",
+      "Assess risks",
+      "Develop controls"
+    ],
+    "createdAt": "2026-03-30T15:06:22.024Z",
+    "updatedAt": "2026-03-30T15:06:22.024Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773d2",
+    "name": "OSHA 48-Hour Master Safety",
+    "category": "OSHA",
+    "hours": "48 hours",
+    "content": [
+      "Advanced safety management",
+      "Comprehensive hazard control",
+      "Program development",
+      "Compliance"
+    ],
+    "outcomes": [
+      "Master safety management"
+    ],
+    "eligibility": "Experienced safety pros.",
+    "modules": [
+      "Safety Management",
+      "Hazard Control",
+      "Program Development",
+      "Compliance",
+      "Auditing"
+    ],
+    "learningObjectives": [
+      "Develop programs",
+      "Implement controls",
+      "Ensure compliance",
+      "Conduct audits"
+    ],
+    "createdAt": "2026-03-30T15:06:22.027Z",
+    "updatedAt": "2026-03-30T15:06:22.027Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773d3",
+    "name": "OTHM Level 3 Diploma in Business Management",
+    "category": "OTHM",
+    "hours": "60 credits",
+    "content": [
+      "Business communication",
+      "Marketing basics",
+      "Finance basics"
+    ],
+    "outcomes": [
+      "Understand business fundamentals"
+    ],
+    "eligibility": "Secondary school leavers.",
+    "modules": [
+      "Introduction to Business",
+      "Communication",
+      "Marketing",
+      "Finance"
+    ],
+    "learningObjectives": [
+      "Explain business concepts",
+      "Communicate effectively",
+      "Apply marketing",
+      "Understand finance"
+    ],
+    "createdAt": "2026-03-30T15:06:22.030Z",
+    "updatedAt": "2026-03-30T15:06:22.030Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773d4",
+    "name": "OTHM Level 3 Diploma in Health & Social Care",
+    "category": "OTHM",
+    "hours": "60 credits",
+    "content": [
+      "Patient care",
+      "Health systems",
+      "Communication"
+    ],
+    "outcomes": [
+      "Provide basic care"
+    ],
+    "eligibility": "School leavers.",
+    "modules": [
+      "Introduction to Care",
+      "Patient Care",
+      "Health Systems",
+      "Communication"
+    ],
+    "learningObjectives": [
+      "Understand care principles",
+      "Provide patient care",
+      "Navigate systems",
+      "Communicate effectively"
+    ],
+    "createdAt": "2026-03-30T15:06:22.032Z",
+    "updatedAt": "2026-03-30T15:06:22.032Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773d5",
+    "name": "OTHM Level 3 Diploma in Information Technology",
+    "category": "OTHM",
+    "hours": "60 credits",
+    "content": [
+      "Computer systems",
+      "Software basics",
+      "IT skills"
+    ],
+    "outcomes": [
+      "Use computer systems"
+    ],
+    "eligibility": "Basic computer knowledge.",
+    "modules": [
+      "Computer Systems",
+      "Software",
+      "IT Skills",
+      "Digital Literacy"
+    ],
+    "learningObjectives": [
+      "Operate computers",
+      "Use software",
+      "Develop IT skills",
+      "Apply literacy"
+    ],
+    "createdAt": "2026-03-30T15:06:22.034Z",
+    "updatedAt": "2026-03-30T15:06:22.034Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773d6",
+    "name": "OTHM Level 4 Diploma in Business Management",
+    "category": "OTHM",
+    "hours": "120 credits",
+    "content": [
+      "Business environment",
+      "HR management",
+      "Accounting"
+    ],
+    "outcomes": [
+      "Manage operations"
+    ],
+    "eligibility": "Level 3 qualification.",
+    "modules": [
+      "Business Environment",
+      "HR Management",
+      "Accounting",
+      "Marketing",
+      "Operations"
+    ],
+    "learningObjectives": [
+      "Analyze environment",
+      "Manage HR",
+      "Handle accounting",
+      "Develop marketing"
+    ],
+    "createdAt": "2026-03-30T15:06:22.038Z",
+    "updatedAt": "2026-03-30T15:06:22.038Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773d7",
+    "name": "OTHM Level 4 Diploma in Logistics & Supply Chain",
+    "category": "OTHM",
+    "hours": "120 credits",
+    "content": [
+      "Inventory management",
+      "Transport systems",
+      "Procurement"
+    ],
+    "outcomes": [
+      "Manage supply chain"
+    ],
+    "eligibility": "Level 3 qualification.",
+    "modules": [
+      "Inventory",
+      "Transportation",
+      "Procurement",
+      "Warehouse",
+      "Analytics"
+    ],
+    "learningObjectives": [
+      "Manage inventory",
+      "Optimize transport",
+      "Handle procurement",
+      "Analyze data"
+    ],
+    "createdAt": "2026-03-30T15:06:22.041Z",
+    "updatedAt": "2026-03-30T15:06:22.041Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773d8",
+    "name": "OTHM Level 4 Diploma in Information Technology",
+    "category": "OTHM",
+    "hours": "120 credits",
+    "content": [
+      "Networking",
+      "Database systems",
+      "Web development"
+    ],
+    "outcomes": [
+      "Design IT solutions"
+    ],
+    "eligibility": "Level 3 IT qualification.",
+    "modules": [
+      "Networking",
+      "Databases",
+      "Web Development",
+      "Programming",
+      "Security"
+    ],
+    "learningObjectives": [
+      "Design networks",
+      "Manage databases",
+      "Develop websites",
+      "Implement security"
+    ],
+    "createdAt": "2026-03-30T15:06:22.044Z",
+    "updatedAt": "2026-03-30T15:06:22.044Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773d9",
+    "name": "OTHM Level 4 Diploma in Health & Social Care",
+    "category": "OTHM",
+    "hours": "120 credits",
+    "content": [
+      "Healthcare management",
+      "Social care policies",
+      "Patient rights"
+    ],
+    "outcomes": [
+      "Manage healthcare"
+    ],
+    "eligibility": "Level 3 Care qualification.",
+    "modules": [
+      "Healthcare Management",
+      "Social Policies",
+      "Patient Rights",
+      "Communication",
+      "Care Planning"
+    ],
+    "learningObjectives": [
+      "Manage services",
+      "Apply policies",
+      "Respect rights",
+      "Develop plans"
+    ],
+    "createdAt": "2026-03-30T15:06:22.046Z",
+    "updatedAt": "2026-03-30T15:06:22.046Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773da",
+    "name": "OTHM Level 5 Diploma in Business Management",
+    "category": "OTHM",
+    "hours": "120 credits",
+    "content": [
+      "Strategic management",
+      "Leadership skills",
+      "Business analytics"
+    ],
+    "outcomes": [
+      "Lead business teams"
+    ],
+    "eligibility": "Level 4 Business.",
+    "modules": [
+      "Strategy",
+      "Leadership",
+      "Analytics",
+      "Finance",
+      "International"
+    ],
+    "learningObjectives": [
+      "Develop strategies",
+      "Lead teams",
+      "Analyze data",
+      "Manage finance"
+    ],
+    "createdAt": "2026-03-30T15:06:22.049Z",
+    "updatedAt": "2026-03-30T15:06:22.049Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773db",
+    "name": "OTHM Level 5 Diploma in Information Technology",
+    "category": "OTHM",
+    "hours": "120 credits",
+    "content": [
+      "Advanced programming",
+      "System analysis",
+      "Cloud computing"
+    ],
+    "outcomes": [
+      "Develop complex IT systems"
+    ],
+    "eligibility": "Level 4 IT Diploma.",
+    "modules": [
+      "Programming",
+      "System Analysis",
+      "Cloud Computing",
+      "Project Management",
+      "Cybersecurity"
+    ],
+    "learningObjectives": [
+      "Develop software",
+      "Analyze systems",
+      "Implement cloud",
+      "Manage projects"
+    ],
+    "createdAt": "2026-03-30T15:06:22.051Z",
+    "updatedAt": "2026-03-30T15:06:22.051Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773dc",
+    "name": "OTHM Level 5 Diploma in Logistics & Supply Chain",
+    "category": "OTHM",
+    "hours": "120 credits",
+    "content": [
+      "Global logistics",
+      "Supply chain strategy",
+      "Risk management"
+    ],
+    "outcomes": [
+      "Optimize supply chains"
+    ],
+    "eligibility": "Level 4 Logistics.",
+    "modules": [
+      "Global Logistics",
+      "Strategy",
+      "Risk Management",
+      "Sustainability",
+      "Technology"
+    ],
+    "learningObjectives": [
+      "Manage logistics",
+      "Develop strategies",
+      "Identify risks",
+      "Implement sustainability"
+    ],
+    "createdAt": "2026-03-30T15:06:22.054Z",
+    "updatedAt": "2026-03-30T15:06:22.054Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773dd",
+    "name": "OTHM Level 5 Diploma in Health & Social Care",
+    "category": "OTHM",
+    "hours": "120 credits",
+    "content": [
+      "Healthcare leadership",
+      "Quality improvement",
+      "Policy"
+    ],
+    "outcomes": [
+      "Lead healthcare teams"
+    ],
+    "eligibility": "Level 4 Care.",
+    "modules": [
+      "Leadership",
+      "Quality Improvement",
+      "Policy",
+      "Finance",
+      "Governance"
+    ],
+    "learningObjectives": [
+      "Lead organizations",
+      "Implement quality",
+      "Apply policies",
+      "Manage governance"
+    ],
+    "createdAt": "2026-03-30T15:06:22.063Z",
+    "updatedAt": "2026-03-30T15:06:22.063Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773de",
+    "name": "OTHM Level 5 Diploma in Education & Training",
+    "category": "OTHM",
+    "hours": "120 credits",
+    "content": [
+      "Teaching methods",
+      "Curriculum design",
+      "Assessment"
+    ],
+    "outcomes": [
+      "Teach effectively"
+    ],
+    "eligibility": "Teaching assistants.",
+    "modules": [
+      "Teaching Methods",
+      "Curriculum",
+      "Assessment",
+      "Classroom Management",
+      "Psychology"
+    ],
+    "learningObjectives": [
+      "Apply methods",
+      "Design curricula",
+      "Develop assessments",
+      "Manage classrooms"
+    ],
+    "createdAt": "2026-03-30T15:06:22.066Z",
+    "updatedAt": "2026-03-30T15:06:22.066Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773df",
+    "name": "OTHM Level 6 Diploma in Occupational Health & Safety",
+    "category": "OTHM",
+    "hours": "120 credits",
+    "content": [
+      "Safety management",
+      "Risk assessment",
+      "Incident investigation",
+      "Environment"
+    ],
+    "outcomes": [
+      "Work as HSE Engineer"
+    ],
+    "eligibility": "Level 5 qualification.",
+    "modules": [
+      "Safety Management",
+      "Risk Assessment",
+      "Incident Investigation",
+      "Environment",
+      "Auditing"
+    ],
+    "learningObjectives": [
+      "Implement systems",
+      "Conduct assessments",
+      "Investigate incidents",
+      "Manage environment"
+    ],
+    "createdAt": "2026-03-30T15:06:22.068Z",
+    "updatedAt": "2026-03-30T15:06:22.068Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773e0",
+    "name": "OTHM Level 6 Diploma in Business Management",
+    "category": "OTHM",
+    "hours": "120 credits",
+    "content": [
+      "Corporate strategy",
+      "Change management",
+      "Global business"
+    ],
+    "outcomes": [
+      "Lead corporate strategy"
+    ],
+    "eligibility": "Level 5 Business.",
+    "modules": [
+      "Corporate Strategy",
+      "Change Management",
+      "Global Business",
+      "Strategic HR",
+      "Ethics"
+    ],
+    "learningObjectives": [
+      "Develop strategies",
+      "Lead change",
+      "Navigate global",
+      "Apply ethics"
+    ],
+    "createdAt": "2026-03-30T15:06:22.070Z",
+    "updatedAt": "2026-03-30T15:06:22.070Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773e1",
+    "name": "OTHM Level 6 Diploma in Accounting & Business",
+    "category": "OTHM",
+    "hours": "120 credits",
+    "content": [
+      "Financial reporting",
+      "Management accounting",
+      "Auditing"
+    ],
+    "outcomes": [
+      "Prepare financial statements"
+    ],
+    "eligibility": "Level 5 Accounting.",
+    "modules": [
+      "Reporting",
+      "Management Accounting",
+      "Auditing",
+      "Taxation",
+      "Finance"
+    ],
+    "learningObjectives": [
+      "Prepare reports",
+      "Apply accounting",
+      "Conduct audits",
+      "Manage finance"
+    ],
+    "createdAt": "2026-03-30T15:06:22.072Z",
+    "updatedAt": "2026-03-30T15:06:22.072Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773e2",
+    "name": "OTHM Level 6 Diploma in Logistics & Supply Chain",
+    "category": "OTHM",
+    "hours": "120 credits",
+    "content": [
+      "Supply chain analytics",
+      "Strategic procurement",
+      "Global logistics"
+    ],
+    "outcomes": [
+      "Optimize supply chains"
+    ],
+    "eligibility": "Level 5 Logistics.",
+    "modules": [
+      "Analytics",
+      "Procurement",
+      "Global Logistics",
+      "Technology",
+      "Strategy"
+    ],
+    "learningObjectives": [
+      "Analyze data",
+      "Develop procurement",
+      "Manage logistics",
+      "Implement technology"
+    ],
+    "createdAt": "2026-03-30T15:06:22.081Z",
+    "updatedAt": "2026-03-30T15:06:22.081Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773e3",
+    "name": "OTHM Level 6 Diploma in Tourism & Hospitality",
+    "category": "OTHM",
+    "hours": "120 credits",
+    "content": [
+      "Tourism management",
+      "Hospitality operations",
+      "Customer experience"
+    ],
+    "outcomes": [
+      "Manage tourism businesses"
+    ],
+    "eligibility": "Level 5 Tourism.",
+    "modules": [
+      "Tourism Management",
+      "Hospitality",
+      "Customer Experience",
+      "Marketing",
+      "Events"
+    ],
+    "learningObjectives": [
+      "Manage tourism",
+      "Lead hospitality",
+      "Enhance experience",
+      "Develop marketing"
+    ],
+    "createdAt": "2026-03-30T15:06:22.083Z",
+    "updatedAt": "2026-03-30T15:06:22.083Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773e4",
+    "name": "OTHM Level 7 Diploma in Project Management",
+    "category": "OTHM",
+    "hours": "120 credits",
+    "content": [
+      "Project planning",
+      "Budget control",
+      "Risk management",
+      "Leadership"
+    ],
+    "outcomes": [
+      "Handle large projects"
+    ],
+    "eligibility": "Level 6 qualification.",
+    "modules": [
+      "Planning",
+      "Budget Control",
+      "Risk Management",
+      "Leadership",
+      "Quality"
+    ],
+    "learningObjectives": [
+      "Plan projects",
+      "Control budgets",
+      "Manage risks",
+      "Lead teams"
+    ],
+    "createdAt": "2026-03-30T15:06:22.085Z",
+    "updatedAt": "2026-03-30T15:06:22.085Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773e5",
+    "name": "OTHM Level 7 Diploma in Strategic Management & Leadership",
+    "category": "OTHM",
+    "hours": "120 credits",
+    "content": [
+      "Strategic planning",
+      "Leadership",
+      "Corporate governance"
+    ],
+    "outcomes": [
+      "Lead organizations"
+    ],
+    "eligibility": "Level 6 qualification.",
+    "modules": [
+      "Strategic Planning",
+      "Leadership",
+      "Governance",
+      "Change Management",
+      "Global Strategy"
+    ],
+    "learningObjectives": [
+      "Develop plans",
+      "Lead change",
+      "Implement governance",
+      "Formulate strategies"
+    ],
+    "createdAt": "2026-03-30T15:06:22.087Z",
+    "updatedAt": "2026-03-30T15:06:22.087Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773e6",
+    "name": "OTHM Level 7 Diploma in Accounting & Finance",
+    "category": "OTHM",
+    "hours": "120 credits",
+    "content": [
+      "Advanced reporting",
+      "Strategic finance",
+      "Investment analysis"
+    ],
+    "outcomes": [
+      "Lead finance departments"
+    ],
+    "eligibility": "Level 6 Accounting.",
+    "modules": [
+      "Reporting",
+      "Finance",
+      "Investment",
+      "Treasury",
+      "Risk Management"
+    ],
+    "learningObjectives": [
+      "Prepare reports",
+      "Develop strategies",
+      "Analyze investments",
+      "Manage risks"
+    ],
+    "createdAt": "2026-03-30T15:06:22.089Z",
+    "updatedAt": "2026-03-30T15:06:22.089Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773e7",
+    "name": "OTHM Level 7 Diploma in Human Resource Management",
+    "category": "OTHM",
+    "hours": "120 credits",
+    "content": [
+      "Talent management",
+      "HR strategy",
+      "Employment law"
+    ],
+    "outcomes": [
+      "Lead HR departments"
+    ],
+    "eligibility": "Level 6 HR.",
+    "modules": [
+      "Talent Management",
+      "Strategy",
+      "Employment Law",
+      "Performance",
+      "Development"
+    ],
+    "learningObjectives": [
+      "Manage talent",
+      "Develop strategies",
+      "Apply law",
+      "Lead development"
+    ],
+    "createdAt": "2026-03-30T15:06:22.096Z",
+    "updatedAt": "2026-03-30T15:06:22.096Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773e8",
+    "name": "OTHM Level 7 Diploma in Logistics & Supply Chain Management",
+    "category": "OTHM",
+    "hours": "120 credits",
+    "content": [
+      "Global strategy",
+      "Network design",
+      "Sustainability"
+    ],
+    "outcomes": [
+      "Lead global supply chains"
+    ],
+    "eligibility": "Level 6 Logistics.",
+    "modules": [
+      "Global Strategy",
+      "Network Design",
+      "Sustainability",
+      "Procurement",
+      "Innovation"
+    ],
+    "learningObjectives": [
+      "Develop strategies",
+      "Design networks",
+      "Implement sustainability",
+      "Lead procurement"
+    ],
+    "createdAt": "2026-03-30T15:06:22.099Z",
+    "updatedAt": "2026-03-30T15:06:22.099Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773e9",
+    "name": "OTHM Level 7 Diploma in Health & Social Care Management",
+    "category": "OTHM",
+    "hours": "120 credits",
+    "content": [
+      "Healthcare strategy",
+      "Quality governance",
+      "Policy"
+    ],
+    "outcomes": [
+      "Lead healthcare organizations"
+    ],
+    "eligibility": "Level 6 Care.",
+    "modules": [
+      "Strategy",
+      "Governance",
+      "Policy",
+      "Leadership",
+      "Innovation"
+    ],
+    "learningObjectives": [
+      "Develop strategies",
+      "Implement governance",
+      "Apply policies",
+      "Lead services"
+    ],
+    "createdAt": "2026-03-30T15:06:22.101Z",
+    "updatedAt": "2026-03-30T15:06:22.101Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773ea",
+    "name": "OTHM Level 7 Diploma in Tourism & Hospitality Management",
+    "category": "OTHM",
+    "hours": "120 credits",
+    "content": [
+      "Strategic hospitality",
+      "Tourism policy",
+      "Luxury brand"
+    ],
+    "outcomes": [
+      "Lead hospitality organizations"
+    ],
+    "eligibility": "Level 6 Tourism.",
+    "modules": [
+      "Hospitality Strategy",
+      "Tourism Policy",
+      "Luxury Brand",
+      "Destination Strategy",
+      "Innovation"
+    ],
+    "learningObjectives": [
+      "Lead enterprises",
+      "Develop policies",
+      "Manage brands",
+      "Create strategies"
+    ],
+    "createdAt": "2026-03-30T15:06:22.104Z",
+    "updatedAt": "2026-03-30T15:06:22.104Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773eb",
+    "name": "OTHM Level 7 Diploma in Education Management",
+    "category": "OTHM",
+    "hours": "120 credits",
+    "content": [
+      "Educational leadership",
+      "Curriculum strategy",
+      "Quality assurance"
+    ],
+    "outcomes": [
+      "Lead educational institutions"
+    ],
+    "eligibility": "Level 6 Education.",
+    "modules": [
+      "Leadership",
+      "Curriculum",
+      "Quality Assurance",
+      "Policy",
+      "Management"
+    ],
+    "learningObjectives": [
+      "Lead organizations",
+      "Develop curricula",
+      "Implement quality",
+      "Manage policies"
+    ],
+    "createdAt": "2026-03-30T15:06:22.107Z",
+    "updatedAt": "2026-03-30T15:06:22.107Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773ec",
+    "name": "OTHM Diploma in Data Science",
+    "category": "OTHM",
+    "hours": "120 credits",
+    "content": [
+      "Data analytics",
+      "Machine learning",
+      "Statistical modeling"
+    ],
+    "outcomes": [
+      "Work as Data Scientist"
+    ],
+    "eligibility": "Level 5 IT.",
+    "modules": [
+      "Analytics",
+      "Machine Learning",
+      "Statistics",
+      "Visualization",
+      "Big Data"
+    ],
+    "learningObjectives": [
+      "Analyze data",
+      "Build models",
+      "Apply statistics",
+      "Create visualizations"
+    ],
+    "createdAt": "2026-03-30T15:06:22.110Z",
+    "updatedAt": "2026-03-30T15:06:22.110Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773ed",
+    "name": "OTHM Diploma in Cyber Security",
+    "category": "OTHM",
+    "hours": "120 credits",
+    "content": [
+      "Network security",
+      "Ethical hacking",
+      "Security governance"
+    ],
+    "outcomes": [
+      "Work as Security Analyst"
+    ],
+    "eligibility": "Level 4 IT.",
+    "modules": [
+      "Network Security",
+      "Ethical Hacking",
+      "Governance",
+      "Incident Response",
+      "Forensics"
+    ],
+    "learningObjectives": [
+      "Secure networks",
+      "Perform hacking",
+      "Implement governance",
+      "Respond to incidents"
+    ],
+    "createdAt": "2026-03-30T15:06:22.113Z",
+    "updatedAt": "2026-03-30T15:06:22.113Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773ee",
+    "name": "OTHM Diploma in Artificial Intelligence",
+    "category": "OTHM",
+    "hours": "120 credits",
+    "content": [
+      "AI fundamentals",
+      "Deep learning",
+      "NLP",
+      "Computer vision"
+    ],
+    "outcomes": [
+      "Work as AI Specialist"
+    ],
+    "eligibility": "Level 6 IT.",
+    "modules": [
+      "AI Fundamentals",
+      "Deep Learning",
+      "NLP",
+      "Computer Vision",
+      "Ethics"
+    ],
+    "learningObjectives": [
+      "Apply AI principles",
+      "Develop models",
+      "Implement NLP",
+      "Create vision applications"
+    ],
+    "createdAt": "2026-03-30T15:06:22.115Z",
+    "updatedAt": "2026-03-30T15:06:22.115Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773ef",
+    "name": "ISO Lead Auditor (9001, 14001, 45001)",
+    "category": "HiQual",
+    "hours": "40-50 hours",
+    "content": [
+      "Quality Management",
+      "Environmental Management",
+      "Safety Management",
+      "Audit planning"
+    ],
+    "outcomes": [
+      "Conduct professional audits",
+      "Work as ISO Lead Auditor"
+    ],
+    "eligibility": "Quality professionals with 2+ years experience.",
+    "modules": [
+      "ISO 9001",
+      "ISO 14001",
+      "ISO 45001",
+      "Audit Planning",
+      "Reporting"
+    ],
+    "learningObjectives": [
+      "Understand ISO standards",
+      "Plan audits",
+      "Lead audit teams",
+      "Prepare reports"
+    ],
+    "createdAt": "2026-03-30T15:06:22.118Z",
+    "updatedAt": "2026-03-30T15:06:22.118Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773f0",
+    "name": "HSE Level 1 – 3 Awards",
+    "category": "HiQual",
+    "hours": "20-60 hours",
+    "content": [
+      "Safety fundamentals",
+      "Fire safety",
+      "Risk assessment",
+      "PPE"
+    ],
+    "outcomes": [
+      "Start career in safety",
+      "Work as Safety Officer"
+    ],
+    "eligibility": "Open to all workers.",
+    "modules": [
+      "Level 1 Basics",
+      "Level 2 Intermediate",
+      "Level 3 Advanced",
+      "Fire Safety",
+      "Risk Assessment"
+    ],
+    "learningObjectives": [
+      "Identify hazards",
+      "Conduct assessments",
+      "Implement controls",
+      "Respond to emergencies"
+    ],
+    "createdAt": "2026-03-30T15:06:22.121Z",
+    "updatedAt": "2026-03-30T15:06:22.121Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773f1",
+    "name": "QA/QC Welding & Piping Inspector",
+    "category": "HiQual",
+    "hours": "40-80 hours",
+    "content": [
+      "Welding inspection",
+      "Piping systems",
+      "ASME codes",
+      "Quality control"
+    ],
+    "outcomes": [
+      "Work as QA/QC Inspector"
+    ],
+    "eligibility": "Mechanical Engineering diploma.",
+    "modules": [
+      "Welding Processes",
+      "Weld Defects",
+      "Piping Systems",
+      "ASME Codes",
+      "Quality Control"
+    ],
+    "learningObjectives": [
+      "Inspect welding",
+      "Identify defects",
+      "Read drawings",
+      "Apply standards"
+    ],
+    "createdAt": "2026-03-30T15:06:22.124Z",
+    "updatedAt": "2026-03-30T15:06:22.124Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773f2",
+    "name": "QA/QC Civil Inspector",
+    "category": "HiQual",
+    "hours": "40-60 hours",
+    "content": [
+      "Civil construction",
+      "Material testing",
+      "Concrete inspection"
+    ],
+    "outcomes": [
+      "Inspect civil works"
+    ],
+    "eligibility": "Civil engineering diploma.",
+    "modules": [
+      "Construction Methods",
+      "Material Testing",
+      "Concrete Quality",
+      "Steel Inspection",
+      "Site Quality"
+    ],
+    "learningObjectives": [
+      "Inspect civil work",
+      "Test materials",
+      "Ensure concrete quality",
+      "Manage site quality"
+    ],
+    "createdAt": "2026-03-30T15:06:22.127Z",
+    "updatedAt": "2026-03-30T15:06:22.127Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773f3",
+    "name": "Civil Lab Technician",
+    "category": "HiQual",
+    "hours": "30-50 hours",
+    "content": [
+      "Soil testing",
+      "Concrete testing",
+      "Aggregate testing"
+    ],
+    "outcomes": [
+      "Work in civil labs"
+    ],
+    "eligibility": "High school with science.",
+    "modules": [
+      "Soil Testing",
+      "Concrete Testing",
+      "Aggregate Testing",
+      "Lab Safety",
+      "Documentation"
+    ],
+    "learningObjectives": [
+      "Perform soil tests",
+      "Test concrete",
+      "Analyze aggregates",
+      "Maintain records"
+    ],
+    "createdAt": "2026-03-30T15:06:22.130Z",
+    "updatedAt": "2026-03-30T15:06:22.130Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773f4",
+    "name": "NDT Level 1, 2, 3",
+    "category": "HiQual",
+    "hours": "40-120 hours",
+    "content": [
+      "NDT methods",
+      "Equipment operation",
+      "Defect identification"
+    ],
+    "outcomes": [
+      "Perform NDT inspections"
+    ],
+    "eligibility": "Technical background.",
+    "modules": [
+      "NDT Fundamentals",
+      "Equipment",
+      "Defect ID",
+      "Procedures",
+      "Reporting"
+    ],
+    "learningObjectives": [
+      "Operate equipment",
+      "Identify defects",
+      "Perform procedures",
+      "Prepare reports"
+    ],
+    "createdAt": "2026-03-30T15:06:22.132Z",
+    "updatedAt": "2026-03-30T15:06:22.132Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773f5",
+    "name": "RT (Radiographic Testing)",
+    "category": "HiQual",
+    "hours": "40-80 hours",
+    "content": [
+      "X-ray and gamma",
+      "Film interpretation",
+      "Safety"
+    ],
+    "outcomes": [
+      "Perform radiographic testing"
+    ],
+    "eligibility": "NDT Level 1.",
+    "modules": [
+      "Radiation Safety",
+      "Equipment",
+      "Film Exposure",
+      "Interpretation",
+      "Defect Detection"
+    ],
+    "learningObjectives": [
+      "Operate equipment",
+      "Interpret radiographs",
+      "Follow safety",
+      "Detect defects"
+    ],
+    "createdAt": "2026-03-30T15:06:22.134Z",
+    "updatedAt": "2026-03-30T15:06:22.134Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773f6",
+    "name": "UT (Ultrasonic Testing)",
+    "category": "HiQual",
+    "hours": "40-80 hours",
+    "content": [
+      "Ultrasonic waves",
+      "Flaw detection",
+      "Thickness measurement"
+    ],
+    "outcomes": [
+      "Perform ultrasonic testing"
+    ],
+    "eligibility": "NDT Level 1.",
+    "modules": [
+      "Ultrasonic Principles",
+      "Equipment",
+      "Flaw Detection",
+      "Thickness",
+      "Calibration"
+    ],
+    "learningObjectives": [
+      "Use equipment",
+      "Detect flaws",
+      "Measure thickness",
+      "Calibrate instruments"
+    ],
+    "createdAt": "2026-03-30T15:06:22.137Z",
+    "updatedAt": "2026-03-30T15:06:22.137Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773f7",
+    "name": "MT (Magnetic Particle Testing)",
+    "category": "HiQual",
+    "hours": "30-50 hours",
+    "content": [
+      "Magnetic fields",
+      "Particle application",
+      "Surface cracks"
+    ],
+    "outcomes": [
+      "Perform MT testing"
+    ],
+    "eligibility": "Basic NDT knowledge.",
+    "modules": [
+      "Magnetic Principles",
+      "Equipment",
+      "Particle Application",
+      "Defect Detection",
+      "Reporting"
+    ],
+    "learningObjectives": [
+      "Apply MT",
+      "Detect surface defects",
+      "Operate equipment",
+      "Interpret results"
+    ],
+    "createdAt": "2026-03-30T15:06:22.139Z",
+    "updatedAt": "2026-03-30T15:06:22.139Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773f8",
+    "name": "PT (Penetrant Testing)",
+    "category": "HiQual",
+    "hours": "20-40 hours",
+    "content": [
+      "Liquid penetrants",
+      "Surface defects",
+      "Application methods"
+    ],
+    "outcomes": [
+      "Perform PT testing"
+    ],
+    "eligibility": "No experience required.",
+    "modules": [
+      "Penetrant Principles",
+      "Application",
+      "Dwell Time",
+      "Developer",
+      "Inspection"
+    ],
+    "learningObjectives": [
+      "Apply penetrant",
+      "Detect defects",
+      "Follow procedures",
+      "Evaluate results"
+    ],
+    "createdAt": "2026-03-30T15:06:22.145Z",
+    "updatedAt": "2026-03-30T15:06:22.145Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773f9",
+    "name": "H2S Safety",
+    "category": "HiQual",
+    "hours": "4-8 hours",
+    "content": [
+      "H2S hazards",
+      "Detection methods",
+      "Breathing apparatus"
+    ],
+    "outcomes": [
+      "Work safely in H2S"
+    ],
+    "eligibility": "Oil and gas workers.",
+    "modules": [
+      "H2S Properties",
+      "Detection",
+      "Breathing Apparatus",
+      "Emergency Response",
+      "Rescue"
+    ],
+    "learningObjectives": [
+      "Recognize hazards",
+      "Use detection",
+      "Operate apparatus",
+      "Respond to emergencies"
+    ],
+    "createdAt": "2026-03-30T15:06:22.148Z",
+    "updatedAt": "2026-03-30T15:06:22.148Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773fa",
+    "name": "Confined Space Entry",
+    "category": "HiQual",
+    "hours": "4-8 hours",
+    "content": [
+      "Space identification",
+      "Atmospheric testing",
+      "Entry permits"
+    ],
+    "outcomes": [
+      "Enter safely"
+    ],
+    "eligibility": "Entry workers.",
+    "modules": [
+      "Classification",
+      "Testing",
+      "Permits",
+      "Entry Procedures",
+      "Rescue"
+    ],
+    "learningObjectives": [
+      "Identify spaces",
+      "Conduct testing",
+      "Follow permits",
+      "Perform rescue"
+    ],
+    "createdAt": "2026-03-30T15:06:22.151Z",
+    "updatedAt": "2026-03-30T15:06:22.151Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773fb",
+    "name": "Fire Safety",
+    "category": "HiQual",
+    "hours": "4-8 hours",
+    "content": [
+      "Fire prevention",
+      "Extinguisher use",
+      "Evacuation"
+    ],
+    "outcomes": [
+      "Prevent and respond to fires"
+    ],
+    "eligibility": "All employees.",
+    "modules": [
+      "Prevention",
+      "Extinguishers",
+      "Evacuation",
+      "Planning",
+      "Alarms"
+    ],
+    "learningObjectives": [
+      "Prevent fires",
+      "Use extinguishers",
+      "Follow evacuation",
+      "Develop plans"
+    ],
+    "createdAt": "2026-03-30T15:06:22.153Z",
+    "updatedAt": "2026-03-30T15:06:22.153Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773fc",
+    "name": "First Aid / CPR",
+    "category": "HiQual",
+    "hours": "8-16 hours",
+    "content": [
+      "Basic first aid",
+      "CPR techniques",
+      "AED use"
+    ],
+    "outcomes": [
+      "Provide first aid"
+    ],
+    "eligibility": "All employees.",
+    "modules": [
+      "First Aid",
+      "CPR",
+      "AED",
+      "Emergency Response",
+      "Injury Management"
+    ],
+    "learningObjectives": [
+      "Provide first aid",
+      "Perform CPR",
+      "Use AED",
+      "Respond to emergencies"
+    ],
+    "createdAt": "2026-03-30T15:06:22.155Z",
+    "updatedAt": "2026-03-30T15:06:22.155Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773fd",
+    "name": "Risk Assessment",
+    "category": "HiQual",
+    "hours": "4-8 hours",
+    "content": [
+      "Hazard identification",
+      "Risk evaluation",
+      "Control measures"
+    ],
+    "outcomes": [
+      "Conduct risk assessments"
+    ],
+    "eligibility": "Safety personnel.",
+    "modules": [
+      "Hazard ID",
+      "Risk Evaluation",
+      "Controls",
+      "Hierarchy",
+      "Documentation"
+    ],
+    "learningObjectives": [
+      "Identify hazards",
+      "Evaluate risks",
+      "Select controls",
+      "Document assessments"
+    ],
+    "createdAt": "2026-03-30T15:06:22.157Z",
+    "updatedAt": "2026-03-30T15:06:22.157Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773fe",
+    "name": "Scaffolding Safety",
+    "category": "HiQual",
+    "hours": "4-8 hours",
+    "content": [
+      "Scaffold erection",
+      "Inspection",
+      "Load capacity"
+    ],
+    "outcomes": [
+      "Work safely on scaffolds"
+    ],
+    "eligibility": "Construction workers.",
+    "modules": [
+      "Scaffold Types",
+      "Erection",
+      "Inspection",
+      "Load Capacity",
+      "Fall Protection"
+    ],
+    "learningObjectives": [
+      "Erect scaffolds",
+      "Inspect components",
+      "Calculate loads",
+      "Use fall protection"
+    ],
+    "createdAt": "2026-03-30T15:06:22.160Z",
+    "updatedAt": "2026-03-30T15:06:22.160Z"
+  },
+  {
+    "_id": "69ca916e1581e888f92773ff",
+    "name": "Rigger Level 1–3",
+    "category": "HiQual",
+    "hours": "20-60 hours",
+    "content": [
+      "Rigging techniques",
+      "Sling types",
+      "Load calculation"
+    ],
+    "outcomes": [
+      "Perform rigging operations"
+    ],
+    "eligibility": "Construction workers.",
+    "modules": [
+      "Rigging Fundamentals",
+      "Sling Types",
+      "Load Calculation",
+      "Hand Signals",
+      "Safe Practices"
+    ],
+    "learningObjectives": [
+      "Select equipment",
+      "Calculate loads",
+      "Use signals",
+      "Perform rigging"
+    ],
+    "createdAt": "2026-03-30T15:06:22.165Z",
+    "updatedAt": "2026-03-30T15:06:22.165Z"
+  },
+  {
+    "_id": "69ca916e1581e888f9277400",
+    "name": "Food Safety Level 1–3",
+    "category": "HiQual",
+    "hours": "8-24 hours",
+    "content": [
+      "Food hygiene",
+      "Contamination prevention",
+      "Temperature control"
+    ],
+    "outcomes": [
+      "Handle food safely"
+    ],
+    "eligibility": "Food industry workers.",
+    "modules": [
+      "Hygiene",
+      "Contamination",
+      "Temperature",
+      "Personal Hygiene",
+      "Legal Requirements"
+    ],
+    "learningObjectives": [
+      "Maintain hygiene",
+      "Prevent contamination",
+      "Control temperatures",
+      "Follow legal standards"
+    ],
+    "createdAt": "2026-03-30T15:06:22.166Z",
+    "updatedAt": "2026-03-30T15:06:22.166Z"
+  },
+  {
+    "_id": "69ca916e1581e888f9277401",
+    "name": "HACCP",
+    "category": "HiQual",
+    "hours": "16-24 hours",
+    "content": [
+      "HACCP principles",
+      "Critical control points",
+      "Monitoring"
+    ],
+    "outcomes": [
+      "Implement HACCP systems"
+    ],
+    "eligibility": "Food safety personnel.",
+    "modules": [
+      "HACCP Principles",
+      "Critical Points",
+      "Monitoring",
+      "Corrective Actions",
+      "Verification"
+    ],
+    "learningObjectives": [
+      "Apply HACCP",
+      "Identify points",
+      "Monitor safety",
+      "Take corrective actions"
+    ],
+    "createdAt": "2026-03-30T15:06:22.168Z",
+    "updatedAt": "2026-03-30T15:06:22.168Z"
+  },
+  {
+    "_id": "69ca916e1581e888f9277402",
+    "name": "Total Quality Management (TQM)",
+    "category": "HiQual",
+    "hours": "20-30 hours",
+    "content": [
+      "Quality principles",
+      "Continuous improvement",
+      "Customer focus"
+    ],
+    "outcomes": [
+      "Implement TQM systems"
+    ],
+    "eligibility": "Managers.",
+    "modules": [
+      "TQM Principles",
+      "Continuous Improvement",
+      "Customer Focus",
+      "Process Management",
+      "Tools"
+    ],
+    "learningObjectives": [
+      "Apply TQM",
+      "Drive improvement",
+      "Focus on customers",
+      "Manage processes"
+    ],
+    "createdAt": "2026-03-30T15:06:22.170Z",
+    "updatedAt": "2026-03-30T15:06:22.170Z"
+  },
+  {
+    "_id": "69ca916e1581e888f9277403",
+    "name": "Six Sigma (Yellow / Green Belt)",
+    "category": "HiQual",
+    "hours": "20-40 hours",
+    "content": [
+      "DMAIC methodology",
+      "Statistical analysis",
+      "Process improvement"
+    ],
+    "outcomes": [
+      "Lead Six Sigma projects"
+    ],
+    "eligibility": "Quality professionals.",
+    "modules": [
+      "Six Sigma",
+      "DMAIC",
+      "Statistics",
+      "Improvement Tools",
+      "Project Management"
+    ],
+    "learningObjectives": [
+      "Apply DMAIC",
+      "Use statistics",
+      "Lead projects",
+      "Analyze data"
+    ],
+    "createdAt": "2026-03-30T15:06:22.172Z",
+    "updatedAt": "2026-03-30T15:06:22.172Z"
+  },
+  {
+    "_id": "69ca916e1581e888f9277404",
+    "name": "ISO 9001 – Quality Management",
+    "category": "HiQual",
+    "hours": "20-30 hours",
+    "content": [
+      "QMS requirements",
+      "Process approach",
+      "Audit preparation"
+    ],
+    "outcomes": [
+      "Implement ISO 9001"
+    ],
+    "eligibility": "Quality professionals.",
+    "modules": [
+      "QMS Requirements",
+      "Process Approach",
+      "Documentation",
+      "Internal Auditing",
+      "Certification"
+    ],
+    "learningObjectives": [
+      "Understand ISO 9001",
+      "Implement systems",
+      "Prepare for audits",
+      "Achieve certification"
+    ],
+    "createdAt": "2026-03-30T15:06:22.174Z",
+    "updatedAt": "2026-03-30T15:06:22.174Z"
+  },
+  {
+    "_id": "69ca916e1581e888f9277405",
+    "name": "ISO 14001 – Environmental Management",
+    "category": "HiQual",
+    "hours": "20-30 hours",
+    "content": [
+      "EMS requirements",
+      "Environmental aspects",
+      "Compliance"
+    ],
+    "outcomes": [
+      "Implement ISO 14001"
+    ],
+    "eligibility": "Environmental professionals.",
+    "modules": [
+      "EMS Requirements",
+      "Environmental Aspects",
+      "Compliance",
+      "Performance Evaluation",
+      "Emergency"
+    ],
+    "learningObjectives": [
+      "Understand ISO 14001",
+      "Identify aspects",
+      "Ensure compliance",
+      "Evaluate performance"
+    ],
+    "createdAt": "2026-03-30T15:06:22.176Z",
+    "updatedAt": "2026-03-30T15:06:22.176Z"
+  },
+  {
+    "_id": "69ca916e1581e888f9277406",
+    "name": "ISO 45001 – Safety Management",
+    "category": "HiQual",
+    "hours": "20-30 hours",
+    "content": [
+      "OH&S requirements",
+      "Hazard identification",
+      "Risk assessment"
+    ],
+    "outcomes": [
+      "Implement ISO 45001"
+    ],
+    "eligibility": "HSE professionals.",
+    "modules": [
+      "OH&S Requirements",
+      "Hazard ID",
+      "Risk Assessment",
+      "Legal Compliance",
+      "Incident Investigation"
+    ],
+    "learningObjectives": [
+      "Apply ISO 45001",
+      "Identify hazards",
+      "Assess risks",
+      "Improve safety"
+    ],
+    "createdAt": "2026-03-30T15:06:22.178Z",
+    "updatedAt": "2026-03-30T15:06:22.178Z"
+  },
+  {
+    "_id": "69ca916e1581e888f9277407",
+    "name": "Train the Trainer (HSE)",
+    "category": "HiQual",
+    "hours": "20-30 hours",
+    "content": [
+      "Training methods",
+      "Presentation skills",
+      "Course design"
+    ],
+    "outcomes": [
+      "Deliver HSE training"
+    ],
+    "eligibility": "Experienced safety professionals.",
+    "modules": [
+      "Training Methods",
+      "Presentation",
+      "Course Design",
+      "Assessment",
+      "Evaluation"
+    ],
+    "learningObjectives": [
+      "Deliver training",
+      "Design courses",
+      "Assess learners",
+      "Evaluate effectiveness"
+    ],
+    "createdAt": "2026-03-30T15:06:22.181Z",
+    "updatedAt": "2026-03-30T15:06:22.181Z"
+  },
+  {
+    "_id": "69ca916e1581e888f9277408",
+    "name": "IOSH Managing Safely",
+    "category": "IOSH",
+    "hours": "4-5 days",
+    "content": [
+      "Risk assessment",
+      "Responsibilities",
+      "Incident investigation",
+      "Performance measurement"
+    ],
+    "outcomes": [
+      "Manage safety effectively"
+    ],
+    "eligibility": "Managers and supervisors.",
+    "modules": [
+      "Managing Safely",
+      "Risk Assessment",
+      "Controlling Risks",
+      "Responsibilities",
+      "Hazards",
+      "Incident Investigation",
+      "Performance",
+      "Environment"
+    ],
+    "learningObjectives": [
+      "Assess risks",
+      "Implement controls",
+      "Understand responsibilities",
+      "Investigate incidents",
+      "Measure performance"
+    ],
+    "createdAt": "2026-03-30T15:06:22.184Z",
+    "updatedAt": "2026-03-30T15:06:22.184Z"
+  },
+  {
+    "_id": "69ca916e1581e888f9277409",
+    "name": "IOSH Working Safely",
+    "category": "IOSH",
+    "hours": "1 day",
+    "content": [
+      "Working safely",
+      "Hazard and risk",
+      "Common hazards",
+      "Safety performance"
+    ],
+    "outcomes": [
+      "Work safely"
+    ],
+    "eligibility": "All employees.",
+    "modules": [
+      "Working Safely",
+      "Hazard/Risk",
+      "Common Hazards",
+      "Safety Performance",
+      "Environment"
+    ],
+    "learningObjectives": [
+      "Understand safety",
+      "Identify hazards",
+      "Report concerns",
+      "Follow safe practices"
+    ],
+    "createdAt": "2026-03-30T15:06:22.186Z",
+    "updatedAt": "2026-03-30T15:06:22.186Z"
+  },
+  {
+    "_id": "69ca916e1581e888f927740a",
+    "name": "IOSH Leading Safely",
+    "category": "IOSH",
+    "hours": "1 day",
+    "content": [
+      "Leadership matters",
+      "Safety culture",
+      "Legal framework",
+      "Strategic management"
+    ],
+    "outcomes": [
+      "Lead safety from top"
+    ],
+    "eligibility": "Senior executives.",
+    "modules": [
+      "Leadership",
+      "Safety Culture",
+      "Legal Framework",
+      "Strategic Management"
+    ],
+    "learningObjectives": [
+      "Demonstrate leadership",
+      "Develop culture",
+      "Understand legal duties",
+      "Integrate safety"
+    ],
+    "createdAt": "2026-03-30T15:06:22.188Z",
+    "updatedAt": "2026-03-30T15:06:22.188Z"
+  },
+  {
+    "_id": "69ca916e1581e888f927740b",
+    "name": "IOSH Fire Safety for Managers",
+    "category": "IOSH",
+    "hours": "2 days",
+    "content": [
+      "Fire risk assessment",
+      "Prevention",
+      "Emergency planning",
+      "Legislation"
+    ],
+    "outcomes": [
+      "Manage fire safety"
+    ],
+    "eligibility": "Managers and safety officers.",
+    "modules": [
+      "Legislation",
+      "Risk Assessment",
+      "Prevention",
+      "Emergency Planning",
+      "Management"
+    ],
+    "learningObjectives": [
+      "Understand law",
+      "Conduct assessments",
+      "Implement prevention",
+      "Manage emergencies"
+    ],
+    "createdAt": "2026-03-30T15:06:22.190Z",
+    "updatedAt": "2026-03-30T15:06:22.190Z"
+  },
+  {
+    "_id": "69ca916e1581e888f927740c",
+    "name": "IOSH Environment for Managers",
+    "category": "IOSH",
+    "hours": "2 days",
+    "content": [
+      "Environmental management",
+      "Legal compliance",
+      "Waste management"
+    ],
+    "outcomes": [
+      "Manage environmental impacts"
+    ],
+    "eligibility": "Managers.",
+    "modules": [
+      "Environmental Management",
+      "Legal Compliance",
+      "Waste Management",
+      "Carbon Reduction",
+      "Monitoring"
+    ],
+    "learningObjectives": [
+      "Understand law",
+      "Manage waste",
+      "Reduce carbon",
+      "Monitor performance"
+    ],
+    "createdAt": "2026-03-30T15:06:22.193Z",
+    "updatedAt": "2026-03-30T15:06:22.193Z"
+  },
+  {
+    "_id": "69ca916e1581e888f927740d",
+    "name": "IOSH Construction Safety",
+    "category": "IOSH",
+    "hours": "3 days",
+    "content": [
+      "Site hazards",
+      "CDM regulations",
+      "Working at height"
+    ],
+    "outcomes": [
+      "Manage construction safety"
+    ],
+    "eligibility": "Construction managers.",
+    "modules": [
+      "Construction Hazards",
+      "CDM Regulations",
+      "Working at Height",
+      "Site Management",
+      "Risk Assessment"
+    ],
+    "learningObjectives": [
+      "Identify hazards",
+      "Apply CDM",
+      "Manage height risks",
+      "Implement controls"
+    ],
+    "createdAt": "2026-03-30T15:06:22.195Z",
+    "updatedAt": "2026-03-30T15:06:22.195Z"
+  },
+  {
+    "_id": "69ca916e1581e888f927740e",
+    "name": "IOSH Incident Investigation",
+    "category": "IOSH",
+    "hours": "2 days",
+    "content": [
+      "Investigation techniques",
+      "Root cause analysis",
+      "Evidence gathering"
+    ],
+    "outcomes": [
+      "Conduct investigations"
+    ],
+    "eligibility": "Safety professionals.",
+    "modules": [
+      "Investigation Principles",
+      "Root Cause Analysis",
+      "Evidence Collection",
+      "Interview Techniques",
+      "Report Writing"
+    ],
+    "learningObjectives": [
+      "Plan investigations",
+      "Identify root causes",
+      "Collect evidence",
+      "Write reports"
+    ],
+    "createdAt": "2026-03-30T15:06:22.199Z",
+    "updatedAt": "2026-03-30T15:06:22.199Z"
+  },
+  {
+    "_id": "69ca916e1581e888f927740f",
+    "name": "IOSH Risk Assessment",
+    "category": "IOSH",
+    "hours": "2 days",
+    "content": [
+      "Risk assessment methods",
+      "Hazard identification",
+      "Control hierarchy"
+    ],
+    "outcomes": [
+      "Conduct risk assessments"
+    ],
+    "eligibility": "Safety professionals.",
+    "modules": [
+      "Risk Methods",
+      "Hazard ID",
+      "Control Hierarchy",
+      "Risk Evaluation",
+      "Monitoring"
+    ],
+    "learningObjectives": [
+      "Apply methodologies",
+      "Identify hazards",
+      "Select controls",
+      "Monitor effectiveness"
+    ],
+    "createdAt": "2026-03-30T15:06:22.201Z",
+    "updatedAt": "2026-03-30T15:06:22.201Z"
+  }
+]

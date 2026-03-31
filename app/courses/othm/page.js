@@ -14,7 +14,6 @@ export default function OTHM() {
         try {
             const response = await fetch('/api/admin/courses');
             const allCourses = await response.json();
-            // Filter only OTHM courses
             const othmCourses = allCourses.filter(course =>
                 course.category === 'OTHM' || course.category === 'othm'
             );
@@ -45,7 +44,6 @@ export default function OTHM() {
 
     return (
         <div className="min-h-screen bg-gray-50 py-10 px-4">
-            {/* Header */}
             <div className="text-center mb-10">
                 <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-900 to-orange-600 bg-clip-text text-transparent">
                     OTHM Qualifications
