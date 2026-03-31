@@ -264,34 +264,36 @@ export default function AdminDashboard() {
         }
     };
 
+    // FIXED: Signature upload function
     const handleSignatureUpload = async (e) => {
         const file = e.target.files[0];
         if (!file) return;
+
+        // Validate file type
+        if (!file.type.includes('image/png') && !file.type.includes('image/jpeg')) {
+            alert('Please upload PNG or JPG image');
+            return;
+        }
+
         const formData = new FormData();
         formData.append('signature', file);
-        formData.append('directorName', settings.directorName || 'Dr. Ahmed Raza');
-        formData.append('directorTitle', settings.directorTitle || 'Director');
-        formData.append('academicDirectorName', settings.academicDirectorName || 'Prof. Sarah Khan');
-        formData.append('academicDirectorTitle', settings.academicDirectorTitle || 'Academic Director');
-        formData.append('phone', settings.phone || '');
-        formData.append('email', settings.email || '');
-        formData.append('officeHours', settings.officeHours || '');
-        formData.append('facebook', settings.facebook || '');
-        formData.append('instagram', settings.instagram || '');
-        formData.append('whatsapp', settings.whatsapp || '');
-        formData.append('footerText', settings.footerText || '');
-        formData.append('address', settings.address || '');
+
         try {
             const response = await fetch('/api/admin/settings', {
                 method: 'PUT',
                 body: formData
             });
-            if (response.ok) {
-                const result = await response.json();
-                setSettings(result.data);
+
+            const result = await response.json();
+
+            if (response.ok && result.success) {
+                // Refresh settings to show the uploaded signature
+                const settingsRes = await fetch('/api/admin/settings');
+                const newSettings = await settingsRes.json();
+                setSettings(newSettings);
                 alert('Signature uploaded successfully!');
             } else {
-                alert('Failed to upload signature');
+                alert('Failed to upload signature: ' + (result.error || 'Unknown error'));
             }
         } catch (error) {
             console.error('Error uploading signature:', error);
@@ -405,12 +407,12 @@ export default function AdminDashboard() {
                                         <div className="overflow-x-auto">
                                             <table className="w-full">
                                                 <thead className="bg-gray-100">
-                                                    <tr><th className="p-4 text-left">Date</th><th className="p-4 text-left">Name</th><th className="p-4 text-left">Email</th><th className="p-4 text-left">Phone</th><th className="p-4 text-left">Course</th><th className="p-4 text-left">CV</th><th className="p-4 text-left">Certificate</th></tr>
+                                                    <th className="p-4 text-left">Date</th><th className="p-4 text-left">Name</th><th className="p-4 text-left">Email</th><th className="p-4 text-left">Phone</th><th className="p-4 text-left">Course</th><th className="p-4 text-left">CV</th><th className="p-4 text-left">Certificate</th>
                                                 </thead>
                                                 <tbody>
                                                     {filteredRegistrations.map((reg, index) => (
                                                         <tr key={index} className="border-b hover:bg-gray-50">
-                                                            <td className="p-4 text-sm">{new Date(reg.registeredAt).toLocaleDateString()}</td>
+                                                            <td className="p-4 text-sm">{new Date(reg.registeredAt).toLocaleDateString()} </td>
                                                             <td className="p-4 font-medium">{reg.name}</td>
                                                             <td className="p-4 text-sm text-blue-600">{reg.email}</td>
                                                             <td className="p-4 text-sm">{reg.phone}</td>
@@ -443,7 +445,7 @@ export default function AdminDashboard() {
                                         <div className="overflow-x-auto">
                                             <table className="w-full">
                                                 <thead className="bg-gray-100">
-                                                    <tr><th className="p-4 text-left">Date</th><th className="p-4 text-left">Name</th><th className="p-4 text-left">Email</th><th className="p-4 text-left">Phone</th><th className="p-4 text-left">Message</th></tr>
+                                                    <th className="p-4 text-left">Date</th><th className="p-4 text-left">Name</th><th className="p-4 text-left">Email</th><th className="p-4 text-left">Phone</th><th className="p-4 text-left">Message</th>
                                                 </thead>
                                                 <tbody>
                                                     {filteredContacts.map((contact, index) => (
@@ -506,7 +508,7 @@ export default function AdminDashboard() {
                                         <div className="overflow-x-auto">
                                             <table className="w-full">
                                                 <thead className="bg-gray-100">
-                                                    <tr><th className="p-4 text-left">Name</th><th className="p-4 text-left">Category</th><th className="p-4 text-left">Hours</th><th className="p-4 text-left">Actions</th></tr>
+                                                    <th className="p-4 text-left">Name</th><th className="p-4 text-left">Category</th><th className="p-4 text-left">Hours</th><th className="p-4 text-left">Actions</th>
                                                 </thead>
                                                 <tbody>
                                                     {filteredCourses.map((course, index) => (
@@ -546,7 +548,7 @@ export default function AdminDashboard() {
                                         <div className="overflow-x-auto">
                                             <table className="w-full">
                                                 <thead className="bg-gray-100">
-                                                    <tr><th className="p-4 text-left">Date</th><th className="p-4 text-left">Student</th><th className="p-4 text-left">Course</th><th className="p-4 text-left">Rating</th><th className="p-4 text-left">Review</th><th className="p-4 text-left">Status</th><th className="p-4 text-left">Actions</th></tr>
+                                                    <th className="p-4 text-left">Date</th><th className="p-4 text-left">Student</th><th className="p-4 text-left">Course</th><th className="p-4 text-left">Rating</th><th className="p-4 text-left">Review</th><th className="p-4 text-left">Status</th><th className="p-4 text-left">Actions</th>
                                                 </thead>
                                                 <tbody>
                                                     {filteredReviews.map((review, index) => (
@@ -584,11 +586,19 @@ export default function AdminDashboard() {
                                     <div><label className="block text-gray-700 font-medium mb-1">Phone Number</label><input type="text" name="phone" value={settings.phone || ''} onChange={handleSettingsChange} className="w-full p-2 border rounded" /></div>
                                     <div><label className="block text-gray-700 font-medium mb-1">Email Address</label><input type="email" name="email" value={settings.email || ''} onChange={handleSettingsChange} className="w-full p-2 border rounded" /></div>
                                     <div><label className="block text-gray-700 font-medium mb-1">Office Hours</label><input type="text" name="officeHours" value={settings.officeHours || ''} onChange={handleSettingsChange} className="w-full p-2 border rounded" /></div>
-                                    <div><label className="block text-gray-700 font-medium mb-1">Director Name</label><input type="text" name="directorName" value={settings.directorName || 'Dr. Ahmed Raza'} onChange={handleSettingsChange} className="w-full p-2 border rounded" /></div>
+                                    <div><label className="block text-gray-700 font-medium mb-1">Director Name</label><input type="text" name="directorName" value={settings.directorName || 'Arshan Rauf'} onChange={handleSettingsChange} className="w-full p-2 border rounded" /></div>
                                     <div><label className="block text-gray-700 font-medium mb-1">Director Title</label><input type="text" name="directorTitle" value={settings.directorTitle || 'Director'} onChange={handleSettingsChange} className="w-full p-2 border rounded" /></div>
-                                    <div><label className="block text-gray-700 font-medium mb-1">Academic Director Name</label><input type="text" name="academicDirectorName" value={settings.academicDirectorName || 'Prof. Sarah Khan'} onChange={handleSettingsChange} className="w-full p-2 border rounded" /></div>
+                                    <div><label className="block text-gray-700 font-medium mb-1">Academic Director Name</label><input type="text" name="academicDirectorName" value={settings.academicDirectorName || 'Dr. Sarah Khan'} onChange={handleSettingsChange} className="w-full p-2 border rounded" /></div>
                                     <div><label className="block text-gray-700 font-medium mb-1">Academic Director Title</label><input type="text" name="academicDirectorTitle" value={settings.academicDirectorTitle || 'Academic Director'} onChange={handleSettingsChange} className="w-full p-2 border rounded" /></div>
-                                    <div><label className="block text-gray-700 font-medium mb-1">Director Signature</label><input type="file" accept="image/png,image/jpeg" onChange={handleSignatureUpload} className="w-full p-2 border rounded" />{settings.signaturePath && <div className="mt-2"><p className="text-sm text-green-600 mb-1">Current Signature:</p><img src={settings.signaturePath} alt="Signature" className="h-16 border rounded p-1 bg-white" /></div>}</div>
+                                    <div><label className="block text-gray-700 font-medium mb-1">Director Signature</label>
+                                        <input type="file" accept="image/png,image/jpeg" onChange={handleSignatureUpload} className="w-full p-2 border rounded" />
+                                        {settings.signatureData && (
+                                            <div className="mt-2">
+                                                <p className="text-sm text-green-600 mb-1">Current Signature:</p>
+                                                <img src={`data:image/png;base64,${settings.signatureData}`} alt="Signature" className="h-16 border rounded p-1 bg-white" />
+                                            </div>
+                                        )}
+                                    </div>
                                     <div><label className="block text-gray-700 font-medium mb-1">Facebook URL</label><input type="text" name="facebook" value={settings.facebook || ''} onChange={handleSettingsChange} className="w-full p-2 border rounded" /></div>
                                     <div><label className="block text-gray-700 font-medium mb-1">Instagram URL</label><input type="text" name="instagram" value={settings.instagram || ''} onChange={handleSettingsChange} className="w-full p-2 border rounded" /></div>
                                     <div><label className="block text-gray-700 font-medium mb-1">WhatsApp URL</label><input type="text" name="whatsapp" value={settings.whatsapp || ''} onChange={handleSettingsChange} className="w-full p-2 border rounded" /></div>
