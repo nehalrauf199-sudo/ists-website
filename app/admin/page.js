@@ -35,7 +35,6 @@ export default function AdminDashboard() {
     });
     const [saveMessage, setSaveMessage] = useState('');
 
-    // ADMIN PASSWORD - CHANGE THIS TO YOUR SECURE PASSWORD
     const ADMIN_PASSWORD = 'arshan2002';
 
     const handleLogin = (e) => {
@@ -51,16 +50,13 @@ export default function AdminDashboard() {
     const handleForgotPassword = async (e) => {
         e.preventDefault();
         setResetMessage('Sending...');
-
         try {
             const response = await fetch('/api/admin/reset-password', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email: resetEmail })
             });
-
             const data = await response.json();
-
             if (response.ok) {
                 setResetMessage('✅ Password reset link sent to your email!');
                 setTimeout(() => {
@@ -86,13 +82,11 @@ export default function AdminDashboard() {
                 fetch('/api/manage/courses'),
                 fetch('/api/admin/reviews')
             ]);
-
             const regData = await regRes.json();
             const contactData = await contactRes.json();
             const settingsData = await settingsRes.json();
             const coursesData = await coursesRes.json();
             const reviewsData = await reviewsRes.json();
-
             setRegistrations(Array.isArray(regData) ? regData : []);
             setContacts(Array.isArray(contactData) ? contactData : []);
             setSettings(settingsData);
@@ -113,7 +107,6 @@ export default function AdminDashboard() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(settings)
             });
-
             if (response.ok) {
                 setSaveMessage('✅ Settings saved successfully!');
                 setTimeout(() => setSaveMessage(''), 3000);
@@ -130,38 +123,27 @@ export default function AdminDashboard() {
     };
 
     const handleSettingsChange = (e) => {
-        setSettings({
-            ...settings,
-            [e.target.name]: e.target.value
-        });
+        setSettings({ ...settings, [e.target.name]: e.target.value });
     };
 
     const handleCourseInputChange = (e) => {
-        setCourseForm({
-            ...courseForm,
-            [e.target.name]: e.target.value
-        });
+        setCourseForm({ ...courseForm, [e.target.name]: e.target.value });
     };
 
     const handleArrayInput = (field, value) => {
         const items = value.split('\n').filter(item => item.trim());
-        setCourseForm({
-            ...courseForm,
-            [field]: items
-        });
+        setCourseForm({ ...courseForm, [field]: items });
     };
 
     const saveCourse = async () => {
         try {
             const method = editingCourse ? 'PUT' : 'POST';
             const body = editingCourse ? { ...courseForm, id: editingCourse._id } : courseForm;
-
             const response = await fetch('/api/manage/courses', {
                 method,
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(body)
             });
-
             if (response.ok) {
                 alert(editingCourse ? 'Course updated!' : 'Course added!');
                 setShowCourseForm(false);
@@ -190,9 +172,7 @@ export default function AdminDashboard() {
     const deleteCourse = async (id) => {
         if (confirm('Are you sure you want to delete this course?')) {
             try {
-                const response = await fetch(`/api/manage/courses?id=${id}`, {
-                    method: 'DELETE'
-                });
+                const response = await fetch(`/api/manage/courses?id=${id}`, { method: 'DELETE' });
                 if (response.ok) {
                     alert('Course deleted!');
                     fetchData();
@@ -229,7 +209,6 @@ export default function AdminDashboard() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ id, action })
             });
-
             if (response.ok) {
                 alert(`Review ${action === 'approve' ? 'approved' : 'rejected'}!`);
                 fetchData();
@@ -245,9 +224,7 @@ export default function AdminDashboard() {
     const deleteReview = async (id) => {
         if (confirm('Are you sure you want to delete this review?')) {
             try {
-                const response = await fetch(`/api/admin/reviews?id=${id}`, {
-                    method: 'DELETE'
-                });
+                const response = await fetch(`/api/admin/reviews?id=${id}`, { method: 'DELETE' });
                 if (response.ok) {
                     alert('Review deleted!');
                     fetchData();
@@ -262,9 +239,7 @@ export default function AdminDashboard() {
     const issueCertificate = async (reg) => {
         const completionDate = prompt('Enter completion date (YYYY-MM-DD):', new Date().toISOString().split('T')[0]);
         if (!completionDate) return;
-
         if (!confirm(`Issue certificate for ${reg.name} for course: ${reg.course}?`)) return;
-
         try {
             const response = await fetch('/api/certificate', {
                 method: 'POST',
@@ -277,9 +252,7 @@ export default function AdminDashboard() {
                     studentEmail: reg.email
                 })
             });
-
             const result = await response.json();
-
             if (response.ok) {
                 alert(`✅ Certificate issued successfully!\nCertificate ID: ${result.certificateId}\nEmail sent to: ${reg.email}`);
             } else {
@@ -294,7 +267,6 @@ export default function AdminDashboard() {
     const handleSignatureUpload = async (e) => {
         const file = e.target.files[0];
         if (!file) return;
-
         const formData = new FormData();
         formData.append('signature', file);
         formData.append('directorName', settings.directorName || 'Dr. Ahmed Raza');
@@ -309,13 +281,11 @@ export default function AdminDashboard() {
         formData.append('whatsapp', settings.whatsapp || '');
         formData.append('footerText', settings.footerText || '');
         formData.append('address', settings.address || '');
-
         try {
             const response = await fetch('/api/admin/settings', {
                 method: 'PUT',
                 body: formData
             });
-
             if (response.ok) {
                 const result = await response.json();
                 setSettings(result.data);
@@ -371,64 +341,22 @@ export default function AdminDashboard() {
                         <h1 className="text-2xl font-bold text-blue-900">Admin Login</h1>
                         <p className="text-gray-600 mt-2">Enter password to access dashboard</p>
                     </div>
-
                     {!showForgot ? (
                         <form onSubmit={handleLogin}>
-                            <input
-                                type="password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                placeholder="Enter admin password"
-                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 mb-4"
-                            />
+                            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Enter admin password" className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 mb-4" />
                             {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
-                            <button
-                                type="submit"
-                                className="w-full bg-gradient-to-r from-blue-900 to-orange-600 text-white font-bold py-3 rounded-lg hover:shadow-lg transition"
-                            >
-                                Login
-                            </button>
+                            <button type="submit" className="w-full bg-gradient-to-r from-blue-900 to-orange-600 text-white font-bold py-3 rounded-lg hover:shadow-lg transition">Login</button>
                             <div className="text-center mt-4">
-                                <button
-                                    type="button"
-                                    onClick={() => setShowForgot(true)}
-                                    className="text-sm text-blue-600 hover:text-blue-800 transition"
-                                >
-                                    Forgot Password?
-                                </button>
+                                <button type="button" onClick={() => setShowForgot(true)} className="text-sm text-blue-600 hover:text-blue-800 transition">Forgot Password?</button>
                             </div>
                         </form>
                     ) : (
                         <form onSubmit={handleForgotPassword}>
-                            <p className="text-gray-600 text-sm mb-4">
-                                Enter your email address and we'll send you instructions to reset your password.
-                            </p>
-                            <input
-                                type="email"
-                                value={resetEmail}
-                                onChange={(e) => setResetEmail(e.target.value)}
-                                placeholder="admin@ists.com"
-                                required
-                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 mb-4"
-                            />
+                            <p className="text-gray-600 text-sm mb-4">Enter your email address and we'll send you instructions to reset your password.</p>
+                            <input type="email" value={resetEmail} onChange={(e) => setResetEmail(e.target.value)} placeholder="admin@ists.com" required className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 mb-4" />
                             {resetMessage && <p className={`text-sm mb-4 ${resetMessage.includes('✅') ? 'text-green-600' : 'text-red-600'}`}>{resetMessage}</p>}
-                            <button
-                                type="submit"
-                                className="w-full bg-gradient-to-r from-blue-900 to-orange-600 text-white font-bold py-3 rounded-lg hover:shadow-lg transition mb-3"
-                            >
-                                Send Reset Link
-                            </button>
-                            <button
-                                type="button"
-                                onClick={() => {
-                                    setShowForgot(false);
-                                    setResetMessage('');
-                                    setResetEmail('');
-                                }}
-                                className="w-full text-gray-500 hover:text-gray-700 text-sm"
-                            >
-                                Back to Login
-                            </button>
+                            <button type="submit" className="w-full bg-gradient-to-r from-blue-900 to-orange-600 text-white font-bold py-3 rounded-lg hover:shadow-lg transition mb-3">Send Reset Link</button>
+                            <button type="button" onClick={() => { setShowForgot(false); setResetMessage(''); setResetEmail(''); }} className="w-full text-gray-500 hover:text-gray-700 text-sm">Back to Login</button>
                         </form>
                     )}
                 </div>
@@ -444,9 +372,7 @@ export default function AdminDashboard() {
                         <h1 className="text-2xl font-bold">Admin Dashboard</h1>
                         <p className="text-blue-100 text-sm">Manage registrations, courses, reviews, and site settings</p>
                     </div>
-                    <button onClick={() => setIsLoggedIn(false)} className="bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg transition">
-                        Logout
-                    </button>
+                    <button onClick={() => setIsLoggedIn(false)} className="bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg transition">Logout</button>
                 </div>
             </div>
 
@@ -466,12 +392,21 @@ export default function AdminDashboard() {
                         {/* Registrations Tab */}
                         {activeTab === 'registrations' && (
                             <div>
-                                <div className="mb-4"><div className="relative"><input type="text" placeholder="Search registrations by name, email, phone, or course..." value={regSearch} onChange={(e) => setRegSearch(e.target.value)} className="w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" /><span className="absolute left-3 top-2.5 text-gray-400">🔍</span>{regSearch && <button onClick={() => setRegSearch('')} className="absolute right-3 top-2.5 text-gray-400 hover:text-gray-600">✕</button>}</div>{regSearch && <p className="text-sm text-gray-500 mt-1">Found {filteredRegistrations.length} registration(s) matching "{regSearch}"</p>}</div>
+                                <div className="mb-4">
+                                    <div className="relative">
+                                        <input type="text" placeholder="Search registrations by name, email, phone, or course..." value={regSearch} onChange={(e) => setRegSearch(e.target.value)} className="w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" />
+                                        <span className="absolute left-3 top-2.5 text-gray-400">🔍</span>
+                                        {regSearch && <button onClick={() => setRegSearch('')} className="absolute right-3 top-2.5 text-gray-400 hover:text-gray-600">✕</button>}
+                                    </div>
+                                    {regSearch && <p className="text-sm text-gray-500 mt-1">Found {filteredRegistrations.length} registration(s) matching "{regSearch}"</p>}
+                                </div>
                                 <div className="bg-white rounded-xl shadow-lg overflow-hidden">
                                     {filteredRegistrations.length === 0 ? <div className="text-center py-12"><div className="text-4xl mb-4">📭</div><p className="text-gray-500">{regSearch ? `No registrations matching "${regSearch}"` : 'No registrations yet'}</p></div> :
                                         <div className="overflow-x-auto">
                                             <table className="w-full">
-                                                <thead className="bg-gray-100"><tr><th className="p-4 text-left">Date</th><th className="p-4 text-left">Name</th><th className="p-4 text-left">Email</th><th className="p-4 text-left">Phone</th><th className="p-4 text-left">Course</th><th className="p-4 text-left">CV</th><th className="p-4 text-left">Certificate</th></tr></thead>
+                                                <thead className="bg-gray-100">
+                                                    <tr><th className="p-4 text-left">Date</th><th className="p-4 text-left">Name</th><th className="p-4 text-left">Email</th><th className="p-4 text-left">Phone</th><th className="p-4 text-left">Course</th><th className="p-4 text-left">CV</th><th className="p-4 text-left">Certificate</th></tr>
+                                                </thead>
                                                 <tbody>
                                                     {filteredRegistrations.map((reg, index) => (
                                                         <tr key={index} className="border-b hover:bg-gray-50">
@@ -486,7 +421,8 @@ export default function AdminDashboard() {
                                                     ))}
                                                 </tbody>
                                             </table>
-                                        </div>}
+                                        </div>
+                                    }
                                 </div>
                             </div>
                         )}
@@ -494,14 +430,35 @@ export default function AdminDashboard() {
                         {/* Contacts Tab */}
                         {activeTab === 'contacts' && (
                             <div>
-                                <div className="mb-4"><div className="relative"><input type="text" placeholder="Search contacts by name, email, phone, or message..." value={contactSearch} onChange={(e) => setContactSearch(e.target.value)} className="w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" /><span className="absolute left-3 top-2.5 text-gray-400">🔍</span>{contactSearch && <button onClick={() => setContactSearch('')} className="absolute right-3 top-2.5 text-gray-400 hover:text-gray-600">✕</button>}</div>{contactSearch && <p className="text-sm text-gray-500 mt-1">Found {filteredContacts.length} contact(s) matching "{contactSearch}"</p>}</div>
+                                <div className="mb-4">
+                                    <div className="relative">
+                                        <input type="text" placeholder="Search contacts by name, email, phone, or message..." value={contactSearch} onChange={(e) => setContactSearch(e.target.value)} className="w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" />
+                                        <span className="absolute left-3 top-2.5 text-gray-400">🔍</span>
+                                        {contactSearch && <button onClick={() => setContactSearch('')} className="absolute right-3 top-2.5 text-gray-400 hover:text-gray-600">✕</button>}
+                                    </div>
+                                    {contactSearch && <p className="text-sm text-gray-500 mt-1">Found {filteredContacts.length} contact(s) matching "{contactSearch}"</p>}
+                                </div>
                                 <div className="bg-white rounded-xl shadow-lg overflow-hidden">
                                     {filteredContacts.length === 0 ? <div className="text-center py-12"><div className="text-4xl mb-4">📭</div><p className="text-gray-500">{contactSearch ? `No contacts matching "${contactSearch}"` : 'No contact messages yet'}</p></div> :
                                         <div className="overflow-x-auto">
-                                            <table className="w-full"><thead className="bg-gray-100"><tr><th className="p-4 text-left">Date</th><th className="p-4 text-left">Name</th><th className="p-4 text-left">Email</th><th className="p-4 text-left">Phone</th><th className="p-4 text-left">Message</th></tr></thead>
-                                                <tbody>{filteredContacts.map((contact, index) => (<tr key={index} className="border-b hover:bg-gray-50"><td className="p-4 text-sm">{new Date(contact.submittedAt).toLocaleDateString()}</td><td className="p-4 font-medium">{contact.name}</td><td className="p-4 text-sm text-blue-600">{contact.email}</td><td className="p-4 text-sm">{contact.phone}</td><td className="p-4 text-sm max-w-md">{contact.message}</td>))}</tbody>
+                                            <table className="w-full">
+                                                <thead className="bg-gray-100">
+                                                    <tr><th className="p-4 text-left">Date</th><th className="p-4 text-left">Name</th><th className="p-4 text-left">Email</th><th className="p-4 text-left">Phone</th><th className="p-4 text-left">Message</th></tr>
+                                                </thead>
+                                                <tbody>
+                                                    {filteredContacts.map((contact, index) => (
+                                                        <tr key={index} className="border-b hover:bg-gray-50">
+                                                            <td className="p-4 text-sm">{new Date(contact.submittedAt).toLocaleDateString()}</td>
+                                                            <td className="p-4 font-medium">{contact.name}</td>
+                                                            <td className="p-4 text-sm text-blue-600">{contact.email}</td>
+                                                            <td className="p-4 text-sm">{contact.phone}</td>
+                                                            <td className="p-4 text-sm max-w-md">{contact.message}</td>
+                                                        </tr>
+                                                    ))}
+                                                </tbody>
                                             </table>
-                                        </div>}
+                                        </div>
+                                    }
                                 </div>
                             </div>
                         )}
@@ -510,11 +467,65 @@ export default function AdminDashboard() {
                         {activeTab === 'courses' && (
                             <div>
                                 <button onClick={() => { setEditingCourse(null); setCourseForm({ name: '', category: '', hours: '', description: '', content: [], outcomes: [], eligibility: '', modules: [], learningObjectives: [] }); setShowCourseForm(true); }} className="mb-4 bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-lg">+ Add New Course</button>
-                                <div className="mb-4"><div className="relative"><input type="text" placeholder="Search courses by name, category, or hours..." value={courseSearch} onChange={(e) => setCourseSearch(e.target.value)} className="w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" /><span className="absolute left-3 top-2.5 text-gray-400">🔍</span>{courseSearch && <button onClick={() => setCourseSearch('')} className="absolute right-3 top-2.5 text-gray-400 hover:text-gray-600">✕</button>}</div>{courseSearch && <p className="text-sm text-gray-500 mt-1">Found {filteredCourses.length} course(s) matching "{courseSearch}"</p>}</div>
-                                {showCourseForm && (<div className="bg-white rounded-xl shadow-lg p-6 mb-6"><h3 className="text-xl font-bold text-blue-900 mb-4">{editingCourse ? 'Edit Course' : 'Add New Course'}</h3><div className="grid md:grid-cols-2 gap-4"><input type="text" name="name" placeholder="Course Name" value={courseForm.name} onChange={handleCourseInputChange} className="p-2 border rounded" /><select name="category" value={courseForm.category} onChange={handleCourseInputChange} className="p-2 border rounded"><option value="">Select Category</option><option value="OSHA">OSHA</option><option value="OTHM">OTHM</option><option value="HiQual">HiQual</option><option value="IOSH">IOSH</option></select><input type="text" name="hours" placeholder="Credit Hours" value={courseForm.hours} onChange={handleCourseInputChange} className="p-2 border rounded" /><textarea name="description" placeholder="Description" value={courseForm.description} onChange={handleCourseInputChange} className="p-2 border rounded col-span-2" rows="2" /><textarea placeholder="Content (one per line)" value={courseForm.content.join('\n')} onChange={(e) => handleArrayInput('content', e.target.value)} className="p-2 border rounded" rows="3" /><textarea placeholder="Outcomes (one per line)" value={courseForm.outcomes.join('\n')} onChange={(e) => handleArrayInput('outcomes', e.target.value)} className="p-2 border rounded" rows="3" /><textarea name="eligibility" placeholder="Eligibility Criteria" value={courseForm.eligibility} onChange={handleCourseInputChange} className="p-2 border rounded col-span-2" rows="2" /><textarea placeholder="Modules (one per line)" value={courseForm.modules.join('\n')} onChange={(e) => handleArrayInput('modules', e.target.value)} className="p-2 border rounded col-span-2" rows="4" /><textarea placeholder="Learning Objectives (one per line)" value={courseForm.learningObjectives.join('\n')} onChange={(e) => handleArrayInput('learningObjectives', e.target.value)} className="p-2 border rounded col-span-2" rows="4" /></div><div className="flex gap-2 mt-4"><button onClick={saveCourse} className="bg-green-500 text-white px-4 py-2 rounded">Save</button><button onClick={() => setShowCourseForm(false)} className="bg-gray-500 text-white px-4 py-2 rounded">Cancel</button></div></div>)}
+                                <div className="mb-4">
+                                    <div className="relative">
+                                        <input type="text" placeholder="Search courses by name, category, or hours..." value={courseSearch} onChange={(e) => setCourseSearch(e.target.value)} className="w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" />
+                                        <span className="absolute left-3 top-2.5 text-gray-400">🔍</span>
+                                        {courseSearch && <button onClick={() => setCourseSearch('')} className="absolute right-3 top-2.5 text-gray-400 hover:text-gray-600">✕</button>}
+                                    </div>
+                                    {courseSearch && <p className="text-sm text-gray-500 mt-1">Found {filteredCourses.length} course(s) matching "{courseSearch}"</p>}
+                                </div>
+                                {showCourseForm && (
+                                    <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
+                                        <h3 className="text-xl font-bold text-blue-900 mb-4">{editingCourse ? 'Edit Course' : 'Add New Course'}</h3>
+                                        <div className="grid md:grid-cols-2 gap-4">
+                                            <input type="text" name="name" placeholder="Course Name" value={courseForm.name} onChange={handleCourseInputChange} className="p-2 border rounded" />
+                                            <select name="category" value={courseForm.category} onChange={handleCourseInputChange} className="p-2 border rounded">
+                                                <option value="">Select Category</option>
+                                                <option value="OSHA">OSHA</option>
+                                                <option value="OTHM">OTHM</option>
+                                                <option value="HiQual">HiQual</option>
+                                                <option value="IOSH">IOSH</option>
+                                            </select>
+                                            <input type="text" name="hours" placeholder="Credit Hours" value={courseForm.hours} onChange={handleCourseInputChange} className="p-2 border rounded" />
+                                            <textarea name="description" placeholder="Description" value={courseForm.description} onChange={handleCourseInputChange} className="p-2 border rounded col-span-2" rows="2" />
+                                            <textarea placeholder="Content (one per line)" value={courseForm.content.join('\n')} onChange={(e) => handleArrayInput('content', e.target.value)} className="p-2 border rounded" rows="3" />
+                                            <textarea placeholder="Outcomes (one per line)" value={courseForm.outcomes.join('\n')} onChange={(e) => handleArrayInput('outcomes', e.target.value)} className="p-2 border rounded" rows="3" />
+                                            <textarea name="eligibility" placeholder="Eligibility Criteria" value={courseForm.eligibility} onChange={handleCourseInputChange} className="p-2 border rounded col-span-2" rows="2" />
+                                            <textarea placeholder="Modules (one per line)" value={courseForm.modules.join('\n')} onChange={(e) => handleArrayInput('modules', e.target.value)} className="p-2 border rounded col-span-2" rows="4" />
+                                            <textarea placeholder="Learning Objectives (one per line)" value={courseForm.learningObjectives.join('\n')} onChange={(e) => handleArrayInput('learningObjectives', e.target.value)} className="p-2 border rounded col-span-2" rows="4" />
+                                        </div>
+                                        <div className="flex gap-2 mt-4">
+                                            <button onClick={saveCourse} className="bg-green-500 text-white px-4 py-2 rounded">Save</button>
+                                            <button onClick={() => setShowCourseForm(false)} className="bg-gray-500 text-white px-4 py-2 rounded">Cancel</button>
+                                        </div>
+                                    </div>
+                                )}
                                 <div className="bg-white rounded-xl shadow-lg overflow-hidden">
                                     {filteredCourses.length === 0 ? <div className="text-center py-12"><div className="text-4xl mb-4">📭</div><p className="text-gray-500">{courseSearch ? `No courses matching "${courseSearch}"` : 'No courses added yet'}</p></div> :
-                                        <div className="overflow-x-auto"><table className="w-full"><thead className="bg-gray-100"><tr><th className="p-4 text-left">Name</th><th className="p-4 text-left">Category</th><th className="p-4 text-left">Hours</th><th className="p-4 text-left">Actions</th></tr></thead><tbody>{filteredCourses.map((course, index) => (<tr key={index} className="border-b hover:bg-gray-50"><td className="p-4">{course.name}</td><td className="p-4"><span className={`px-2 py-1 rounded text-xs font-semibold ${course.category === 'OSHA' ? 'bg-blue-100 text-blue-800' : course.category === 'OTHM' ? 'bg-green-100 text-green-800' : course.category === 'HiQual' ? 'bg-purple-100 text-purple-800' : course.category === 'IOSH' ? 'bg-orange-100 text-orange-800' : 'bg-gray-100 text-gray-800'}`}>{course.category}</span></td><td className="p-4">{course.hours}</td><td className="p-4"><button onClick={() => editCourse(course)} className="text-blue-600 mr-3 hover:text-blue-800">✏️ Edit</button><button onClick={() => deleteCourse(course._id)} className="text-red-600 hover:text-red-800">🗑️ Delete</button></td></tr>))}</tbody></table></div>}
+                                        <div className="overflow-x-auto">
+                                            <table className="w-full">
+                                                <thead className="bg-gray-100">
+                                                    <tr><th className="p-4 text-left">Name</th><th className="p-4 text-left">Category</th><th className="p-4 text-left">Hours</th><th className="p-4 text-left">Actions</th></tr>
+                                                </thead>
+                                                <tbody>
+                                                    {filteredCourses.map((course, index) => (
+                                                        <tr key={index} className="border-b hover:bg-gray-50">
+                                                            <td className="p-4">{course.name}</td>
+                                                            <td className="p-4">
+                                                                <span className={`px-2 py-1 rounded text-xs font-semibold ${course.category === 'OSHA' ? 'bg-blue-100 text-blue-800' : course.category === 'OTHM' ? 'bg-green-100 text-green-800' : course.category === 'HiQual' ? 'bg-purple-100 text-purple-800' : course.category === 'IOSH' ? 'bg-orange-100 text-orange-800' : 'bg-gray-100 text-gray-800'}`}>{course.category}</span>
+                                                            </td>
+                                                            <td className="p-4">{course.hours}</td>
+                                                            <td className="p-4">
+                                                                <button onClick={() => editCourse(course)} className="text-blue-600 mr-3 hover:text-blue-800">✏️ Edit</button>
+                                                                <button onClick={() => deleteCourse(course._id)} className="text-red-600 hover:text-red-800">🗑️ Delete</button>
+                                                            </td>
+                                                        </tr>
+                                                    ))}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    }
                                 </div>
                             </div>
                         )}
@@ -522,10 +533,45 @@ export default function AdminDashboard() {
                         {/* Reviews Tab */}
                         {activeTab === 'reviews' && (
                             <div>
-                                <div className="mb-4"><div className="relative"><input type="text" placeholder="Search reviews by name, course, comment, or status..." value={reviewSearch} onChange={(e) => setReviewSearch(e.target.value)} className="w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" /><span className="absolute left-3 top-2.5 text-gray-400">🔍</span>{reviewSearch && <button onClick={() => setReviewSearch('')} className="absolute right-3 top-2.5 text-gray-400 hover:text-gray-600">✕</button>}</div>{reviewSearch && <p className="text-sm text-gray-500 mt-1">Found {filteredReviews.length} review(s) matching "{reviewSearch}"</p>}</div>
+                                <div className="mb-4">
+                                    <div className="relative">
+                                        <input type="text" placeholder="Search reviews by name, course, comment, or status..." value={reviewSearch} onChange={(e) => setReviewSearch(e.target.value)} className="w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" />
+                                        <span className="absolute left-3 top-2.5 text-gray-400">🔍</span>
+                                        {reviewSearch && <button onClick={() => setReviewSearch('')} className="absolute right-3 top-2.5 text-gray-400 hover:text-gray-600">✕</button>}
+                                    </div>
+                                    {reviewSearch && <p className="text-sm text-gray-500 mt-1">Found {filteredReviews.length} review(s) matching "{reviewSearch}"</p>}
+                                </div>
                                 <div className="bg-white rounded-xl shadow-lg overflow-hidden">
                                     {filteredReviews.length === 0 ? <div className="text-center py-12"><div className="text-4xl mb-4">📭</div><p className="text-gray-500">{reviewSearch ? `No reviews matching "${reviewSearch}"` : 'No reviews yet'}</p></div> :
-                                        <div className="overflow-x-auto"><table className="w-full"><thead className="bg-gray-100"><tr><th className="p-4 text-left">Date</th><th className="p-4 text-left">Student</th><th className="p-4 text-left">Course</th><th className="p-4 text-left">Rating</th><th className="p-4 text-left">Review</th><th className="p-4 text-left">Status</th><th className="p-4 text-left">Actions</th></tr></thead><tbody>{filteredReviews.map((review, index) => (<tr key={index} className="border-b hover:bg-gray-50"><td className="p-4 text-sm">{new Date(review.createdAt).toLocaleDateString()}</td><td className="p-4"><div className="flex items-center gap-3"><Avatar name={review.name} email={review.email} size="w-10 h-10" /><span className="font-medium">{review.name}</span></div></td><td className="p-4 text-sm">{review.course}</td><td className="p-4"><div className="flex gap-1">{[...Array(5)].map((_, i) => (<span key={i} className={`text-lg ${i < review.rating ? 'text-yellow-400' : 'text-gray-300'}`}>★</span>))}</div></td><td className="p-4 text-sm max-w-xs truncate">{review.comment}</td><td className="p-4"><span className={`px-2 py-1 rounded text-xs font-semibold ${review.status === 'approved' ? 'bg-green-100 text-green-800' : review.status === 'rejected' ? 'bg-red-100 text-red-800' : 'bg-yellow-100 text-yellow-800'}`}>{review.status}</span></td><td className="p-4">{review.status === 'pending' && (<><button onClick={() => updateReviewStatus(review._id, 'approve')} className="bg-green-500 text-white px-2 py-1 rounded text-xs mr-1 hover:bg-green-600">✅ Approve</button><button onClick={() => updateReviewStatus(review._id, 'reject')} className="bg-red-500 text-white px-2 py-1 rounded text-xs mr-1 hover:bg-red-600">❌ Reject</button></>)}<button onClick={() => deleteReview(review._id)} className="bg-gray-500 text-white px-2 py-1 rounded text-xs hover:bg-gray-600">🗑️ Delete</button></td></tr>))}</tbody></table></div>}
+                                        <div className="overflow-x-auto">
+                                            <table className="w-full">
+                                                <thead className="bg-gray-100">
+                                                    <tr><th className="p-4 text-left">Date</th><th className="p-4 text-left">Student</th><th className="p-4 text-left">Course</th><th className="p-4 text-left">Rating</th><th className="p-4 text-left">Review</th><th className="p-4 text-left">Status</th><th className="p-4 text-left">Actions</th></tr>
+                                                </thead>
+                                                <tbody>
+                                                    {filteredReviews.map((review, index) => (
+                                                        <tr key={index} className="border-b hover:bg-gray-50">
+                                                            <td className="p-4 text-sm">{new Date(review.createdAt).toLocaleDateString()}</td>
+                                                            <td className="p-4"><div className="flex items-center gap-3"><Avatar name={review.name} email={review.email} size="w-10 h-10" /><span className="font-medium">{review.name}</span></div></td>
+                                                            <td className="p-4 text-sm">{review.course}</td>
+                                                            <td className="p-4"><div className="flex gap-1">{[...Array(5)].map((_, i) => (<span key={i} className={`text-lg ${i < review.rating ? 'text-yellow-400' : 'text-gray-300'}`}>★</span>))}</div></td>
+                                                            <td className="p-4 text-sm max-w-xs truncate">{review.comment}</td>
+                                                            <td className="p-4"><span className={`px-2 py-1 rounded text-xs font-semibold ${review.status === 'approved' ? 'bg-green-100 text-green-800' : review.status === 'rejected' ? 'bg-red-100 text-red-800' : 'bg-yellow-100 text-yellow-800'}`}>{review.status}</span></td>
+                                                            <td className="p-4">
+                                                                {review.status === 'pending' && (
+                                                                    <>
+                                                                        <button onClick={() => updateReviewStatus(review._id, 'approve')} className="bg-green-500 text-white px-2 py-1 rounded text-xs mr-1 hover:bg-green-600">✅ Approve</button>
+                                                                        <button onClick={() => updateReviewStatus(review._id, 'reject')} className="bg-red-500 text-white px-2 py-1 rounded text-xs mr-1 hover:bg-red-600">❌ Reject</button>
+                                                                    </>
+                                                                )}
+                                                                <button onClick={() => deleteReview(review._id)} className="bg-gray-500 text-white px-2 py-1 rounded text-xs hover:bg-gray-600">🗑️ Delete</button>
+                                                            </td>
+                                                        </tr>
+                                                    ))}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    }
                                 </div>
                             </div>
                         )}
