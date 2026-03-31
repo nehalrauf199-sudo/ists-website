@@ -28,13 +28,6 @@ body {
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 }
 
-/* Optional: Add gradient border on hover - uncomment if you want this effect */
-/* .group:hover .rounded-2xl {
-  background: linear-gradient(white, white) padding-box,
-              linear-gradient(135deg, #1e3a8a, #f97316) border-box;
-  border: 2px solid transparent;
-} */
-
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
@@ -46,52 +39,63 @@ html {
   color: white;
 }
 
-/* Mobile Responsive Styles */
+/* ========== MOBILE RESPONSIVE STYLES ========== */
 @media (max-width: 768px) {
 
   /* Navbar */
   nav {
     flex-direction: column;
     text-align: center;
-    gap: 10px;
+    gap: 12px;
+    padding: 15px !important;
   }
 
   nav .flex.items-center {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
+    justify-content: center;
   }
 
   nav a {
-    padding: 8px 12px;
+    padding: 8px 12px !important;
     font-size: 14px;
   }
 
+  .bg-orange-500,
+  .bg-blue-700 {
+    padding: 8px 16px !important;
+    font-size: 14px !important;
+  }
+
   /* Hero Section */
-  section.text-center {
+  section.relative {
     padding: 60px 20px !important;
   }
 
-  section.text-center h1 {
+  section.relative h1 {
     font-size: 28px !important;
   }
 
-  section.text-center p {
+  section.relative p {
     font-size: 16px !important;
   }
 
-  /* Grid Layouts */
+  /* Grid Layouts - Make all columns single column */
   .grid {
+    grid-template-columns: 1fr !important;
     gap: 20px !important;
   }
 
-  .grid.md\:grid-cols-2,
-  .grid.md\:grid-cols-3,
-  .grid.md\:grid-cols-4 {
-    grid-template-columns: 1fr !important;
+  /* Course Cards */
+  .bg-white.rounded-xl {
+    margin: 0 10px;
   }
 
-  /* Cards */
-  .bg-white.rounded-xl {
+  .bg-white.rounded-xl .p-5 {
     padding: 20px !important;
+  }
+
+  .bg-white.rounded-xl h3 {
+    font-size: 18px !important;
   }
 
   /* Buttons */
@@ -118,13 +122,51 @@ html {
   footer p {
     font-size: 12px !important;
   }
-}
 
-@media (max-width: 480px) {
+  /* Student Name */
+  .student-name {
+    font-size: 28px !important;
+  }
 
-  /* Very small phones */
-  section.text-center h1 {
+  /* Certificate Page */
+  .certificate-white {
+    padding: 25px !important;
+  }
+
+  .student-wrapper {
+    gap: 10px !important;
+  }
+
+  .line-left,
+  .line-right {
+    width: 30px !important;
+  }
+
+  .institute-name {
+    font-size: 18px !important;
+  }
+
+  .cert-title {
     font-size: 24px !important;
+  }
+
+  .course-name {
+    font-size: 18px !important;
+  }
+
+  .footer {
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+  }
+
+  .signature-section {
+    margin-top: 10px;
+  }
+
+  /* Home Page Text */
+  .text-5xl {
+    font-size: 32px !important;
   }
 
   .text-3xl {
@@ -135,7 +177,106 @@ html {
     font-size: 28px !important;
   }
 
+  /* About Page */
+  .grid.md\:grid-cols-2 {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Reviews */
+  .testimonial-card {
+    padding: 20px !important;
+  }
+
+  /* Admin Dashboard Tables */
+  .overflow-x-auto {
+    overflow-x: auto;
+  }
+
+  table {
+    min-width: 600px;
+  }
+
+  /* WhatsApp Widget */
+  .fixed.bottom-6.right-6 {
+    bottom: 15px;
+    right: 15px;
+  }
+
+  /* Course Page Headers */
+  .text-center h1 {
+    font-size: 28px !important;
+  }
+
+  .text-center p {
+    font-size: 14px !important;
+  }
+
+  /* Contact Page Cards */
+  .grid.md\:grid-cols-3 {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Register Page */
+  .max-w-4xl {
+    padding: 0 15px;
+  }
+
+  .bg-white.rounded-2xl {
+    margin: 0 5px;
+  }
+}
+
+@media (max-width: 480px) {
+
+  /* Very small phones */
+  section.relative h1 {
+    font-size: 24px !important;
+  }
+
+  .text-3xl {
+    font-size: 20px !important;
+  }
+
   .student-name {
     font-size: 24px !important;
+  }
+
+  nav a {
+    padding: 6px 10px !important;
+    font-size: 12px !important;
+  }
+
+  .bg-orange-500,
+  .bg-blue-700 {
+    padding: 6px 12px !important;
+    font-size: 12px !important;
+  }
+
+  /* Hide some elements if needed */
+  .hidden-mobile {
+    display: none;
+  }
+
+  /* Smaller padding for cards */
+  .p-8 {
+    padding: 20px !important;
+  }
+
+  .p-6 {
+    padding: 15px !important;
+  }
+
+  /* Adjust icons */
+  .text-4xl {
+    font-size: 24px !important;
+  }
+
+  .text-5xl {
+    font-size: 28px !important;
+  }
+
+  /* WhatsApp Widget size on very small phones */
+  .w-80 {
+    width: 280px !important;
   }
 }
