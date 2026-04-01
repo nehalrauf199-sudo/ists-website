@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Register() {
     const [formData, setFormData] = useState({
@@ -17,149 +17,30 @@ export default function Register() {
     const [error, setError] = useState('');
     const [courseSearch, setCourseSearch] = useState('');
     const [showCourseDropdown, setShowCourseDropdown] = useState(false);
+    const [courses, setCourses] = useState([]);
+    const [loadingCourses, setLoadingCourses] = useState(true);
 
-    const allCourses = [
-        // OSHA Courses
-        "OSHA 30-Hour Construction Safety",
-        "OSHA 30-Hour General Industry",
-        "OSHA 10-Hour Construction Safety",
-        "OSHA 10-Hour General Industry",
-        "OSHA 48-Hour Master Safety",
-        "OSHA HAZWOPER 40-Hour",
-        "OSHA 10-Hour Maritime",
-        "OSHA 30-Hour Maritime",
-        "OSHA 15-Hour Disaster Training",
-        "OSHA 7.5-Hour Disaster Refresher",
-        "OSHA 510 – Construction Standards",
-        "OSHA 511 – General Industry Standards",
-        "OSHA 521 – Industrial Hygiene",
-        "OSHA Maritime Standards (5410)",
-        "OSHA 500 – Trainer Course (Construction)",
-        "OSHA 501 – Trainer Course (General Industry)",
-        "OSHA 502 / 503 – Trainer Updates",
-        "Fall Protection",
-        "Scaffolding Safety",
-        "Excavation & Trenching",
-        "Ladder Safety",
-        "Electrical Safety",
-        "Lockout/Tagout (LOTO)",
-        "Machine Guarding",
-        "Forklift Safety",
-        "Hazard Communication",
-        "Industrial Hygiene",
-        "Asbestos Awareness",
-        "Lead Safety",
-        "Silica Safety",
-        "Fire Safety",
-        "Emergency Response",
-        "Crane & Rigging Safety",
-        "Confined Space Entry",
-        "H2S Safety",
-        "Job Safety Analysis (JSA)",
-
-        // OTHM Courses
-        "OTHM Level 3 Diploma in Business Management",
-        "OTHM Level 3 Diploma in Health & Social Care",
-        "OTHM Level 3 Diploma in Information Technology",
-        "OTHM Level 4 Diploma in Business Management",
-        "OTHM Level 4 Diploma in Logistics & Supply Chain",
-        "OTHM Level 4 Diploma in Information Technology",
-        "OTHM Level 4 Diploma in Health & Social Care",
-        "OTHM Level 5 Diploma in Business Management",
-        "OTHM Level 5 Diploma in Information Technology",
-        "OTHM Level 5 Diploma in Logistics & Supply Chain",
-        "OTHM Level 5 Diploma in Health & Social Care",
-        "OTHM Level 5 Diploma in Education & Training",
-        "OTHM Level 6 Diploma in Occupational Health & Safety",
-        "OTHM Level 6 Diploma in Business Management",
-        "OTHM Level 6 Diploma in Accounting & Business",
-        "OTHM Level 6 Diploma in Logistics & Supply Chain",
-        "OTHM Level 6 Diploma in Tourism & Hospitality",
-        "OTHM Level 7 Diploma in Project Management",
-        "OTHM Level 7 Diploma in Strategic Management & Leadership",
-        "OTHM Level 7 Diploma in Accounting & Finance",
-        "OTHM Level 7 Diploma in Human Resource Management",
-        "OTHM Level 7 Diploma in Logistics & Supply Chain Management",
-        "OTHM Level 7 Diploma in Health & Social Care Management",
-        "OTHM Level 7 Diploma in Tourism & Hospitality Management",
-        "OTHM Level 7 Diploma in Education Management",
-        "OTHM Diploma in Data Science",
-        "OTHM Diploma in Cyber Security",
-        "OTHM Diploma in Artificial Intelligence (AI)",
-
-        // HiQual Courses
-        "HiQual ISO Lead Auditor (9001, 14001, 45001)",
-        "HiQual HSE Level 1 – 3 Awards",
-        "HiQual QA/QC Welding & Piping Inspector",
-        "HiQual QA/QC Civil Inspector",
-        "HiQual Civil Lab Technician",
-        "HiQual Land Surveyor",
-        "HiQual AutoCAD Civil",
-        "HiQual QA/QC Mechanical Inspector",
-        "HiQual QA/QC Electrical Inspector",
-        "HiQual HVAC Technician Course",
-        "HiQual MEP (Mechanical, Electrical, Plumbing)",
-        "HiQual NDT Level 1, 2, 3",
-        "HiQual RT (Radiographic Testing)",
-        "HiQual UT (Ultrasonic Testing)",
-        "HiQual MT (Magnetic Particle Testing)",
-        "HiQual PT (Penetrant Testing)",
-        "HiQual VT (Visual Testing)",
-        "HiQual H2S Safety",
-        "HiQual Confined Space Entry",
-        "HiQual Permit to Work (PTW)",
-        "HiQual Fire Safety",
-        "HiQual First Aid / CPR",
-        "HiQual Risk Assessment",
-        "HiQual Scaffolding Safety",
-        "HiQual Work at Height",
-        "HiQual Rigger Level 1–3",
-        "HiQual Lifting Supervisor",
-        "HiQual Crane Operator Safety",
-        "HiQual Food Safety Level 1–3",
-        "HiQual HACCP",
-        "HiQual Total Quality Management (TQM)",
-        "HiQual Six Sigma (Yellow / Green Belt)",
-        "HiQual Quality Control & Assurance",
-        "HiQual ISO 9001 – Quality Management",
-        "HiQual ISO 14001 – Environmental Management",
-        "HiQual ISO 45001 – Safety Management",
-        "HiQual ISO 17025 – Laboratory Management",
-        "HiQual ISO 22000 – Food Safety",
-        "HiQual ISO 31000 – Risk Management",
-        "HiQual Train the Trainer (HSE)",
-        "HiQual Instructor Development Course",
-
-        // IOSH Courses
-        "IOSH Managing Safely",
-        "IOSH Working Safely",
-        "IOSH Leading Safely",
-        "IOSH Safety for Executives & Directors",
-        "IOSH Fire Safety for Managers",
-        "IOSH Environment for Managers",
-        "IOSH Construction Safety",
-        "IOSH Occupational Health & Wellbeing",
-        "IOSH Safety for Logistics & Transport",
-        "IOSH Safety for Healthcare",
-        "IOSH Safety, Health & Environment for Business",
-        "IOSH Incident Investigation",
-        "IOSH Risk Assessment",
-        "IOSH Working Safely Refresher",
-        "IOSH Managing Safely Refresher",
-        "IOSH Display Screen Equipment (DSE)",
-        "IOSH Stress Management",
-        "IOSH Manual Handling",
-        "IOSH Working at Height",
-        "IOSH Asbestos Awareness"
-    ];
+    // Fetch courses from database
+    useEffect(() => {
+        fetch('/api/manage/courses')
+            .then(res => res.json())
+            .then(data => {
+                setCourses(data);
+                setLoadingCourses(false);
+            })
+            .catch(err => {
+                console.error('Error fetching courses:', err);
+                setLoadingCourses(false);
+            });
+    }, []);
 
     // Filter courses based on search
-    const filteredCourses = allCourses.filter(course =>
-        course.toLowerCase().includes(courseSearch.toLowerCase())
+    const filteredCourses = courses.filter(course =>
+        course.name.toLowerCase().includes(courseSearch.toLowerCase())
     );
 
-    const handleCourseSelect = (course) => {
-        setFormData({ ...formData, course });
+    const handleCourseSelect = (courseName) => {
+        setFormData({ ...formData, course: courseName });
         setCourseSearch('');
         setShowCourseDropdown(false);
     };
@@ -268,19 +149,20 @@ export default function Register() {
                                         }
                                     }}
                                     onFocus={() => setShowCourseDropdown(true)}
-                                    placeholder="🔍 Search for a course..."
+                                    placeholder={loadingCourses ? "Loading courses..." : "🔍 Search for a course..."}
+                                    disabled={loadingCourses}
                                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                                 />
-                                {showCourseDropdown && courseSearch && (
+                                {!loadingCourses && showCourseDropdown && courseSearch && (
                                     <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto">
                                         {filteredCourses.length > 0 ? (
                                             filteredCourses.map((course, index) => (
                                                 <div
                                                     key={index}
-                                                    onClick={() => handleCourseSelect(course)}
+                                                    onClick={() => handleCourseSelect(course.name)}
                                                     className="px-4 py-2 hover:bg-orange-50 cursor-pointer border-b border-gray-100 text-sm"
                                                 >
-                                                    {course}
+                                                    {course.name}
                                                 </div>
                                             ))
                                         ) : (
@@ -297,7 +179,7 @@ export default function Register() {
                                 </p>
                             )}
                             <p className="text-sm text-gray-500 mt-1">
-                                Type course name to search from {allCourses.length}+ courses
+                                {loadingCourses ? 'Loading courses...' : `${courses.length} courses available. Type to search.`}
                             </p>
                         </div>
 
