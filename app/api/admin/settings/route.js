@@ -1,7 +1,5 @@
 import { NextResponse } from 'next/server';
 import clientPromise from '@/app/lib/mongodb';
-import fs from 'fs';
-import path from 'path';
 
 export async function GET() {
     try {
@@ -21,11 +19,12 @@ export async function GET() {
                 whatsapp: 'https://wa.me/923161720551',
                 footerText: 'Institute of Safety & Technical Studies',
                 address: 'Pakistan',
-                directorName: 'Dr. Ahmed Raza',
+                directorName: 'Arshan Rauf',
                 directorTitle: 'Director',
-                academicDirectorName: 'Prof. Sarah Khan',
+                academicDirectorName: 'Dr. Sarah Khan',
                 academicDirectorTitle: 'Academic Director',
-                signaturePath: null
+                signatureData: null,
+                signatureFileName: null
             };
             await db.collection('settings').insertOne(settings);
         }
@@ -40,41 +39,31 @@ export async function GET() {
 export async function PUT(req) {
     try {
         const contentType = req.headers.get('content-type') || '';
-        let body = {};
-        let signaturePath = null;
+        let updateData = {};
 
-        // Handle FormData (for file upload)
+        // Handle FormData (for file upload from admin page)
         if (contentType.includes('multipart/form-data')) {
             const formData = await req.formData();
 
+            // Get all fields from formData
             for (const [key, value] of formData.entries()) {
-                if (key !== 'signature') {
-                    body[key] = value;
+                if (key === 'signature') {
+                    // Handle signature file
+                    if (value && value.size > 0) {
+                        const bytes = await value.arrayBuffer();
+                        const buffer = Buffer.from(bytes);
+                        updateData.signatureData = buffer.toString('base64');
+                        updateData.signatureFileName = value.name;
+                        console.log('Signature uploaded:', value.name, 'Size:', value.size);
+                    }
+                } else {
+                    // Handle text fields
+                    updateData[key] = value;
                 }
-            }
-
-            // Handle signature upload
-            const signatureFile = formData.get('signature');
-            if (signatureFile && signatureFile.size > 0) {
-                const bytes = await signatureFile.arrayBuffer();
-                const buffer = Buffer.from(bytes);
-
-                const uploadDir = path.join(process.cwd(), 'public', 'signatures');
-                if (!fs.existsSync(uploadDir)) {
-                    fs.mkdirSync(uploadDir, { recursive: true });
-                }
-
-                const timestamp = Date.now();
-                const fileName = `signature_${timestamp}.png`;
-                const filePath = path.join(uploadDir, fileName);
-
-                fs.writeFileSync(filePath, buffer);
-                signaturePath = `/signatures/${fileName}`;
-                body.signaturePath = signaturePath;
             }
         } else {
             // Handle JSON (for normal settings save)
-            body = await req.json();
+            updateData = await req.json();
         }
 
         const client = await clientPromise;
@@ -84,7 +73,7 @@ export async function PUT(req) {
             { _id: 'site_settings' },
             {
                 $set: {
-                    ...body,
+                    ...updateData,
                     updatedAt: new Date()
                 }
             },
@@ -96,6 +85,6 @@ export async function PUT(req) {
         return NextResponse.json({ success: true, data: updatedSettings });
     } catch (error) {
         console.error('Error updating settings:', error);
-        return NextResponse.json({ error: 'Failed to update settings' }, { status: 500 });
+        return NextResponse.json({ error: 'Failed to update settings: ' + error.message }, { status: 500 });
     }
 }

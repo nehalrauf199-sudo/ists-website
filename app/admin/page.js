@@ -264,18 +264,15 @@ export default function AdminDashboard() {
         }
     };
 
-    // FIXED: Signature upload function
     const handleSignatureUpload = async (e) => {
         const file = e.target.files[0];
         if (!file) return;
 
-        // Validate file type
         if (!file.type.includes('image/png') && !file.type.includes('image/jpeg')) {
             alert('Please upload PNG or JPG image');
             return;
         }
 
-        // Validate file size (max 2MB)
         if (file.size > 2 * 1024 * 1024) {
             alert('File size too large. Max 2MB');
             return;
@@ -415,7 +412,7 @@ export default function AdminDashboard() {
                                                 <tbody>
                                                     {filteredRegistrations.map((reg, index) => (
                                                         <tr key={index} className="border-b hover:bg-gray-50">
-                                                            <td className="p-4 text-sm">{new Date(reg.registeredAt).toLocaleDateString()}  </td>
+                                                            <td className="p-4 text-sm">{new Date(reg.registeredAt).toLocaleDateString()}   </td>
                                                             <td className="p-4 font-medium">{reg.name}</td>
                                                             <td className="p-4 text-sm text-blue-600">{reg.email}</td>
                                                             <td className="p-4 text-sm">{reg.phone}</td>
@@ -491,6 +488,7 @@ export default function AdminDashboard() {
                                                 <option value="OTHM">OTHM</option>
                                                 <option value="HiQual">HiQual</option>
                                                 <option value="IOSH">IOSH</option>
+                                                <option value="Other">Other</option>
                                             </select>
                                             <input type="text" name="hours" placeholder="Credit Hours" value={courseForm.hours} onChange={handleCourseInputChange} className="p-2 border rounded" />
                                             <textarea name="description" placeholder="Description" value={courseForm.description} onChange={handleCourseInputChange} className="p-2 border rounded col-span-2" rows="2" />
@@ -518,7 +516,7 @@ export default function AdminDashboard() {
                                                         <tr key={index} className="border-b hover:bg-gray-50">
                                                             <td className="p-4">{course.name}</td>
                                                             <td className="p-4">
-                                                                <span className={`px-2 py-1 rounded text-xs font-semibold ${course.category === 'OSHA' ? 'bg-blue-100 text-blue-800' : course.category === 'OTHM' ? 'bg-green-100 text-green-800' : course.category === 'HiQual' ? 'bg-purple-100 text-purple-800' : course.category === 'IOSH' ? 'bg-orange-100 text-orange-800' : 'bg-gray-100 text-gray-800'}`}>{course.category}</span>
+                                                                <span className={`px-2 py-1 rounded text-xs font-semibold ${course.category === 'OSHA' ? 'bg-blue-100 text-blue-800' : course.category === 'OTHM' ? 'bg-green-100 text-green-800' : course.category === 'HiQual' ? 'bg-purple-100 text-purple-800' : course.category === 'IOSH' ? 'bg-orange-100 text-orange-800' : course.category === 'Other' ? 'bg-gray-100 text-gray-800' : 'bg-gray-100 text-gray-800'}`}>{course.category}</span>
                                                             </td>
                                                             <td className="p-4">{course.hours}</td>
                                                             <td className="p-4">
