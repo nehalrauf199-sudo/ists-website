@@ -1,3 +1,5 @@
+'use client';
+import { useState, useEffect } from 'react';
 import './globals.css';
 import WhatsAppWidget from './components/WhatsAppWidget';
 import Script from 'next/script';
@@ -23,16 +25,32 @@ export const metadata = {
 const GA_MEASUREMENT_ID = 'G-18TJMCKHW1';
 
 export default function RootLayout({ children }) {
+  const [settings, setSettings] = useState({
+    phone: '+92 316 1720551',
+    email: 'info@ists.com',
+    footerText: 'Institute of Safety & Technical Studies'
+  });
+
+  useEffect(() => {
+    fetch('/api/site/settings')
+      .then(res => res.json())
+      .then(data => setSettings(data))
+      .catch(err => console.error('Error fetching settings:', err));
+  }, []);
+
   return (
     <html lang="en">
       <head>
+        {/* Google Site Verification */}
+        <meta name="google-site-verification" content="o701f4kxw46OO44UinyYPOL89roAQWgtQkrM6d9mu1w" />
+        {/* Google Analytics */}
         <Script strategy="afterInteractive" src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`} />
         <Script id="google-analytics" strategy="afterInteractive" dangerouslySetInnerHTML={{
           __html: `window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', '${GA_MEASUREMENT_ID}');`,
         }} />
       </head>
       <body className="bg-gray-100 text-gray-800 font-sans">
-        {/* SIMPLE NAVBAR - FIXED */}
+        {/* SIMPLE NAVBAR */}
         <div style={{ backgroundColor: '#1e3a8a', padding: '12px 16px', position: 'sticky', top: 0, zIndex: 50 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', maxWidth: '1200px', margin: '0 auto' }}>
             {/* LEFT SIDE - LOGO */}
@@ -84,14 +102,14 @@ export default function RootLayout({ children }) {
         {/* PAGE CONTENT */}
         {children}
 
-        {/* FOOTER */}
+        {/* FOOTER - NOW USING DYNAMIC SETTINGS FROM DATABASE */}
         <footer style={{ backgroundColor: '#1e3a8a', color: 'white', textAlign: 'center', padding: '32px 16px', marginTop: '64px' }}>
           <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
             <div style={{ marginBottom: '16px' }}>
               <span style={{ color: '#f97316', fontWeight: 'bold', fontSize: '20px' }}>ISTS</span>
-              <p style={{ fontSize: '12px', marginTop: '4px' }}>Institute of Safety & Technical Studies</p>
+              <p style={{ fontSize: '12px', marginTop: '4px' }}>{settings.footerText}</p>
             </div>
-            <p>Phone: +92 316 1720551 | Email: info@ists.com</p>
+            <p>Phone: {settings.phone} | Email: {settings.email}</p>
             <p style={{ fontSize: '10px', marginTop: '16px' }}>© 2026 ISTS. All rights reserved.</p>
           </div>
         </footer>
