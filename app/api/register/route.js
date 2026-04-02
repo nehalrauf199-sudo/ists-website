@@ -49,26 +49,33 @@ export async function POST(req) {
             experience: experience || '',
             message: message || '',
             cvFileName: cvFileName,
-            cvData: cvData, // Store CV as base64 in database
+            cvData: cvData,
             registeredAt: new Date(),
             status: 'pending'
         });
 
         console.log('Saved to database');
 
+        // Get sender email from Site Settings
+        const settings = await db.collection('settings').findOne({ _id: 'site_settings' });
+        const senderEmail = settings?.email || process.env.EMAIL_USER;
+        const adminEmail = process.env.ADMIN_EMAIL || senderEmail;
+
+        console.log('Sending emails from:', senderEmail);
+
         // Send email
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: process.env.EMAIL_USER,
+                user: senderEmail,
                 pass: process.env.EMAIL_PASS
             }
         });
 
         // Email to admin
         await transporter.sendMail({
-            from: process.env.EMAIL_USER,
-            to: process.env.ADMIN_EMAIL,
+            from: `"ISTS Institute" <${senderEmail}>`,
+            to: adminEmail,
             subject: `New Registration: ${name} - ${course}`,
             html: `
                 <h2>New Course Registration</h2>
@@ -87,7 +94,7 @@ export async function POST(req) {
 
         // Confirmation to student
         await transporter.sendMail({
-            from: process.env.EMAIL_USER,
+            from: `"ISTS Institute" <${senderEmail}>`,
             to: email,
             subject: `Registration Confirmation: ${course} - ISTS`,
             html: `

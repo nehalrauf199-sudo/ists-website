@@ -19,6 +19,7 @@ export async function POST(req) {
         }
 
         // ========== SAVE TO DATABASE ==========
+        let savedContact = null;
         try {
             const client = await clientPromise;
             const db = client.db('ists');
@@ -34,17 +35,27 @@ export async function POST(req) {
             };
 
             const result = await db.collection('contacts').insertOne(contactData);
+            savedContact = result;
             console.log('✅ Contact saved to database! ID:', result.insertedId);
 
         } catch (dbError) {
             console.error('❌ Database error:', dbError);
         }
 
+        // Get sender email from Site Settings
+        const client = await clientPromise;
+        const db = client.db('ists');
+        const settings = await db.collection('settings').findOne({ _id: 'site_settings' });
+        const senderEmail = settings?.email || process.env.EMAIL_USER;
+        const adminEmail = process.env.ADMIN_EMAIL || senderEmail;
+
+        console.log('Sending emails from:', senderEmail);
+
         // ========== SEND EMAILS ==========
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: process.env.EMAIL_USER,
+                user: senderEmail,
                 pass: process.env.EMAIL_PASS
             }
         });
@@ -53,19 +64,19 @@ export async function POST(req) {
         const adminEmailContent = `
             <h2>New Contact Form Submission</h2>
             <table style="border-collapse: collapse; width: 100%;">
-                <tr><td style="padding: 8px;"><strong>Name:</strong></td><td>${name}</td></tr>
-                <tr><td style="padding: 8px;"><strong>Email:</strong></td><td>${email}</td></tr>
-                <tr><td style="padding: 8px;"><strong>Phone:</strong></td><td>${phone}</td></tr>
-                <tr><td style="padding: 8px;"><strong>Course:</strong></td><td>${course || 'Not specified'}</td></tr>
-                <tr><td style="padding: 8px;"><strong>Message:</strong></td><td>${message}</td></tr>
+                <tr><td style="padding: 8px;"><strong>Name:</strong></td><td>${name}</td>
+                <tr><td style="padding: 8px;"><strong>Email:</strong></td><td>${email}</td>
+                <tr><td style="padding: 8px;"><strong>Phone:</strong></td><td>${phone}</td>
+                <tr><td style="padding: 8px;"><strong>Course:</strong></td><td>${course || 'Not specified'}</td>
+                <tr><td style="padding: 8px;"><strong>Message:</strong></td><td>${message}</td>
             </table>
             <hr />
             <p>Submitted on: ${new Date().toLocaleString()}</p>
         `;
 
         await transporter.sendMail({
-            from: process.env.EMAIL_USER,
-            to: process.env.ADMIN_EMAIL,
+            from: `"ISTS Institute" <${senderEmail}>`,
+            to: adminEmail,
             subject: `New Contact Message from ${name}`,
             html: adminEmailContent
         });
@@ -82,7 +93,7 @@ export async function POST(req) {
         `;
 
         await transporter.sendMail({
-            from: process.env.EMAIL_USER,
+            from: `"ISTS Institute" <${senderEmail}>`,
             to: email,
             subject: 'We received your message - ISTS',
             html: userEmailContent
