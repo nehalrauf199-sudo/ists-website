@@ -6,17 +6,12 @@ export default function Home() {
 
       {/* HERO SECTION WITH BACKGROUND IMAGE */}
       <section className="relative text-white text-center py-32 px-4">
-        {/* Background Image with Overlay */}
         <div className="absolute inset-0 bg-black/60 z-0"></div>
         <div
           className="absolute inset-0 bg-cover bg-center z-0"
           style={{ backgroundImage: "url('/hero-bg.jpg')" }}
         ></div>
-
-        {/* Gradient Overlay for Blue + Orange Effect */}
         <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 via-blue-800/70 to-orange-600/70 z-0"></div>
-
-        {/* Content */}
         <div className="relative z-10 max-w-4xl mx-auto">
           <h1 className="text-5xl md:text-6xl font-bold mb-6">
             Institute of Safety & Technical Studies
@@ -30,12 +25,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* WHY CHOOSE US - With Image */}
+      {/* WHY CHOOSE US - Simple version (with image) */}
       <section className="py-20 px-4 bg-gray-50">
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
-
-            {/* Left Side - Text Content */}
             <div>
               <h2 className="text-3xl font-bold text-blue-900 mb-4">Why Choose ISTS?</h2>
               <div className="w-20 h-1 bg-orange-500 mb-6"></div>
@@ -46,8 +39,6 @@ export default function Home() {
                 Join thousands of professionals who have advanced their careers with our industry-focused training programs.
               </p>
             </div>
-
-            {/* Right Side - Image */}
             <div className="rounded-xl overflow-hidden shadow-lg">
               <img
                 src="/training-image.jpg"
@@ -55,33 +46,82 @@ export default function Home() {
                 className="w-full h-auto object-cover hover:scale-105 transition duration-500"
               />
             </div>
-
           </div>
         </div>
       </section>
 
-      {/* KEY FEATURES - 3 Columns */}
+      {/* KEY FEATURES - 3 Columns (existing) */}
       <section className="py-16 px-4 bg-white">
         <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8 text-center">
-
           <div className="p-6 hover:shadow-xl transition duration-300 rounded-lg group">
             <div className="text-5xl mb-4 group-hover:scale-110 transition duration-300">🌍</div>
             <h3 className="text-xl font-bold text-blue-800 mb-2">Global Recognition</h3>
             <p className="text-gray-600">Internationally accepted certifications</p>
           </div>
-
           <div className="p-6 hover:shadow-xl transition duration-300 rounded-lg group">
             <div className="text-5xl mb-4 group-hover:scale-110 transition duration-300">👨‍🏫</div>
             <h3 className="text-xl font-bold text-blue-800 mb-2">Expert Trainers</h3>
             <p className="text-gray-600">Learn from industry professionals</p>
           </div>
-
           <div className="p-6 hover:shadow-xl transition duration-300 rounded-lg group">
             <div className="text-5xl mb-4 group-hover:scale-110 transition duration-300">📚</div>
             <h3 className="text-xl font-bold text-blue-800 mb-2">Flexible Learning</h3>
             <p className="text-gray-600">Online & classroom options available</p>
           </div>
+        </div>
+      </section>
 
+      {/* NEW DETAILED WHY CHOOSE US SECTION - 6 points */}
+      <section className="py-16 px-4 bg-gray-50">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-blue-900 mb-4">
+              Why Choose <span className="text-orange-600">ISTS</span>?
+            </h2>
+            <div className="w-20 h-1 bg-orange-600 mx-auto rounded-full"></div>
+            <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
+              Your trusted partner for internationally recognized safety and technical certifications
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition duration-300 border border-gray-100">
+              <div className="text-4xl mb-4">🌍</div>
+              <h3 className="text-xl font-bold text-blue-900 mb-2">Internationally Recognized</h3>
+              <p className="text-gray-600">Globally accepted diplomas and certifications from UK and internationally accredited bodies.</p>
+            </div>
+            <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition duration-300 border border-gray-100">
+              <div className="text-4xl mb-4">🛡️</div>
+              <h3 className="text-xl font-bold text-blue-900 mb-2">Specialized HSE Training</h3>
+              <p className="text-gray-600">Expert-led health, safety, and environment courses designed for real workplace challenges.</p>
+            </div>
+            <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition duration-300 border border-gray-100">
+              <div className="text-4xl mb-4">💼</div>
+              <h3 className="text-xl font-bold text-blue-900 mb-2">Practical Industry Focus</h3>
+              <p className="text-gray-600">Hands-on, industry-driven learning that prepares you for immediate job success.</p>
+            </div>
+            <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition duration-300 border border-gray-100">
+              <div className="text-4xl mb-4">👨‍🏫</div>
+              <h3 className="text-xl font-bold text-blue-900 mb-2">Experienced Trainers</h3>
+              <p className="text-gray-600">Learn from certified professionals with years of field and teaching experience.</p>
+            </div>
+            <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition duration-300 border border-gray-100">
+              <div className="text-4xl mb-4">🎓</div>
+              <h3 className="text-xl font-bold text-blue-900 mb-2">Flexible Learning</h3>
+              <p className="text-gray-600">Online and weekend classes designed for students and working professionals.</p>
+            </div>
+            <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition duration-300 border border-gray-100">
+              <div className="text-4xl mb-4">🚀</div>
+              <h3 className="text-xl font-bold text-blue-900 mb-2">Career-Oriented Programs</h3>
+              <p className="text-gray-600">Boost your employability with certifications that employers demand.</p>
+            </div>
+          </div>
+
+          <div className="text-center mt-12">
+            <a href="/courses" className="inline-block bg-orange-600 hover:bg-orange-700 text-white font-semibold px-8 py-3 rounded-lg transition duration-300 shadow-md">
+              Explore All Courses →
+            </a>
+          </div>
         </div>
       </section>
 
@@ -100,5 +140,5 @@ export default function Home() {
       </section>
 
     </div>
-  )
+  );
 }
