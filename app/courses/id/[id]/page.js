@@ -1,73 +1,71 @@
 import clientPromise from '@/app/lib/mongodb';
 import { ObjectId } from 'mongodb';
 
-async function getCourseById(id) {
-    const client = await clientPromise;
-    const db = client.db('ists');
-    const course = await db.collection('courses').findOne({ _id: new ObjectId(id) });
-    return course;
-}
+export default async function DebugCoursePage({ params }) {
+    const { id } = params;
+    let course = null;
+    let error = null;
+    let allCoursesCount = 0;
 
-export async function generateMetadata({ params }) {
-    const course = await getCourseById(params.id);
-    if (!course) {
-        return { title: 'Course Not Found', description: 'The requested course does not exist.' };
-    }
-    return {
-        title: course.seoTitle || course.name,
-        description: course.metaDescription || `Learn ${course.name} at ISTS.`,
-        keywords: course.focusKeyword,
-    };
-}
+    try {
+        const client = await clientPromise;
+        const db = client.db('ists');
 
-export default async function CoursePage({ params }) {
-    const course = await getCourseById(params.id);
-    if (!course) {
-        return (
-            <div className="min-h-screen bg-gray-50 py-20 px-4 text-center">
-                <h1 className="text-3xl font-bold text-blue-900">Course Not Found</h1>
-                <p className="mt-4">The course you are looking for does not exist.</p>
-                <a href="/courses" className="inline-block mt-6 bg-orange-500 text-white px-6 py-2 rounded-full">View All Courses</a>
-            </div>
-        );
+        console.log('Looking for ID:', id);
+
+        if (ObjectId.isValid(id)) {
+            course = await db.collection('courses').findOne({ _id: new ObjectId(id) });
+            console.log('Course found?', course ? 'Yes' : 'No');
+        } else {
+            console.log('ID is not a valid ObjectId');
+        }
+
+        allCoursesCount = await db.collection('courses').countDocuments();
+        console.log('Total courses:', allCoursesCount);
+    } catch (err) {
+        error = err.message;
+        console.error('Error:', err);
     }
 
     return (
-        <div className="min-h-screen bg-gray-50">
-            <div className="bg-gradient-to-r from-blue-900 to-blue-800 text-white py-16 px-4">
-                <div className="max-w-6xl mx-auto">
-                    <h1 className="text-4xl md:text-5xl font-bold mb-4">{course.name}</h1>
-                    <p className="text-blue-100">Category: {course.category} | Duration: {course.hours}</p>
-                </div>
+        <div className="p-8 bg-gray-100 min-h-screen">
+            <h1 className="text-2xl font-bold mb-4">Debug Information</h1>
+            <div className="bg-white p-4 rounded shadow mb-4">
+                <p><strong>URL ID received:</strong> <code>{id}</code></p>
+                <p><strong>Is valid ObjectId?</strong> {ObjectId.isValid(id) ? 'Yes' : 'No'}</p>
+                <p><strong>Total courses in database:</strong> {allCoursesCount}</p>
+                <p><strong>Error (if any):</strong> {error || 'None'}</p>
             </div>
-            <div className="max-w-6xl mx-auto px-4 py-12">
-                {course.featuredImage && (
-                    <div className="mb-8 rounded-xl overflow-hidden shadow-lg">
-                        <img src={course.featuredImage} alt={course.name} className="w-full h-auto object-cover" />
-                    </div>
-                )}
-                {course.sections?.map((section, idx) => (
-                    <div key={idx} className="bg-white rounded-xl shadow-md p-6 mb-6">
-                        <h2 className="text-2xl font-bold text-blue-900 mb-3">{section.heading}</h2>
-                        <div className="text-gray-700 whitespace-pre-line">{section.description}</div>
-                    </div>
-                ))}
-                {course.faqs?.length > 0 && (
-                    <div className="mt-12 bg-white rounded-xl shadow-md p-6">
-                        <h2 className="text-2xl font-bold text-blue-900 mb-6">Frequently Asked Questions</h2>
-                        <div className="space-y-4">
-                            {course.faqs.map((faq, idx) => (
-                                <details key={idx} className="border rounded-lg p-4">
-                                    <summary className="font-semibold cursor-pointer">{faq.question}</summary>
-                                    <p className="mt-2 text-gray-600 pl-4">{faq.answer}</p>
-                                </details>
-                            ))}
-                        </div>
-                    </div>
-                )}
-                <div className="mt-12 text-center">
-                    <a href="/register" className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-full transition">Register for this Course</a>
+
+            {course ? (
+                <div className="bg-green-100 p-4 rounded">
+                    <h2 className="text-xl font-bold">✅ Course Found!</h2>
+                    <p><strong>Name:</strong> {course.name}</p>
+                    <p><strong>Category:</strong> {course.category}</p>
+                    <p><strong>Hours:</strong> {course.hours}</p>
+                    <p><strong>ID:</strong> {course._id.toString()}</p>
                 </div>
+            ) : (
+                <div className="bg-red-100 p-4 rounded">
+                    <h2 className="text-xl font-bold text-red-700">❌ Course Not Found</h2>
+                    <p>No course with ID <code>{id}</code> was found.</p>
+                    <p className="mt-2">Possible reasons:</p>
+                    <ul className="list-disc ml-6">
+                        <li>The ID is incorrect – copy it from the admin panel's Edit URL.</li>
+                        <li>The database connection is failing (check total courses count above).</li>
+                        <li>The `courses` collection is empty (if count = 0).</li>
+                    </ul>
+                </div>
+            )}
+
+            <div className="mt-6">
+                <p><strong>How to get a real course ID:</strong></p>
+                <ol className="list-decimal ml-6">
+                    <li>Go to your admin panel → Courses tab.</li>
+                    <li>Click the "Edit" button (✏️) of any course.</li>
+                    <li>Look at the browser URL – it will contain <code>?id=...</code> (e.g., <code>?id=67b2c3d4e5f67890abcd1234</code>).</li>
+                    <li>Copy that long hex string and paste it into the URL: <code>/courses/id/YOUR_COPY</code></li>
+                </ol>
             </div>
         </div>
     );
