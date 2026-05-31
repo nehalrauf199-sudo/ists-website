@@ -2,7 +2,6 @@
 import { useState, useEffect } from 'react';
 
 export default function OtherCourses() {
-    const [openCourse, setOpenCourse] = useState(null);
     const [courses, setCourses] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -14,7 +13,6 @@ export default function OtherCourses() {
         try {
             const response = await fetch('/api/admin/courses');
             const allCourses = await response.json();
-            // Filter only Other category courses
             const otherCourses = allCourses.filter(course =>
                 course.category === 'Other' || course.category === 'other'
             );
@@ -26,12 +24,8 @@ export default function OtherCourses() {
         }
     };
 
-    const toggleCourse = (courseId) => {
-        if (openCourse === courseId) {
-            setOpenCourse(null);
-        } else {
-            setOpenCourse(courseId);
-        }
+    const getSlug = (name) => {
+        return name.toLowerCase().replace(/\s+/g, '-');
     };
 
     if (loading) {
@@ -67,58 +61,31 @@ export default function OtherCourses() {
                     </div>
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {courses.map((course) => (
-                            <div key={course._id} className="bg-white rounded-xl shadow-lg overflow-hidden border-2 border-transparent hover:border-orange-500 transition-all duration-300">
-                                <div className="p-5">
-                                    <div className="flex justify-between items-start">
-                                        <div className="flex-1">
-                                            <div className="inline-block bg-purple-100 text-purple-800 text-xs font-semibold px-2 py-1 rounded mb-2">
-                                                {course.category}
+                        {courses.map((course) => {
+                            const slug = getSlug(course.name);
+                            return (
+                                <a
+                                    key={course._id}
+                                    href={`/courses/${slug}`}
+                                    className="bg-white rounded-xl shadow-lg overflow-hidden border-2 border-transparent hover:border-orange-500 transition-all duration-300 block"
+                                >
+                                    <div className="p-5">
+                                        <div className="flex justify-between items-start">
+                                            <div className="flex-1">
+                                                <div className="inline-block bg-purple-100 text-purple-800 text-xs font-semibold px-2 py-1 rounded mb-2">
+                                                    {course.category}
+                                                </div>
+                                                <h3 className="text-lg font-bold text-blue-900 mb-1">{course.name}</h3>
+                                                <p className="text-sm text-orange-600 font-semibold">{course.hours}</p>
                                             </div>
-                                            <h3 className="text-lg font-bold text-blue-900 mb-1">{course.name}</h3>
-                                            <p className="text-sm text-orange-600 font-semibold">{course.hours}</p>
-                                        </div>
-                                        <button
-                                            onClick={() => toggleCourse(course._id)}
-                                            className="w-8 h-8 bg-gradient-to-r from-blue-600 to-orange-500 text-white rounded-full flex items-center justify-center hover:scale-110 transition-transform"
-                                        >
-                                            {openCourse === course._id ? '▲' : '▼'}
-                                        </button>
-                                    </div>
-                                </div>
-
-                                {openCourse === course._id && (
-                                    <div className="border-t border-gray-200 bg-gray-50 p-5 space-y-4">
-                                        <div>
-                                            <h4 className="font-bold text-blue-800 mb-2">📖 Course Overview</h4>
-                                            <ul className="list-disc list-inside text-gray-700 text-sm space-y-1">
-                                                {course.content?.map((item, idx) => <li key={idx}>{item}</li>)}
-                                            </ul>
-                                            <p className="text-gray-700 text-sm mt-2 font-semibold">Learning Outcomes:</p>
-                                            <ul className="list-disc list-inside text-gray-700 text-sm space-y-1">
-                                                {course.outcomes?.map((item, idx) => <li key={idx}>{item}</li>)}
-                                            </ul>
-                                        </div>
-                                        <div>
-                                            <h4 className="font-bold text-blue-800 mb-2">✅ Eligibility Criteria</h4>
-                                            <p className="text-gray-700 text-sm">{course.eligibility}</p>
-                                        </div>
-                                        <div>
-                                            <h4 className="font-bold text-blue-800 mb-2">📚 Study Modules</h4>
-                                            <ul className="list-disc list-inside text-gray-700 text-sm space-y-1">
-                                                {course.modules?.map((module, idx) => <li key={idx}>{module}</li>)}
-                                            </ul>
-                                        </div>
-                                        <div>
-                                            <h4 className="font-bold text-blue-800 mb-2">🎯 Learning Objectives</h4>
-                                            <ul className="list-disc list-inside text-gray-700 text-sm space-y-1">
-                                                {course.learningObjectives?.map((obj, idx) => <li key={idx}>{obj}</li>)}
-                                            </ul>
+                                            <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-orange-500 text-white rounded-full flex items-center justify-center">
+                                                →
+                                            </div>
                                         </div>
                                     </div>
-                                )}
-                            </div>
-                        ))}
+                                </a>
+                            );
+                        })}
                     </div>
                 )}
             </div>
