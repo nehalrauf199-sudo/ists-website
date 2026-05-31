@@ -471,7 +471,7 @@ export default function AdminDashboard() {
                                                             <td className="p-4 text-sm">{reg.phone}</td>
                                                             <td className="p-4 text-sm max-w-xs truncate">{reg.course}</td>
                                                             <td className="p-4">{reg.cvFileName ? <a href={`/api/download/cv?file=${reg.cvFileName}`} target="_blank" className="text-orange-600 text-sm hover:underline">📄 Download CV</a> : <span className="text-gray-400">No CV</span>}</td>
-                                                            <td className="p-4"><button onClick={() => issueCertificate(reg)} className="bg-green-600 hover:bg-green-700 text-white px-3 py-1.5 rounded text-xs font-semibold">🎓 Issue Certificate</button></td>
+
                                                         </tr>
                                                     ))}
                                                 </tbody>
