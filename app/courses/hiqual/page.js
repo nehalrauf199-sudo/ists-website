@@ -24,10 +24,6 @@ export default function HiQual() {
         }
     };
 
-    const getSlug = (name) => {
-        return name.toLowerCase().replace(/\s+/g, '-');
-    };
-
     if (loading) {
         return (
             <div className="min-h-screen bg-gray-50 py-20 px-4 text-center">
@@ -60,30 +56,27 @@ export default function HiQual() {
                     </div>
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {courses.map((course) => {
-                            const slug = getSlug(course.name);
-                            return (
-                                <a
-                                    key={course._id}
-                                    href={`/courses/${slug}`}
-                                    className="bg-white rounded-xl shadow-lg overflow-hidden border-2 border-transparent hover:border-orange-500 transition-all duration-300 block"
-                                >
-                                    <div className="p-5">
-                                        <div className="flex justify-between items-start">
-                                            <div className="flex-1">
-                                                <div className="inline-block bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-1 rounded mb-2">
-                                                    {course.hours}
-                                                </div>
-                                                <h3 className="text-lg font-bold text-blue-900 mb-1">{course.name}</h3>
+                        {courses.map((course) => (
+                            <a
+                                key={course._id}
+                                href={`/courses/id/${course._id}`}
+                                className="bg-white rounded-xl shadow-lg overflow-hidden border-2 border-transparent hover:border-orange-500 transition-all duration-300 block"
+                            >
+                                <div className="p-5">
+                                    <div className="flex justify-between items-start">
+                                        <div className="flex-1">
+                                            <div className="inline-block bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-1 rounded mb-2">
+                                                {course.hours}
                                             </div>
-                                            <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-orange-500 text-white rounded-full flex items-center justify-center">
-                                                →
-                                            </div>
+                                            <h3 className="text-lg font-bold text-blue-900 mb-1">{course.name}</h3>
+                                        </div>
+                                        <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-orange-500 text-white rounded-full flex items-center justify-center">
+                                            →
                                         </div>
                                     </div>
-                                </a>
-                            );
-                        })}
+                                </div>
+                            </a>
+                        ))}
                     </div>
                 )}
             </div>
