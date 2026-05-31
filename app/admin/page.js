@@ -23,25 +23,12 @@ export default function AdminDashboard() {
     const [contactSearch, setContactSearch] = useState('');
     const [reviewSearch, setReviewSearch] = useState('');
     const [saveMessage, setSaveMessage] = useState('');
-
-    // Extended course form state for dynamic fields
     const [courseForm, setCourseForm] = useState({
-        name: '',
-        category: '',
-        hours: '',
-        description: '',
-        content: [],
-        outcomes: [],
-        eligibility: '',
-        modules: [],
-        learningObjectives: [],
-        sections: [],           // { heading, description }
-        faqs: [],               // { question, answer }
-        seoTitle: '',
-        metaDescription: '',
-        focusKeyword: '',
-        featuredImagePreview: null,
-        featuredImageFile: null
+        name: '', category: '', hours: '', description: '',
+        content: [], outcomes: [], eligibility: '', modules: [], learningObjectives: [],
+        sections: [], faqs: [],
+        seoTitle: '', metaDescription: '', focusKeyword: '',
+        featuredImagePreview: null, featuredImageFile: null,
     });
 
     const ADMIN_PASSWORD = 'arshan2002';
@@ -63,7 +50,7 @@ export default function AdminDashboard() {
             const response = await fetch('/api/admin/reset-password', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email: resetEmail })
+                body: JSON.stringify({ email: resetEmail }),
             });
             const data = await response.json();
             if (response.ok) {
@@ -89,7 +76,7 @@ export default function AdminDashboard() {
                 fetch('/api/admin/contacts'),
                 fetch('/api/admin/settings'),
                 fetch('/api/manage/courses'),
-                fetch('/api/admin/reviews')
+                fetch('/api/admin/reviews'),
             ]);
             const regData = await regRes.json();
             const contactData = await contactRes.json();
@@ -114,7 +101,7 @@ export default function AdminDashboard() {
             const response = await fetch('/api/admin/settings', {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(settings)
+                body: JSON.stringify(settings),
             });
             if (response.ok) {
                 setSaveMessage('✅ Settings saved successfully!');
@@ -144,43 +131,44 @@ export default function AdminDashboard() {
         setCourseForm({ ...courseForm, [field]: items });
     };
 
-    // Dynamic sections handlers
     const addSection = () => {
         setCourseForm({
             ...courseForm,
-            sections: [...courseForm.sections, { heading: '', description: '' }]
+            sections: [...courseForm.sections, { heading: '', description: '' }],
         });
     };
+
     const updateSection = (index, field, value) => {
         const updated = [...courseForm.sections];
         updated[index][field] = value;
         setCourseForm({ ...courseForm, sections: updated });
     };
+
     const removeSection = (index) => {
         const updated = [...courseForm.sections];
         updated.splice(index, 1);
         setCourseForm({ ...courseForm, sections: updated });
     };
 
-    // FAQ handlers
     const addFaq = () => {
         setCourseForm({
             ...courseForm,
-            faqs: [...courseForm.faqs, { question: '', answer: '' }]
+            faqs: [...courseForm.faqs, { question: '', answer: '' }],
         });
     };
+
     const updateFaq = (index, field, value) => {
         const updated = [...courseForm.faqs];
         updated[index][field] = value;
         setCourseForm({ ...courseForm, faqs: updated });
     };
+
     const removeFaq = (index) => {
         const updated = [...courseForm.faqs];
         updated.splice(index, 1);
         setCourseForm({ ...courseForm, faqs: updated });
     };
 
-    // Featured image handler
     const handleFeaturedImageUpload = (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -189,7 +177,7 @@ export default function AdminDashboard() {
                 setCourseForm({
                     ...courseForm,
                     featuredImagePreview: reader.result,
-                    featuredImageFile: file
+                    featuredImageFile: file,
                 });
             };
             reader.readAsDataURL(file);
@@ -203,29 +191,18 @@ export default function AdminDashboard() {
             const response = await fetch('/api/manage/courses', {
                 method,
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(body)
+                body: JSON.stringify(body),
             });
             if (response.ok) {
                 alert(editingCourse ? 'Course updated!' : 'Course added!');
                 setShowCourseForm(false);
                 setEditingCourse(null);
                 setCourseForm({
-                    name: '',
-                    category: '',
-                    hours: '',
-                    description: '',
-                    content: [],
-                    outcomes: [],
-                    eligibility: '',
-                    modules: [],
-                    learningObjectives: [],
-                    sections: [],
-                    faqs: [],
-                    seoTitle: '',
-                    metaDescription: '',
-                    focusKeyword: '',
-                    featuredImagePreview: null,
-                    featuredImageFile: null
+                    name: '', category: '', hours: '', description: '',
+                    content: [], outcomes: [], eligibility: '', modules: [], learningObjectives: [],
+                    sections: [], faqs: [],
+                    seoTitle: '', metaDescription: '', focusKeyword: '',
+                    featuredImagePreview: null, featuredImageFile: null,
                 });
                 fetchData();
             } else {
@@ -271,8 +248,8 @@ export default function AdminDashboard() {
             seoTitle: course.seoTitle || '',
             metaDescription: course.metaDescription || '',
             focusKeyword: course.focusKeyword || '',
-            featuredImagePreview: course.featuredImage ? course.featuredImage : null,
-            featuredImageFile: null
+            featuredImagePreview: course.featuredImage || null,
+            featuredImageFile: null,
         });
         setShowCourseForm(true);
     };
@@ -282,7 +259,7 @@ export default function AdminDashboard() {
             const response = await fetch('/api/admin/reviews', {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ id, action })
+                body: JSON.stringify({ id, action }),
             });
             if (response.ok) {
                 alert(`Review ${action === 'approve' ? 'approved' : 'rejected'}!`);
@@ -303,6 +280,8 @@ export default function AdminDashboard() {
                 if (response.ok) {
                     alert('Review deleted!');
                     fetchData();
+                } else {
+                    alert('Failed to delete review');
                 }
             } catch (error) {
                 console.error('Error deleting review:', error);
@@ -324,8 +303,8 @@ export default function AdminDashboard() {
                     studentName: reg.name,
                     courseName: reg.course,
                     completionDate: completionDate,
-                    studentEmail: reg.email
-                })
+                    studentEmail: reg.email,
+                }),
             });
             const result = await response.json();
             if (response.ok) {
@@ -355,7 +334,7 @@ export default function AdminDashboard() {
         try {
             const response = await fetch('/api/admin/settings', {
                 method: 'PUT',
-                body: formData
+                body: formData,
             });
             const result = await response.json();
             if (response.ok && result.success) {
@@ -464,36 +443,41 @@ export default function AdminDashboard() {
                         {activeTab === 'registrations' && (
                             <div>
                                 <div className="mb-4">
-                                    <div className="relative">
-                                        <input type="text" placeholder="Search registrations by name, email, phone, or course..." value={regSearch} onChange={(e) => setRegSearch(e.target.value)} className="w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" />
-                                        <span className="absolute left-3 top-2.5 text-gray-400">🔍</span>
-                                        {regSearch && <button onClick={() => setRegSearch('')} className="absolute right-3 top-2.5 text-gray-400 hover:text-gray-600">✕</button>}
-                                    </div>
-                                    {regSearch && <p className="text-sm text-gray-500 mt-1">Found {filteredRegistrations.length} registration(s) matching "{regSearch}"</p>}
+                                    <input type="text" placeholder="Search registrations by name, email, phone, or course..." value={regSearch} onChange={(e) => setRegSearch(e.target.value)} className="w-full px-4 py-2 pl-10 border rounded-lg" />
                                 </div>
                                 <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-                                    {filteredRegistrations.length === 0 ? <div className="text-center py-12"><div className="text-4xl mb-4">📭</div><p className="text-gray-500">{regSearch ? `No registrations matching "${regSearch}"` : 'No registrations yet'}</p></div> :
+                                    {filteredRegistrations.length === 0 ? (
+                                        <div className="text-center py-12">No registrations</div>
+                                    ) : (
                                         <div className="overflow-x-auto">
                                             <table className="w-full">
                                                 <thead className="bg-gray-100">
-                                                    <th className="p-4 text-left">Date</th><th className="p-4 text-left">Name</th><th className="p-4 text-left">Email</th><th className="p-4 text-left">Phone</th><th className="p-4 text-left">Course</th><th className="p-4 text-left">CV</th><th className="p-4 text-left">Certificate</th>
+                                                    <tr>
+                                                        <th className="p-4 text-left">Date</th>
+                                                        <th className="p-4 text-left">Name</th>
+                                                        <th className="p-4 text-left">Email</th>
+                                                        <th className="p-4 text-left">Phone</th>
+                                                        <th className="p-4 text-left">Course</th>
+                                                        <th className="p-4 text-left">CV</th>
+                                                        <th className="p-4 text-left">Certificate</th>
+                                                    </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {filteredRegistrations.map((reg, index) => (
-                                                        <tr key={index} className="border-b hover:bg-gray-50">
-                                                            <td className="p-4 text-sm">{new Date(reg.registeredAt).toLocaleDateString()}   </td>
+                                                    {filteredRegistrations.map((reg, idx) => (
+                                                        <tr key={idx} className="border-b hover:bg-gray-50">
+                                                            <td className="p-4 text-sm">{new Date(reg.registeredAt).toLocaleDateString()}</td>
                                                             <td className="p-4 font-medium">{reg.name}</td>
                                                             <td className="p-4 text-sm text-blue-600">{reg.email}</td>
                                                             <td className="p-4 text-sm">{reg.phone}</td>
                                                             <td className="p-4 text-sm max-w-xs truncate">{reg.course}</td>
-                                                            <td className="p-4">{reg.cvFileName ? <a href={`/api/download/cv?file=${reg.cvFileName}`} target="_blank" rel="noopener noreferrer" className="text-orange-600 text-sm hover:underline">📄 Download CV</a> : <span className="text-gray-400 text-sm">No CV</span>}</td>
-                                                            <td className="p-4"></td>
+                                                            <td className="p-4">{reg.cvFileName ? <a href={`/api/download/cv?file=${reg.cvFileName}`} target="_blank" className="text-orange-600 text-sm hover:underline">📄 Download CV</a> : <span className="text-gray-400">No CV</span>}</td>
+                                                            <td className="p-4"><button onClick={() => issueCertificate(reg)} className="bg-green-600 hover:bg-green-700 text-white px-3 py-1.5 rounded text-xs font-semibold">🎓 Issue Certificate</button></td>
                                                         </tr>
                                                     ))}
                                                 </tbody>
                                             </table>
                                         </div>
-                                    }
+                                    )}
                                 </div>
                             </div>
                         )}
@@ -502,23 +486,26 @@ export default function AdminDashboard() {
                         {activeTab === 'contacts' && (
                             <div>
                                 <div className="mb-4">
-                                    <div className="relative">
-                                        <input type="text" placeholder="Search contacts by name, email, phone, or message..." value={contactSearch} onChange={(e) => setContactSearch(e.target.value)} className="w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" />
-                                        <span className="absolute left-3 top-2.5 text-gray-400">🔍</span>
-                                        {contactSearch && <button onClick={() => setContactSearch('')} className="absolute right-3 top-2.5 text-gray-400 hover:text-gray-600">✕</button>}
-                                    </div>
-                                    {contactSearch && <p className="text-sm text-gray-500 mt-1">Found {filteredContacts.length} contact(s) matching "{contactSearch}"</p>}
+                                    <input type="text" placeholder="Search contacts by name, email, phone, or message..." value={contactSearch} onChange={(e) => setContactSearch(e.target.value)} className="w-full px-4 py-2 pl-10 border rounded-lg" />
                                 </div>
                                 <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-                                    {filteredContacts.length === 0 ? <div className="text-center py-12"><div className="text-4xl mb-4">📭</div><p className="text-gray-500">{contactSearch ? `No contacts matching "${contactSearch}"` : 'No contact messages yet'}</p></div> :
+                                    {filteredContacts.length === 0 ? (
+                                        <div className="text-center py-12">No contacts</div>
+                                    ) : (
                                         <div className="overflow-x-auto">
                                             <table className="w-full">
                                                 <thead className="bg-gray-100">
-                                                    <th className="p-4 text-left">Date</th><th className="p-4 text-left">Name</th><th className="p-4 text-left">Email</th><th className="p-4 text-left">Phone</th><th className="p-4 text-left">Message</th>
+                                                    <tr>
+                                                        <th className="p-4 text-left">Date</th>
+                                                        <th className="p-4 text-left">Name</th>
+                                                        <th className="p-4 text-left">Email</th>
+                                                        <th className="p-4 text-left">Phone</th>
+                                                        <th className="p-4 text-left">Message</th>
+                                                    </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {filteredContacts.map((contact, index) => (
-                                                        <tr key={index} className="border-b hover:bg-gray-50">
+                                                    {filteredContacts.map((contact, idx) => (
+                                                        <tr key={idx} className="border-b hover:bg-gray-50">
                                                             <td className="p-4 text-sm">{new Date(contact.submittedAt).toLocaleDateString()}</td>
                                                             <td className="p-4 font-medium">{contact.name}</td>
                                                             <td className="p-4 text-sm text-blue-600">{contact.email}</td>
@@ -527,9 +514,9 @@ export default function AdminDashboard() {
                                                         </tr>
                                                     ))}
                                                 </tbody>
-                                            </tr>
+                                            </table>
                                         </div>
-                                    }
+                                    )}
                                 </div>
                             </div>
                         )}
@@ -539,17 +526,11 @@ export default function AdminDashboard() {
                             <div>
                                 <button onClick={() => { setEditingCourse(null); setCourseForm({ name: '', category: '', hours: '', description: '', content: [], outcomes: [], eligibility: '', modules: [], learningObjectives: [], sections: [], faqs: [], seoTitle: '', metaDescription: '', focusKeyword: '', featuredImagePreview: null, featuredImageFile: null }); setShowCourseForm(true); }} className="mb-4 bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-lg">+ Add New Course</button>
                                 <div className="mb-4">
-                                    <div className="relative">
-                                        <input type="text" placeholder="Search courses by name, category, or hours..." value={courseSearch} onChange={(e) => setCourseSearch(e.target.value)} className="w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" />
-                                        <span className="absolute left-3 top-2.5 text-gray-400">🔍</span>
-                                        {courseSearch && <button onClick={() => setCourseSearch('')} className="absolute right-3 top-2.5 text-gray-400 hover:text-gray-600">✕</button>}
-                                    </div>
-                                    {courseSearch && <p className="text-sm text-gray-500 mt-1">Found {filteredCourses.length} course(s) matching "{courseSearch}"</p>}
+                                    <input type="text" placeholder="Search courses by name, category, or hours..." value={courseSearch} onChange={(e) => setCourseSearch(e.target.value)} className="w-full px-4 py-2 pl-10 border rounded-lg" />
                                 </div>
                                 {showCourseForm && (
                                     <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
                                         <h3 className="text-xl font-bold text-blue-900 mb-4">{editingCourse ? 'Edit Course' : 'Add New Course'}</h3>
-                                        {/* Basic Info */}
                                         <div className="grid md:grid-cols-2 gap-4 mb-4">
                                             <input type="text" name="name" placeholder="Course Name" value={courseForm.name} onChange={handleCourseInputChange} className="p-2 border rounded" />
                                             <select name="category" value={courseForm.category} onChange={handleCourseInputChange} className="p-2 border rounded">
@@ -564,29 +545,27 @@ export default function AdminDashboard() {
                                             <div>
                                                 <label className="block text-gray-700 text-sm mb-1">Featured Image</label>
                                                 <input type="file" accept="image/*" onChange={handleFeaturedImageUpload} className="p-2 border rounded w-full" />
-                                                {courseForm.featuredImagePreview && (
-                                                    <img src={courseForm.featuredImagePreview} alt="Preview" className="mt-2 h-20 object-cover rounded" />
-                                                )}
+                                                {courseForm.featuredImagePreview && <img src={courseForm.featuredImagePreview} alt="Preview" className="mt-2 h-20 object-cover rounded" />}
                                             </div>
                                         </div>
-                                        {/* Dynamic Sections Builder */}
+
                                         <div className="mb-4">
                                             <div className="flex justify-between items-center mb-2">
-                                                <h4 className="font-bold text-blue-800">Course Sections (unlimited)</h4>
+                                                <h4 className="font-bold text-blue-800">Course Sections</h4>
                                                 <button type="button" onClick={addSection} className="bg-green-500 text-white px-3 py-1 rounded text-sm">+ Add Section</button>
                                             </div>
                                             {courseForm.sections.map((section, idx) => (
                                                 <div key={idx} className="border p-3 rounded mb-3 bg-gray-50">
-                                                    <input type="text" placeholder="Section Heading (e.g., Course Overview)" value={section.heading} onChange={(e) => updateSection(idx, 'heading', e.target.value)} className="w-full p-2 border rounded mb-2 font-bold text-blue-800" />
+                                                    <input type="text" placeholder="Section Heading" value={section.heading} onChange={(e) => updateSection(idx, 'heading', e.target.value)} className="w-full p-2 border rounded mb-2 font-bold text-blue-800" />
                                                     <textarea placeholder="Section Description" value={section.description} onChange={(e) => updateSection(idx, 'description', e.target.value)} rows="3" className="w-full p-2 border rounded mb-2" />
                                                     <button type="button" onClick={() => removeSection(idx)} className="text-red-600 text-sm">Remove Section</button>
                                                 </div>
                                             ))}
                                         </div>
-                                        {/* FAQ Builder */}
+
                                         <div className="mb-4">
                                             <div className="flex justify-between items-center mb-2">
-                                                <h4 className="font-bold text-blue-800">Frequently Asked Questions (optional)</h4>
+                                                <h4 className="font-bold text-blue-800">Frequently Asked Questions</h4>
                                                 <button type="button" onClick={addFaq} className="bg-green-500 text-white px-3 py-1 rounded text-sm">+ Add FAQ</button>
                                             </div>
                                             {courseForm.faqs.map((faq, idx) => (
@@ -597,7 +576,7 @@ export default function AdminDashboard() {
                                                 </div>
                                             ))}
                                         </div>
-                                        {/* SEO Fields */}
+
                                         <div className="mb-4 border-t pt-4">
                                             <h4 className="font-bold text-blue-800 mb-2">SEO Settings</h4>
                                             <div className="grid md:grid-cols-2 gap-4">
@@ -606,18 +585,7 @@ export default function AdminDashboard() {
                                                 <textarea name="metaDescription" placeholder="Meta Description" value={courseForm.metaDescription} onChange={handleCourseInputChange} rows="2" className="p-2 border rounded col-span-2" />
                                             </div>
                                         </div>
-                                        {/* Keep old fields for backward compatibility (hidden or visible) */}
-                                        <div className="border-t pt-4 mt-4">
-                                            <details className="text-sm text-gray-500">
-                                                <summary>Advanced / Legacy Fields (optional)</summary>
-                                                <textarea placeholder="Description" name="description" value={courseForm.description} onChange={handleCourseInputChange} className="w-full p-2 border rounded mt-2" rows="2" />
-                                                <textarea placeholder="Content (one per line)" value={courseForm.content.join('\n')} onChange={(e) => handleArrayInput('content', e.target.value)} className="w-full p-2 border rounded mt-2" rows="3" />
-                                                <textarea placeholder="Outcomes (one per line)" value={courseForm.outcomes.join('\n')} onChange={(e) => handleArrayInput('outcomes', e.target.value)} className="w-full p-2 border rounded mt-2" rows="3" />
-                                                <textarea name="eligibility" placeholder="Eligibility Criteria" value={courseForm.eligibility} onChange={handleCourseInputChange} className="w-full p-2 border rounded mt-2" rows="2" />
-                                                <textarea placeholder="Modules (one per line)" value={courseForm.modules.join('\n')} onChange={(e) => handleArrayInput('modules', e.target.value)} className="w-full p-2 border rounded mt-2" rows="4" />
-                                                <textarea placeholder="Learning Objectives (one per line)" value={courseForm.learningObjectives.join('\n')} onChange={(e) => handleArrayInput('learningObjectives', e.target.value)} className="w-full p-2 border rounded mt-2" rows="4" />
-                                            </details>
-                                        </div>
+
                                         <div className="flex gap-2 mt-4">
                                             <button onClick={saveCourse} className="bg-green-500 text-white px-4 py-2 rounded">Save</button>
                                             <button onClick={() => setShowCourseForm(false)} className="bg-gray-500 text-white px-4 py-2 rounded">Cancel</button>
@@ -625,30 +593,32 @@ export default function AdminDashboard() {
                                     </div>
                                 )}
                                 <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-                                    {filteredCourses.length === 0 ? <div className="text-center py-12"><div className="text-4xl mb-4">📭</div><p className="text-gray-500">{courseSearch ? `No courses matching "${courseSearch}"` : 'No courses added yet'}</p></div> :
+                                    {filteredCourses.length === 0 ? (
+                                        <div className="text-center py-12">No courses added yet</div>
+                                    ) : (
                                         <div className="overflow-x-auto">
                                             <table className="w-full">
                                                 <thead className="bg-gray-100">
-                                                    <th className="p-4 text-left">Name</th><th className="p-4 text-left">Category</th><th className="p-4 text-left">Hours</th><th className="p-4 text-left">Actions</th>
+                                                    <tr>
+                                                        <th className="p-4 text-left">Name</th>
+                                                        <th className="p-4 text-left">Category</th>
+                                                        <th className="p-4 text-left">Hours</th>
+                                                        <th className="p-4 text-left">Actions</th>
+                                                    </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {filteredCourses.map((course, index) => (
-                                                        <tr key={index} className="border-b hover:bg-gray-50">
+                                                    {filteredCourses.map((course, idx) => (
+                                                        <tr key={idx} className="border-b hover:bg-gray-50">
                                                             <td className="p-4">{course.name}</td>
-                                                            <td className="p-4">
-                                                                <span className={`px-2 py-1 rounded text-xs font-semibold ${course.category === 'OSHA' ? 'bg-blue-100 text-blue-800' : course.category === 'OTHM' ? 'bg-green-100 text-green-800' : course.category === 'HiQual' ? 'bg-purple-100 text-purple-800' : course.category === 'IOSH' ? 'bg-orange-100 text-orange-800' : course.category === 'Other' ? 'bg-gray-100 text-gray-800' : 'bg-gray-100 text-gray-800'}`}>{course.category}</span>
-                                                            </td>
+                                                            <td className="p-4"><span className={`px-2 py-1 rounded text-xs font-semibold ${course.category === 'OSHA' ? 'bg-blue-100 text-blue-800' : course.category === 'OTHM' ? 'bg-green-100 text-green-800' : course.category === 'HiQual' ? 'bg-purple-100 text-purple-800' : course.category === 'IOSH' ? 'bg-orange-100 text-orange-800' : 'bg-gray-100 text-gray-800'}`}>{course.category}</span></td>
                                                             <td className="p-4">{course.hours}</td>
-                                                            <td className="p-4">
-                                                                <button onClick={() => editCourse(course)} className="text-blue-600 mr-3 hover:text-blue-800">✏️ Edit</button>
-                                                                <button onClick={() => deleteCourse(course._id)} className="text-red-600 hover:text-red-800">🗑️ Delete</button>
-                                                            </td>
+                                                            <td className="p-4"><button onClick={() => editCourse(course)} className="text-blue-600 mr-3 hover:text-blue-800">✏️ Edit</button><button onClick={() => deleteCourse(course._id)} className="text-red-600 hover:text-red-800">🗑️ Delete</button></td>
                                                         </tr>
                                                     ))}
                                                 </tbody>
                                             </table>
                                         </div>
-                                    }
+                                    )}
                                 </div>
                             </div>
                         )}
@@ -657,23 +627,28 @@ export default function AdminDashboard() {
                         {activeTab === 'reviews' && (
                             <div>
                                 <div className="mb-4">
-                                    <div className="relative">
-                                        <input type="text" placeholder="Search reviews by name, course, comment, or status..." value={reviewSearch} onChange={(e) => setReviewSearch(e.target.value)} className="w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" />
-                                        <span className="absolute left-3 top-2.5 text-gray-400">🔍</span>
-                                        {reviewSearch && <button onClick={() => setReviewSearch('')} className="absolute right-3 top-2.5 text-gray-400 hover:text-gray-600">✕</button>}
-                                    </div>
-                                    {reviewSearch && <p className="text-sm text-gray-500 mt-1">Found {filteredReviews.length} review(s) matching "{reviewSearch}"</p>}
+                                    <input type="text" placeholder="Search reviews by name, course, comment, or status..." value={reviewSearch} onChange={(e) => setReviewSearch(e.target.value)} className="w-full px-4 py-2 pl-10 border rounded-lg" />
                                 </div>
                                 <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-                                    {filteredReviews.length === 0 ? <div className="text-center py-12"><div className="text-4xl mb-4">📭</div><p className="text-gray-500">{reviewSearch ? `No reviews matching "${reviewSearch}"` : 'No reviews yet'}</p></div> :
+                                    {filteredReviews.length === 0 ? (
+                                        <div className="text-center py-12">No reviews</div>
+                                    ) : (
                                         <div className="overflow-x-auto">
                                             <table className="w-full">
                                                 <thead className="bg-gray-100">
-                                                    <th className="p-4 text-left">Date</th><th className="p-4 text-left">Student</th><th className="p-4 text-left">Course</th><th className="p-4 text-left">Rating</th><th className="p-4 text-left">Review</th><th className="p-4 text-left">Status</th><th className="p-4 text-left">Actions</th>
+                                                    <tr>
+                                                        <th className="p-4 text-left">Date</th>
+                                                        <th className="p-4 text-left">Student</th>
+                                                        <th className="p-4 text-left">Course</th>
+                                                        <th className="p-4 text-left">Rating</th>
+                                                        <th className="p-4 text-left">Review</th>
+                                                        <th className="p-4 text-left">Status</th>
+                                                        <th className="p-4 text-left">Actions</th>
+                                                    </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {filteredReviews.map((review, index) => (
-                                                        <tr key={index} className="border-b hover:bg-gray-50">
+                                                    {filteredReviews.map((review, idx) => (
+                                                        <tr key={idx} className="border-b hover:bg-gray-50">
                                                             <td className="p-4 text-sm">{new Date(review.createdAt).toLocaleDateString()}</td>
                                                             <td className="p-4"><div className="flex items-center gap-3"><Avatar name={review.name} email={review.email} size="w-10 h-10" /><span className="font-medium">{review.name}</span></div></td>
                                                             <td className="p-4 text-sm">{review.course}</td>
@@ -681,12 +656,10 @@ export default function AdminDashboard() {
                                                             <td className="p-4 text-sm max-w-xs truncate">{review.comment}</td>
                                                             <td className="p-4"><span className={`px-2 py-1 rounded text-xs font-semibold ${review.status === 'approved' ? 'bg-green-100 text-green-800' : review.status === 'rejected' ? 'bg-red-100 text-red-800' : 'bg-yellow-100 text-yellow-800'}`}>{review.status}</span></td>
                                                             <td className="p-4">
-                                                                {review.status === 'pending' && (
-                                                                    <>
-                                                                        <button onClick={() => updateReviewStatus(review._id, 'approve')} className="bg-green-500 text-white px-2 py-1 rounded text-xs mr-1 hover:bg-green-600">✅ Approve</button>
-                                                                        <button onClick={() => updateReviewStatus(review._id, 'reject')} className="bg-red-500 text-white px-2 py-1 rounded text-xs mr-1 hover:bg-red-600">❌ Reject</button>
-                                                                    </>
-                                                                )}
+                                                                {review.status === 'pending' && (<>
+                                                                    <button onClick={() => updateReviewStatus(review._id, 'approve')} className="bg-green-500 text-white px-2 py-1 rounded text-xs mr-1 hover:bg-green-600">✅ Approve</button>
+                                                                    <button onClick={() => updateReviewStatus(review._id, 'reject')} className="bg-red-500 text-white px-2 py-1 rounded text-xs mr-1 hover:bg-red-600">❌ Reject</button>
+                                                                </>)}
                                                                 <button onClick={() => deleteReview(review._id)} className="bg-gray-500 text-white px-2 py-1 rounded text-xs hover:bg-gray-600">🗑️ Delete</button>
                                                             </td>
                                                         </tr>
@@ -694,7 +667,7 @@ export default function AdminDashboard() {
                                                 </tbody>
                                             </table>
                                         </div>
-                                    }
+                                    )}
                                 </div>
                             </div>
                         )}
@@ -711,21 +684,13 @@ export default function AdminDashboard() {
                                     <div><label className="block text-gray-700 font-medium mb-1">Director Title</label><input type="text" name="directorTitle" value={settings.directorTitle || 'Director'} onChange={handleSettingsChange} className="w-full p-2 border rounded" /></div>
                                     <div><label className="block text-gray-700 font-medium mb-1">Academic Director Name</label><input type="text" name="academicDirectorName" value={settings.academicDirectorName || 'Dr. Sarah Khan'} onChange={handleSettingsChange} className="w-full p-2 border rounded" /></div>
                                     <div><label className="block text-gray-700 font-medium mb-1">Academic Director Title</label><input type="text" name="academicDirectorTitle" value={settings.academicDirectorTitle || 'Academic Director'} onChange={handleSettingsChange} className="w-full p-2 border rounded" /></div>
-                                    <div><label className="block text-gray-700 font-medium mb-1">Director Signature</label>
-                                        <input type="file" accept="image/png,image/jpeg" onChange={handleSignatureUpload} className="w-full p-2 border rounded" />
-                                        {settings.signatureData && (
-                                            <div className="mt-2">
-                                                <p className="text-sm text-green-600 mb-1">Current Signature:</p>
-                                                <img src={`data:image/png;base64,${settings.signatureData}`} alt="Signature" className="h-16 border rounded p-1 bg-white" />
-                                            </div>
-                                        )}
-                                    </div>
+                                    <div><label className="block text-gray-700 font-medium mb-1">Director Signature</label><input type="file" accept="image/png,image/jpeg" onChange={handleSignatureUpload} className="w-full p-2 border rounded" /></div>
                                     <div><label className="block text-gray-700 font-medium mb-1">Facebook URL</label><input type="text" name="facebook" value={settings.facebook || ''} onChange={handleSettingsChange} className="w-full p-2 border rounded" /></div>
                                     <div><label className="block text-gray-700 font-medium mb-1">Instagram URL</label><input type="text" name="instagram" value={settings.instagram || ''} onChange={handleSettingsChange} className="w-full p-2 border rounded" /></div>
                                     <div><label className="block text-gray-700 font-medium mb-1">WhatsApp URL</label><input type="text" name="whatsapp" value={settings.whatsapp || ''} onChange={handleSettingsChange} className="w-full p-2 border rounded" /></div>
                                     <div><label className="block text-gray-700 font-medium mb-1">Footer Text</label><input type="text" name="footerText" value={settings.footerText || ''} onChange={handleSettingsChange} className="w-full p-2 border rounded" /></div>
                                     <div><label className="block text-gray-700 font-medium mb-1">Address</label><input type="text" name="address" value={settings.address || ''} onChange={handleSettingsChange} className="w-full p-2 border rounded" /></div>
-                                    {saveMessage && <div className={`p-2 rounded text-center ${saveMessage.includes('✅') ? 'bg-green-100 text-green-700' : saveMessage.includes('❌') ? 'bg-red-100 text-red-700' : 'bg-blue-100 text-blue-700'}`}>{saveMessage}</div>}
+                                    {saveMessage && <div className={`p-2 rounded text-center ${saveMessage.includes('✅') ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>{saveMessage}</div>}
                                     <button onClick={saveSettings} className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-6 rounded-lg transition">Save Settings</button>
                                 </div>
                             </div>
