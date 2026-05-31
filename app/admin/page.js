@@ -22,6 +22,9 @@ export default function AdminDashboard() {
     const [regSearch, setRegSearch] = useState('');
     const [contactSearch, setContactSearch] = useState('');
     const [reviewSearch, setReviewSearch] = useState('');
+    const [saveMessage, setSaveMessage] = useState('');
+
+    // Extended course form state for dynamic fields
     const [courseForm, setCourseForm] = useState({
         name: '',
         category: '',
@@ -31,9 +34,15 @@ export default function AdminDashboard() {
         outcomes: [],
         eligibility: '',
         modules: [],
-        learningObjectives: []
+        learningObjectives: [],
+        sections: [],           // { heading, description }
+        faqs: [],               // { question, answer }
+        seoTitle: '',
+        metaDescription: '',
+        focusKeyword: '',
+        featuredImagePreview: null,
+        featuredImageFile: null
     });
-    const [saveMessage, setSaveMessage] = useState('');
 
     const ADMIN_PASSWORD = 'arshan2002';
 
@@ -135,6 +144,58 @@ export default function AdminDashboard() {
         setCourseForm({ ...courseForm, [field]: items });
     };
 
+    // Dynamic sections handlers
+    const addSection = () => {
+        setCourseForm({
+            ...courseForm,
+            sections: [...courseForm.sections, { heading: '', description: '' }]
+        });
+    };
+    const updateSection = (index, field, value) => {
+        const updated = [...courseForm.sections];
+        updated[index][field] = value;
+        setCourseForm({ ...courseForm, sections: updated });
+    };
+    const removeSection = (index) => {
+        const updated = [...courseForm.sections];
+        updated.splice(index, 1);
+        setCourseForm({ ...courseForm, sections: updated });
+    };
+
+    // FAQ handlers
+    const addFaq = () => {
+        setCourseForm({
+            ...courseForm,
+            faqs: [...courseForm.faqs, { question: '', answer: '' }]
+        });
+    };
+    const updateFaq = (index, field, value) => {
+        const updated = [...courseForm.faqs];
+        updated[index][field] = value;
+        setCourseForm({ ...courseForm, faqs: updated });
+    };
+    const removeFaq = (index) => {
+        const updated = [...courseForm.faqs];
+        updated.splice(index, 1);
+        setCourseForm({ ...courseForm, faqs: updated });
+    };
+
+    // Featured image handler
+    const handleFeaturedImageUpload = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setCourseForm({
+                    ...courseForm,
+                    featuredImagePreview: reader.result,
+                    featuredImageFile: file
+                });
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
     const saveCourse = async () => {
         try {
             const method = editingCourse ? 'PUT' : 'POST';
@@ -157,7 +218,14 @@ export default function AdminDashboard() {
                     outcomes: [],
                     eligibility: '',
                     modules: [],
-                    learningObjectives: []
+                    learningObjectives: [],
+                    sections: [],
+                    faqs: [],
+                    seoTitle: '',
+                    metaDescription: '',
+                    focusKeyword: '',
+                    featuredImagePreview: null,
+                    featuredImageFile: null
                 });
                 fetchData();
             } else {
@@ -197,7 +265,14 @@ export default function AdminDashboard() {
             outcomes: course.outcomes || [],
             eligibility: course.eligibility || '',
             modules: course.modules || [],
-            learningObjectives: course.learningObjectives || []
+            learningObjectives: course.learningObjectives || [],
+            sections: course.sections || [],
+            faqs: course.faqs || [],
+            seoTitle: course.seoTitle || '',
+            metaDescription: course.metaDescription || '',
+            focusKeyword: course.focusKeyword || '',
+            featuredImagePreview: course.featuredImage ? course.featuredImage : null,
+            featuredImageFile: null
         });
         setShowCourseForm(true);
     };
@@ -267,28 +342,22 @@ export default function AdminDashboard() {
     const handleSignatureUpload = async (e) => {
         const file = e.target.files[0];
         if (!file) return;
-
         if (!file.type.includes('image/png') && !file.type.includes('image/jpeg')) {
             alert('Please upload PNG or JPG image');
             return;
         }
-
         if (file.size > 2 * 1024 * 1024) {
             alert('File size too large. Max 2MB');
             return;
         }
-
         const formData = new FormData();
         formData.append('signature', file);
-
         try {
             const response = await fetch('/api/admin/settings', {
                 method: 'PUT',
                 body: formData
             });
-
             const result = await response.json();
-
             if (response.ok && result.success) {
                 setSettings(result.data);
                 alert('Signature uploaded successfully!');
@@ -458,7 +527,7 @@ export default function AdminDashboard() {
                                                         </tr>
                                                     ))}
                                                 </tbody>
-                                            </table>
+                                            </tr>
                                         </div>
                                     }
                                 </div>
@@ -468,7 +537,7 @@ export default function AdminDashboard() {
                         {/* Courses Tab */}
                         {activeTab === 'courses' && (
                             <div>
-                                <button onClick={() => { setEditingCourse(null); setCourseForm({ name: '', category: '', hours: '', description: '', content: [], outcomes: [], eligibility: '', modules: [], learningObjectives: [] }); setShowCourseForm(true); }} className="mb-4 bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-lg">+ Add New Course</button>
+                                <button onClick={() => { setEditingCourse(null); setCourseForm({ name: '', category: '', hours: '', description: '', content: [], outcomes: [], eligibility: '', modules: [], learningObjectives: [], sections: [], faqs: [], seoTitle: '', metaDescription: '', focusKeyword: '', featuredImagePreview: null, featuredImageFile: null }); setShowCourseForm(true); }} className="mb-4 bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-lg">+ Add New Course</button>
                                 <div className="mb-4">
                                     <div className="relative">
                                         <input type="text" placeholder="Search courses by name, category, or hours..." value={courseSearch} onChange={(e) => setCourseSearch(e.target.value)} className="w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" />
@@ -480,7 +549,8 @@ export default function AdminDashboard() {
                                 {showCourseForm && (
                                     <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
                                         <h3 className="text-xl font-bold text-blue-900 mb-4">{editingCourse ? 'Edit Course' : 'Add New Course'}</h3>
-                                        <div className="grid md:grid-cols-2 gap-4">
+                                        {/* Basic Info */}
+                                        <div className="grid md:grid-cols-2 gap-4 mb-4">
                                             <input type="text" name="name" placeholder="Course Name" value={courseForm.name} onChange={handleCourseInputChange} className="p-2 border rounded" />
                                             <select name="category" value={courseForm.category} onChange={handleCourseInputChange} className="p-2 border rounded">
                                                 <option value="">Select Category</option>
@@ -491,12 +561,62 @@ export default function AdminDashboard() {
                                                 <option value="Other">Other</option>
                                             </select>
                                             <input type="text" name="hours" placeholder="Credit Hours" value={courseForm.hours} onChange={handleCourseInputChange} className="p-2 border rounded" />
-                                            <textarea name="description" placeholder="Description" value={courseForm.description} onChange={handleCourseInputChange} className="p-2 border rounded col-span-2" rows="2" />
-                                            <textarea placeholder="Content (one per line)" value={courseForm.content.join('\n')} onChange={(e) => handleArrayInput('content', e.target.value)} className="p-2 border rounded" rows="3" />
-                                            <textarea placeholder="Outcomes (one per line)" value={courseForm.outcomes.join('\n')} onChange={(e) => handleArrayInput('outcomes', e.target.value)} className="p-2 border rounded" rows="3" />
-                                            <textarea name="eligibility" placeholder="Eligibility Criteria" value={courseForm.eligibility} onChange={handleCourseInputChange} className="p-2 border rounded col-span-2" rows="2" />
-                                            <textarea placeholder="Modules (one per line)" value={courseForm.modules.join('\n')} onChange={(e) => handleArrayInput('modules', e.target.value)} className="p-2 border rounded col-span-2" rows="4" />
-                                            <textarea placeholder="Learning Objectives (one per line)" value={courseForm.learningObjectives.join('\n')} onChange={(e) => handleArrayInput('learningObjectives', e.target.value)} className="p-2 border rounded col-span-2" rows="4" />
+                                            <div>
+                                                <label className="block text-gray-700 text-sm mb-1">Featured Image</label>
+                                                <input type="file" accept="image/*" onChange={handleFeaturedImageUpload} className="p-2 border rounded w-full" />
+                                                {courseForm.featuredImagePreview && (
+                                                    <img src={courseForm.featuredImagePreview} alt="Preview" className="mt-2 h-20 object-cover rounded" />
+                                                )}
+                                            </div>
+                                        </div>
+                                        {/* Dynamic Sections Builder */}
+                                        <div className="mb-4">
+                                            <div className="flex justify-between items-center mb-2">
+                                                <h4 className="font-bold text-blue-800">Course Sections (unlimited)</h4>
+                                                <button type="button" onClick={addSection} className="bg-green-500 text-white px-3 py-1 rounded text-sm">+ Add Section</button>
+                                            </div>
+                                            {courseForm.sections.map((section, idx) => (
+                                                <div key={idx} className="border p-3 rounded mb-3 bg-gray-50">
+                                                    <input type="text" placeholder="Section Heading (e.g., Course Overview)" value={section.heading} onChange={(e) => updateSection(idx, 'heading', e.target.value)} className="w-full p-2 border rounded mb-2 font-bold text-blue-800" />
+                                                    <textarea placeholder="Section Description" value={section.description} onChange={(e) => updateSection(idx, 'description', e.target.value)} rows="3" className="w-full p-2 border rounded mb-2" />
+                                                    <button type="button" onClick={() => removeSection(idx)} className="text-red-600 text-sm">Remove Section</button>
+                                                </div>
+                                            ))}
+                                        </div>
+                                        {/* FAQ Builder */}
+                                        <div className="mb-4">
+                                            <div className="flex justify-between items-center mb-2">
+                                                <h4 className="font-bold text-blue-800">Frequently Asked Questions (optional)</h4>
+                                                <button type="button" onClick={addFaq} className="bg-green-500 text-white px-3 py-1 rounded text-sm">+ Add FAQ</button>
+                                            </div>
+                                            {courseForm.faqs.map((faq, idx) => (
+                                                <div key={idx} className="border p-3 rounded mb-3 bg-gray-50">
+                                                    <input type="text" placeholder="Question" value={faq.question} onChange={(e) => updateFaq(idx, 'question', e.target.value)} className="w-full p-2 border rounded mb-2" />
+                                                    <textarea placeholder="Answer" value={faq.answer} onChange={(e) => updateFaq(idx, 'answer', e.target.value)} rows="2" className="w-full p-2 border rounded mb-2" />
+                                                    <button type="button" onClick={() => removeFaq(idx)} className="text-red-600 text-sm">Remove FAQ</button>
+                                                </div>
+                                            ))}
+                                        </div>
+                                        {/* SEO Fields */}
+                                        <div className="mb-4 border-t pt-4">
+                                            <h4 className="font-bold text-blue-800 mb-2">SEO Settings</h4>
+                                            <div className="grid md:grid-cols-2 gap-4">
+                                                <input type="text" name="seoTitle" placeholder="SEO Title" value={courseForm.seoTitle} onChange={handleCourseInputChange} className="p-2 border rounded" />
+                                                <input type="text" name="focusKeyword" placeholder="Focus Keyword" value={courseForm.focusKeyword} onChange={handleCourseInputChange} className="p-2 border rounded" />
+                                                <textarea name="metaDescription" placeholder="Meta Description" value={courseForm.metaDescription} onChange={handleCourseInputChange} rows="2" className="p-2 border rounded col-span-2" />
+                                            </div>
+                                        </div>
+                                        {/* Keep old fields for backward compatibility (hidden or visible) */}
+                                        <div className="border-t pt-4 mt-4">
+                                            <details className="text-sm text-gray-500">
+                                                <summary>Advanced / Legacy Fields (optional)</summary>
+                                                <textarea placeholder="Description" name="description" value={courseForm.description} onChange={handleCourseInputChange} className="w-full p-2 border rounded mt-2" rows="2" />
+                                                <textarea placeholder="Content (one per line)" value={courseForm.content.join('\n')} onChange={(e) => handleArrayInput('content', e.target.value)} className="w-full p-2 border rounded mt-2" rows="3" />
+                                                <textarea placeholder="Outcomes (one per line)" value={courseForm.outcomes.join('\n')} onChange={(e) => handleArrayInput('outcomes', e.target.value)} className="w-full p-2 border rounded mt-2" rows="3" />
+                                                <textarea name="eligibility" placeholder="Eligibility Criteria" value={courseForm.eligibility} onChange={handleCourseInputChange} className="w-full p-2 border rounded mt-2" rows="2" />
+                                                <textarea placeholder="Modules (one per line)" value={courseForm.modules.join('\n')} onChange={(e) => handleArrayInput('modules', e.target.value)} className="w-full p-2 border rounded mt-2" rows="4" />
+                                                <textarea placeholder="Learning Objectives (one per line)" value={courseForm.learningObjectives.join('\n')} onChange={(e) => handleArrayInput('learningObjectives', e.target.value)} className="w-full p-2 border rounded mt-2" rows="4" />
+                                            </details>
                                         </div>
                                         <div className="flex gap-2 mt-4">
                                             <button onClick={saveCourse} className="bg-green-500 text-white px-4 py-2 rounded">Save</button>
