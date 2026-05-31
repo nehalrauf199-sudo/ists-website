@@ -1,28 +1,20 @@
-// app/courses/[slug]/page.js
 import clientPromise from '@/app/lib/mongodb';
-import Image from 'next/image';
 
-// Helper to get course by slug
+// Helper to get course by slug (uses the stored slug field)
 async function getCourseBySlug(slug) {
     const client = await clientPromise;
     const db = client.db('ists');
-    // Since slug is not a separate field, we generate it from name: lowercase, spaces replaced with hyphens.
-    // We'll fetch all courses and then find the one whose slug matches.
-    const courses = await db.collection('courses').find({}).toArray();
-    const course = courses.find(c =>
-        c.name.toLowerCase().replace(/\s+/g, '-') === slug
-    );
+    const course = await db.collection('courses').findOne({ slug });
     return course;
 }
 
 // Generate dynamic metadata for SEO
 export async function generateMetadata({ params }) {
-    const slug = params.slug;
-    const course = await getCourseBySlug(slug);
+    const course = await getCourseBySlug(params.slug);
     if (!course) {
         return {
             title: 'Course Not Found - ISTS',
-            description: 'The requested course does not exist.'
+            description: 'The requested course does not exist.',
         };
     }
     return {
@@ -38,22 +30,23 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function CoursePage({ params }) {
-    const slug = params.slug;
-    const course = await getCourseBySlug(slug);
+    const course = await getCourseBySlug(params.slug);
 
     if (!course) {
         return (
             <div className="min-h-screen bg-gray-50 py-20 px-4 text-center">
                 <h1 className="text-3xl font-bold text-blue-900">Course Not Found</h1>
                 <p className="mt-4">The course you are looking for does not exist.</p>
-                <a href="/courses" className="inline-block mt-6 bg-orange-500 text-white px-6 py-2 rounded-full">View All Courses</a>
+                <a href="/courses" className="inline-block mt-6 bg-orange-500 text-white px-6 py-2 rounded-full">
+                    View All Courses
+                </a>
             </div>
         );
     }
 
     return (
         <div className="min-h-screen bg-gray-50">
-            {/* Hero Section with Course Title and Featured Image */}
+            {/* Hero Section */}
             <div className="bg-gradient-to-r from-blue-900 to-blue-800 text-white py-16 px-4">
                 <div className="max-w-6xl mx-auto">
                     <h1 className="text-4xl md:text-5xl font-bold mb-4">{course.name}</h1>
@@ -63,14 +56,14 @@ export default async function CoursePage({ params }) {
 
             {/* Main Content */}
             <div className="max-w-6xl mx-auto px-4 py-12">
-                {/* Featured Image (if exists) */}
+                {/* Featured Image */}
                 {course.featuredImage && (
                     <div className="mb-8 rounded-xl overflow-hidden shadow-lg">
                         <img src={course.featuredImage} alt={course.name} className="w-full h-auto object-cover" />
                     </div>
                 )}
 
-                {/* Dynamic Sections – Admin can add any number of sections */}
+                {/* Dynamic Sections */}
                 {course.sections && course.sections.length > 0 ? (
                     <div className="space-y-8">
                         {course.sections.map((section, idx) => (
@@ -81,7 +74,7 @@ export default async function CoursePage({ params }) {
                         ))}
                     </div>
                 ) : (
-                    // Fallback: display old hardcoded fields if sections are empty (for backward compatibility)
+                    // Fallback for courses that still use old fields (optional)
                     <div className="space-y-8">
                         {course.description && (
                             <div className="bg-white rounded-xl shadow-md p-6">
@@ -89,7 +82,7 @@ export default async function CoursePage({ params }) {
                                 <p className="text-gray-700">{course.description}</p>
                             </div>
                         )}
-                        {course.content && course.content.length > 0 && (
+                        {course.content?.length > 0 && (
                             <div className="bg-white rounded-xl shadow-md p-6">
                                 <h2 className="text-2xl font-bold text-blue-900 mb-3">Course Content</h2>
                                 <ul className="list-disc list-inside text-gray-700 space-y-1">
@@ -97,7 +90,7 @@ export default async function CoursePage({ params }) {
                                 </ul>
                             </div>
                         )}
-                        {course.outcomes && course.outcomes.length > 0 && (
+                        {course.outcomes?.length > 0 && (
                             <div className="bg-white rounded-xl shadow-md p-6">
                                 <h2 className="text-2xl font-bold text-blue-900 mb-3">Learning Outcomes</h2>
                                 <ul className="list-disc list-inside text-gray-700 space-y-1">
@@ -111,7 +104,7 @@ export default async function CoursePage({ params }) {
                                 <p className="text-gray-700">{course.eligibility}</p>
                             </div>
                         )}
-                        {course.modules && course.modules.length > 0 && (
+                        {course.modules?.length > 0 && (
                             <div className="bg-white rounded-xl shadow-md p-6">
                                 <h2 className="text-2xl font-bold text-blue-900 mb-3">Study Modules</h2>
                                 <ul className="list-disc list-inside text-gray-700 space-y-1">
@@ -119,7 +112,7 @@ export default async function CoursePage({ params }) {
                                 </ul>
                             </div>
                         )}
-                        {course.learningObjectives && course.learningObjectives.length > 0 && (
+                        {course.learningObjectives?.length > 0 && (
                             <div className="bg-white rounded-xl shadow-md p-6">
                                 <h2 className="text-2xl font-bold text-blue-900 mb-3">Learning Objectives</h2>
                                 <ul className="list-disc list-inside text-gray-700 space-y-1">
@@ -130,7 +123,7 @@ export default async function CoursePage({ params }) {
                     </div>
                 )}
 
-                {/* FAQ Section – Accordion */}
+                {/* FAQ Accordion */}
                 {course.faqs && course.faqs.length > 0 && (
                     <div className="mt-12 bg-white rounded-xl shadow-md p-6">
                         <h2 className="text-2xl font-bold text-blue-900 mb-6">Frequently Asked Questions</h2>
@@ -147,7 +140,9 @@ export default async function CoursePage({ params }) {
 
                 {/* Call to Action */}
                 <div className="mt-12 text-center">
-                    <a href="/register" className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-full transition">Register for this Course</a>
+                    <a href="/register" className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-full transition">
+                        Register for this Course
+                    </a>
                 </div>
             </div>
         </div>

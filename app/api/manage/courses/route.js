@@ -2,6 +2,16 @@ import { NextResponse } from 'next/server';
 import clientPromise from '@/app/lib/mongodb';
 import { ObjectId } from 'mongodb';
 
+// Helper: generate a clean, URL‑friendly slug from a course name
+function generateSlug(name) {
+    return name
+        .toLowerCase()
+        .replace(/[^a-z0-9\s-]/g, '')   // remove special characters
+        .replace(/\s+/g, '-')            // replace spaces with hyphens
+        .replace(/-+/g, '-')             // collapse multiple hyphens
+        .replace(/^-|-$/g, '');          // trim hyphens from start/end
+}
+
 export async function GET() {
     try {
         const client = await clientPromise;
@@ -17,20 +27,15 @@ export async function DELETE(req) {
     try {
         const url = new URL(req.url);
         const id = url.searchParams.get('id');
-
         if (!id) {
             return NextResponse.json({ error: 'No ID provided' }, { status: 400 });
         }
-
         const client = await clientPromise;
         const db = client.db('ists');
-
         const result = await db.collection('courses').deleteOne({ _id: new ObjectId(id) });
-
         if (result.deletedCount === 0) {
             return NextResponse.json({ error: 'Course not found' }, { status: 404 });
         }
-
         return NextResponse.json({ success: true });
     } catch (error) {
         return NextResponse.json({ error: error.message }, { status: 500 });
@@ -43,9 +48,11 @@ export async function POST(req) {
         const client = await clientPromise;
         const db = client.db('ists');
 
-        // Build new course document with all possible fields
+        // Generate a clean slug from the course name
+        const slug = generateSlug(body.name);
+
         const newCourse = {
-            // Basic fields (existing)
+            // Basic fields
             name: body.name || '',
             category: body.category || '',
             hours: body.hours || '',
@@ -57,16 +64,17 @@ export async function POST(req) {
             learningObjectives: body.learningObjectives || [],
 
             // New dynamic fields
-            sections: body.sections || [],        // array of { heading, description }
-            faqs: body.faqs || [],                // array of { question, answer }
+            sections: body.sections || [],
+            faqs: body.faqs || [],
             seoTitle: body.seoTitle || '',
             metaDescription: body.metaDescription || '',
             focusKeyword: body.focusKeyword || '',
-            featuredImage: body.featuredImagePreview || null, // store the base64 preview or URL
+            featuredImage: body.featuredImagePreview || null,
 
-            // Metadata
+            // Slug and timestamps
+            slug,
             createdAt: new Date(),
-            updatedAt: new Date()
+            updatedAt: new Date(),
         };
 
         const result = await db.collection('courses').insertOne(newCourse);
@@ -81,7 +89,6 @@ export async function PUT(req) {
     try {
         const body = await req.json();
         const { id, ...updateData } = body;
-
         if (!id) {
             return NextResponse.json({ error: 'No ID provided' }, { status: 400 });
         }
@@ -89,7 +96,11 @@ export async function PUT(req) {
         const client = await clientPromise;
         const db = client.db('ists');
 
-        // Prepare update object – include all fields that may be present
+        // If the name is being updated, regenerate the slug
+        if (updateData.name) {
+            updateData.slug = generateSlug(updateData.name);
+        }
+
         const updateFields = {
             // Basic fields
             name: updateData.name,
@@ -102,7 +113,7 @@ export async function PUT(req) {
             modules: updateData.modules,
             learningObjectives: updateData.learningObjectives,
 
-            // New dynamic fields
+            // Dynamic fields
             sections: updateData.sections,
             faqs: updateData.faqs,
             seoTitle: updateData.seoTitle,
@@ -110,10 +121,13 @@ export async function PUT(req) {
             focusKeyword: updateData.focusKeyword,
             featuredImage: updateData.featuredImagePreview || updateData.featuredImage,
 
-            updatedAt: new Date()
+            // Slug (if regenerated)
+            slug: updateData.slug,
+
+            updatedAt: new Date(),
         };
 
-        // Remove undefined fields to avoid overwriting with undefined
+        // Remove any undefined fields so they don't overwrite existing data
         Object.keys(updateFields).forEach(key => updateFields[key] === undefined && delete updateFields[key]);
 
         await db.collection('courses').updateOne(
