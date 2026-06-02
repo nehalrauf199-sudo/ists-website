@@ -172,27 +172,47 @@ export default function AdminDashboard() {
     const handleFeaturedImageUpload = (e) => {
         const file = e.target.files[0];
         if (file) {
+            // Create preview for UI
             const reader = new FileReader();
             reader.onloadend = () => {
-                setCourseForm({
-                    ...courseForm,
+                setCourseForm(prev => ({
+                    ...prev,
                     featuredImagePreview: reader.result,
                     featuredImageFile: file,
-                });
+                }));
             };
             reader.readAsDataURL(file);
         }
     };
 
+    // ✅ UPDATED: Send FormData instead of JSON (for file upload)
     const saveCourse = async () => {
         try {
-            const method = editingCourse ? 'PUT' : 'POST';
-            const body = editingCourse ? { ...courseForm, id: editingCourse._id } : courseForm;
+            const formData = new FormData();
+            formData.append('name', courseForm.name);
+            formData.append('category', courseForm.category);
+            formData.append('hours', courseForm.hours);
+            formData.append('description', courseForm.description);
+            formData.append('content', courseForm.content.join('\n'));
+            formData.append('outcomes', courseForm.outcomes.join('\n'));
+            formData.append('eligibility', courseForm.eligibility);
+            formData.append('modules', courseForm.modules.join('\n'));
+            formData.append('learningObjectives', courseForm.learningObjectives.join('\n'));
+            formData.append('sections', JSON.stringify(courseForm.sections));
+            formData.append('faqs', JSON.stringify(courseForm.faqs));
+            formData.append('seoTitle', courseForm.seoTitle);
+            formData.append('metaDescription', courseForm.metaDescription);
+            formData.append('focusKeyword', courseForm.focusKeyword);
+            if (courseForm.featuredImageFile) {
+                formData.append('featuredImage', courseForm.featuredImageFile);
+            }
+            if (editingCourse) formData.append('id', editingCourse._id);
+
             const response = await fetch('/api/manage/courses', {
-                method,
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(body),
+                method: editingCourse ? 'PUT' : 'POST',
+                body: formData,
             });
+
             if (response.ok) {
                 alert(editingCourse ? 'Course updated!' : 'Course added!');
                 setShowCourseForm(false);
@@ -471,7 +491,7 @@ export default function AdminDashboard() {
                                                             <td className="p-4 text-sm">{reg.phone}</td>
                                                             <td className="p-4 text-sm max-w-xs truncate">{reg.course}</td>
                                                             <td className="p-4">{reg.cvFileName ? <a href={`/api/download/cv?file=${reg.cvFileName}`} target="_blank" className="text-orange-600 text-sm hover:underline">📄 Download CV</a> : <span className="text-gray-400">No CV</span>}</td>
-
+                                                            <td className="p-4"></td>
                                                         </tr>
                                                     ))}
                                                 </tbody>
