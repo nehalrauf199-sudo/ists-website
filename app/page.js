@@ -54,17 +54,17 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* KEY FEATURES WITH LARGER UNIFORM IMAGES */}
+            {/* KEY FEATURES WITH VERY LARGE IMAGES */}
             <section className="py-16 px-4 bg-white">
                 <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8 text-center">
 
                     {/* Global Recognition */}
                     <div className="p-6 hover:shadow-xl transition duration-300 rounded-lg group">
-                        <div className="w-40 h-40 mx-auto mb-4 overflow-hidden group-hover:scale-110 transition duration-300">
+                        <div className="w-64 h-64 mx-auto mb-4 overflow-hidden group-hover:scale-110 transition duration-300 rounded-full bg-gray-50 flex items-center justify-center">
                             <img
-                                src="/images/global-recognition.jpg"
+                                src="/images/global-recognition.jpeg"
                                 alt="Global partnership and international recognition"
-                                className="w-full h-full object-contain"
+                                className="w-full h-full object-cover"
                             />
                         </div>
                         <h3 className="text-xl font-bold text-blue-800 mb-2">Global Recognition</h3>
@@ -73,11 +73,11 @@ export default function Home() {
 
                     {/* Expert Trainers */}
                     <div className="p-6 hover:shadow-xl transition duration-300 rounded-lg group">
-                        <div className="w-40 h-40 mx-auto mb-4 overflow-hidden group-hover:scale-110 transition duration-300">
+                        <div className="w-64 h-64 mx-auto mb-4 overflow-hidden group-hover:scale-110 transition duration-300 rounded-full bg-gray-50 flex items-center justify-center">
                             <img
                                 src="/images/expert-trainers.jpeg"
                                 alt="Experienced instructors and expert trainers"
-                                className="w-full h-full object-contain"
+                                className="w-full h-full object-cover"
                             />
                         </div>
                         <h3 className="text-xl font-bold text-blue-800 mb-2">Expert Trainers</h3>
@@ -86,11 +86,11 @@ export default function Home() {
 
                     {/* Flexible Learning */}
                     <div className="p-6 hover:shadow-xl transition duration-300 rounded-lg group">
-                        <div className="w-40 h-40 mx-auto mb-4 overflow-hidden group-hover:scale-110 transition duration-300">
+                        <div className="w-64 h-64 mx-auto mb-4 overflow-hidden group-hover:scale-110 transition duration-300 rounded-full bg-gray-50 flex items-center justify-center">
                             <img
                                 src="/images/flexible-learning.jpeg"
                                 alt="Online and flexible learning options"
-                                className="w-full h-full object-contain"
+                                className="w-full h-full object-cover"
                             />
                         </div>
                         <h3 className="text-xl font-bold text-blue-800 mb-2">Flexible Learning</h3>
