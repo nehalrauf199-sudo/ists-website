@@ -54,13 +54,13 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* KEY FEATURES WITH IMAGES */}
+            {/* KEY FEATURES WITH LARGER UNIFORM IMAGES */}
             <section className="py-16 px-4 bg-white">
                 <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8 text-center">
 
                     {/* Global Recognition */}
                     <div className="p-6 hover:shadow-xl transition duration-300 rounded-lg group">
-                        <div className="w-24 h-24 mx-auto mb-4 overflow-hidden group-hover:scale-110 transition duration-300">
+                        <div className="w-40 h-40 mx-auto mb-4 overflow-hidden group-hover:scale-110 transition duration-300">
                             <img
                                 src="/images/global-recognition.jpg"
                                 alt="Global partnership and international recognition"
@@ -73,7 +73,7 @@ export default function Home() {
 
                     {/* Expert Trainers */}
                     <div className="p-6 hover:shadow-xl transition duration-300 rounded-lg group">
-                        <div className="w-24 h-24 mx-auto mb-4 overflow-hidden group-hover:scale-110 transition duration-300">
+                        <div className="w-40 h-40 mx-auto mb-4 overflow-hidden group-hover:scale-110 transition duration-300">
                             <img
                                 src="/images/expert-trainers.jpeg"
                                 alt="Experienced instructors and expert trainers"
@@ -86,7 +86,7 @@ export default function Home() {
 
                     {/* Flexible Learning */}
                     <div className="p-6 hover:shadow-xl transition duration-300 rounded-lg group">
-                        <div className="w-24 h-24 mx-auto mb-4 overflow-hidden group-hover:scale-110 transition duration-300">
+                        <div className="w-40 h-40 mx-auto mb-4 overflow-hidden group-hover:scale-110 transition duration-300">
                             <img
                                 src="/images/flexible-learning.jpeg"
                                 alt="Online and flexible learning options"
