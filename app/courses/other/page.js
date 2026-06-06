@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 export default function OtherCourses() {
     const [courses, setCourses] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
         fetchCourses();
@@ -23,6 +24,10 @@ export default function OtherCourses() {
             setLoading(false);
         }
     };
+
+    const filteredCourses = courses.filter(course =>
+        course.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
     if (loading) {
         return (
@@ -48,16 +53,27 @@ export default function OtherCourses() {
                 </p>
             </div>
 
+            {/* Search Bar */}
+            <div className="max-w-md mx-auto mb-8">
+                <input
+                    type="text"
+                    placeholder="Search courses by name..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                />
+            </div>
+
             <div className="max-w-7xl mx-auto">
-                {courses.length === 0 ? (
+                {filteredCourses.length === 0 ? (
                     <div className="text-center py-12 bg-white rounded-xl shadow-lg">
                         <div className="text-4xl mb-4">📭</div>
-                        <p className="text-gray-500">No "Other" category courses available yet.</p>
+                        <p className="text-gray-500">No courses match your search.</p>
                         <p className="text-sm text-gray-400 mt-2">Admin can add new courses with category "Other"</p>
                     </div>
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {courses.map((course) => (
+                        {filteredCourses.map((course) => (
                             <a
                                 key={course._id}
                                 href={`/courses/id/${course._id}`}
