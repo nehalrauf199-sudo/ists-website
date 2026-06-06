@@ -54,24 +54,49 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* KEY FEATURES */}
+            {/* KEY FEATURES WITH IMAGES */}
             <section className="py-16 px-4 bg-white">
                 <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8 text-center">
+
+                    {/* Global Recognition */}
                     <div className="p-6 hover:shadow-xl transition duration-300 rounded-lg group">
-                        <div className="text-5xl mb-4 group-hover:scale-110 transition duration-300">🌍</div>
+                        <div className="w-24 h-24 mx-auto mb-4 overflow-hidden group-hover:scale-110 transition duration-300">
+                            <img
+                                src="/images/global-recognition.jpg"
+                                alt="Global partnership and international recognition"
+                                className="w-full h-full object-contain"
+                            />
+                        </div>
                         <h3 className="text-xl font-bold text-blue-800 mb-2">Global Recognition</h3>
                         <p className="text-gray-600">Internationally accepted certifications</p>
                     </div>
+
+                    {/* Expert Trainers */}
                     <div className="p-6 hover:shadow-xl transition duration-300 rounded-lg group">
-                        <div className="text-5xl mb-4 group-hover:scale-110 transition duration-300">👨‍🏫</div>
+                        <div className="w-24 h-24 mx-auto mb-4 overflow-hidden group-hover:scale-110 transition duration-300">
+                            <img
+                                src="/images/expert-trainers.jpeg"
+                                alt="Experienced instructors and expert trainers"
+                                className="w-full h-full object-contain"
+                            />
+                        </div>
                         <h3 className="text-xl font-bold text-blue-800 mb-2">Expert Trainers</h3>
                         <p className="text-gray-600">Learn from industry professionals</p>
                     </div>
+
+                    {/* Flexible Learning */}
                     <div className="p-6 hover:shadow-xl transition duration-300 rounded-lg group">
-                        <div className="text-5xl mb-4 group-hover:scale-110 transition duration-300">📚</div>
+                        <div className="w-24 h-24 mx-auto mb-4 overflow-hidden group-hover:scale-110 transition duration-300">
+                            <img
+                                src="/images/flexible-learning.jpeg"
+                                alt="Online and flexible learning options"
+                                className="w-full h-full object-contain"
+                            />
+                        </div>
                         <h3 className="text-xl font-bold text-blue-800 mb-2">Flexible Learning</h3>
                         <p className="text-gray-600">Online and classroom options available</p>
                     </div>
+
                 </div>
             </section>
 
