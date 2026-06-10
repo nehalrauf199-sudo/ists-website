@@ -19,7 +19,7 @@ export default function LayoutWrapper({ children }) {
     return (
         <>
             {/* NAVBAR - LIGHTER BLUE BACKGROUND */}
-            <div style={{ backgroundColor: '#3b82f6', padding: '12px 16px', position: 'sticky', top: 0, zIndex: 50 }}>
+            <div style={{ backgroundColor: '#09419c', padding: '12px 16px', position: 'sticky', top: 0, zIndex: 50 }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', maxWidth: '1200px', margin: '0 auto' }}>
 
                     {/* LEFT SIDE - LARGE LOGO, NO WHITE CIRCLE */}
@@ -27,7 +27,7 @@ export default function LayoutWrapper({ children }) {
                         <img
                             src="/logo.png"
                             alt="ISTS Logo"
-                            style={{ width: '120px', height: '120px', objectFit: 'contain', display: 'block' }}
+                            style={{ width: '160px', height: '160px', objectFit: 'contain', display: 'block' }}
                         />
                     </div>
 
