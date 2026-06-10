@@ -46,7 +46,7 @@ export default function LayoutWrapper({ children }) {
                         <img
                             src="/logo.png"
                             alt="ISTS Logo"
-                            style={{ width: '110px', height: '110px', objectFit: 'contain', display: 'block' }}
+                            style={{ width: '170px', height: '120px', objectFit: 'contain', display: 'block' }}
                         />
                     </div>
 
