@@ -21,13 +21,18 @@ export default function LayoutWrapper({ children }) {
             {/* NAVBAR */}
             <div style={{ backgroundColor: '#1e3a8a', padding: '12px 16px', position: 'sticky', top: 0, zIndex: 50 }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', maxWidth: '1200px', margin: '0 auto' }}>
-                    {/* LEFT SIDE - LOGO */}
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                        <img src="/logo.png" alt="ISTS Logo" style={{ width: '60px', height: '60px', borderRadius: '50%' }} />
-
+                    {/* LEFT SIDE - LOGO WITH WHITE CIRCLE */}
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <div style={{ backgroundColor: 'white', borderRadius: '50%', padding: '10px', display: 'inline-flex', boxShadow: '0 2px 8px rgba(0,0,0,0.2)' }}>
+                            <img
+                                src="/logo.png"
+                                alt="ISTS Logo"
+                                style={{ width: '100px', height: '100px', objectFit: 'contain', display: 'block' }}
+                            />
+                        </div>
                     </div>
 
-                    {/* RIGHT SIDE - HAMBURGER (mobile only) */}
+                    {/* MOBILE MENU - unchanged */}
                     <div style={{ display: 'block' }} className="md-hidden">
                         <label htmlFor="menu-toggle" style={{ cursor: 'pointer', color: 'white', fontSize: '24px' }}>☰</label>
                         <input type="checkbox" id="menu-toggle" style={{ display: 'none' }} />
@@ -53,24 +58,14 @@ export default function LayoutWrapper({ children }) {
                 </div>
             </div>
 
-            {/* Add CSS for mobile menu toggle */}
             <style>{`
-        #menu-toggle:checked + .menu-dropdown {
-          display: block !important;
-        }
-        @media (min-width: 768px) {
-          .md-hidden { display: none !important; }
-          .md-flex { display: flex !important; }
-        }
-        @media (max-width: 767px) {
-          .md-flex { display: none !important; }
-        }
-      `}</style>
+                #menu-toggle:checked + .menu-dropdown { display: block !important; }
+                @media (min-width: 768px) { .md-hidden { display: none !important; } .md-flex { display: flex !important; } }
+                @media (max-width: 767px) { .md-flex { display: none !important; } }
+            `}</style>
 
-            {/* PAGE CONTENT */}
             {children}
 
-            {/* FOOTER - USING DYNAMIC SETTINGS */}
             <footer style={{ backgroundColor: '#1e3a8a', color: 'white', textAlign: 'center', padding: '32px 16px', marginTop: '64px' }}>
                 <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
                     <div style={{ marginBottom: '16px' }}>
@@ -82,7 +77,6 @@ export default function LayoutWrapper({ children }) {
                 </div>
             </footer>
 
-            {/* WhatsApp Chat Widget */}
             <WhatsAppWidget />
         </>
     );
