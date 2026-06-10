@@ -12,29 +12,25 @@ function generateSlug(name) {
         .replace(/^-|-$/g, '');
 }
 
-// Simple in‑memory cache for the courses list (full objects)
-let cachedCourses = null;
-let cacheTimestamp = 0;
-const CACHE_TTL = 60000; // 60 seconds
-
-export async function GET() {
+export async function GET(req) {
     try {
-        const now = Date.now();
-        // Serve cached version if still fresh
-        if (cachedCourses && (now - cacheTimestamp) < CACHE_TTL) {
-            return NextResponse.json(cachedCourses);
-        }
+        const url = new URL(req.url);
+        const id = url.searchParams.get('id');
 
         const client = await clientPromise;
         const db = client.db('ists');
-        // Return ALL fields – the admin dashboard needs sections, faqs, SEO, etc.
-        const courses = await db.collection('courses').find({}).toArray();
 
-        // Update cache
-        cachedCourses = courses;
-        cacheTimestamp = now;
-
-        return NextResponse.json(courses);
+        if (id) {
+            // Return a single full course (for editing)
+            const course = await db.collection('courses').findOne({ _id: new ObjectId(id) });
+            return NextResponse.json(course);
+        } else {
+            // Return lightweight list for the admin table (only needed fields)
+            const courses = await db.collection('courses')
+                .find({}, { projection: { name: 1, category: 1, hours: 1 } })
+                .toArray();
+            return NextResponse.json(courses);
+        }
     } catch (error) {
         return NextResponse.json({ error: error.message }, { status: 500 });
     }
@@ -48,8 +44,6 @@ export async function DELETE(req) {
         const client = await clientPromise;
         const db = client.db('ists');
         await db.collection('courses').deleteOne({ _id: new ObjectId(id) });
-        // Invalidate cache after deletion
-        cachedCourses = null;
         return NextResponse.json({ success: true });
     } catch (error) {
         return NextResponse.json({ error: error.message }, { status: 500 });
@@ -101,8 +95,6 @@ export async function POST(req) {
         };
 
         const result = await db.collection('courses').insertOne(newCourse);
-        // Invalidate cache after insert
-        cachedCourses = null;
         return NextResponse.json({ success: true, id: result.insertedId });
     } catch (error) {
         console.error('POST error:', error);
@@ -142,8 +134,6 @@ export async function PUT(req) {
             { _id: new ObjectId(id) },
             { $set: updateData }
         );
-        // Invalidate cache after update
-        cachedCourses = null;
         return NextResponse.json({ success: true });
     } catch (error) {
         console.error('PUT error:', error);
