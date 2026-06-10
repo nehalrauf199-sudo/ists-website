@@ -12,7 +12,7 @@ function generateSlug(name) {
         .replace(/^-|-$/g, '');
 }
 
-// Simple in‑memory cache for the courses list
+// Simple in‑memory cache for the courses list (full objects)
 let cachedCourses = null;
 let cacheTimestamp = 0;
 const CACHE_TTL = 60000; // 60 seconds
@@ -27,10 +27,8 @@ export async function GET() {
 
         const client = await clientPromise;
         const db = client.db('ists');
-        // Only fetch fields needed for the admin table – this reduces data transfer from ~500KB to ~5KB
-        const courses = await db.collection('courses')
-            .find({}, { projection: { name: 1, category: 1, hours: 1 } })
-            .toArray();
+        // Return ALL fields – the admin dashboard needs sections, faqs, SEO, etc.
+        const courses = await db.collection('courses').find({}).toArray();
 
         // Update cache
         cachedCourses = courses;
