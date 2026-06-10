@@ -18,24 +18,24 @@ export default function LayoutWrapper({ children }) {
 
     return (
         <>
-            {/* NAVBAR - LIGHTER BLUE BACKGROUND */}
-            <div style={{ backgroundColor: '#09419c', padding: '12px 16px', position: 'sticky', top: 0, zIndex: 50 }}>
+            {/* NAVBAR - ORIGINAL DARK BLUE, COMPACT PADDING */}
+            <div style={{ backgroundColor: '#1e3a8a', padding: '8px 16px', position: 'sticky', top: 0, zIndex: 50 }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', maxWidth: '1200px', margin: '0 auto' }}>
 
-                    {/* LEFT SIDE - LARGE LOGO, NO WHITE CIRCLE */}
+                    {/* LEFT SIDE - LOGO (balanced size, no extra background) */}
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                         <img
                             src="/logo.png"
                             alt="ISTS Logo"
-                            style={{ width: '160px', height: '160px', objectFit: 'contain', display: 'block' }}
+                            style={{ width: '90px', height: '90px', objectFit: 'contain', display: 'block' }}
                         />
                     </div>
 
-                    {/* RIGHT SIDE - HAMBURGER (mobile only) */}
+                    {/* MOBILE MENU */}
                     <div style={{ display: 'block' }} className="md-hidden">
                         <label htmlFor="menu-toggle" style={{ cursor: 'pointer', color: 'white', fontSize: '24px' }}>☰</label>
                         <input type="checkbox" id="menu-toggle" style={{ display: 'none' }} />
-                        <div style={{ position: 'absolute', top: '60px', left: '0', right: '0', backgroundColor: '#3b82f6', padding: '16px', display: 'none' }} className="menu-dropdown">
+                        <div style={{ position: 'absolute', top: '60px', left: '0', right: '0', backgroundColor: '#1e3a8a', padding: '16px', display: 'none' }} className="menu-dropdown">
                             <a href="/" style={{ display: 'block', color: 'white', padding: '8px', textDecoration: 'none' }}>Home</a>
                             <a href="/courses" style={{ display: 'block', color: 'white', padding: '8px', textDecoration: 'none' }}>Courses</a>
                             <a href="/about" style={{ display: 'block', color: 'white', padding: '8px', textDecoration: 'none' }}>About</a>
@@ -74,7 +74,7 @@ export default function LayoutWrapper({ children }) {
             {/* PAGE CONTENT */}
             {children}
 
-            {/* FOOTER */}
+            {/* FOOTER (unchanged) */}
             <footer style={{ backgroundColor: '#1e3a8a', color: 'white', textAlign: 'center', padding: '32px 16px', marginTop: '64px' }}>
                 <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
                     <div style={{ marginBottom: '16px' }}>
