@@ -172,7 +172,6 @@ export default function AdminDashboard() {
     const handleFeaturedImageUpload = (e) => {
         const file = e.target.files[0];
         if (file) {
-            // Create preview for UI
             const reader = new FileReader();
             reader.onloadend = () => {
                 setCourseForm(prev => ({
@@ -185,7 +184,6 @@ export default function AdminDashboard() {
         }
     };
 
-    // ✅ UPDATED: Send FormData instead of JSON (for file upload)
     const saveCourse = async () => {
         try {
             const formData = new FormData();
@@ -251,27 +249,39 @@ export default function AdminDashboard() {
         }
     };
 
-    const editCourse = (course) => {
-        setEditingCourse(course);
-        setCourseForm({
-            name: course.name || '',
-            category: course.category || '',
-            hours: course.hours || '',
-            description: course.description || '',
-            content: course.content || [],
-            outcomes: course.outcomes || [],
-            eligibility: course.eligibility || '',
-            modules: course.modules || [],
-            learningObjectives: course.learningObjectives || [],
-            sections: course.sections || [],
-            faqs: course.faqs || [],
-            seoTitle: course.seoTitle || '',
-            metaDescription: course.metaDescription || '',
-            focusKeyword: course.focusKeyword || '',
-            featuredImagePreview: course.featuredImage || null,
-            featuredImageFile: null,
-        });
-        setShowCourseForm(true);
+    const editCourse = async (course) => {
+        // Fetch the full course data by ID (includes sections, FAQs, SEO, etc.)
+        try {
+            const res = await fetch(`/api/manage/courses?id=${course._id}`);
+            if (!res.ok) {
+                alert('Failed to load course details');
+                return;
+            }
+            const fullCourse = await res.json();
+            setEditingCourse(fullCourse);
+            setCourseForm({
+                name: fullCourse.name || '',
+                category: fullCourse.category || '',
+                hours: fullCourse.hours || '',
+                description: fullCourse.description || '',
+                content: fullCourse.content || [],
+                outcomes: fullCourse.outcomes || [],
+                eligibility: fullCourse.eligibility || '',
+                modules: fullCourse.modules || [],
+                learningObjectives: fullCourse.learningObjectives || [],
+                sections: fullCourse.sections || [],
+                faqs: fullCourse.faqs || [],
+                seoTitle: fullCourse.seoTitle || '',
+                metaDescription: fullCourse.metaDescription || '',
+                focusKeyword: fullCourse.focusKeyword || '',
+                featuredImagePreview: fullCourse.featuredImage || null,
+                featuredImageFile: null,
+            });
+            setShowCourseForm(true);
+        } catch (error) {
+            console.error('Error editing course:', error);
+            alert('Failed to load course details');
+        }
     };
 
     const updateReviewStatus = async (id, action) => {
