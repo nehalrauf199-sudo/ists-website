@@ -23,8 +23,8 @@ export default function LayoutWrapper({ children }) {
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', maxWidth: '1200px', margin: '0 auto' }}>
                     {/* LEFT SIDE - LOGO */}
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                        <img src="/logo.png" alt="ISTS Logo" style={{ width: '36px', height: '36px', borderRadius: '50%' }} />
-                        <span style={{ color: 'white', fontWeight: 'bold', fontSize: '18px' }}>ISTS</span>
+                        <img src="/logo.png" alt="ISTS Logo" style={{ width: '60px', height: '60px', borderRadius: '50%' }} />
+
                     </div>
 
                     {/* RIGHT SIDE - HAMBURGER (mobile only) */}
