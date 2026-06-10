@@ -18,24 +18,43 @@ export default function LayoutWrapper({ children }) {
 
     return (
         <>
-            {/* NAVBAR - ORIGINAL DARK BLUE, COMPACT PADDING */}
-            <div style={{ backgroundColor: '#1e3a8a', padding: '8px 16px', position: 'sticky', top: 0, zIndex: 50 }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', maxWidth: '1200px', margin: '0 auto' }}>
-
-                    {/* LEFT SIDE - LOGO (balanced size, no extra background) */}
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
+            {/* HEADER WITH FIXED HEIGHT – logo can be large without expanding the header */}
+            <div
+                style={{
+                    backgroundColor: '#1e3a8a',
+                    height: '120px',           // Fixed header height
+                    padding: '0 16px',
+                    position: 'sticky',
+                    top: 0,
+                    zIndex: 50,
+                    display: 'flex',
+                    alignItems: 'center'      // Vertically center content
+                }}
+            >
+                <div
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        width: '100%',
+                        maxWidth: '1200px',
+                        margin: '0 auto'
+                    }}
+                >
+                    {/* LEFT SIDE - LARGE LOGO */}
+                    <div>
                         <img
                             src="/logo.png"
                             alt="ISTS Logo"
-                            style={{ width: '90px', height: '90px', objectFit: 'contain', display: 'block' }}
+                            style={{ width: '110px', height: '110px', objectFit: 'contain', display: 'block' }}
                         />
                     </div>
 
-                    {/* MOBILE MENU */}
+                    {/* RIGHT SIDE - HAMBURGER (mobile only) */}
                     <div style={{ display: 'block' }} className="md-hidden">
                         <label htmlFor="menu-toggle" style={{ cursor: 'pointer', color: 'white', fontSize: '24px' }}>☰</label>
                         <input type="checkbox" id="menu-toggle" style={{ display: 'none' }} />
-                        <div style={{ position: 'absolute', top: '60px', left: '0', right: '0', backgroundColor: '#1e3a8a', padding: '16px', display: 'none' }} className="menu-dropdown">
+                        <div style={{ position: 'absolute', top: '120px', left: '0', right: '0', backgroundColor: '#1e3a8a', padding: '16px', display: 'none' }} className="menu-dropdown">
                             <a href="/" style={{ display: 'block', color: 'white', padding: '8px', textDecoration: 'none' }}>Home</a>
                             <a href="/courses" style={{ display: 'block', color: 'white', padding: '8px', textDecoration: 'none' }}>Courses</a>
                             <a href="/about" style={{ display: 'block', color: 'white', padding: '8px', textDecoration: 'none' }}>About</a>
