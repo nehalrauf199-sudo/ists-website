@@ -20,24 +20,38 @@ export default function Register() {
     const [courses, setCourses] = useState([]);
     const [loadingCourses, setLoadingCourses] = useState(true);
 
-    // Fetch courses from database
+    // Fetch courses from database – with error handling and array validation
     useEffect(() => {
-        fetch('/api/manage/courses')
-            .then(res => res.json())
-            .then(data => {
-                setCourses(data);
-                setLoadingCourses(false);
-            })
-            .catch(err => {
+        const fetchCourses = async () => {
+            try {
+                const response = await fetch('/api/manage/courses');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch courses');
+                }
+                const data = await response.json();
+                // Ensure data is an array
+                if (Array.isArray(data)) {
+                    setCourses(data);
+                } else {
+                    console.error('API did not return an array:', data);
+                    setCourses([]);
+                }
+            } catch (err) {
                 console.error('Error fetching courses:', err);
+                setCourses([]);
+            } finally {
                 setLoadingCourses(false);
-            });
+            }
+        };
+        fetchCourses();
     }, []);
 
-    // Filter courses based on search
-    const filteredCourses = courses.filter(course =>
-        course.name.toLowerCase().includes(courseSearch.toLowerCase())
-    );
+    // Filter courses based on search – only if courses is an array
+    const filteredCourses = Array.isArray(courses)
+        ? courses.filter(course =>
+            course.name.toLowerCase().includes(courseSearch.toLowerCase())
+        )
+        : [];
 
     const handleCourseSelect = (courseName) => {
         setFormData({ ...formData, course: courseName });
