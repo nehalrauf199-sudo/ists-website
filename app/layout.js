@@ -1,7 +1,6 @@
 import './globals.css';
 import LayoutWrapper from './components/LayoutWrapper';
 import Script from 'next/script';
-import DevelopmentBanner from './components/DevelopmentBanner';
 
 export const metadata = {
   title: 'ISTS - Institute of Safety & Technical Studies | OSHA, IOSH, HiQual, OTHM Certifications in Pakistan',
@@ -36,7 +35,6 @@ export default function RootLayout({ children }) {
         }} />
       </head>
       <body className="bg-gray-100 text-gray-800 font-sans">
-        <DevelopmentBanner />
         <LayoutWrapper>
           {children}
         </LayoutWrapper>
