@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 import clientPromise from '@/app/lib/mongodb';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req) {
     try {
@@ -56,26 +58,16 @@ export async function POST(req) {
 
         console.log('Saved to database');
 
-        // Get sender email from Site Settings
-        const settings = await db.collection('settings').findOne({ _id: 'site_settings' });
-        const senderEmail = settings?.email || process.env.EMAIL_USER;
+        // Get sender email from environment (fallback to site settings if needed)
+        const senderEmail = process.env.EMAIL_FROM || 'Admissions@ists-institute.com';
         const adminEmail = process.env.ADMIN_EMAIL || senderEmail;
 
         console.log('Sending emails from:', senderEmail);
 
-        // Send email
-        const transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: senderEmail,
-                pass: process.env.EMAIL_PASS
-            }
-        });
-
-        // Email to admin
-        await transporter.sendMail({
-            from: `"ISTS Institute" <${senderEmail}>`,
-            to: adminEmail,
+        // ─── Send notification to admin ───
+        await resend.emails.send({
+            from: `ISTS Institute <${senderEmail}>`,
+            to: [adminEmail],
             subject: `New Registration: ${name} - ${course}`,
             html: `
                 <h2>New Course Registration</h2>
@@ -89,21 +81,33 @@ export async function POST(req) {
                 <p><strong>CV Attached:</strong> ${cvFileName || 'No CV uploaded'}</p>
                 <hr>
                 <p>Registration Date: ${new Date().toLocaleString()}</p>
-            `
+            `,
         });
 
-        // Confirmation to student
-        await transporter.sendMail({
-            from: `"ISTS Institute" <${senderEmail}>`,
-            to: email,
+        // ─── Send confirmation to student ───
+        await resend.emails.send({
+            from: `ISTS Institute <${senderEmail}>`,
+            to: [email],
             subject: `Registration Confirmation: ${course} - ISTS`,
             html: `
                 <h2>Thank You for Registering!</h2>
                 <p>Dear ${name},</p>
                 <p>Thank you for registering for <strong>${course}</strong> with ISTS.</p>
                 <p>Our team will contact you within 24-48 hours.</p>
+                <br>
+                <p><strong>Your Registration Details:</strong></p>
+                <p><strong>Course:</strong> ${course}</p>
+                <p><strong>Name:</strong> ${name}</p>
+                <p><strong>Phone:</strong> ${phone}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Education:</strong> ${education}</p>
+                ${experience ? `<p><strong>Experience:</strong> ${experience}</p>` : ''}
+                ${message ? `<p><strong>Message:</strong> ${message}</p>` : ''}
+                <br>
                 <p>Best regards,<br>ISTS Team</p>
-            `
+                <hr>
+                <p style="font-size: 12px; color: #666;">This is an automated confirmation. Please do not reply to this email.</p>
+            `,
         });
 
         return NextResponse.json({
