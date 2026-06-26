@@ -9,7 +9,7 @@ export default function Home() {
                 <div className="absolute inset-0 bg-black/60 z-0"></div>
                 <div
                     className="absolute inset-0 bg-cover bg-center z-0"
-                    style={{ backgroundImage: "url('/hero-bg.jpg')" }}
+                    style={{ backgroundImage: "url('/hero-bg.webp')" }}
                 ></div>
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 via-blue-800/70 to-orange-600/70 z-0"></div>
                 <div className="relative z-10 max-w-4xl mx-auto">

@@ -250,7 +250,6 @@ export default function AdminDashboard() {
     };
 
     const editCourse = async (course) => {
-        // Fetch the full course data by ID (includes sections, FAQs, SEO, etc.)
         try {
             const res = await fetch(`/api/manage/courses?id=${course._id}`);
             if (!res.ok) {
@@ -379,6 +378,23 @@ export default function AdminDashboard() {
         }
     };
 
+    // ─── DELETE Registration ───
+    const deleteRegistration = async (id) => {
+        if (!confirm('Are you sure you want to delete this registration?')) return;
+        try {
+            const response = await fetch(`/api/admin/registrations?id=${id}`, { method: 'DELETE' });
+            if (response.ok) {
+                alert('Registration deleted successfully!');
+                fetchData();
+            } else {
+                alert('Failed to delete registration');
+            }
+        } catch (error) {
+            console.error('Error deleting registration:', error);
+            alert('Failed to delete registration');
+        }
+    };
+
     const filteredCourses = courses.filter(course =>
         course.name?.toLowerCase().includes(courseSearch.toLowerCase()) ||
         course.category?.toLowerCase().includes(courseSearch.toLowerCase()) ||
@@ -490,6 +506,7 @@ export default function AdminDashboard() {
                                                         <th className="p-4 text-left">Course</th>
                                                         <th className="p-4 text-left">CV</th>
                                                         <th className="p-4 text-left">Certificate</th>
+                                                        <th className="p-4 text-left">Actions</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -502,6 +519,14 @@ export default function AdminDashboard() {
                                                             <td className="p-4 text-sm max-w-xs truncate">{reg.course}</td>
                                                             <td className="p-4">{reg.cvFileName ? <a href={`/api/download/cv?file=${reg.cvFileName}`} target="_blank" className="text-orange-600 text-sm hover:underline">📄 Download CV</a> : <span className="text-gray-400">No CV</span>}</td>
                                                             <td className="p-4"></td>
+                                                            <td className="p-4">
+                                                                <button
+                                                                    onClick={() => deleteRegistration(reg._id)}
+                                                                    className="bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded text-xs font-semibold transition"
+                                                                >
+                                                                    🗑️ Delete
+                                                                </button>
+                                                            </td>
                                                         </tr>
                                                     ))}
                                                 </tbody>
