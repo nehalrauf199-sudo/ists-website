@@ -665,7 +665,7 @@ export default function AdminDashboard() {
                                                     {filteredCourses.map((course, idx) => (
                                                         <tr key={idx} className="border-b hover:bg-gray-50">
                                                             <td className="p-4">{course.name}</td>
-                                                            <td className="p-4"><span className={`px-2 py-1 rounded text-xs font-semibold ${course.category === 'OSHA' ? 'bg-blue-100 text-blue-800' : course.category === 'OTHM' ? 'bg-green-100 text-green-800' : course.category === 'HiQual' ? 'bg-purple-100 text-purple-800' : course.category === 'IOSH' ? 'bg-orange-100 text-orange-800' : 'bg-gray-100 text-gray-800'}`}>{course.category}</span></td>
+                                                            <td className="p-4"><span className={`px-2 py-1 rounded text-xs font-semibold ${course.category === 'OSHA' ? 'bg-blue-100 text-blue-800' : course.category === 'HiQual' ? 'bg-purple-100 text-purple-800' : course.category === 'IOSH' ? 'bg-orange-100 text-orange-800' : 'bg-gray-100 text-gray-800'}`}>{course.category}</span></td>
                                                             <td className="p-4">{course.hours}</td>
                                                             <td className="p-4"><button onClick={() => editCourse(course)} className="text-blue-600 mr-3 hover:text-blue-800">✏️ Edit</button><button onClick={() => deleteCourse(course._id)} className="text-red-600 hover:text-red-800">🗑️ Delete</button></td>
                                                         </tr>
