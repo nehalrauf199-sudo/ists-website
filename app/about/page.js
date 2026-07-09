@@ -33,7 +33,7 @@ export default function About() {
                             </p>
                             <p className="text-gray-700 leading-relaxed">
                                 Our commitment to excellence and student success has made us one of the most trusted
-                                training institutes in the region for OSHA, IOSH, OTHM, and HiQual certifications.
+                                training institutes in the region for OSHA, IOSH, and HiQual certifications.
                             </p>
                         </div>
                         <div className="bg-gradient-to-br from-blue-100 to-orange-100 rounded-2xl p-8 text-center">
@@ -165,11 +165,7 @@ export default function About() {
                             <p className="font-semibold text-blue-800">OSHA</p>
                             <p className="text-xs text-gray-500">Official Partner</p>
                         </div>
-                        <div className="bg-gray-50 rounded-xl p-6 text-center hover:shadow-lg transition duration-300">
-                            <img src="/otha.png" alt="OTHM" className="w-20 h-20 mx-auto mb-3" />
-                            <p className="font-semibold text-blue-800">OTHM</p>
-                            <p className="text-xs text-gray-500">Approved Center</p>
-                        </div>
+
                         <div className="bg-gray-50 rounded-xl p-6 text-center hover:shadow-lg transition duration-300">
                             <img src="/hiqual.png" alt="HiQual" className="w-20 h-20 mx-auto mb-3" />
                             <p className="font-semibold text-blue-800">HiQual</p>
