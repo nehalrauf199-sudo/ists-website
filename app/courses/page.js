@@ -26,16 +26,7 @@ export default function Courses() {
                         </div>
                     </a>
 
-                    {/* OTHM Box */}
-                    <a href="/courses/othm" className="group">
-                        <div className="bg-white rounded-2xl shadow-lg p-12 flex flex-col items-center justify-center hover:shadow-2xl transition-all duration-300 hover:scale-105 cursor-pointer border border-gray-100 min-h-[320px]">
-                            <img src="/otha.png" alt="OTHM" className="w-36 h-36 object-contain mb-6 group-hover:scale-110 transition duration-300" />
-                        </div>
-                        <div className="text-center mt-5">
-                            <h3 className="text-xl font-bold text-blue-900 mb-2">OTHM</h3>
-                            <p className="text-gray-600">Professional diploma programs for career advancement</p>
-                        </div>
-                    </a>
+
 
                     {/* HiQual Box */}
                     <a href="/courses/hiqual" className="group">

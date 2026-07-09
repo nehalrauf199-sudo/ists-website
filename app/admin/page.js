@@ -591,7 +591,7 @@ export default function AdminDashboard() {
                                             <select name="category" value={courseForm.category} onChange={handleCourseInputChange} className="p-2 border rounded">
                                                 <option value="">Select Category</option>
                                                 <option value="OSHA">OSHA</option>
-                                                <option value="OTHM">OTHM</option>
+                                                {/* <option value="OTHM">OTHM</option> */}
                                                 <option value="HiQual">HiQual</option>
                                                 <option value="IOSH">IOSH</option>
                                                 <option value="Other">Other</option>
