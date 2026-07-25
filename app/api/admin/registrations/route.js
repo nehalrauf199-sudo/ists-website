@@ -9,7 +9,7 @@ export async function GET() {
 
         const registrations = await db.collection('registrations')
             .find({})
-            .sort({ registeredAt: -1 })
+            // .sort({ registeredAt: -1 })  ← REMOVED to fix 32MB sorting limit
             .toArray();
 
         return NextResponse.json(registrations);
