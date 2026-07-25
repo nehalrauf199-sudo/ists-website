@@ -15,11 +15,13 @@ export async function GET() {
         return NextResponse.json(registrations);
     } catch (error) {
         console.error('Error fetching registrations:', error);
-        return NextResponse.json({ error: 'Failed to fetch registrations' }, { status: 500 });
+        return NextResponse.json(
+            { error: 'Failed to fetch registrations', details: error.message },
+            { status: 500 }
+        );
     }
 }
 
-// ─── DELETE function ───
 export async function DELETE(req) {
     try {
         const url = new URL(req.url);
@@ -39,6 +41,9 @@ export async function DELETE(req) {
         return NextResponse.json({ success: true });
     } catch (error) {
         console.error('Error deleting registration:', error);
-        return NextResponse.json({ error: error.message }, { status: 500 });
+        return NextResponse.json(
+            { error: 'Failed to delete registration', details: error.message },
+            { status: 500 }
+        );
     }
 }
