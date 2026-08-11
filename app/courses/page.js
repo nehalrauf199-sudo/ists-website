@@ -12,7 +12,7 @@ export default function CoursesPage() {
     // Filter categories based on search
     const filteredCategories = useMemo(() => {
         if (searchTerm.trim() === '') {
-            return categories;  // Returns ALL categories
+            return categories;
         }
 
         return categories
@@ -29,7 +29,6 @@ export default function CoursesPage() {
             .filter(cat => cat.courses.length > 0);
     }, [searchTerm]);
 
-    // Get total course count
     const totalCourses = categories.reduce((acc, cat) => acc + cat.courses.length, 0);
 
     return (
@@ -85,14 +84,12 @@ export default function CoursesPage() {
                     </div>
                 </div>
 
-                {/* Categories Grid - Shows ALL categories */}
+                {/* Categories Grid */}
                 {filteredCategories.length === 0 ? (
                     <div className="text-center py-16 bg-white rounded-xl shadow-lg">
                         <div className="text-6xl mb-4">🔍</div>
                         <h3 className="text-2xl font-bold text-gray-800 mb-2">No courses found</h3>
-                        <p className="text-gray-500">
-                            Try adjusting your search terms.
-                        </p>
+                        <p className="text-gray-500">Try adjusting your search terms.</p>
                         <button
                             onClick={() => setSearchTerm('')}
                             className="mt-4 bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-6 rounded-lg transition"
