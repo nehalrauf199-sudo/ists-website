@@ -2,7 +2,7 @@
 // All course data – hardcoded for speed and clean URLs
 
 import {
-    FaShieldAlt, FaHardHat, FaTools, FaIndustry,
+    FaShieldAlt, FaHardHat, FaTools,
     FaFire, FaAmbulance, FaBrain, FaClipboardCheck,
     FaCogs, FaLaptop, FaDatabase, FaShield,
     FaHeartbeat, FaAppleAlt, FaCar, FaBuilding,
