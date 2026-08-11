@@ -1694,4 +1694,5 @@ export const getAllCourses = () => {
             categoryName: cat.name
         }))
     );
-};
+};   
+ 
