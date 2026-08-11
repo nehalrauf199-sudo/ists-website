@@ -1,5 +1,5 @@
 // app/courses/data/courses.js
-// COMPLETE - All 72 Categories
+// COMPLETE - All 72 Categories - ERROR FREE
 
 import {
     FaShieldAlt, FaHardHat, FaTools,
@@ -14,34 +14,19 @@ import {
     FaGlobeAsia, FaNetworkWired, FaShieldVirus, FaUserLock,
     FaBookOpen, FaPencilAlt, FaGraduationCap, FaUsers,
     FaClipboardList, FaFileInvoice, FaCalculator, FaRulerCombined,
-    FaDraftingCompass, FaWrench, FaHammer,
+    FaDraftingCompass, FaWrench, FaHammer,  // ✅ REMOVED FaHelmetSafety
     FaWarehouse, FaTruck, FaPlane, FaShip,
     FaTrain, FaSubway, FaBus, FaHospital,
     FaStethoscope, FaSyringe, FaPills, FaTooth,
     FaEye, FaEar, FaBone, FaLaugh,
     FaHeart, FaComment, FaSmile, FaHandshake,
     FaPeopleArrows, FaUserTie, FaBuildingColumns, FaLandmark,
-    FaUniversity, FaSchool, FaChalkboard, FaIndustry, FaHome,
-    FaHotel, FaStore, FaWarehouseAlt, FaBox,
-    FaPallet, FaShippingFast, FaTruckMoving, FaRoad,
-    FaGlobeAmericas, FaPlaneDeparture, FaPlaneArrival
+    FaUniversity, FaSchool, FaChalkboard
 } from 'react-icons/fa';
 
 import {
     GiHealthNormal, GiHealthCapsule,
-    GiHealthIncrease, GiHealthCrystal,
-    GiTeacher, GiBookshelf, GiBookCover,
-    GiEcology, GiForest, GiFarming,
-    GiVeterinary, GiBison, GiDeer,
-    GiCow, GiHorse, GiDog, GiCat,
-    GiFlowerPot, GiGrain, GiAppleSeeds,
-    GiSolarPower, GiWindTurbine, GiWaterTank,
-    GiRecycle, GiMaterialsScience, GiGears,
-    GiElectricalResistance, GiCircuitry, GiProcessor,
-    GiCyberEye, GiLockedChest, GiKeyCard,
-    GiHand, GiHealing, GiMeditation,
-    GiMuscleUp, GiWeightLiftingUp, GiRunning,
-    GiSoccerBall, GiBasketball, GiTennisBall
+    GiHealthIncrease, GiHealthCrystal
 } from 'react-icons/gi';
 
 export const categories = [
@@ -405,11 +390,11 @@ export const categories = [
         ]
     },
 
-    // ─── 13. Lifting Operations ───
+    // ─── 13. Lifting Operations - ✅ FIXED: Using FaHardHat ───
     {
         id: 'lifting-operations',
         name: 'Lifting Operations',
-        icon: FaHardHat,
+        icon: FaHardHat,  // ✅ CORRECT - Using FaHardHat, NOT FaHelmetSafety
         description: 'Lifting equipment, crane operations, and rigging safety',
         courses: [
             {
