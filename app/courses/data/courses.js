@@ -1,5 +1,5 @@
 // app/courses/data/courses.js
-// Complete - All 72 Categories with ALL Sub-Courses
+// COMPLETE - All 72 Categories
 
 import {
     FaShieldAlt, FaHardHat, FaTools,
@@ -44,26 +44,8 @@ import {
     GiSoccerBall, GiBasketball, GiTennisBall
 } from 'react-icons/gi';
 
-import {
-    MdHealthAndSafety, MdSecurity, MdEngineering,
-    MdScience, MdPsychology, MdElderly,
-    MdChildCare, MdFamilyRestroom, MdPets,
-    MdAgriculture, MdEnergySavingsLeaf, MdElectricBolt,
-    MdOutlineSecurity, MdOutlineHealthAndSafety,
-    MdOutlineConstruction, MdOutlineEngineering,
-    MdOutlineScience, MdOutlinePsychology
-} from 'react-icons/md';
-
-import {
-    TbBrandApple, TbBrandGoogle, TbBrandMicrosoft,
-    TbBrandAmazon, TbBrandFacebook, TbBrandTwitter,
-    TbBrandInstagram, TbBrandLinkedin, TbBrandYoutube
-} from 'react-icons/tb';
-
 export const categories = [
-    // ═══════════════════════════════════════════════════
-    // 1. Health and Safety
-    // ═══════════════════════════════════════════════════
+    // ─── 1. Health and Safety ───
     {
         id: 'health-safety',
         name: 'Health and Safety',
@@ -75,67 +57,35 @@ export const categories = [
                 name: 'IOSH Managing Safely',
                 duration: '5 Days',
                 image: '/courses/iosh-managing-safely.webp',
-                entryRequirements: 'No prior experience required. Basic understanding of workplace safety recommended.',
-                studyUnits: ['Unit 1: Managing Safely', 'Unit 2: Risk Assessment', 'Unit 3: Controlling Risks', 'Unit 4: Understanding Your Responsibilities', 'Unit 5: Identifying Hazards', 'Unit 6: Investigating Incidents'],
-                learningOutcomes: ['Understand health and safety responsibilities', 'Conduct effective risk assessments', 'Identify and control workplace hazards', 'Investigate incidents effectively', 'Manage safety in your team'],
-                futureProgression: 'Progression to IOSH Managing Safely, NEBOSH, or become a Safety Manager'
+                entryRequirements: 'No prior experience required',
+                studyUnits: ['Unit 1: Managing Safely', 'Unit 2: Risk Assessment', 'Unit 3: Controlling Risks'],
+                learningOutcomes: ['Understand safety responsibilities', 'Conduct risk assessments', 'Identify hazards'],
+                futureProgression: 'Progression to NEBOSH or Safety Manager'
             },
             {
                 slug: 'iosh-working-safely',
                 name: 'IOSH Working Safely',
                 duration: '1 Day',
                 image: '/courses/iosh-working-safely.webp',
-                entryRequirements: 'Open to all workers at all levels',
-                studyUnits: ['Unit 1: Introducing Working Safely', 'Unit 2: Defining Hazards and Risks', 'Unit 3: Identifying Common Hazards', 'Unit 4: Improving Safety Performance'],
-                learningOutcomes: ['Identify common workplace hazards', 'Understand your safety responsibilities', 'Contribute to a safer workplace'],
-                futureProgression: 'Progression to IOSH Managing Safely or NEBOSH'
+                entryRequirements: 'Open to all workers',
+                studyUnits: ['Unit 1: Working Safely', 'Unit 2: Identifying Hazards', 'Unit 3: Safety Performance'],
+                learningOutcomes: ['Identify hazards', 'Understand safety responsibilities', 'Contribute to safety'],
+                futureProgression: 'Progression to IOSH Managing Safely'
             },
             {
                 slug: 'nebosh-igc',
                 name: 'NEBOSH International General Certificate',
                 duration: '10 Days',
                 image: '/courses/nebosh-igc.webp',
-                entryRequirements: 'No formal entry requirements. Good understanding of English recommended.',
-                studyUnits: ['Unit 1: Health and Safety Foundations', 'Unit 2: Policy and Organizing', 'Unit 3: Planning and Implementing', 'Unit 4: Measuring and Auditing', 'Unit 5: Incident Investigation'],
-                learningOutcomes: ['Understand health and safety management systems', 'Apply risk assessment principles', 'Implement effective control measures', 'Investigate incidents and implement corrective actions'],
-                futureProgression: 'Progression to NEBOSH Diploma or become a Health & Safety Professional'
-            },
-            {
-                slug: 'level-3-health-safety',
-                name: 'Level 3 Diploma in Health and Safety',
-                duration: '12 Months',
-                image: '/courses/level-3-health-safety.webp',
-                entryRequirements: 'No formal qualifications required. Some workplace experience recommended.',
-                studyUnits: ['Unit 1: Health and Safety Management', 'Unit 2: Risk Assessment and Control', 'Unit 3: Workplace Hazards and Controls', 'Unit 4: Incident Investigation', 'Unit 5: Emergency Planning'],
-                learningOutcomes: ['Manage health and safety in the workplace', 'Conduct comprehensive risk assessments', 'Develop safety management systems', 'Lead incident investigations'],
-                futureProgression: 'Progression to Level 5 Diploma or become a Health & Safety Manager'
-            },
-            {
-                slug: 'level-5-health-safety',
-                name: 'Level 5 Diploma in Health and Safety',
-                duration: '18 Months',
-                image: '/courses/level-5-health-safety.webp',
-                entryRequirements: 'Level 3 qualification or relevant experience in health and safety',
-                studyUnits: ['Unit 1: Strategic Health and Safety Management', 'Unit 2: Risk Management', 'Unit 3: Health and Safety Legislation', 'Unit 4: Organizational Culture', 'Unit 5: Leadership and Influence'],
-                learningOutcomes: ['Develop health and safety strategies', 'Lead organizational safety culture', 'Implement legislative compliance', 'Influence safety behaviors'],
-                futureProgression: 'Progression to Level 7 Diploma or become a Health & Safety Director'
-            },
-            {
-                slug: 'certified-safety-manager',
-                name: 'Certified Safety Manager (CSM)',
-                duration: '6 Months',
-                image: '/courses/certified-safety-manager.webp',
-                entryRequirements: '3+ years of experience in safety or a related field',
-                studyUnits: ['Unit 1: Safety Management Systems', 'Unit 2: Risk Management', 'Unit 3: Emergency Response Planning', 'Unit 4: Safety Auditing', 'Unit 5: Behavioral Safety'],
-                learningOutcomes: ['Manage safety programs effectively', 'Conduct safety audits', 'Lead emergency response teams', 'Build positive safety cultures'],
-                futureProgression: 'Progression to become a Safety Director or Consultant'
+                entryRequirements: 'Good understanding of English',
+                studyUnits: ['Unit 1: Health and Safety Foundations', 'Unit 2: Policy and Organizing', 'Unit 3: Incident Investigation'],
+                learningOutcomes: ['Understand safety management systems', 'Apply risk assessment', 'Investigate incidents'],
+                futureProgression: 'Progression to NEBOSH Diploma'
             }
         ]
     },
 
-    // ═══════════════════════════════════════════════════
-    // 2. Energy Management
-    // ═══════════════════════════════════════════════════
+    // ─── 2. Energy Management ───
     {
         id: 'energy-management',
         name: 'Energy Management',
@@ -147,67 +97,35 @@ export const categories = [
                 name: 'Level 5 Diploma in Energy Management and Sustainability',
                 duration: '12 Months',
                 image: '/courses/level-5-energy-management.webp',
-                entryRequirements: 'No formal qualifications required. Interest in energy and sustainability recommended.',
-                studyUnits: ['Unit 1: Energy Management Fundamentals', 'Unit 2: Energy Auditing', 'Unit 3: Renewable Energy Technologies', 'Unit 4: Sustainability Practices', 'Unit 5: Energy Policy and Legislation'],
-                learningOutcomes: ['Understand energy management principles', 'Conduct energy audits', 'Evaluate renewable technologies', 'Implement sustainability practices'],
-                futureProgression: 'Progression to Level 7 Diploma or become Energy Manager'
+                entryRequirements: 'Interest in energy and sustainability',
+                studyUnits: ['Unit 1: Energy Management Fundamentals', 'Unit 2: Energy Auditing', 'Unit 3: Renewable Energy Technologies'],
+                learningOutcomes: ['Understand energy management', 'Conduct energy audits', 'Evaluate renewable technologies'],
+                futureProgression: 'Progression to Level 7 Diploma or Energy Manager'
             },
             {
                 slug: 'iso-50001-lead-auditor',
                 name: 'ISO 50001:2018 Energy Management Systems Lead Auditor',
                 duration: '5 Days',
                 image: '/courses/iso-50001-lead-auditor.webp',
-                entryRequirements: 'Understanding of energy management systems recommended',
-                studyUnits: ['Unit 1: ISO 50001 Overview', 'Unit 2: Energy Management Requirements', 'Unit 3: Audit Planning', 'Unit 4: Conducting Audits', 'Unit 5: Audit Reporting'],
-                learningOutcomes: ['Understand ISO 50001 requirements', 'Plan and conduct audits', 'Write audit reports', 'Lead audit teams'],
-                futureProgression: 'Progression to become Lead Auditor or Energy Consultant'
-            },
-            {
-                slug: 'level-4-energy-auditing',
-                name: 'Level 4 Diploma in Energy Auditing and Sustainable Energy Systems',
-                duration: '9 Months',
-                image: '/courses/level-4-energy-auditing.webp',
-                entryRequirements: 'Some experience in energy or facilities management recommended',
-                studyUnits: ['Unit 1: Energy Auditing Techniques', 'Unit 2: Building Energy Management', 'Unit 3: Renewable Energy Systems', 'Unit 4: Energy Monitoring and Targeting', 'Unit 5: Sustainable Energy Solutions'],
-                learningOutcomes: ['Conduct energy audits', 'Analyze energy data', 'Recommend energy saving measures', 'Implement renewable energy solutions'],
-                futureProgression: 'Progression to Level 5 Diploma or Energy Manager'
+                entryRequirements: 'Understanding of energy management systems',
+                studyUnits: ['Unit 1: ISO 50001 Overview', 'Unit 2: Energy Management Requirements', 'Unit 3: Audit Planning'],
+                learningOutcomes: ['Understand ISO 50001', 'Plan and conduct audits', 'Lead audit teams'],
+                futureProgression: 'Progression to Lead Auditor or Energy Consultant'
             },
             {
                 slug: 'certified-energy-manager',
                 name: 'Certified Energy Manager (CEM)',
                 duration: '4 Months',
                 image: '/courses/certified-energy-manager.webp',
-                entryRequirements: '2+ years of experience in energy management or related field',
-                studyUnits: ['Unit 1: Energy Management Basics', 'Unit 2: Energy Auditing', 'Unit 3: Energy Efficiency Measures', 'Unit 4: Renewable Energy', 'Unit 5: Energy Economics'],
-                learningOutcomes: ['Manage energy programs effectively', 'Conduct energy audits', 'Implement efficiency measures', 'Develop energy strategies'],
-                futureProgression: 'Progression to become Energy Director or Consultant'
-            },
-            {
-                slug: 'level-3-energy-management',
-                name: 'Level 3 Diploma in Energy Management',
-                duration: '6 Months',
-                image: '/courses/level-3-energy-management.webp',
-                entryRequirements: 'Interest in energy management',
-                studyUnits: ['Unit 1: Energy Fundamentals', 'Unit 2: Energy Efficiency', 'Unit 3: Renewable Energy', 'Unit 4: Energy Auditing', 'Unit 5: Sustainability'],
-                learningOutcomes: ['Understand energy fundamentals', 'Implement energy efficiency', 'Apply renewable energy', 'Conduct energy audits'],
-                futureProgression: 'Progression to Level 4 Diploma'
-            },
-            {
-                slug: 'level-7-energy-management',
-                name: 'Level 7 Diploma in Energy Management',
-                duration: '24 Months',
-                image: '/courses/level-7-energy-management.webp',
-                entryRequirements: 'Level 6 qualification or equivalent experience',
-                studyUnits: ['Unit 1: Strategic Energy Policy', 'Unit 2: Advanced Energy Economics', 'Unit 3: Energy Research Methods', 'Unit 4: Leadership in Energy', 'Unit 5: Global Energy Issues'],
-                learningOutcomes: ['Develop strategic energy policy', 'Lead energy organizations', 'Conduct advanced energy research', 'Address global energy challenges'],
-                futureProgression: 'Progression to become Energy Director or CEO'
+                entryRequirements: '2+ years of experience in energy management',
+                studyUnits: ['Unit 1: Energy Management Basics', 'Unit 2: Energy Auditing', 'Unit 3: Energy Efficiency Measures'],
+                learningOutcomes: ['Manage energy programs', 'Conduct energy audits', 'Implement efficiency measures'],
+                futureProgression: 'Progression to Energy Director or Consultant'
             }
         ]
     },
 
-    // ═══════════════════════════════════════════════════
-    // 3. Quality Control
-    // ═══════════════════════════════════════════════════
+    // ─── 3. Quality Control ───
     {
         id: 'quality-control',
         name: 'Quality Control',
@@ -219,19 +137,19 @@ export const categories = [
                 name: 'ISO 9001:2015 Quality Management Systems Lead Auditor',
                 duration: '5 Days',
                 image: '/courses/iso-9001-lead-auditor.webp',
-                entryRequirements: 'Understanding of quality management systems recommended',
-                studyUnits: ['Unit 1: ISO 9001 Requirements', 'Unit 2: Audit Principles', 'Unit 3: Audit Planning', 'Unit 4: Conducting Audits', 'Unit 5: Reporting Audits'],
-                learningOutcomes: ['Understand ISO 9001 requirements', 'Plan and conduct audits', 'Lead audit teams', 'Write audit reports'],
-                futureProgression: 'Progression to become Lead Auditor or Quality Manager'
+                entryRequirements: 'Understanding of quality management systems',
+                studyUnits: ['Unit 1: ISO 9001 Requirements', 'Unit 2: Audit Principles', 'Unit 3: Audit Planning'],
+                learningOutcomes: ['Understand ISO 9001', 'Plan and conduct audits', 'Lead audit teams'],
+                futureProgression: 'Progression to Lead Auditor or Quality Manager'
             },
             {
                 slug: 'six-sigma-green-belt',
                 name: 'Six Sigma Green Belt',
                 duration: '5 Days',
                 image: '/courses/six-sigma-green-belt.webp',
-                entryRequirements: 'Basic understanding of quality concepts recommended',
-                studyUnits: ['Unit 1: Six Sigma Overview', 'Unit 2: DMAIC Methodology', 'Unit 3: Statistical Tools', 'Unit 4: Process Improvement', 'Unit 5: Project Management'],
-                learningOutcomes: ['Apply Six Sigma principles', 'Use DMAIC methodology', 'Analyze data', 'Lead improvement projects'],
+                entryRequirements: 'Basic understanding of quality concepts',
+                studyUnits: ['Unit 1: Six Sigma Overview', 'Unit 2: DMAIC Methodology', 'Unit 3: Statistical Tools'],
+                learningOutcomes: ['Apply Six Sigma principles', 'Use DMAIC methodology', 'Lead improvement projects'],
                 futureProgression: 'Progression to Six Sigma Black Belt or Quality Manager'
             },
             {
@@ -240,48 +158,16 @@ export const categories = [
                 duration: '10 Days',
                 image: '/courses/six-sigma-black-belt.webp',
                 entryRequirements: 'Green Belt certification or equivalent experience',
-                studyUnits: ['Unit 1: Advanced Six Sigma', 'Unit 2: Statistical Analysis', 'Unit 3: Process Design', 'Unit 4: Team Leadership', 'Unit 5: Project Management'],
-                learningOutcomes: ['Lead complex improvement projects', 'Mentor Green Belts', 'Develop process designs', 'Drive organizational change'],
+                studyUnits: ['Unit 1: Advanced Six Sigma', 'Unit 2: Statistical Analysis', 'Unit 3: Team Leadership'],
+                learningOutcomes: ['Lead complex improvement projects', 'Mentor Green Belts', 'Drive organizational change'],
                 futureProgression: 'Progression to Master Black Belt or Quality Director'
-            },
-            {
-                slug: 'level-5-quality-management',
-                name: 'Level 5 Diploma in Quality Management',
-                duration: '12 Months',
-                image: '/courses/level-5-quality-management.webp',
-                entryRequirements: 'Level 3 qualification or relevant experience',
-                studyUnits: ['Unit 1: Quality Management Principles', 'Unit 2: Quality Systems', 'Unit 3: Continuous Improvement', 'Unit 4: Supplier Quality', 'Unit 5: Quality Metrics'],
-                learningOutcomes: ['Develop quality management systems', 'Lead continuous improvement', 'Manage supplier quality', 'Analyze quality metrics'],
-                futureProgression: 'Progression to Level 7 Diploma or Quality Director'
-            },
-            {
-                slug: 'iso-9001-internal-auditor',
-                name: 'ISO 9001:2015 Quality Management Systems Internal Auditor',
-                duration: '3 Days',
-                image: '/courses/iso-9001-internal-auditor.webp',
-                entryRequirements: 'Understanding of quality management',
-                studyUnits: ['Unit 1: ISO 9001 Overview', 'Unit 2: Internal Audit Process', 'Unit 3: Audit Reporting', 'Unit 4: Corrective Actions'],
-                learningOutcomes: ['Understand ISO 9001', 'Conduct internal audits', 'Write audit reports', 'Implement corrective actions'],
-                futureProgression: 'Progression to Lead Auditor'
-            },
-            {
-                slug: 'quality-tools-techniques',
-                name: 'Quality Tools and Techniques',
-                duration: '3 Days',
-                image: '/courses/quality-tools-techniques.webp',
-                entryRequirements: 'Basic understanding of quality concepts',
-                studyUnits: ['Unit 1: Quality Tools Overview', 'Unit 2: Statistical Process Control', 'Unit 3: Root Cause Analysis', 'Unit 4: Process Mapping', 'Unit 5: Measurement Systems'],
-                learningOutcomes: ['Apply quality tools', 'Use statistical process control', 'Conduct root cause analysis', 'Create process maps'],
-                futureProgression: 'Progression to Six Sigma Green Belt'
             }
         ]
     },
 
-    // ═══════════════════════════════════════════════════
-    // 4. Food Safety and Hygiene
-    // ═══════════════════════════════════════════════════
+    // ─── 4. Food Safety and Hygiene ───
     {
-        id: 'food-safety',
+        id: 'food-safety-hygiene',
         name: 'Food Safety and Hygiene',
         icon: FaAppleAlt,
         description: 'Food safety management, HACCP, and hygiene certifications',
@@ -291,19 +177,9 @@ export const categories = [
                 name: 'Level 3 Award in Food Safety',
                 duration: '3 Days',
                 image: '/courses/level-3-food-safety.webp',
-                entryRequirements: 'Some experience in food handling recommended',
-                studyUnits: ['Unit 1: Food Safety Legislation', 'Unit 2: Food Hazards', 'Unit 3: Food Safety Management', 'Unit 4: HACCP Principles', 'Unit 5: Food Hygiene'],
-                learningOutcomes: ['Understand food safety laws', 'Identify food hazards', 'Apply HACCP principles', 'Manage food safety systems'],
-                futureProgression: 'Progression to Level 4 or become Food Safety Manager'
-            },
-            {
-                slug: 'haccp-level-3',
-                name: 'HACCP Level 3',
-                duration: '3 Days',
-                image: '/courses/haccp-level-3.webp',
-                entryRequirements: 'Understanding of food safety basics recommended',
-                studyUnits: ['Unit 1: HACCP Principles', 'Unit 2: Hazard Analysis', 'Unit 3: Critical Control Points', 'Unit 4: Implementation', 'Unit 5: Monitoring and Review'],
-                learningOutcomes: ['Apply HACCP principles', 'Analyze hazards', 'Establish control points', 'Implement and monitor HACCP systems'],
+                entryRequirements: 'Some experience in food handling',
+                studyUnits: ['Unit 1: Food Safety Legislation', 'Unit 2: Food Hazards', 'Unit 3: HACCP Principles'],
+                learningOutcomes: ['Understand food safety laws', 'Identify food hazards', 'Apply HACCP principles'],
                 futureProgression: 'Progression to Level 4 or Food Safety Manager'
             },
             {
@@ -311,27 +187,15 @@ export const categories = [
                 name: 'ISO 22000:2018 Food Safety Management Systems Lead Auditor',
                 duration: '5 Days',
                 image: '/courses/iso-22000-lead-auditor.webp',
-                entryRequirements: 'Understanding of food safety systems recommended',
-                studyUnits: ['Unit 1: ISO 22000 Requirements', 'Unit 2: Audit Principles', 'Unit 3: Audit Planning', 'Unit 4: Conducting Audits', 'Unit 5: Audit Reporting'],
-                learningOutcomes: ['Understand ISO 22000 requirements', 'Plan and conduct audits', 'Lead audit teams', 'Write audit reports'],
-                futureProgression: 'Progression to become Lead Auditor or Food Safety Consultant'
-            },
-            {
-                slug: 'level-5-food-safety',
-                name: 'Level 5 Diploma in Food Safety',
-                duration: '12 Months',
-                image: '/courses/level-5-food-safety.webp',
-                entryRequirements: 'Level 3 qualification or relevant experience',
-                studyUnits: ['Unit 1: Food Safety Management', 'Unit 2: HACCP Implementation', 'Unit 3: Food Safety Culture', 'Unit 4: Regulatory Compliance', 'Unit 5: Food Safety Auditing'],
-                learningOutcomes: ['Lead food safety programs', 'Implement HACCP systems', 'Build food safety culture', 'Conduct food safety audits'],
-                futureProgression: 'Progression to Level 7 Diploma or Food Safety Director'
+                entryRequirements: 'Understanding of food safety systems',
+                studyUnits: ['Unit 1: ISO 22000 Requirements', 'Unit 2: Audit Principles', 'Unit 3: Audit Planning'],
+                learningOutcomes: ['Understand ISO 22000', 'Plan and conduct audits', 'Lead audit teams'],
+                futureProgression: 'Progression to Lead Auditor or Food Safety Consultant'
             }
         ]
     },
 
-    // ═══════════════════════════════════════════════════
-    // 5. Fire Safety
-    // ═══════════════════════════════════════════════════
+    // ─── 5. Fire Safety ───
     {
         id: 'fire-safety',
         name: 'Fire Safety',
@@ -344,19 +208,19 @@ export const categories = [
                 duration: '3 Days',
                 image: '/courses/level-3-fire-safety.webp',
                 entryRequirements: 'No prior experience required',
-                studyUnits: ['Unit 1: Fire Safety Legislation', 'Unit 2: Fire Hazards', 'Unit 3: Fire Prevention', 'Unit 4: Emergency Planning', 'Unit 5: Fire Extinguisher Training'],
-                learningOutcomes: ['Understand fire safety laws', 'Identify fire hazards', 'Implement fire prevention measures', 'Develop emergency plans'],
-                futureProgression: 'Progression to Level 4 or become Fire Safety Manager'
+                studyUnits: ['Unit 1: Fire Safety Legislation', 'Unit 2: Fire Hazards', 'Unit 3: Fire Prevention'],
+                learningOutcomes: ['Understand fire safety laws', 'Identify fire hazards', 'Implement fire prevention measures'],
+                futureProgression: 'Progression to Level 4 or Fire Safety Manager'
             },
             {
                 slug: 'fire-risk-assessor',
                 name: 'Fire Risk Assessor',
                 duration: '5 Days',
                 image: '/courses/fire-risk-assessor.webp',
-                entryRequirements: 'Some experience in fire safety recommended',
-                studyUnits: ['Unit 1: Fire Risk Assessment Principles', 'Unit 2: Identification of Fire Hazards', 'Unit 3: Evaluation of Fire Risk', 'Unit 4: Control Measures', 'Unit 5: Documentation and Review'],
-                learningOutcomes: ['Conduct fire risk assessments', 'Identify fire hazards', 'Evaluate fire risks', 'Recommend control measures'],
-                futureProgression: 'Progression to become Fire Safety Consultant'
+                entryRequirements: 'Some experience in fire safety',
+                studyUnits: ['Unit 1: Fire Risk Assessment Principles', 'Unit 2: Identification of Fire Hazards', 'Unit 3: Control Measures'],
+                learningOutcomes: ['Conduct fire risk assessments', 'Identify fire hazards', 'Recommend control measures'],
+                futureProgression: 'Progression to Fire Safety Consultant'
             },
             {
                 slug: 'fire-warden-training',
@@ -364,16 +228,14 @@ export const categories = [
                 duration: '2 Days',
                 image: '/courses/fire-warden-training.webp',
                 entryRequirements: 'Open to all employees',
-                studyUnits: ['Unit 1: Fire Warden Responsibilities', 'Unit 2: Fire Prevention', 'Unit 3: Emergency Evacuation', 'Unit 4: Fire Extinguisher Use', 'Unit 5: Communication and Reporting'],
-                learningOutcomes: ['Understand fire warden duties', 'Prevent fires', 'Lead evacuations', 'Use fire extinguishers'],
+                studyUnits: ['Unit 1: Fire Warden Responsibilities', 'Unit 2: Fire Prevention', 'Unit 3: Emergency Evacuation'],
+                learningOutcomes: ['Understand fire warden duties', 'Prevent fires', 'Lead evacuations'],
                 futureProgression: 'Progression to Fire Safety Manager'
             }
         ]
     },
 
-    // ═══════════════════════════════════════════════════
-    // 6. First Aid
-    // ═══════════════════════════════════════════════════
+    // ─── 6. First Aid ───
     {
         id: 'first-aid',
         name: 'First Aid',
@@ -386,9 +248,9 @@ export const categories = [
                 duration: '3 Days',
                 image: '/courses/first-aid-at-work.webp',
                 entryRequirements: 'No prior experience required',
-                studyUnits: ['Unit 1: First Aid Principles', 'Unit 2: CPR and AED', 'Unit 3: Wound Management', 'Unit 4: Fracture Management', 'Unit 5: Medical Emergencies'],
-                learningOutcomes: ['Provide first aid in the workplace', 'Perform CPR and use AED', 'Manage wounds and fractures', 'Handle medical emergencies'],
-                futureProgression: 'Progression to become First Aid Instructor or Paramedic'
+                studyUnits: ['Unit 1: First Aid Principles', 'Unit 2: CPR and AED', 'Unit 3: Wound Management'],
+                learningOutcomes: ['Provide first aid', 'Perform CPR and use AED', 'Manage wounds and fractures'],
+                futureProgression: 'Progression to First Aid Instructor or Paramedic'
             },
             {
                 slug: 'emergency-first-aid',
@@ -396,28 +258,16 @@ export const categories = [
                 duration: '1 Day',
                 image: '/courses/emergency-first-aid.webp',
                 entryRequirements: 'Open to all employees',
-                studyUnits: ['Unit 1: Emergency First Aid', 'Unit 2: CPR', 'Unit 3: Managing Incidents', 'Unit 4: Minor Injuries'],
-                learningOutcomes: ['Provide emergency first aid', 'Perform CPR', 'Manage incidents', 'Handle minor injuries'],
+                studyUnits: ['Unit 1: Emergency First Aid', 'Unit 2: CPR', 'Unit 3: Managing Incidents'],
+                learningOutcomes: ['Provide emergency first aid', 'Perform CPR', 'Manage incidents'],
                 futureProgression: 'Progression to First Aid at Work'
-            },
-            {
-                slug: 'paediatric-first-aid',
-                name: 'Paediatric First Aid',
-                duration: '2 Days',
-                image: '/courses/paediatric-first-aid.webp',
-                entryRequirements: 'No prior experience required',
-                studyUnits: ['Unit 1: Child and Infant CPR', 'Unit 2: Childhood Illnesses', 'Unit 3: Wound Management', 'Unit 4: Emergency Planning', 'Unit 5: Safeguarding'],
-                learningOutcomes: ['Provide first aid to children and infants', 'Recognize childhood illnesses', 'Manage injuries', 'Understand safeguarding'],
-                futureProgression: 'Progression to become First Aid Instructor'
             }
         ]
     },
 
-    // ═══════════════════════════════════════════════════
-    // 7. Mental Health First Aid
-    // ═══════════════════════════════════════════════════
+    // ─── 7. Mental Health First Aid ───
     {
-        id: 'mental-health',
+        id: 'mental-health-first-aid',
         name: 'Mental Health First Aid',
         icon: FaBrain,
         description: 'Mental health awareness, first aid, and support certifications',
@@ -428,93 +278,49 @@ export const categories = [
                 duration: '2 Days',
                 image: '/courses/mental-health-first-aid.webp',
                 entryRequirements: 'No prior experience required',
-                studyUnits: ['Unit 1: Mental Health Awareness', 'Unit 2: Depression', 'Unit 3: Anxiety', 'Unit 4: Self-Harm and Suicide', 'Unit 5: Supporting Others'],
-                learningOutcomes: ['Recognize mental health issues', 'Provide initial support', 'Signpost to professional help', 'Promote mental wellbeing'],
-                futureProgression: 'Progression to become MHFA Instructor'
-            },
-            {
-                slug: 'mental-health-champion',
-                name: 'Mental Health Champion',
-                duration: '1 Day',
-                image: '/courses/mental-health-champion.webp',
-                entryRequirements: 'Open to all employees',
-                studyUnits: ['Unit 1: Mental Health Basics', 'Unit 2: Reducing Stigma', 'Unit 3: Supporting Colleagues', 'Unit 4: Building Resilience'],
-                learningOutcomes: ['Understand mental health', 'Reduce stigma', 'Support colleagues', 'Build resilience'],
-                futureProgression: 'Progression to MHFA'
+                studyUnits: ['Unit 1: Mental Health Awareness', 'Unit 2: Depression', 'Unit 3: Supporting Others'],
+                learningOutcomes: ['Recognize mental health issues', 'Provide initial support', 'Promote mental wellbeing'],
+                futureProgression: 'Progression to MHFA Instructor'
             }
         ]
     },
 
-    // ═══════════════════════════════════════════════════
-    // 8. Teaching, Assessment and IQA
-    // ═══════════════════════════════════════════════════
+    // ─── 8. Teaching, Assessment and IQA ───
     {
         id: 'teaching-assessment-iqa',
         name: 'Teaching, Assessment and IQA',
         icon: FaChalkboardTeacher,
-        description: 'Teaching qualifications, assessment, and internal quality assurance certifications',
+        description: 'Teaching qualifications, assessment, and internal quality assurance',
         courses: [
             {
-                slug: 'level-3-award-education-training',
+                slug: 'level-3-teaching',
                 name: 'Level 3 Award in Education and Training',
                 duration: '6 Months',
-                image: '/courses/level-3-award-education-training.webp',
+                image: '/courses/level-3-teaching.webp',
                 entryRequirements: 'No formal qualifications required',
-                studyUnits: ['Unit 1: Understanding Roles and Responsibilities', 'Unit 2: Planning and Delivering Sessions', 'Unit 3: Assessment and Feedback', 'Unit 4: Professional Development'],
-                learningOutcomes: ['Understand teaching roles', 'Plan and deliver lessons', 'Assess learners effectively', 'Develop professionally'],
-                futureProgression: 'Progression to Level 4 Certificate in Education and Training'
+                studyUnits: ['Unit 1: Teaching Roles', 'Unit 2: Planning Lessons', 'Unit 3: Assessment'],
+                learningOutcomes: ['Understand teaching roles', 'Plan and deliver lessons', 'Assess learners'],
+                futureProgression: 'Progression to Level 4 or become a Teacher'
             },
             {
-                slug: 'level-4-cert-education-training',
-                name: 'Level 4 Certificate in Education and Training',
-                duration: '9 Months',
-                image: '/courses/level-4-cert-education-training.webp',
-                entryRequirements: 'Level 3 Award in Education and Training or equivalent',
-                studyUnits: ['Unit 1: Teaching and Learning Approaches', 'Unit 2: Curriculum Design', 'Unit 3: Assessment Practices', 'Unit 4: Professional Development'],
-                learningOutcomes: ['Design curricula', 'Apply advanced teaching methods', 'Lead assessment practices', 'Develop professionally'],
-                futureProgression: 'Progression to Level 5 Diploma in Education and Training'
-            },
-            {
-                slug: 'level-5-diploma-education-training',
-                name: 'Level 5 Diploma in Education and Training',
-                duration: '18 Months',
-                image: '/courses/level-5-diploma-education-training.webp',
-                entryRequirements: 'Level 4 Certificate in Education and Training',
-                studyUnits: ['Unit 1: Educational Policy', 'Unit 2: Curriculum Development', 'Unit 3: Quality Assurance', 'Unit 4: Education Leadership'],
-                learningOutcomes: ['Understand educational policy', 'Lead curriculum development', 'Manage quality assurance', 'Lead educational teams'],
-                futureProgression: 'Progression to QTLS or Education Management'
-            },
-            {
-                slug: 'level-3-award-assessing-work',
-                name: 'Level 3 Award in Assessing Competence in the Work Environment',
+                slug: 'iqa-certification',
+                name: 'Internal Quality Assurance (IQA)',
                 duration: '3 Months',
-                image: '/courses/level-3-award-assessing-work.webp',
-                entryRequirements: 'Experience in vocational area',
-                studyUnits: ['Unit 1: Understanding Assessment', 'Unit 2: Assessing Competence', 'Unit 3: Quality Assurance'],
-                learningOutcomes: ['Understand assessment principles', 'Assess workplace competence', 'Maintain quality standards'],
-                futureProgression: 'Progression to Level 4 IQA'
-            },
-            {
-                slug: 'level-4-iqa',
-                name: 'Level 4 Award in Internal Quality Assurance of Assessment',
-                duration: '4 Months',
-                image: '/courses/level-4-iqa.webp',
-                entryRequirements: 'Level 3 Assessing qualification',
-                studyUnits: ['Unit 1: Quality Assurance Principles', 'Unit 2: Internal Verification', 'Unit 3: Standardization', 'Unit 4: External Relations'],
-                learningOutcomes: ['Understand quality assurance', 'Conduct internal verification', 'Lead standardization', 'Manage external relations'],
+                image: '/courses/iqa-certification.webp',
+                entryRequirements: 'Experience in teaching or assessment',
+                studyUnits: ['Unit 1: Quality Assurance Principles', 'Unit 2: Internal Verification', 'Unit 3: Standardization'],
+                learningOutcomes: ['Understand quality assurance', 'Conduct internal verification', 'Ensure standardization'],
                 futureProgression: 'Progression to EQA or Quality Manager'
             }
         ]
     },
 
-    // ═══════════════════════════════════════════════════
-    // 9. Education and Training
-    // ═══════════════════════════════════════════════════
+    // ─── 9. Education and Training ───
     {
         id: 'education-training',
         name: 'Education and Training',
         icon: FaGraduationCap,
-        description: 'Education management, training delivery, and instructional design certifications',
+        description: 'Education management, training delivery, and instructional design',
         courses: [
             {
                 slug: 'level-4-education',
@@ -522,8 +328,8 @@ export const categories = [
                 duration: '12 Months',
                 image: '/courses/level-4-education.webp',
                 entryRequirements: 'Level 3 qualification or experience in education',
-                studyUnits: ['Unit 1: Education Policy', 'Unit 2: Curriculum Design', 'Unit 3: Teaching Practice', 'Unit 4: Educational Leadership'],
-                learningOutcomes: ['Understand education policy', 'Design curricula', 'Deliver teaching', 'Lead educational initiatives'],
+                studyUnits: ['Unit 1: Education Policy', 'Unit 2: Curriculum Design', 'Unit 3: Teaching Practice'],
+                learningOutcomes: ['Understand education policy', 'Design curricula', 'Deliver teaching'],
                 futureProgression: 'Progression to Level 5 or Education Manager'
             },
             {
@@ -532,31 +338,19 @@ export const categories = [
                 duration: '2 Days',
                 image: '/courses/train-the-trainer.webp',
                 entryRequirements: 'Experience in a subject area',
-                studyUnits: ['Unit 1: Training Principles', 'Unit 2: Session Planning', 'Unit 3: Training Delivery', 'Unit 4: Evaluation'],
-                learningOutcomes: ['Plan training sessions', 'Deliver engaging training', 'Evaluate training effectiveness', 'Adapt training to learners'],
+                studyUnits: ['Unit 1: Training Principles', 'Unit 2: Session Planning', 'Unit 3: Training Delivery'],
+                learningOutcomes: ['Plan training sessions', 'Deliver engaging training', 'Evaluate training effectiveness'],
                 futureProgression: 'Progression to L&D Manager or Training Consultant'
-            },
-            {
-                slug: 'instructional-design',
-                name: 'Instructional Design Certification',
-                duration: '3 Months',
-                image: '/courses/instructional-design.webp',
-                entryRequirements: 'Interest in instructional design',
-                studyUnits: ['Unit 1: Design Principles', 'Unit 2: Learning Theory', 'Unit 3: Content Development', 'Unit 4: Evaluation'],
-                learningOutcomes: ['Apply design principles', 'Use learning theory', 'Develop content', 'Evaluate effectiveness'],
-                futureProgression: 'Progression to Learning Experience Designer'
             }
         ]
     },
 
-    // ═══════════════════════════════════════════════════
-    // 10. Health and Social Care
-    // ═══════════════════════════════════════════════════
+    // ─── 10. Health and Social Care ───
     {
         id: 'health-social-care',
         name: 'Health and Social Care',
         icon: FaHeartbeat,
-        description: 'Health and social care management and practice certifications',
+        description: 'Health and social care management and practice',
         courses: [
             {
                 slug: 'level-3-health-social-care',
@@ -564,31 +358,19 @@ export const categories = [
                 duration: '12 Months',
                 image: '/courses/level-3-health-social-care.webp',
                 entryRequirements: 'Interest in health and social care',
-                studyUnits: ['Unit 1: Health and Social Care Principles', 'Unit 2: Person-Centered Care', 'Unit 3: Communication', 'Unit 4: Safeguarding'],
-                learningOutcomes: ['Understand health and social care principles', 'Provide person-centered care', 'Communicate effectively', 'Apply safeguarding'],
+                studyUnits: ['Unit 1: Health and Social Care Principles', 'Unit 2: Person-Centered Care', 'Unit 3: Communication'],
+                learningOutcomes: ['Understand health and social care principles', 'Provide person-centered care', 'Communicate effectively'],
                 futureProgression: 'Progression to Level 5 or Care Manager'
-            },
-            {
-                slug: 'level-5-health-social-care',
-                name: 'Level 5 Diploma in Health and Social Care Management',
-                duration: '18 Months',
-                image: '/courses/level-5-health-social-care.webp',
-                entryRequirements: 'Level 3 qualification or relevant experience',
-                studyUnits: ['Unit 1: Strategic Care Leadership', 'Unit 2: Service Development', 'Unit 3: Quality Management', 'Unit 4: Policy Development'],
-                learningOutcomes: ['Lead strategic care', 'Develop services', 'Manage quality', 'Develop policy'],
-                futureProgression: 'Progression to Care Director'
             }
         ]
     },
 
-    // ═══════════════════════════════════════════════════
-    // 11. Early Learning and Childcare
-    // ═══════════════════════════════════════════════════
+    // ─── 11. Early Learning and Childcare ───
     {
         id: 'early-learning-childcare',
         name: 'Early Learning and Childcare',
         icon: FaSchool,
-        description: 'Childcare, early years education, and child development certifications',
+        description: 'Childcare, early years education, and child development',
         courses: [
             {
                 slug: 'level-3-childcare',
@@ -596,21 +378,19 @@ export const categories = [
                 duration: '12 Months',
                 image: '/courses/level-3-childcare.webp',
                 entryRequirements: 'Interest in childcare',
-                studyUnits: ['Unit 1: Child Development', 'Unit 2: Safeguarding', 'Unit 3: Play and Learning', 'Unit 4: Curriculum Planning'],
-                learningOutcomes: ['Understand child development', 'Apply safeguarding principles', 'Promote play and learning', 'Design curriculum'],
+                studyUnits: ['Unit 1: Child Development', 'Unit 2: Safeguarding', 'Unit 3: Play and Learning'],
+                learningOutcomes: ['Understand child development', 'Apply safeguarding principles', 'Promote play and learning'],
                 futureProgression: 'Progression to Level 5 or Nursery Manager'
             }
         ]
     },
 
-    // ═══════════════════════════════════════════════════
-    // 12. Manual Handling
-    // ═══════════════════════════════════════════════════
+    // ─── 12. Manual Handling ───
     {
         id: 'manual-handling',
         name: 'Manual Handling',
         icon: FaWrench,
-        description: 'Safe manual handling, lifting techniques, and risk assessment certifications',
+        description: 'Safe manual handling, lifting techniques, and risk assessment',
         courses: [
             {
                 slug: 'manual-handling-training',
@@ -618,21 +398,19 @@ export const categories = [
                 duration: '1 Day',
                 image: '/courses/manual-handling-training.webp',
                 entryRequirements: 'Open to all workers',
-                studyUnits: ['Unit 1: Manual Handling Risks', 'Unit 2: Safe Techniques', 'Unit 3: Risk Assessment', 'Unit 4: Legal Requirements'],
-                learningOutcomes: ['Identify manual handling risks', 'Apply safe techniques', 'Conduct risk assessments', 'Understand legal requirements'],
+                studyUnits: ['Unit 1: Manual Handling Risks', 'Unit 2: Safe Techniques', 'Unit 3: Risk Assessment'],
+                learningOutcomes: ['Identify manual handling risks', 'Apply safe techniques', 'Conduct risk assessments'],
                 futureProgression: 'Progression to Manual Handling Trainer'
             }
         ]
     },
 
-    // ═══════════════════════════════════════════════════
-    // 13. Lifting Operations
-    // ═══════════════════════════════════════════════════
+    // ─── 13. Lifting Operations ───
     {
         id: 'lifting-operations',
         name: 'Lifting Operations',
         icon: FaHardHat,
-        description: 'Lifting equipment, crane operations, and rigging safety certifications',
+        description: 'Lifting equipment, crane operations, and rigging safety',
         courses: [
             {
                 slug: 'lifting-supervisor',
@@ -640,8 +418,8 @@ export const categories = [
                 duration: '5 Days',
                 image: '/courses/lifting-supervisor.webp',
                 entryRequirements: 'Experience in lifting operations',
-                studyUnits: ['Unit 1: Lifting Regulations', 'Unit 2: Equipment Inspection', 'Unit 3: Lifting Plans', 'Unit 4: Team Leadership'],
-                learningOutcomes: ['Understand lifting regulations', 'Inspect lifting equipment', 'Develop lifting plans', 'Lead lifting teams'],
+                studyUnits: ['Unit 1: Lifting Regulations', 'Unit 2: Equipment Inspection', 'Unit 3: Lifting Plans'],
+                learningOutcomes: ['Understand lifting regulations', 'Inspect lifting equipment', 'Develop lifting plans'],
                 futureProgression: 'Progression to Lifting Operations Manager'
             }
         ]
@@ -1631,7 +1409,7 @@ export const categories = [
     {
         id: 'lifeguard-qualifications',
         name: 'Lifeguard Qualifications',
-        icon: FaUmbrella,
+        icon: FaSun,
         description: 'Lifeguard training, first aid, and water rescue',
         courses: [
             {
