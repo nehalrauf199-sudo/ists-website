@@ -15,30 +15,22 @@ import {
     FaBookOpen, FaPencilAlt, FaGraduationCap, FaUsers,
     FaClipboardList, FaFileInvoice, FaCalculator, FaRulerCombined,
     FaDraftingCompass, FaWrench, FaHammer, FaHelmetSafety,
-    FaIndustry, FaWarehouse, FaTruck, FaPlane,
-    FaShip, FaTrain, FaSubway, FaBus,
-    FaHospital, FaStethoscope, FaSyringe, FaPills,
-    FaTooth, FaEye, FaEar, FaBone,
-    FaLaugh, FaHeart, FaComment, FaSmile,
-    FaHandshake, FaPeopleArrows, FaUserTie, FaBuildingColumns,
-    FaLandmark, FaUniversity, FaSchool, FaChalkboard,
-    FaGlobeAmericas, FaGlobeEurope, FaGlobeAsia, FaGlobeAfrica,
-    FaGlobeOceania, FaFlag, FaFlagCheckered, FaFlagUsa,
-    FaFlagUk, FaFlagCanada, FaFlagAustralia, FaFlagIndia,
-    FaFlagPakistan, FaFlagChina, FaFlagJapan, FaFlagGermany,
-    FaFlagFrance, FaFlagItaly, FaFlagSpain, FaFlagBrazil,
-    FaFlagMexico, FaFlagSouthAfrica, FaFlagEgypt, FaFlagNigeria,
-    FaFlagKenya, FaFlagGhana, FaFlagMorocco, FaFlagTunisia,
-    FaFlagAlgeria, FaFlagLibya, FaFlagSudan, FaFlagEthiopia
+    FaWarehouse, FaTruck, FaPlane, FaShip,
+    FaTrain, FaSubway, FaBus, FaHospital,
+    FaStethoscope, FaSyringe, FaPills, FaTooth,
+    FaEye, FaEar, FaBone, FaLaugh,
+    FaHeart, FaComment, FaSmile, FaHandshake,
+    FaPeopleArrows, FaUserTie, FaBuildingColumns, FaLandmark,
+    FaUniversity, FaSchool, FaChalkboard
 } from 'react-icons/fa';
 
 import {
-    GiHealthNormal, GiHealthPotion, GiHealthCapsule,
-    GiHealthIncrease, GiHealthCrystal, GiHealthPotion
+    GiHealthNormal, GiHealthCapsule,
+    GiHealthIncrease, GiHealthCrystal
 } from 'react-icons/gi';
 
 import {
-    MdHealthAndSafety, MdHealthAndSafety, MdHealthAndSafety
+    MdHealthAndSafety
 } from 'react-icons/md';
 
 export const categories = [
