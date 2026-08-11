@@ -1,5 +1,5 @@
 // app/courses/page.js
-// Main courses page with all categories and search functionality
+// Main courses page with ALL categories
 
 'use client';
 import { useState, useMemo } from 'react';
@@ -8,17 +8,15 @@ import { categories } from './data/courses';
 
 export default function CoursesPage() {
     const [searchTerm, setSearchTerm] = useState('');
-    const [selectedCategory, setSelectedCategory] = useState('all');
 
     // Filter categories based on search
     const filteredCategories = useMemo(() => {
-        if (searchTerm.trim() === '' && selectedCategory === 'all') {
+        if (searchTerm.trim() === '') {
             return categories;
         }
 
         return categories
             .map(cat => {
-                // Filter courses within each category
                 const filteredCourses = cat.courses.filter(course =>
                     course.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                     cat.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -29,7 +27,10 @@ export default function CoursesPage() {
                 };
             })
             .filter(cat => cat.courses.length > 0);
-    }, [searchTerm, selectedCategory]);
+    }, [searchTerm]);
+
+    // Get total course count
+    const totalCourses = categories.reduce((acc, cat) => acc + cat.courses.length, 0);
 
     return (
         <div className="min-h-screen bg-gray-50">
@@ -42,14 +43,16 @@ export default function CoursesPage() {
                     <p className="text-xl text-blue-100 max-w-3xl mx-auto">
                         Choose your path to professional excellence
                     </p>
+                    <p className="text-sm text-blue-200 mt-2">
+                        {totalCourses} courses across {categories.length} categories
+                    </p>
                 </div>
             </div>
 
-            {/* Search and Filter Section */}
+            {/* Search Section */}
             <div className="max-w-7xl mx-auto px-4 py-8">
                 <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
                     <div className="flex flex-col md:flex-row gap-4">
-                        {/* Search Bar */}
                         <div className="flex-1">
                             <div className="relative">
                                 <input
@@ -73,10 +76,9 @@ export default function CoursesPage() {
                                     />
                                 </svg>
                             </div>
-                            {/* ✅ FIXED: This line was causing the error */}
                             {searchTerm && (
                                 <p className="text-sm text-gray-500 mt-2">
-                                    Showing results for: <span className="font-semibold text-blue-900">&#34;{searchTerm}&#34;</span>
+                                    Showing results for: <span className="font-semibold text-blue-900">&quot;{searchTerm}&quot;</span>
                                 </p>
                             )}
                         </div>
@@ -89,7 +91,7 @@ export default function CoursesPage() {
                         <div className="text-6xl mb-4">🔍</div>
                         <h3 className="text-2xl font-bold text-gray-800 mb-2">No courses found</h3>
                         <p className="text-gray-500">
-                            Try adjusting your search terms or browse all categories above.
+                            Try adjusting your search terms.
                         </p>
                         <button
                             onClick={() => setSearchTerm('')}
@@ -121,6 +123,8 @@ export default function CoursesPage() {
                                             {category.description}
                                         </p>
                                         <div className="flex items-center justify-center gap-2 text-orange-500 font-semibold text-sm group-hover:gap-3 transition-all">
+                                            <span>{category.courses.length} Courses</span>
+                                            <span className="text-gray-300">|</span>
                                             <span>EXPLORE</span>
                                             <svg
                                                 className="w-4 h-4 group-hover:translate-x-1 transition"
