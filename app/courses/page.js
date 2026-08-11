@@ -12,7 +12,7 @@ export default function CoursesPage() {
     // Filter categories based on search
     const filteredCategories = useMemo(() => {
         if (searchTerm.trim() === '') {
-            return categories;  // ✅ Returns ALL categories
+            return categories;  // Returns ALL categories
         }
 
         return categories
