@@ -12,7 +12,7 @@ export default function CoursesPage() {
     // Filter categories based on search
     const filteredCategories = useMemo(() => {
         if (searchTerm.trim() === '') {
-            return categories;
+            return categories;  // ✅ Returns ALL categories
         }
 
         return categories
@@ -85,7 +85,7 @@ export default function CoursesPage() {
                     </div>
                 </div>
 
-                {/* Categories Grid */}
+                {/* Categories Grid - Shows ALL categories */}
                 {filteredCategories.length === 0 ? (
                     <div className="text-center py-16 bg-white rounded-xl shadow-lg">
                         <div className="text-6xl mb-4">🔍</div>
@@ -119,7 +119,7 @@ export default function CoursesPage() {
                                         <h3 className="text-xl font-bold text-blue-900 mb-2 group-hover:text-orange-600 transition">
                                             {category.name}
                                         </h3>
-                                        <p className="text-gray-600 text-sm mb-3">
+                                        <p className="text-gray-600 text-sm mb-3 line-clamp-2">
                                             {category.description}
                                         </p>
                                         <div className="flex items-center justify-center gap-2 text-orange-500 font-semibold text-sm group-hover:gap-3 transition-all">
