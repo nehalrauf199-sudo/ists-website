@@ -3,13 +3,13 @@ import LayoutWrapper from './components/LayoutWrapper';
 import Script from 'next/script';
 
 export const metadata = {
-  title: 'ISTS - Institute of Safety & Technical Studies | OSHA, IOSH, HiQual, OTHM Certifications in Pakistan',
-  description: 'ISTS offers OSHA certification, IOSH safety courses, HiQual UK diplomas, and OTHM online diplomas. HEC approved institute for working professionals.',
+  title: 'ISTS - Institute of Safety & Technical Studies | OSHA, IOSH, HiQual Certifications in Pakistan',
+  description: 'ISTS offers OSHA certification, IOSH safety courses, HiQual UK diplomas, and online diplomas. HEC approved institute for working professionals.',
   keywords: 'OSHA certification, IOSH course, safety training',
   authors: [{ name: 'ISTS Institute' }],
   openGraph: {
     title: 'ISTS - Institute of Safety & Technical Studies',
-    description: 'Professional safety and technical certifications for career growth in Pakistan. OSHA, IOSH, HiQual, OTHM approved courses.',
+    description: 'Professional safety and technical certifications for career growth in Pakistan. OSHA, IOSH, HiQual approved courses.',
     url: 'https://ists.com',
     siteName: 'ISTS Institute',
     images: [{ url: '/logo.jpeg', width: 1200, height: 630 }],
