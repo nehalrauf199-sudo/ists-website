@@ -299,19 +299,37 @@ export default function AdminDashboard() {
                                                         <th className="p-4 text-left">Email</th>
                                                         <th className="p-4 text-left">Phone</th>
                                                         <th className="p-4 text-left">Course</th>
-                                                        <th className="p-4 text-left">CV</th>
+                                                        <th className="p-4 text-left">Files</th>
                                                         <th className="p-4 text-left">Actions</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     {filteredRegistrations.map((reg, idx) => (
                                                         <tr key={idx} className="border-b hover:bg-gray-50">
-                                                            <td className="p-4 text-sm">{new Date(reg.registeredAt).toLocaleDateString()}</td>
+                                                            <td className="p-4 text-sm">{new Date(reg.createdAt || reg.registeredAt).toLocaleDateString()}</td>
                                                             <td className="p-4 font-medium">{reg.name}</td>
                                                             <td className="p-4 text-sm text-blue-600">{reg.email}</td>
                                                             <td className="p-4 text-sm">{reg.phone}</td>
                                                             <td className="p-4 text-sm max-w-xs truncate">{reg.course}</td>
-                                                            <td className="p-4">{reg.cvFileName ? <a href={`/api/download/cv?file=${reg.cvFileName}`} target="_blank" className="text-orange-600 text-sm hover:underline">📄 Download CV</a> : <span className="text-gray-400">No CV</span>}</td>
+                                                            <td className="p-4">
+                                                                <div className="space-y-1">
+                                                                    {reg.cv && (
+                                                                        <a href={reg.cv} download={reg.cvFileName || 'cv'} className="text-orange-600 text-xs hover:underline block">📄 CV</a>
+                                                                    )}
+                                                                    {reg.idFront && (
+                                                                        <a href={reg.idFront} download={reg.idFrontFileName || 'id-front'} className="text-blue-600 text-xs hover:underline block">🪪 ID Front</a>
+                                                                    )}
+                                                                    {reg.idBack && (
+                                                                        <a href={reg.idBack} download={reg.idBackFileName || 'id-back'} className="text-blue-600 text-xs hover:underline block">🪪 ID Back</a>
+                                                                    )}
+                                                                    {reg.passport && (
+                                                                        <a href={reg.passport} download={reg.passportFileName || 'passport'} className="text-green-600 text-xs hover:underline block">🛂 Passport</a>
+                                                                    )}
+                                                                    {!reg.cv && !reg.idFront && !reg.idBack && !reg.passport && (
+                                                                        <span className="text-gray-400 text-xs">No files</span>
+                                                                    )}
+                                                                </div>
+                                                            </td>
                                                             <td className="p-4">
                                                                 <button onClick={() => deleteRegistration(reg._id)} className="bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded text-xs font-semibold transition">🗑️ Delete</button>
                                                             </td>
@@ -349,7 +367,7 @@ export default function AdminDashboard() {
                                                 <tbody>
                                                     {filteredContacts.map((contact, idx) => (
                                                         <tr key={idx} className="border-b hover:bg-gray-50">
-                                                            <td className="p-4 text-sm">{new Date(contact.submittedAt).toLocaleDateString()}</td>
+                                                            <td className="p-4 text-sm">{new Date(contact.submittedAt || contact.createdAt).toLocaleDateString()}</td>
                                                             <td className="p-4 font-medium">{contact.name}</td>
                                                             <td className="p-4 text-sm text-blue-600">{contact.email}</td>
                                                             <td className="p-4 text-sm">{contact.phone}</td>

@@ -1,6 +1,4 @@
 import { NextResponse } from 'next/server';
-import { writeFile, mkdir } from 'fs/promises';
-import path from 'path';
 import { connectDB } from '@/lib/db';
 import Registration from '@/models/Registration';
 
@@ -40,33 +38,23 @@ export async function POST(request) {
             );
         }
 
-        // Create uploads directory
-        const uploadDir = path.join(process.cwd(), 'public/uploads');
-        await mkdir(uploadDir, { recursive: true });
-
-        // Helper function to save file
-        const saveFile = async (file, prefix) => {
+        // Helper function to convert file to base64
+        const fileToBase64 = async (file) => {
             if (!file) return null;
-
             const bytes = await file.arrayBuffer();
             const buffer = Buffer.from(bytes);
-
-            const timestamp = Date.now();
-            const ext = path.extname(file.name);
-            const filename = `${prefix}_${timestamp}${ext}`;
-            const filepath = path.join(uploadDir, filename);
-
-            await writeFile(filepath, buffer);
-            return `/uploads/${filename}`;
+            const base64 = buffer.toString('base64');
+            const mimeType = file.type || 'application/octet-stream';
+            return `data:${mimeType};base64,${base64}`;
         };
 
-        // Save files
-        const cvPath = await saveFile(cvFile, 'cv');
-        const idFrontPath = await saveFile(idFrontFile, 'id_front');
-        const idBackPath = await saveFile(idBackFile, 'id_back');
-        const passportPath = await saveFile(passportFile, 'passport');
+        // Convert files to base64
+        const cvBase64 = await fileToBase64(cvFile);
+        const idFrontBase64 = await fileToBase64(idFrontFile);
+        const idBackBase64 = await fileToBase64(idBackFile);
+        const passportBase64 = await fileToBase64(passportFile);
 
-        // Create registration
+        // Create registration with base64 files
         const registration = new Registration({
             course,
             name,
@@ -75,10 +63,15 @@ export async function POST(request) {
             education,
             experience,
             message,
-            cv: cvPath,
-            idFront: idFrontPath,
-            idBack: idBackPath,
-            passport: passportPath,
+            cv: cvBase64,
+            cvFileName: cvFile.name,
+            cvFileType: cvFile.type,
+            idFront: idFrontBase64,
+            idFrontFileName: idFrontFile?.name,
+            idBack: idBackBase64,
+            idBackFileName: idBackFile?.name,
+            passport: passportBase64,
+            passportFileName: passportFile?.name,
             status: 'pending'
         });
 
