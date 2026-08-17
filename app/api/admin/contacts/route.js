@@ -12,4 +12,4 @@ export async function GET() {
         console.error('Error fetching contacts:', error);
         return NextResponse.json({ error: 'Failed to fetch contacts' }, { status: 500 });
     }
-}
+} 
