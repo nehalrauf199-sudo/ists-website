@@ -6,9 +6,9 @@ export default function Contact() {
         phone: '+92 308 5727897',
         email: 'info@ists-institute.com',
         officeHours: '24/7 Available',
-        facebook: '#',
-        instagram: '#',
-        whatsapp: '#'
+        facebook: 'https://www.facebook.com/share/1EjKrNWHVm/',
+        instagram: 'https://www.instagram.com/ists_official',
+        whatsapp: 'https://wa.me/923085727897'
     });
     const [formData, setFormData] = useState({
         name: '',
