@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 export default function ReviewForm() {
     const [formData, setFormData] = useState({
@@ -9,25 +9,9 @@ export default function ReviewForm() {
         rating: 5,
         comment: ''
     });
-    const [courses, setCourses] = useState([]);
-    const [loadingCourses, setLoadingCourses] = useState(true);
     const [submitting, setSubmitting] = useState(false);
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState('');
-
-    // Fetch courses from database
-    useEffect(() => {
-        fetch('/api/manage/courses')
-            .then(res => res.json())
-            .then(data => {
-                setCourses(data);
-                setLoadingCourses(false);
-            })
-            .catch(err => {
-                console.error('Error fetching courses:', err);
-                setLoadingCourses(false);
-            });
-    }, []);
 
     const handleChange = (e) => {
         setFormData({
@@ -36,10 +20,21 @@ export default function ReviewForm() {
         });
     };
 
+    const handleRating = (value) => {
+        setFormData({ ...formData, rating: value });
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setSubmitting(true);
         setError('');
+
+        // Validate required fields
+        if (!formData.name || !formData.email || !formData.course || !formData.rating || !formData.comment) {
+            setError('Please fill in all required fields');
+            setSubmitting(false);
+            return;
+        }
 
         try {
             const response = await fetch('/api/reviews', {
@@ -78,21 +73,13 @@ export default function ReviewForm() {
         );
     }
 
-    if (loadingCourses) {
-        return (
-            <div className="bg-white rounded-2xl shadow-lg p-6 text-center">
-                <div className="text-4xl mb-3">⏳</div>
-                <p className="text-gray-500">Loading courses...</p>
-            </div>
-        );
-    }
-
     return (
         <div className="bg-white rounded-2xl shadow-lg p-6">
             <h3 className="text-2xl font-bold text-blue-900 mb-4">Share Your Experience</h3>
             <p className="text-gray-600 mb-6">Help other students make the right choice</p>
 
             <form onSubmit={handleSubmit} className="space-y-4">
+                {/* Name */}
                 <div>
                     <label className="block text-gray-700 font-medium mb-1">Your Name *</label>
                     <input
@@ -106,6 +93,7 @@ export default function ReviewForm() {
                     />
                 </div>
 
+                {/* Email */}
                 <div>
                     <label className="block text-gray-700 font-medium mb-1">Email *</label>
                     <input
@@ -119,23 +107,22 @@ export default function ReviewForm() {
                     />
                 </div>
 
+                {/* Course - Manual Input (No Dropdown) */}
                 <div>
                     <label className="block text-gray-700 font-medium mb-1">Course Taken *</label>
-                    <select
+                    <input
+                        type="text"
                         name="course"
                         value={formData.course}
                         onChange={handleChange}
                         required
                         className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
-                    >
-                        <option value="">Select a course</option>
-                        {courses.map((course, idx) => (
-                            <option key={idx} value={course.name}>{course.name}</option>
-                        ))}
-                    </select>
-                    <p className="text-xs text-gray-500 mt-1">{courses.length} courses available</p>
+                        placeholder="e.g., OSHA 30-Hour, IOSH Managing Safely, etc."
+                    />
+                    <p className="text-xs text-gray-400 mt-1">Type the course name you completed</p>
                 </div>
 
+                {/* Rating */}
                 <div>
                     <label className="block text-gray-700 font-medium mb-1">Rating *</label>
                     <div className="flex gap-2">
@@ -143,8 +130,9 @@ export default function ReviewForm() {
                             <button
                                 key={star}
                                 type="button"
-                                onClick={() => setFormData({ ...formData, rating: star })}
-                                className={`text-3xl ${star <= formData.rating ? 'text-yellow-400' : 'text-gray-300'} hover:scale-110 transition`}
+                                onClick={() => handleRating(star)}
+                                className={`text-3xl transition ${star <= formData.rating ? 'text-yellow-400' : 'text-gray-300 hover:text-yellow-300'
+                                    }`}
                             >
                                 ★
                             </button>
@@ -152,6 +140,7 @@ export default function ReviewForm() {
                     </div>
                 </div>
 
+                {/* Review Comment */}
                 <div>
                     <label className="block text-gray-700 font-medium mb-1">Your Review *</label>
                     <textarea
@@ -170,7 +159,7 @@ export default function ReviewForm() {
                 <button
                     type="submit"
                     disabled={submitting}
-                    className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 rounded-lg transition"
+                    className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 rounded-lg transition disabled:opacity-50"
                 >
                     {submitting ? 'Submitting...' : 'Submit Review'}
                 </button>

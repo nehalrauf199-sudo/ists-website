@@ -70,7 +70,6 @@ export default function LayoutWrapper({ children }) {
                         <a href="/about" style={{ color: 'white', textDecoration: 'none' }}>About</a>
                         <a href="/contact" style={{ color: 'white', textDecoration: 'none' }}>Contact</a>
                         <a href="/register" style={{ backgroundColor: '#f97316', color: 'white', padding: '6px 16px', borderRadius: '20px', textDecoration: 'none' }}>Register</a>
-                        <a href="/admin" style={{ backgroundColor: '#2563eb', color: 'white', padding: '6px 12px', borderRadius: '8px', textDecoration: 'none' }}>👑 Admin</a>
                     </div>
                 </div>
             </div>
