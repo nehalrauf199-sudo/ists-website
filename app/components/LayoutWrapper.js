@@ -60,7 +60,6 @@ export default function LayoutWrapper({ children }) {
                             <a href="/about" style={{ display: 'block', color: 'white', padding: '8px', textDecoration: 'none' }}>About</a>
                             <a href="/contact" style={{ display: 'block', color: 'white', padding: '8px', textDecoration: 'none' }}>Contact</a>
                             <a href="/register" style={{ display: 'block', backgroundColor: '#f97316', color: 'white', padding: '8px', textAlign: 'center', borderRadius: '20px', marginTop: '8px', textDecoration: 'none' }}>Register</a>
-                            <a href="/admin" style={{ display: 'block', backgroundColor: '#2563eb', color: 'white', padding: '8px', textAlign: 'center', borderRadius: '8px', marginTop: '8px', textDecoration: 'none' }}>👑 Admin</a>
                         </div>
                     </div>
 
