@@ -40,7 +40,7 @@ export async function POST(request) {
             );
         }
 
-        // Create uploads directory if it doesn't exist
+        // Create uploads directory
         const uploadDir = path.join(process.cwd(), 'public/uploads');
         await mkdir(uploadDir, { recursive: true });
 
@@ -51,7 +51,6 @@ export async function POST(request) {
             const bytes = await file.arrayBuffer();
             const buffer = Buffer.from(bytes);
 
-            // Create unique filename
             const timestamp = Date.now();
             const ext = path.extname(file.name);
             const filename = `${prefix}_${timestamp}${ext}`;
@@ -61,13 +60,13 @@ export async function POST(request) {
             return `/uploads/${filename}`;
         };
 
-        // Save all files
+        // Save files
         const cvPath = await saveFile(cvFile, 'cv');
         const idFrontPath = await saveFile(idFrontFile, 'id_front');
         const idBackPath = await saveFile(idBackFile, 'id_back');
         const passportPath = await saveFile(passportFile, 'passport');
 
-        // Create registration record
+        // Create registration
         const registration = new Registration({
             course,
             name,
@@ -86,14 +85,14 @@ export async function POST(request) {
         await registration.save();
 
         return NextResponse.json(
-            { message: 'Registration submitted successfully', data: registration },
+            { message: 'Registration submitted successfully' },
             { status: 201 }
         );
 
     } catch (error) {
         console.error('Registration error:', error);
         return NextResponse.json(
-            { error: 'Internal server error' },
+            { error: error.message || 'Internal server error' },
             { status: 500 }
         );
     }
