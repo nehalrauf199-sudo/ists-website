@@ -6,7 +6,8 @@ const ReviewSchema = new mongoose.Schema({
         required: [true, 'Name is required']
     },
     email: {
-        type: String
+        type: String,
+        required: [true, 'Email is required']
     },
     course: {
         type: String,
