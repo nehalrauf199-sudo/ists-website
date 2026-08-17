@@ -13,23 +13,12 @@ export default function AdminDashboard() {
     const [registrations, setRegistrations] = useState([]);
     const [contacts, setContacts] = useState([]);
     const [settings, setSettings] = useState(null);
-    const [courses, setCourses] = useState([]);
     const [reviews, setReviews] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [editingCourse, setEditingCourse] = useState(null);
-    const [showCourseForm, setShowCourseForm] = useState(false);
-    const [courseSearch, setCourseSearch] = useState('');
     const [regSearch, setRegSearch] = useState('');
     const [contactSearch, setContactSearch] = useState('');
     const [reviewSearch, setReviewSearch] = useState('');
     const [saveMessage, setSaveMessage] = useState('');
-    const [courseForm, setCourseForm] = useState({
-        name: '', category: '', hours: '', description: '',
-        content: [], outcomes: [], eligibility: '', modules: [], learningObjectives: [],
-        sections: [], faqs: [],
-        seoTitle: '', metaDescription: '', focusKeyword: '',
-        featuredImagePreview: null, featuredImageFile: null,
-    });
 
     const ADMIN_PASSWORD = 'arshan2002';
 
@@ -71,22 +60,25 @@ export default function AdminDashboard() {
     const fetchData = async () => {
         setLoading(true);
         try {
-            const [regRes, contactRes, settingsRes, coursesRes, reviewsRes] = await Promise.all([
+            const [regRes, contactRes, settingsRes, reviewsRes] = await Promise.all([
                 fetch('/api/admin/registrations'),
                 fetch('/api/admin/contacts'),
                 fetch('/api/admin/settings'),
-                fetch('/api/manage/courses'),
                 fetch('/api/admin/reviews'),
             ]);
             const regData = await regRes.json();
             const contactData = await contactRes.json();
             const settingsData = await settingsRes.json();
-            const coursesData = await coursesRes.json();
             const reviewsData = await reviewsRes.json();
             setRegistrations(Array.isArray(regData) ? regData : []);
             setContacts(Array.isArray(contactData) ? contactData : []);
-            setSettings(settingsData);
-            setCourses(Array.isArray(coursesData) ? coursesData : []);
+            setSettings(settingsData || {
+                phone: '+92 308 5727897',
+                email: 'info@ists-institute.com',
+                officeHours: '24/7 Available',
+                footerText: 'Institute of Safety & Technical Studies',
+                address: 'Pakistan',
+            });
             setReviews(Array.isArray(reviewsData) ? reviewsData : []);
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -122,164 +114,34 @@ export default function AdminDashboard() {
         setSettings({ ...settings, [e.target.name]: e.target.value });
     };
 
-    const handleCourseInputChange = (e) => {
-        setCourseForm({ ...courseForm, [e.target.name]: e.target.value });
-    };
-
-    const handleArrayInput = (field, value) => {
-        const items = value.split('\n').filter(item => item.trim());
-        setCourseForm({ ...courseForm, [field]: items });
-    };
-
-    const addSection = () => {
-        setCourseForm({
-            ...courseForm,
-            sections: [...courseForm.sections, { heading: '', description: '' }],
-        });
-    };
-
-    const updateSection = (index, field, value) => {
-        const updated = [...courseForm.sections];
-        updated[index][field] = value;
-        setCourseForm({ ...courseForm, sections: updated });
-    };
-
-    const removeSection = (index) => {
-        const updated = [...courseForm.sections];
-        updated.splice(index, 1);
-        setCourseForm({ ...courseForm, sections: updated });
-    };
-
-    const addFaq = () => {
-        setCourseForm({
-            ...courseForm,
-            faqs: [...courseForm.faqs, { question: '', answer: '' }],
-        });
-    };
-
-    const updateFaq = (index, field, value) => {
-        const updated = [...courseForm.faqs];
-        updated[index][field] = value;
-        setCourseForm({ ...courseForm, faqs: updated });
-    };
-
-    const removeFaq = (index) => {
-        const updated = [...courseForm.faqs];
-        updated.splice(index, 1);
-        setCourseForm({ ...courseForm, faqs: updated });
-    };
-
-    const handleFeaturedImageUpload = (e) => {
+    const handleSignatureUpload = async (e) => {
         const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setCourseForm(prev => ({
-                    ...prev,
-                    featuredImagePreview: reader.result,
-                    featuredImageFile: file,
-                }));
-            };
-            reader.readAsDataURL(file);
+        if (!file) return;
+        if (!file.type.includes('image/png') && !file.type.includes('image/jpeg')) {
+            alert('Please upload PNG or JPG image');
+            return;
         }
-    };
-
-    const saveCourse = async () => {
+        if (file.size > 2 * 1024 * 1024) {
+            alert('File size too large. Max 2MB');
+            return;
+        }
+        const formData = new FormData();
+        formData.append('signature', file);
         try {
-            const formData = new FormData();
-            formData.append('name', courseForm.name);
-            formData.append('category', courseForm.category);
-            formData.append('hours', courseForm.hours);
-            formData.append('description', courseForm.description);
-            formData.append('content', courseForm.content.join('\n'));
-            formData.append('outcomes', courseForm.outcomes.join('\n'));
-            formData.append('eligibility', courseForm.eligibility);
-            formData.append('modules', courseForm.modules.join('\n'));
-            formData.append('learningObjectives', courseForm.learningObjectives.join('\n'));
-            formData.append('sections', JSON.stringify(courseForm.sections));
-            formData.append('faqs', JSON.stringify(courseForm.faqs));
-            formData.append('seoTitle', courseForm.seoTitle);
-            formData.append('metaDescription', courseForm.metaDescription);
-            formData.append('focusKeyword', courseForm.focusKeyword);
-            if (courseForm.featuredImageFile) {
-                formData.append('featuredImage', courseForm.featuredImageFile);
-            }
-            if (editingCourse) formData.append('id', editingCourse._id);
-
-            const response = await fetch('/api/manage/courses', {
-                method: editingCourse ? 'PUT' : 'POST',
+            const response = await fetch('/api/admin/settings', {
+                method: 'PUT',
                 body: formData,
             });
-
-            if (response.ok) {
-                alert(editingCourse ? 'Course updated!' : 'Course added!');
-                setShowCourseForm(false);
-                setEditingCourse(null);
-                setCourseForm({
-                    name: '', category: '', hours: '', description: '',
-                    content: [], outcomes: [], eligibility: '', modules: [], learningObjectives: [],
-                    sections: [], faqs: [],
-                    seoTitle: '', metaDescription: '', focusKeyword: '',
-                    featuredImagePreview: null, featuredImageFile: null,
-                });
-                fetchData();
+            const result = await response.json();
+            if (response.ok && result.success) {
+                setSettings(result.data);
+                alert('Signature uploaded successfully!');
             } else {
-                alert('Failed to save course');
+                alert('Failed to upload signature: ' + (result.error || 'Unknown error'));
             }
         } catch (error) {
-            console.error('Error saving course:', error);
-            alert('Failed to save course');
-        }
-    };
-
-    const deleteCourse = async (id) => {
-        if (confirm('Are you sure you want to delete this course?')) {
-            try {
-                const response = await fetch(`/api/manage/courses?id=${id}`, { method: 'DELETE' });
-                if (response.ok) {
-                    alert('Course deleted!');
-                    fetchData();
-                } else {
-                    alert('Failed to delete course');
-                }
-            } catch (error) {
-                console.error('Error deleting course:', error);
-                alert('Failed to delete course');
-            }
-        }
-    };
-
-    const editCourse = async (course) => {
-        try {
-            const res = await fetch(`/api/manage/courses?id=${course._id}`);
-            if (!res.ok) {
-                alert('Failed to load course details');
-                return;
-            }
-            const fullCourse = await res.json();
-            setEditingCourse(fullCourse);
-            setCourseForm({
-                name: fullCourse.name || '',
-                category: fullCourse.category || '',
-                hours: fullCourse.hours || '',
-                description: fullCourse.description || '',
-                content: fullCourse.content || [],
-                outcomes: fullCourse.outcomes || [],
-                eligibility: fullCourse.eligibility || '',
-                modules: fullCourse.modules || [],
-                learningObjectives: fullCourse.learningObjectives || [],
-                sections: fullCourse.sections || [],
-                faqs: fullCourse.faqs || [],
-                seoTitle: fullCourse.seoTitle || '',
-                metaDescription: fullCourse.metaDescription || '',
-                focusKeyword: fullCourse.focusKeyword || '',
-                featuredImagePreview: fullCourse.featuredImage || null,
-                featuredImageFile: null,
-            });
-            setShowCourseForm(true);
-        } catch (error) {
-            console.error('Error editing course:', error);
-            alert('Failed to load course details');
+            console.error('Error uploading signature:', error);
+            alert('Failed to upload signature');
         }
     };
 
@@ -319,66 +181,6 @@ export default function AdminDashboard() {
         }
     };
 
-    const issueCertificate = async (reg) => {
-        const completionDate = prompt('Enter completion date (YYYY-MM-DD):', new Date().toISOString().split('T')[0]);
-        if (!completionDate) return;
-        if (!confirm(`Issue certificate for ${reg.name} for course: ${reg.course}?`)) return;
-        try {
-            const response = await fetch('/api/certificate', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    registrationId: reg._id,
-                    studentName: reg.name,
-                    courseName: reg.course,
-                    completionDate: completionDate,
-                    studentEmail: reg.email,
-                }),
-            });
-            const result = await response.json();
-            if (response.ok) {
-                alert(`✅ Certificate issued successfully!\nCertificate ID: ${result.certificateId}\nEmail sent to: ${reg.email}`);
-            } else {
-                alert('❌ Failed to issue certificate: ' + (result.error || 'Unknown error'));
-            }
-        } catch (error) {
-            console.error('Error issuing certificate:', error);
-            alert('❌ Failed to issue certificate');
-        }
-    };
-
-    const handleSignatureUpload = async (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
-        if (!file.type.includes('image/png') && !file.type.includes('image/jpeg')) {
-            alert('Please upload PNG or JPG image');
-            return;
-        }
-        if (file.size > 2 * 1024 * 1024) {
-            alert('File size too large. Max 2MB');
-            return;
-        }
-        const formData = new FormData();
-        formData.append('signature', file);
-        try {
-            const response = await fetch('/api/admin/settings', {
-                method: 'PUT',
-                body: formData,
-            });
-            const result = await response.json();
-            if (response.ok && result.success) {
-                setSettings(result.data);
-                alert('Signature uploaded successfully!');
-            } else {
-                alert('Failed to upload signature: ' + (result.error || 'Unknown error'));
-            }
-        } catch (error) {
-            console.error('Error uploading signature:', error);
-            alert('Failed to upload signature');
-        }
-    };
-
-    // ─── DELETE Registration ───
     const deleteRegistration = async (id) => {
         if (!confirm('Are you sure you want to delete this registration?')) return;
         try {
@@ -394,12 +196,6 @@ export default function AdminDashboard() {
             alert('Failed to delete registration');
         }
     };
-
-    const filteredCourses = courses.filter(course =>
-        course.name?.toLowerCase().includes(courseSearch.toLowerCase()) ||
-        course.category?.toLowerCase().includes(courseSearch.toLowerCase()) ||
-        course.hours?.toLowerCase().includes(courseSearch.toLowerCase())
-    );
 
     const filteredRegistrations = registrations.filter(reg =>
         reg.name?.toLowerCase().includes(regSearch.toLowerCase()) ||
@@ -466,7 +262,7 @@ export default function AdminDashboard() {
                 <div className="max-w-7xl mx-auto flex justify-between items-center flex-wrap gap-4">
                     <div>
                         <h1 className="text-2xl font-bold">Admin Dashboard</h1>
-                        <p className="text-blue-100 text-sm">Manage registrations, reviews, and site settings</p>
+                        <p className="text-blue-100 text-sm">Manage registrations, contacts, reviews, and site settings</p>
                     </div>
                     <button onClick={() => setIsLoggedIn(false)} className="bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg transition">Logout</button>
                 </div>
@@ -504,7 +300,6 @@ export default function AdminDashboard() {
                                                         <th className="p-4 text-left">Phone</th>
                                                         <th className="p-4 text-left">Course</th>
                                                         <th className="p-4 text-left">CV</th>
-                                                        <th className="p-4 text-left">Certificate</th>
                                                         <th className="p-4 text-left">Actions</th>
                                                     </tr>
                                                 </thead>
@@ -517,14 +312,8 @@ export default function AdminDashboard() {
                                                             <td className="p-4 text-sm">{reg.phone}</td>
                                                             <td className="p-4 text-sm max-w-xs truncate">{reg.course}</td>
                                                             <td className="p-4">{reg.cvFileName ? <a href={`/api/download/cv?file=${reg.cvFileName}`} target="_blank" className="text-orange-600 text-sm hover:underline">📄 Download CV</a> : <span className="text-gray-400">No CV</span>}</td>
-                                                            <td className="p-4"></td>
                                                             <td className="p-4">
-                                                                <button
-                                                                    onClick={() => deleteRegistration(reg._id)}
-                                                                    className="bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded text-xs font-semibold transition"
-                                                                >
-                                                                    🗑️ Delete
-                                                                </button>
+                                                                <button onClick={() => deleteRegistration(reg._id)} className="bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded text-xs font-semibold transition">🗑️ Delete</button>
                                                             </td>
                                                         </tr>
                                                     ))}
@@ -575,8 +364,6 @@ export default function AdminDashboard() {
                             </div>
                         )}
 
-
-
                         {/* Reviews Tab */}
                         {activeTab === 'reviews' && (
                             <div>
@@ -610,10 +397,7 @@ export default function AdminDashboard() {
                                                             <td className="p-4 text-sm max-w-xs truncate">{review.comment}</td>
                                                             <td className="p-4"><span className={`px-2 py-1 rounded text-xs font-semibold ${review.status === 'approved' ? 'bg-green-100 text-green-800' : review.status === 'rejected' ? 'bg-red-100 text-red-800' : 'bg-yellow-100 text-yellow-800'}`}>{review.status}</span></td>
                                                             <td className="p-4">
-                                                                {review.status === 'pending' && (<>
-                                                                    <button onClick={() => updateReviewStatus(review._id, 'approve')} className="bg-green-500 text-white px-2 py-1 rounded text-xs mr-1 hover:bg-green-600">✅ Approve</button>
-                                                                    <button onClick={() => updateReviewStatus(review._id, 'reject')} className="bg-red-500 text-white px-2 py-1 rounded text-xs mr-1 hover:bg-red-600">❌ Reject</button>
-                                                                </>)}
+                                                                {review.status === 'pending' && (<> <button onClick={() => updateReviewStatus(review._id, 'approve')} className="bg-green-500 text-white px-2 py-1 rounded text-xs mr-1 hover:bg-green-600">✅ Approve</button> <button onClick={() => updateReviewStatus(review._id, 'reject')} className="bg-red-500 text-white px-2 py-1 rounded text-xs mr-1 hover:bg-red-600">❌ Reject</button> </>)}
                                                                 <button onClick={() => deleteReview(review._id)} className="bg-gray-500 text-white px-2 py-1 rounded text-xs hover:bg-gray-600">🗑️ Delete</button>
                                                             </td>
                                                         </tr>
@@ -634,10 +418,10 @@ export default function AdminDashboard() {
                                     <div><label className="block text-gray-700 font-medium mb-1">Phone Number</label><input type="text" name="phone" value={settings.phone || ''} onChange={handleSettingsChange} className="w-full p-2 border rounded" /></div>
                                     <div><label className="block text-gray-700 font-medium mb-1">Email Address</label><input type="email" name="email" value={settings.email || ''} onChange={handleSettingsChange} className="w-full p-2 border rounded" /></div>
                                     <div><label className="block text-gray-700 font-medium mb-1">Office Hours</label><input type="text" name="officeHours" value={settings.officeHours || ''} onChange={handleSettingsChange} className="w-full p-2 border rounded" /></div>
-                                    <div><label className="block text-gray-700 font-medium mb-1">Director Name</label><input type="text" name="directorName" value={settings.directorName || 'Arshan Rauf'} onChange={handleSettingsChange} className="w-full p-2 border rounded" /></div>
-                                    <div><label className="block text-gray-700 font-medium mb-1">Director Title</label><input type="text" name="directorTitle" value={settings.directorTitle || 'Director'} onChange={handleSettingsChange} className="w-full p-2 border rounded" /></div>
-                                    <div><label className="block text-gray-700 font-medium mb-1">Academic Director Name</label><input type="text" name="academicDirectorName" value={settings.academicDirectorName || 'Dr. Sarah Khan'} onChange={handleSettingsChange} className="w-full p-2 border rounded" /></div>
-                                    <div><label className="block text-gray-700 font-medium mb-1">Academic Director Title</label><input type="text" name="academicDirectorTitle" value={settings.academicDirectorTitle || 'Academic Director'} onChange={handleSettingsChange} className="w-full p-2 border rounded" /></div>
+                                    <div><label className="block text-gray-700 font-medium mb-1">Director Name</label><input type="text" name="directorName" value={settings.directorName || ''} onChange={handleSettingsChange} className="w-full p-2 border rounded" /></div>
+                                    <div><label className="block text-gray-700 font-medium mb-1">Director Title</label><input type="text" name="directorTitle" value={settings.directorTitle || ''} onChange={handleSettingsChange} className="w-full p-2 border rounded" /></div>
+                                    <div><label className="block text-gray-700 font-medium mb-1">Academic Director Name</label><input type="text" name="academicDirectorName" value={settings.academicDirectorName || ''} onChange={handleSettingsChange} className="w-full p-2 border rounded" /></div>
+                                    <div><label className="block text-gray-700 font-medium mb-1">Academic Director Title</label><input type="text" name="academicDirectorTitle" value={settings.academicDirectorTitle || ''} onChange={handleSettingsChange} className="w-full p-2 border rounded" /></div>
                                     <div><label className="block text-gray-700 font-medium mb-1">Director Signature</label><input type="file" accept="image/png,image/jpeg" onChange={handleSignatureUpload} className="w-full p-2 border rounded" /></div>
                                     <div><label className="block text-gray-700 font-medium mb-1">Facebook URL</label><input type="text" name="facebook" value={settings.facebook || ''} onChange={handleSettingsChange} className="w-full p-2 border rounded" /></div>
                                     <div><label className="block text-gray-700 font-medium mb-1">Instagram URL</label><input type="text" name="instagram" value={settings.instagram || ''} onChange={handleSettingsChange} className="w-full p-2 border rounded" /></div>
