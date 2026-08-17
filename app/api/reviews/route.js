@@ -2,6 +2,27 @@ import { NextResponse } from 'next/server';
 import { connectDB } from '@/lib/db';
 import Review from '@/models/Review';
 
+// GET - Fetch approved reviews for frontend
+export async function GET() {
+    try {
+        await connectDB();
+
+        // Only fetch approved reviews
+        const reviews = await Review.find({ status: 'approved' })
+            .sort({ createdAt: -1 })
+            .limit(10);
+
+        return NextResponse.json(reviews);
+
+    } catch (error) {
+        console.error('Error fetching reviews:', error);
+        return NextResponse.json(
+            { error: 'Failed to fetch reviews' },
+            { status: 500 }
+        );
+    }
+}
+
 // POST - Submit a new review
 export async function POST(request) {
     try {
@@ -17,7 +38,7 @@ export async function POST(request) {
             );
         }
 
-        // Create review
+        // Create review with pending status
         const review = new Review({
             name,
             email,
