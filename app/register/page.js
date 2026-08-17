@@ -1,5 +1,7 @@
 'use client';
+
 import { useState, useEffect } from 'react';
+import { getAllCourses } from '../courses/data/courses';
 
 export default function Register() {
     const [formData, setFormData] = useState({
@@ -11,51 +13,32 @@ export default function Register() {
         experience: '',
         message: ''
     });
-    const [file, setFile] = useState(null);
+    const [cvFile, setCvFile] = useState(null);
+    const [idFrontFile, setIdFrontFile] = useState(null);
+    const [idBackFile, setIdBackFile] = useState(null);
+    const [passportFile, setPassportFile] = useState(null);
     const [submitting, setSubmitting] = useState(false);
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState('');
     const [courseSearch, setCourseSearch] = useState('');
     const [showCourseDropdown, setShowCourseDropdown] = useState(false);
     const [courses, setCourses] = useState([]);
-    const [loadingCourses, setLoadingCourses] = useState(true);
 
-    // Fetch courses from database – with error handling and array validation
+    // Load courses from hardcoded data
     useEffect(() => {
-        const fetchCourses = async () => {
-            try {
-                const response = await fetch('/api/manage/courses');
-                if (!response.ok) {
-                    throw new Error('Failed to fetch courses');
-                }
-                const data = await response.json();
-                // Ensure data is an array
-                if (Array.isArray(data)) {
-                    setCourses(data);
-                } else {
-                    console.error('API did not return an array:', data);
-                    setCourses([]);
-                }
-            } catch (err) {
-                console.error('Error fetching courses:', err);
-                setCourses([]);
-            } finally {
-                setLoadingCourses(false);
-            }
-        };
-        fetchCourses();
+        const allCourses = getAllCourses();
+        setCourses(allCourses);
     }, []);
 
-    // Filter courses based on search – only if courses is an array
-    const filteredCourses = Array.isArray(courses)
-        ? courses.filter(course =>
-            course.name.toLowerCase().includes(courseSearch.toLowerCase())
-        )
-        : [];
+    // Filter courses based on search
+    const filteredCourses = courses.filter(course =>
+        course.name.toLowerCase().includes(courseSearch.toLowerCase()) ||
+        course.categoryName.toLowerCase().includes(courseSearch.toLowerCase())
+    );
 
     const handleCourseSelect = (courseName) => {
         setFormData({ ...formData, course: courseName });
-        setCourseSearch('');
+        setCourseSearch(courseName);
         setShowCourseDropdown(false);
     };
 
@@ -66,12 +49,28 @@ export default function Register() {
         });
     };
 
-    const handleFileChange = (e) => {
-        setFile(e.target.files[0]);
+    const handleFileChange = (e, setFileFunc) => {
+        const file = e.target.files[0];
+        if (file) {
+            // Validate file size (5MB max)
+            if (file.size > 5 * 1024 * 1024) {
+                alert('File size must be less than 5MB');
+                e.target.value = '';
+                return;
+            }
+            setFileFunc(file);
+        }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Validate CV is required
+        if (!cvFile) {
+            setError('Please upload your CV/Resume (Required)');
+            return;
+        }
+
         setSubmitting(true);
         setError('');
 
@@ -83,9 +82,12 @@ export default function Register() {
         data.append('education', formData.education);
         data.append('experience', formData.experience);
         data.append('message', formData.message);
-        if (file) {
-            data.append('cv', file);
-        }
+
+        // Append files
+        if (cvFile) data.append('cv', cvFile);
+        if (idFrontFile) data.append('idFront', idFrontFile);
+        if (idBackFile) data.append('idBack', idBackFile);
+        if (passportFile) data.append('passport', passportFile);
 
         try {
             const response = await fetch('/api/register', {
@@ -104,7 +106,13 @@ export default function Register() {
                     experience: '',
                     message: ''
                 });
-                setFile(null);
+                setCvFile(null);
+                setIdFrontFile(null);
+                setIdBackFile(null);
+                setPassportFile(null);
+                setCourseSearch('');
+                // Reset file inputs
+                document.querySelectorAll('input[type="file"]').forEach(input => input.value = '');
             } else {
                 const result = await response.json();
                 setError(result.error || 'Something went wrong');
@@ -134,7 +142,6 @@ export default function Register() {
     return (
         <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-12 px-4">
             <div className="max-w-4xl mx-auto">
-
                 {/* Header */}
                 <div className="text-center mb-8">
                     <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-900 to-orange-600 bg-clip-text text-transparent">
@@ -147,14 +154,13 @@ export default function Register() {
                 {/* Registration Form */}
                 <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
                     <form onSubmit={handleSubmit} className="p-8">
-
                         {/* Course Selection with Search */}
                         <div className="mb-6 relative">
                             <label className="block text-blue-900 font-bold mb-2">Select Course *</label>
                             <div className="relative">
                                 <input
                                     type="text"
-                                    value={formData.course || courseSearch}
+                                    value={courseSearch}
                                     onChange={(e) => {
                                         setCourseSearch(e.target.value);
                                         setShowCourseDropdown(true);
@@ -163,11 +169,10 @@ export default function Register() {
                                         }
                                     }}
                                     onFocus={() => setShowCourseDropdown(true)}
-                                    placeholder={loadingCourses ? "Loading courses..." : "🔍 Search for a course..."}
-                                    disabled={loadingCourses}
+                                    placeholder="🔍 Search for a course..."
                                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                                 />
-                                {!loadingCourses && showCourseDropdown && courseSearch && (
+                                {showCourseDropdown && courseSearch && (
                                     <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto">
                                         {filteredCourses.length > 0 ? (
                                             filteredCourses.map((course, index) => (
@@ -176,12 +181,13 @@ export default function Register() {
                                                     onClick={() => handleCourseSelect(course.name)}
                                                     className="px-4 py-2 hover:bg-orange-50 cursor-pointer border-b border-gray-100 text-sm"
                                                 >
-                                                    {course.name}
+                                                    <div className="font-medium">{course.name}</div>
+                                                    <div className="text-xs text-gray-500">{course.categoryName}</div>
                                                 </div>
                                             ))
                                         ) : (
                                             <div className="px-4 py-2 text-gray-500 text-sm">
-                                                No courses found. Type another name...
+                                                No courses found. You can type any course name.
                                             </div>
                                         )}
                                     </div>
@@ -193,7 +199,7 @@ export default function Register() {
                                 </p>
                             )}
                             <p className="text-sm text-gray-500 mt-1">
-                                {loadingCourses ? 'Loading courses...' : `${courses.length} courses available. Type to search.`}
+                                {courses.length} courses available. Type to search or enter manually.
                             </p>
                         </div>
 
@@ -266,17 +272,65 @@ export default function Register() {
                             />
                         </div>
 
-                        {/* CV Upload */}
+                        {/* CV Upload - Required */}
                         <div className="mb-6">
-                            <label className="block text-blue-900 font-bold mb-2">Upload CV / Resume *</label>
+                            <label className="block text-blue-900 font-bold mb-2">
+                                Upload CV / Resume *
+                            </label>
                             <input
                                 type="file"
-                                onChange={handleFileChange}
+                                onChange={(e) => handleFileChange(e, setCvFile)}
                                 accept=".pdf,.doc,.docx"
                                 required
                                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-orange-500 file:text-white hover:file:bg-orange-600"
                             />
-                            <p className="text-sm text-gray-500 mt-1">Accepted formats: PDF, DOC, DOCX (Max 5MB)</p>
+                            <p className="text-sm text-gray-500 mt-1">Accepted formats: PDF, DOC, DOCX (Max 5MB) - <span className="text-red-500">Required</span></p>
+                            {cvFile && <p className="text-sm text-green-600 mt-1">✓ {cvFile.name} uploaded</p>}
+                        </div>
+
+                        {/* ID Card Front - Optional */}
+                        <div className="mb-6">
+                            <label className="block text-blue-900 font-bold mb-2">
+                                ID Card (Front) - Optional
+                            </label>
+                            <input
+                                type="file"
+                                onChange={(e) => handleFileChange(e, setIdFrontFile)}
+                                accept="image/*,.pdf"
+                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-orange-500 file:text-white hover:file:bg-orange-600"
+                            />
+                            <p className="text-sm text-gray-500 mt-1">Accepted: JPG, PNG, PDF (Max 5MB)</p>
+                            {idFrontFile && <p className="text-sm text-green-600 mt-1">✓ {idFrontFile.name} uploaded</p>}
+                        </div>
+
+                        {/* ID Card Back - Optional */}
+                        <div className="mb-6">
+                            <label className="block text-blue-900 font-bold mb-2">
+                                ID Card (Back) - Optional
+                            </label>
+                            <input
+                                type="file"
+                                onChange={(e) => handleFileChange(e, setIdBackFile)}
+                                accept="image/*,.pdf"
+                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-orange-500 file:text-white hover:file:bg-orange-600"
+                            />
+                            <p className="text-sm text-gray-500 mt-1">Accepted: JPG, PNG, PDF (Max 5MB)</p>
+                            {idBackFile && <p className="text-sm text-green-600 mt-1">✓ {idBackFile.name} uploaded</p>}
+                        </div>
+
+                        {/* Passport Photo - Optional */}
+                        <div className="mb-6">
+                            <label className="block text-blue-900 font-bold mb-2">
+                                Passport Photo - Optional
+                            </label>
+                            <input
+                                type="file"
+                                onChange={(e) => handleFileChange(e, setPassportFile)}
+                                accept="image/*"
+                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-orange-500 file:text-white hover:file:bg-orange-600"
+                            />
+                            <p className="text-sm text-gray-500 mt-1">Accepted: JPG, PNG (Max 2MB)</p>
+                            {passportFile && <p className="text-sm text-green-600 mt-1">✓ {passportFile.name} uploaded</p>}
                         </div>
 
                         {/* Additional Message */}
@@ -302,7 +356,7 @@ export default function Register() {
                         {/* Submit Button */}
                         <button
                             type="submit"
-                            disabled={submitting || !formData.course}
+                            disabled={submitting}
                             className="w-full bg-gradient-to-r from-blue-900 to-orange-600 text-white font-bold py-3 px-6 rounded-lg hover:shadow-lg transition duration-300 disabled:opacity-50"
                         >
                             {submitting ? 'Submitting...' : 'Submit Registration'}
