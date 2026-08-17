@@ -7,7 +7,8 @@ import SearchBar from '../../components/SearchBar';
 import { useState } from 'react';
 
 export default function CategoryPage({ params }) {
-    const { category } = params;
+    // UNWRAP params using React.use() - REQUIRED for Next.js 16
+    const { category } = React.use(params);
     const categoryData = getCategoryById(category);
     const [searchTerm, setSearchTerm] = useState('');
 

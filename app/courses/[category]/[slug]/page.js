@@ -1,20 +1,14 @@
-// app/courses/[category]/[slug]/page.js
+'use client';
+
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { getCategoryById, getAllCourses } from '../../data/courses';
+import { getCategoryById } from '../../data/courses';
 import { FaArrowLeft, FaClipboardList, FaBook, FaGraduationCap, FaRocket } from 'react-icons/fa';
-
-// Generate static params for all course pages
-export async function generateStaticParams() {
-    const allCourses = getAllCourses();
-    return allCourses.map((course) => ({
-        category: course.category,
-        slug: course.slug,
-    }));
-}
+import React from 'react';
 
 export default function CourseDetailPage({ params }) {
-    const { category, slug } = params;
+    // UNWRAP params using React.use() - REQUIRED for Next.js 16
+    const { category, slug } = React.use(params);
     const categoryData = getCategoryById(category);
 
     if (!categoryData) {
@@ -29,7 +23,6 @@ export default function CourseDetailPage({ params }) {
 
     return (
         <div className="min-h-screen bg-gray-50">
-            {/* Hero Section with Image */}
             <div className="relative h-[300px] md:h-[400px] bg-gray-800">
                 {course.image ? (
                     <img
@@ -69,10 +62,8 @@ export default function CourseDetailPage({ params }) {
                 </div>
             </div>
 
-            {/* Course Content with Tabs */}
             <div className="max-w-5xl mx-auto px-4 py-12">
                 <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-                    {/* Tabs Navigation */}
                     <div className="border-b border-gray-200">
                         <div className="flex flex-wrap">
                             <TabButton id="requirements" active={true}>
@@ -90,9 +81,7 @@ export default function CourseDetailPage({ params }) {
                         </div>
                     </div>
 
-                    {/* Tab Content */}
                     <div className="p-6 md:p-8">
-                        {/* Entry Requirements */}
                         <TabContent id="requirements" active={true}>
                             <h2 className="text-2xl font-bold text-blue-900 mb-4">Entry Requirements</h2>
                             <div className="prose max-w-none">
@@ -112,7 +101,6 @@ export default function CourseDetailPage({ params }) {
                             </div>
                         </TabContent>
 
-                        {/* Study Units */}
                         <TabContent id="units">
                             <h2 className="text-2xl font-bold text-blue-900 mb-4">Study Units</h2>
                             <div className="prose max-w-none">
@@ -128,7 +116,6 @@ export default function CourseDetailPage({ params }) {
                             </div>
                         </TabContent>
 
-                        {/* Learning Outcomes */}
                         <TabContent id="outcomes">
                             <h2 className="text-2xl font-bold text-blue-900 mb-4">Learning Outcomes</h2>
                             <div className="prose max-w-none">
@@ -144,7 +131,6 @@ export default function CourseDetailPage({ params }) {
                             </div>
                         </TabContent>
 
-                        {/* Future Progression */}
                         <TabContent id="progression">
                             <h2 className="text-2xl font-bold text-blue-900 mb-4">Future Progression</h2>
                             <div className="prose max-w-none">
@@ -166,7 +152,6 @@ export default function CourseDetailPage({ params }) {
                     </div>
                 </div>
 
-                {/* Enroll Button */}
                 <div className="mt-8 text-center">
                     <Link
                         href="/contact"
@@ -180,7 +165,6 @@ export default function CourseDetailPage({ params }) {
     );
 }
 
-// Tab Button Component
 function TabButton({ id, active, children }) {
     return (
         <button
@@ -190,12 +174,9 @@ function TabButton({ id, active, children }) {
                 }`}
             data-tab={id}
             onClick={() => {
-                // Hide all tab contents
                 document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-                // Show selected tab
                 const target = document.getElementById(`tab-${id}`);
                 if (target) target.classList.remove('hidden');
-                // Update active states
                 document.querySelectorAll('.tab-button').forEach(btn => {
                     btn.classList.remove('border-orange-500', 'text-orange-600');
                     btn.classList.add('text-gray-600');
@@ -212,7 +193,6 @@ function TabButton({ id, active, children }) {
     );
 }
 
-// Tab Content Component
 function TabContent({ id, active, children }) {
     return (
         <div
