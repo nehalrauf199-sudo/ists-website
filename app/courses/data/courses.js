@@ -1,22 +1,20 @@
 // app/courses/data/courses.js
-// UPDATED - 15 Main Categories with Courses
-
 import {
-    FaShieldAlt,      // Health and Safety
-    FaHeartbeat,      // First Aid
-    FaFire,           // Fire Safety
-    FaClipboardCheck, // ISO Lead Auditor
-    FaTools,          // Quality Control
-    FaBolt,           // Energy Management
-    FaHardHat,        // Lifting Operations
-    FaLaptop,         // IT Qualifications
-    FaUserTie,        // Business & Leadership
-    FaHospital,       // Health and Social Care
-    FaSchool,         // Early Learning
-    FaBuildingColumns,// Construction
-    FaOilCan,         // Oil and Gas
-    FaAppleAlt,       // Food Safety
-    FaHardDrive       // Technical/Vocational
+    FaShieldAlt,
+    FaHeartbeat,
+    FaFire,
+    FaClipboardCheck,
+    FaTools,
+    FaBolt,
+    FaHardHat,
+    FaLaptop,
+    FaUserTie,
+    FaHospital,
+    FaSchool,
+    FaBuilding,      // ← FIXED: was FaBuildingColumns
+    FaOilCan,
+    FaAppleAlt,
+    FaServer         // ← FIXED: was FaHardDrive
 } from 'react-icons/fa';
 
 export const categories = [
@@ -261,7 +259,7 @@ export const categories = [
     {
         id: 'construction',
         name: 'Construction & Civil Engineering',
-        icon: FaBuildingColumns,
+        icon: FaBuilding,
         description: 'Building, construction management, and civil engineering',
         courses: [
             {
@@ -315,7 +313,7 @@ export const categories = [
     {
         id: 'technical-vocational',
         name: 'Technical & Vocational Qualifications',
-        icon: FaHardDrive,
+        icon: FaServer,
         description: 'Hands-on technical skills, trades, and vocational training',
         courses: [
             {
@@ -332,7 +330,6 @@ export const categories = [
     }
 ];
 
-// Helper functions
 export const getAllCategories = () => categories;
 export const getCategoryById = (id) => categories.find(cat => cat.id === id);
 export const getCourseBySlug = (categoryId, slug) => {
