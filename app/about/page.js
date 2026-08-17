@@ -1,3 +1,26 @@
+import {
+    FaTrophy,
+    FaBullseye,
+    FaEye,
+    FaStar,
+    FaHandshake,
+    FaLightbulb,
+    FaGlobe,
+    FaUsers,
+    FaBook,
+    FaChalkboardTeacher,
+    FaTools,
+    FaBriefcase,
+    FaMoneyBillWave,
+    FaGraduationCap,
+    FaCertificate,
+    FaAward,
+    FaBuilding,
+    FaClock,
+    FaPhone,
+    FaEnvelope
+} from 'react-icons/fa';
+
 export default function About() {
     return (
         <div className="min-h-screen bg-gray-50">
@@ -37,7 +60,9 @@ export default function About() {
                             </p>
                         </div>
                         <div className="bg-gradient-to-br from-blue-100 to-orange-100 rounded-2xl p-8 text-center">
-                            <div className="text-6xl mb-4">🏆</div>
+                            <div className="flex justify-center mb-4">
+                                <FaTrophy className="w-20 h-20 text-orange-500" />
+                            </div>
                             <h3 className="text-2xl font-bold text-blue-900 mb-2">10+ Years of Excellence</h3>
                             <p className="text-gray-700">Trusted by thousands of professionals worldwide</p>
                         </div>
@@ -55,7 +80,9 @@ export default function About() {
                     <div className="grid md:grid-cols-2 gap-8">
                         {/* Mission Card */}
                         <div className="bg-white rounded-2xl shadow-lg p-8 text-center hover:shadow-2xl transition duration-300">
-                            <div className="text-5xl mb-4">🎯</div>
+                            <div className="flex justify-center mb-4">
+                                <FaBullseye className="w-16 h-16 text-orange-500" />
+                            </div>
                             <h3 className="text-2xl font-bold text-blue-900 mb-4">Our Mission</h3>
                             <p className="text-gray-700 leading-relaxed">
                                 To provide accessible, high-quality safety and technical education that empowers
@@ -64,7 +91,9 @@ export default function About() {
                         </div>
                         {/* Vision Card */}
                         <div className="bg-white rounded-2xl shadow-lg p-8 text-center hover:shadow-2xl transition duration-300">
-                            <div className="text-5xl mb-4">👁️</div>
+                            <div className="flex justify-center mb-4">
+                                <FaEye className="w-16 h-16 text-orange-500" />
+                            </div>
                             <h3 className="text-2xl font-bold text-blue-900 mb-4">Our Vision</h3>
                             <p className="text-gray-700 leading-relaxed">
                                 To become the leading institute for safety and technical training in the region,
@@ -85,22 +114,30 @@ export default function About() {
                     </div>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                         <div className="text-center p-4">
-                            <div className="text-4xl mb-3">⭐</div>
+                            <div className="flex justify-center mb-3">
+                                <FaStar className="w-10 h-10 text-orange-500" />
+                            </div>
                             <h4 className="font-bold text-blue-800 mb-2">Excellence</h4>
                             <p className="text-gray-600 text-sm">Striving for the highest quality in everything we do</p>
                         </div>
                         <div className="text-center p-4">
-                            <div className="text-4xl mb-3">🤝</div>
+                            <div className="flex justify-center mb-3">
+                                <FaHandshake className="w-10 h-10 text-orange-500" />
+                            </div>
                             <h4 className="font-bold text-blue-800 mb-2">Integrity</h4>
                             <p className="text-gray-600 text-sm">Honest and transparent in all our dealings</p>
                         </div>
                         <div className="text-center p-4">
-                            <div className="text-4xl mb-3">💡</div>
+                            <div className="flex justify-center mb-3">
+                                <FaLightbulb className="w-10 h-10 text-orange-500" />
+                            </div>
                             <h4 className="font-bold text-blue-800 mb-2">Innovation</h4>
                             <p className="text-gray-600 text-sm">Embracing new teaching methods and technologies</p>
                         </div>
                         <div className="text-center p-4">
-                            <div className="text-4xl mb-3">🌍</div>
+                            <div className="flex justify-center mb-3">
+                                <FaGlobe className="w-10 h-10 text-orange-500" />
+                            </div>
                             <h4 className="font-bold text-blue-800 mb-2">Global Mindset</h4>
                             <p className="text-gray-600 text-sm">Preparing students for international careers</p>
                         </div>
@@ -118,32 +155,44 @@ export default function About() {
                     </div>
                     <div className="grid md:grid-cols-3 gap-8">
                         <div className="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-2xl transition duration-300">
-                            <div className="text-4xl mb-3">🌍</div>
+                            <div className="flex justify-center mb-3">
+                                <FaGlobe className="w-12 h-12 text-orange-500" />
+                            </div>
                             <h3 className="text-xl font-bold text-blue-800 mb-2">International Recognition</h3>
                             <p className="text-gray-600">Certifications accepted worldwide, opening doors to global careers</p>
                         </div>
                         <div className="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-2xl transition duration-300">
-                            <div className="text-4xl mb-3">👨‍🏫</div>
+                            <div className="flex justify-center mb-3">
+                                <FaChalkboardTeacher className="w-12 h-12 text-orange-500" />
+                            </div>
                             <h3 className="text-xl font-bold text-blue-800 mb-2">Expert Trainers</h3>
                             <p className="text-gray-600">Learn from industry professionals with real-world experience</p>
                         </div>
                         <div className="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-2xl transition duration-300">
-                            <div className="text-4xl mb-3">📚</div>
+                            <div className="flex justify-center mb-3">
+                                <FaBook className="w-12 h-12 text-orange-500" />
+                            </div>
                             <h3 className="text-xl font-bold text-blue-800 mb-2">Flexible Learning</h3>
                             <p className="text-gray-600">Online, classroom, and blended learning options available</p>
                         </div>
                         <div className="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-2xl transition duration-300">
-                            <div className="text-4xl mb-3">🛠️</div>
+                            <div className="flex justify-center mb-3">
+                                <FaTools className="w-12 h-12 text-orange-500" />
+                            </div>
                             <h3 className="text-xl font-bold text-blue-800 mb-2">Practical Training</h3>
                             <p className="text-gray-600">Hands-on training with real-world scenarios and case studies</p>
                         </div>
                         <div className="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-2xl transition duration-300">
-                            <div className="text-4xl mb-3">💼</div>
+                            <div className="flex justify-center mb-3">
+                                <FaBriefcase className="w-12 h-12 text-orange-500" />
+                            </div>
                             <h3 className="text-xl font-bold text-blue-800 mb-2">Career Support</h3>
                             <p className="text-gray-600">Job placement assistance and career guidance for all students</p>
                         </div>
                         <div className="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-2xl transition duration-300">
-                            <div className="text-4xl mb-3">💰</div>
+                            <div className="flex justify-center mb-3">
+                                <FaMoneyBillWave className="w-12 h-12 text-orange-500" />
+                            </div>
                             <h3 className="text-xl font-bold text-blue-800 mb-2">Affordable Fees</h3>
                             <p className="text-gray-600">Quality education at competitive prices with installment options</p>
                         </div>
@@ -161,20 +210,32 @@ export default function About() {
                     </div>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center">
                         <div className="bg-gray-50 rounded-xl p-6 text-center hover:shadow-lg transition duration-300">
-                            <img src="/osha.jpg" alt="OSHA" className="w-20 h-20 mx-auto mb-3" />
+                            <div className="flex justify-center mb-3">
+                                <FaCertificate className="w-16 h-16 text-orange-500" />
+                            </div>
                             <p className="font-semibold text-blue-800">OSHA</p>
                             <p className="text-xs text-gray-500">Official Partner</p>
                         </div>
-
                         <div className="bg-gray-50 rounded-xl p-6 text-center hover:shadow-lg transition duration-300">
-                            <img src="/hiqual.png" alt="HiQual" className="w-20 h-20 mx-auto mb-3" />
+                            <div className="flex justify-center mb-3">
+                                <FaAward className="w-16 h-16 text-orange-500" />
+                            </div>
                             <p className="font-semibold text-blue-800">HiQual</p>
                             <p className="text-xs text-gray-500">Authorized Partner</p>
                         </div>
                         <div className="bg-gray-50 rounded-xl p-6 text-center hover:shadow-lg transition duration-300">
-                            <img src="/iosh.png" alt="IOSH" className="w-20 h-20 mx-auto mb-3" />
+                            <div className="flex justify-center mb-3">
+                                <FaGraduationCap className="w-16 h-16 text-orange-500" />
+                            </div>
                             <p className="font-semibold text-blue-800">IOSH</p>
                             <p className="text-xs text-gray-500">Accredited Provider</p>
+                        </div>
+                        <div className="bg-gray-50 rounded-xl p-6 text-center hover:shadow-lg transition duration-300">
+                            <div className="flex justify-center mb-3">
+                                <FaBuilding className="w-16 h-16 text-orange-500" />
+                            </div>
+                            <p className="font-semibold text-blue-800">OTHM</p>
+                            <p className="text-xs text-gray-500">Approved Centre</p>
                         </div>
                     </div>
                 </div>
@@ -185,19 +246,27 @@ export default function About() {
                 <div className="max-w-6xl mx-auto">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                         <div>
-                            <div className="text-4xl md:text-5xl font-bold mb-2">5,000+</div>
+                            <div className="text-4xl md:text-5xl font-bold mb-2 flex justify-center items-center gap-2">
+                                <FaUsers className="w-10 h-10" /> 5,000+
+                            </div>
                             <p className="text-blue-200">Students Trained</p>
                         </div>
                         <div>
-                            <div className="text-4xl md:text-5xl font-bold mb-2">50+</div>
+                            <div className="text-4xl md:text-5xl font-bold mb-2 flex justify-center items-center gap-2">
+                                <FaBook className="w-10 h-10" /> 50+
+                            </div>
                             <p className="text-blue-200">Certified Courses</p>
                         </div>
                         <div>
-                            <div className="text-4xl md:text-5xl font-bold mb-2">10+</div>
+                            <div className="text-4xl md:text-5xl font-bold mb-2 flex justify-center items-center gap-2">
+                                <FaChalkboardTeacher className="w-10 h-10" /> 10+
+                            </div>
                             <p className="text-blue-200">Expert Trainers</p>
                         </div>
                         <div>
-                            <div className="text-4xl md:text-5xl font-bold mb-2">100%</div>
+                            <div className="text-4xl md:text-5xl font-bold mb-2 flex justify-center items-center gap-2">
+                                <FaBriefcase className="w-10 h-10" /> 100%
+                            </div>
                             <p className="text-blue-200">Placement Assistance</p>
                         </div>
                     </div>
