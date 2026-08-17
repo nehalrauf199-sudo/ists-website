@@ -4,8 +4,8 @@ import WhatsAppWidget from './WhatsAppWidget';
 
 export default function LayoutWrapper({ children }) {
     const [settings, setSettings] = useState({
-        phone: '+92 316 1720551',
-        email: 'info@ists.com',
+        phone: '+92 308 5727897',
+        email: 'info@ists-institute.com',
         footerText: 'Institute of Safety & Technical Studies'
     });
 

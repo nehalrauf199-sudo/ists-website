@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react';
 
 export default function Contact() {
     const [settings, setSettings] = useState({
-        phone: '+92 316 1720551',
-        email: 'info@ists.com',
+        phone: '+92 308 5727897',
+        email: 'info@ists-institute.com',
         officeHours: '24/7 Available',
         facebook: '#',
         instagram: '#',

@@ -449,7 +449,7 @@ export default function AdminDashboard() {
                     ) : (
                         <form onSubmit={handleForgotPassword}>
                             <p className="text-gray-600 text-sm mb-4">Enter your email address and we'll send you instructions to reset your password.</p>
-                            <input type="email" value={resetEmail} onChange={(e) => setResetEmail(e.target.value)} placeholder="admin@ists.com" required className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 mb-4" />
+                            <input type="email" value={resetEmail} onChange={(e) => setResetEmail(e.target.value)} placeholder="info@ists-institute.com" required className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 mb-4" />
                             {resetMessage && <p className={`text-sm mb-4 ${resetMessage.includes('✅') ? 'text-green-600' : 'text-red-600'}`}>{resetMessage}</p>}
                             <button type="submit" className="w-full bg-gradient-to-r from-blue-900 to-orange-600 text-white font-bold py-3 rounded-lg hover:shadow-lg transition mb-3">Send Reset Link</button>
                             <button type="button" onClick={() => { setShowForgot(false); setResetMessage(''); setResetEmail(''); }} className="w-full text-gray-500 hover:text-gray-700 text-sm">Back to Login</button>

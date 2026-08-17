@@ -28,7 +28,7 @@ export default function WhatsAppWidget() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const phoneNumber = settings.phone ? settings.phone.replace(/[^0-9]/g, '') : '923161720551';
+    const phoneNumber = settings.phone ? settings.phone.replace(/[^0-9]/g, '') : '923085727897';
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
     const presetMessages = [
