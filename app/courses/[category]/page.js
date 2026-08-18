@@ -58,7 +58,7 @@ export default function CategoryPage({ params }) {
                 <div className="mb-8">
                     <div className="max-w-xl">
                         <SearchBar
-                            placeholder="Search courses in this category..."
+                            placeholder=""
                             onSearch={(term) => setSearchTerm(term)}
                         />
                     </div>
