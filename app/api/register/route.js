@@ -2,6 +2,15 @@ import { NextResponse } from 'next/server';
 import { connectDB } from '@/lib/db';
 import Registration from '@/models/Registration';
 
+// ✅ File size limit
+export const config = {
+    api: {
+        bodyParser: {
+            sizeLimit: '10mb',
+        },
+    },
+};
+
 export async function POST(request) {
     try {
         await connectDB();
@@ -19,7 +28,7 @@ export async function POST(request) {
 
         // Get files
         const cvFile = formData.get('cv');
-        const idDocumentFile = formData.get('idDocument'); // ← Combined field
+        const idDocumentFile = formData.get('idDocument');
 
         // Validate required fields
         if (!name || !phone || !email || !education || !course) {

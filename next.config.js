@@ -10,6 +10,12 @@ const nextConfig = {
             // Add more redirects here for other old slug URLs
         ];
     },
+    // ✅ Add this to increase file upload limit
+    experimental: {
+        serverActions: {
+            bodySizeLimit: '10mb',
+        },
+    },
 };
 
 module.exports = nextConfig;
