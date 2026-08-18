@@ -200,47 +200,6 @@ export default function About() {
                 </div>
             </section>
 
-            {/* Our Partners & Accreditations */}
-            <section className="py-16 px-4 bg-white">
-                <div className="max-w-6xl mx-auto">
-                    <div className="text-center mb-12">
-                        <h2 className="text-3xl font-bold text-blue-900 mb-4">Our Partners & Accreditations</h2>
-                        <div className="w-24 h-1 bg-orange-500 mx-auto"></div>
-                        <p className="text-gray-600 mt-4">Proudly associated with leading certification bodies worldwide</p>
-                    </div>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center">
-                        <div className="bg-gray-50 rounded-xl p-6 text-center hover:shadow-lg transition duration-300">
-                            <div className="flex justify-center mb-3">
-                                <FaCertificate className="w-16 h-16 text-orange-500" />
-                            </div>
-                            <p className="font-semibold text-blue-800">OSHA</p>
-                            <p className="text-xs text-gray-500">Official Partner</p>
-                        </div>
-                        <div className="bg-gray-50 rounded-xl p-6 text-center hover:shadow-lg transition duration-300">
-                            <div className="flex justify-center mb-3">
-                                <FaAward className="w-16 h-16 text-orange-500" />
-                            </div>
-                            <p className="font-semibold text-blue-800">HiQual</p>
-                            <p className="text-xs text-gray-500">Authorized Partner</p>
-                        </div>
-                        <div className="bg-gray-50 rounded-xl p-6 text-center hover:shadow-lg transition duration-300">
-                            <div className="flex justify-center mb-3">
-                                <FaGraduationCap className="w-16 h-16 text-orange-500" />
-                            </div>
-                            <p className="font-semibold text-blue-800">IOSH</p>
-                            <p className="text-xs text-gray-500">Accredited Provider</p>
-                        </div>
-                        <div className="bg-gray-50 rounded-xl p-6 text-center hover:shadow-lg transition duration-300">
-                            <div className="flex justify-center mb-3">
-                                <FaBuilding className="w-16 h-16 text-orange-500" />
-                            </div>
-                            <p className="font-semibold text-blue-800">OTHM</p>
-                            <p className="text-xs text-gray-500">Approved Centre</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
             {/* Statistics Section */}
             <section className="py-16 px-4 bg-gradient-to-r from-blue-900 to-blue-800 text-white">
                 <div className="max-w-6xl mx-auto">
