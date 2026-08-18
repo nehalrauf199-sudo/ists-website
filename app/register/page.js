@@ -14,9 +14,7 @@ export default function Register() {
         message: ''
     });
     const [cvFile, setCvFile] = useState(null);
-    const [idFrontFile, setIdFrontFile] = useState(null);
-    const [idBackFile, setIdBackFile] = useState(null);
-    const [passportFile, setPassportFile] = useState(null);
+    const [idDocumentFile, setIdDocumentFile] = useState(null); // Combined ID/Passport
     const [submitting, setSubmitting] = useState(false);
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState('');
@@ -85,9 +83,7 @@ export default function Register() {
 
         // Append files
         if (cvFile) data.append('cv', cvFile);
-        if (idFrontFile) data.append('idFront', idFrontFile);
-        if (idBackFile) data.append('idBack', idBackFile);
-        if (passportFile) data.append('passport', passportFile);
+        if (idDocumentFile) data.append('idDocument', idDocumentFile);
 
         try {
             const response = await fetch('/api/register', {
@@ -107,9 +103,7 @@ export default function Register() {
                     message: ''
                 });
                 setCvFile(null);
-                setIdFrontFile(null);
-                setIdBackFile(null);
-                setPassportFile(null);
+                setIdDocumentFile(null);
                 setCourseSearch('');
                 // Reset file inputs
                 document.querySelectorAll('input[type="file"]').forEach(input => input.value = '');
@@ -288,49 +282,19 @@ export default function Register() {
                             {cvFile && <p className="text-sm text-green-600 mt-1">✓ {cvFile.name} uploaded</p>}
                         </div>
 
-                        {/* ID Card Front - Optional */}
+                        {/* ID Document - Combined Optional Upload */}
                         <div className="mb-6">
                             <label className="block text-blue-900 font-bold mb-2">
-                                ID Card (Front) - Optional
+                                ID Card or Passport - Optional
                             </label>
                             <input
                                 type="file"
-                                onChange={(e) => handleFileChange(e, setIdFrontFile)}
+                                onChange={(e) => handleFileChange(e, setIdDocumentFile)}
                                 accept="image/*,.pdf"
                                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-orange-500 file:text-white hover:file:bg-orange-600"
                             />
-                            <p className="text-sm text-gray-500 mt-1">Accepted: JPG, PNG, PDF (Max 5MB)</p>
-                            {idFrontFile && <p className="text-sm text-green-600 mt-1">✓ {idFrontFile.name} uploaded</p>}
-                        </div>
-
-                        {/* ID Card Back - Optional */}
-                        <div className="mb-6">
-                            <label className="block text-blue-900 font-bold mb-2">
-                                ID Card (Back) - Optional
-                            </label>
-                            <input
-                                type="file"
-                                onChange={(e) => handleFileChange(e, setIdBackFile)}
-                                accept="image/*,.pdf"
-                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-orange-500 file:text-white hover:file:bg-orange-600"
-                            />
-                            <p className="text-sm text-gray-500 mt-1">Accepted: JPG, PNG, PDF (Max 5MB)</p>
-                            {idBackFile && <p className="text-sm text-green-600 mt-1">✓ {idBackFile.name} uploaded</p>}
-                        </div>
-
-                        {/* Passport Photo - Optional */}
-                        <div className="mb-6">
-                            <label className="block text-blue-900 font-bold mb-2">
-                                Passport Photo - Optional
-                            </label>
-                            <input
-                                type="file"
-                                onChange={(e) => handleFileChange(e, setPassportFile)}
-                                accept="image/*"
-                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-orange-500 file:text-white hover:file:bg-orange-600"
-                            />
-                            <p className="text-sm text-gray-500 mt-1">Accepted: JPG, PNG (Max 2MB)</p>
-                            {passportFile && <p className="text-sm text-green-600 mt-1">✓ {passportFile.name} uploaded</p>}
+                            <p className="text-sm text-gray-500 mt-1">Accepted: JPG, PNG, PDF (Max 5MB) - Upload ID Card (Front/Back) or Passport Photo</p>
+                            {idDocumentFile && <p className="text-sm text-green-600 mt-1">✓ {idDocumentFile.name} uploaded</p>}
                         </div>
 
                         {/* Additional Message */}
