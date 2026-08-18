@@ -27,7 +27,7 @@ export default function CoursesPage() {
                 {/* Search Bar */}
                 <div className="max-w-2xl mx-auto mb-12">
                     <SearchBar
-                        placeholder="Search for courses or categories..."
+                        placeholder=""
                         onSearch={(term) => setSearchTerm(term)}
                     />
                 </div>

@@ -19,9 +19,7 @@ export async function POST(request) {
 
         // Get files
         const cvFile = formData.get('cv');
-        const idFrontFile = formData.get('idFront');
-        const idBackFile = formData.get('idBack');
-        const passportFile = formData.get('passport');
+        const idDocumentFile = formData.get('idDocument'); // ← Combined field
 
         // Validate required fields
         if (!name || !phone || !email || !education || !course) {
@@ -50,9 +48,7 @@ export async function POST(request) {
 
         // Convert files to base64
         const cvBase64 = await fileToBase64(cvFile);
-        const idFrontBase64 = await fileToBase64(idFrontFile);
-        const idBackBase64 = await fileToBase64(idBackFile);
-        const passportBase64 = await fileToBase64(passportFile);
+        const idDocumentBase64 = await fileToBase64(idDocumentFile);
 
         // Create registration with base64 files
         const registration = new Registration({
@@ -66,12 +62,8 @@ export async function POST(request) {
             cv: cvBase64,
             cvFileName: cvFile.name,
             cvFileType: cvFile.type,
-            idFront: idFrontBase64,
-            idFrontFileName: idFrontFile?.name,
-            idBack: idBackBase64,
-            idBackFileName: idBackFile?.name,
-            passport: passportBase64,
-            passportFileName: passportFile?.name,
+            idDocument: idDocumentBase64,
+            idDocumentFileName: idDocumentFile?.name,
             status: 'pending'
         });
 

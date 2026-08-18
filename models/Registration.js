@@ -8,24 +8,11 @@ const RegistrationSchema = new mongoose.Schema({
     education: { type: String, required: true },
     experience: { type: String },
     message: { type: String },
-
-    // CV (required)
-    cv: { type: String, required: true }, // base64
+    cv: { type: String, required: true },
     cvFileName: { type: String },
     cvFileType: { type: String },
-
-    // ID Front (optional)
-    idFront: { type: String },
-    idFrontFileName: { type: String },
-
-    // ID Back (optional)
-    idBack: { type: String },
-    idBackFileName: { type: String },
-
-    // Passport (optional)
-    passport: { type: String },
-    passportFileName: { type: String },
-
+    idDocument: { type: String },
+    idDocumentFileName: { type: String },
     status: {
         type: String,
         enum: ['pending', 'approved', 'rejected'],
