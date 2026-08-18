@@ -10,7 +10,7 @@ import {
     FaFlask,          // QA/QC
     FaMicroscope,     // NDT
     FaGraduationCap,  // Diploma HSE
-    FaLeaf,           // Diploma Environment
+    FaLeaf,           // Diploma Environment & Green Building
     FaBuilding,       // Diploma Civil
     FaBolt,           // Electrical
     FaCogs,           // Mechanical
@@ -22,16 +22,13 @@ import {
     FaChalkboardTeacher, // Train the Trainer
     FaTruck,          // Transport
     FaStar,           // Quality Management
-    FaFlask,          // Lab Technician
     FaRulerCombined,  // Architectural
     FaGlobe,          // Surveying
     FaAppleAlt,       // Food Safety
-    FaLeaf,           // Green Building
     FaProjectDiagram, // Project Management
     FaCar,            // Defence Driving
     FaFolderOpen,     // Document Controller
     FaWrench,         // Technical
-    FaFire,           // B Gas CPD
     FaSun,            // Solar
     FaOilCan,         // Oil & Gas
     FaHospital        // Health & Safety
