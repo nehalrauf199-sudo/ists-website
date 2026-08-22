@@ -1,7 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { getAllCourses } from '../courses/data/courses';
+import { useState } from 'react';
 
 export default function Register() {
     const [formData, setFormData] = useState({
@@ -16,29 +15,10 @@ export default function Register() {
     const [cvFile, setCvFile] = useState(null);
     const [idDocumentFile, setIdDocumentFile] = useState(null);
     const [submitting, setSubmitting] = useState(false);
+    const [uploading, setUploading] = useState(false);
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState('');
-    const [courseSearch, setCourseSearch] = useState('');
-    const [showCourseDropdown, setShowCourseDropdown] = useState(false);
-    const [courses, setCourses] = useState([]);
-
-    // Load courses from hardcoded data
-    useEffect(() => {
-        const allCourses = getAllCourses();
-        setCourses(allCourses);
-    }, []);
-
-    // Filter courses based on search
-    const filteredCourses = courses.filter(course =>
-        course.name.toLowerCase().includes(courseSearch.toLowerCase()) ||
-        course.categoryName.toLowerCase().includes(courseSearch.toLowerCase())
-    );
-
-    const handleCourseSelect = (courseName) => {
-        setFormData({ ...formData, course: courseName });
-        setCourseSearch(courseName);
-        setShowCourseDropdown(false);
-    };
+    const [uploadProgress, setUploadProgress] = useState(0);
 
     const handleChange = (e) => {
         setFormData({
@@ -50,15 +30,52 @@ export default function Register() {
     const handleFileChange = (e, setFileFunc) => {
         const file = e.target.files[0];
         if (file) {
-            // No file size limit - unlimited
+            // Show file size warning if > 10MB
+            if (file.size > 10 * 1024 * 1024) {
+                if (!confirm(`File is ${(file.size / 1024 / 1024).toFixed(1)}MB. Large files may take longer to upload. Continue?`)) {
+                    e.target.value = '';
+                    return;
+                }
+            }
             setFileFunc(file);
+        }
+    };
+
+    const uploadFile = async (file) => {
+        if (!file) return null;
+
+        setUploading(true);
+        setUploadProgress(0);
+
+        const formData = new FormData();
+        formData.append('file', file);
+
+        try {
+            const response = await fetch('/api/upload', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Upload failed');
+            }
+
+            const data = await response.json();
+            setUploadProgress(100);
+            return data.url;
+        } catch (error) {
+            console.error('Upload error:', error);
+            throw error;
+        } finally {
+            setUploading(false);
+            setUploadProgress(0);
         }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Validate CV is required
         if (!cvFile) {
             setError('Please upload your CV/Resume (Required)');
             return;
@@ -67,23 +84,37 @@ export default function Register() {
         setSubmitting(true);
         setError('');
 
-        const data = new FormData();
-        data.append('course', formData.course || 'Not specified');
-        data.append('name', formData.name || 'Not specified');
-        data.append('phone', formData.phone || 'Not specified');
-        data.append('email', formData.email || 'Not specified');
-        data.append('education', formData.education || 'Not specified');
-        data.append('experience', formData.experience || '');
-        data.append('message', formData.message || '');
-
-        // Append files
-        if (cvFile) data.append('cv', cvFile);
-        if (idDocumentFile) data.append('idDocument', idDocumentFile);
-
         try {
+            // Upload CV first
+            const cvUrl = await uploadFile(cvFile);
+
+            // Upload ID document if exists
+            let idUrl = null;
+            if (idDocumentFile) {
+                idUrl = await uploadFile(idDocumentFile);
+            }
+
+            // Save registration to database
             const response = await fetch('/api/register', {
                 method: 'POST',
-                body: data
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    course: formData.course || 'Not specified',
+                    name: formData.name || 'Not specified',
+                    phone: formData.phone || 'Not specified',
+                    email: formData.email || 'Not specified',
+                    education: formData.education || 'Not specified',
+                    experience: formData.experience || '',
+                    message: formData.message || '',
+                    cvUrl: cvUrl,
+                    cvFileName: cvFile.name,
+                    cvFileSize: cvFile.size,
+                    idDocumentUrl: idUrl,
+                    idDocumentFileName: idDocumentFile?.name,
+                    idDocumentFileSize: idDocumentFile?.size
+                })
             });
 
             if (response.ok) {
@@ -99,15 +130,13 @@ export default function Register() {
                 });
                 setCvFile(null);
                 setIdDocumentFile(null);
-                setCourseSearch('');
-                // Reset file inputs
                 document.querySelectorAll('input[type="file"]').forEach(input => input.value = '');
             } else {
                 const result = await response.json();
                 setError(result.error || 'Something went wrong');
             }
         } catch (err) {
-            setError('Failed to submit. Please try again.');
+            setError(err.message || 'Failed to submit. Please try again.');
         } finally {
             setSubmitting(false);
         }
@@ -131,7 +160,6 @@ export default function Register() {
     return (
         <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-12 px-4">
             <div className="max-w-4xl mx-auto">
-                {/* Header */}
                 <div className="text-center mb-8">
                     <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-900 to-orange-600 bg-clip-text text-transparent">
                         Register for a Course
@@ -140,10 +168,9 @@ export default function Register() {
                     <p className="text-gray-600 mt-4">Fill out the form below to secure your spot</p>
                 </div>
 
-                {/* Registration Form */}
                 <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
                     <form onSubmit={handleSubmit} className="p-8">
-                        {/* Course - Manual Input Only (No Dropdown) */}
+                        {/* Course */}
                         <div className="mb-6">
                             <label className="block text-blue-900 font-bold mb-2">Course Name</label>
                             <input
@@ -222,7 +249,7 @@ export default function Register() {
                             />
                         </div>
 
-                        {/* CV Upload - Required */}
+                        {/* CV Upload */}
                         <div className="mb-6">
                             <label className="block text-blue-900 font-bold mb-2">
                                 Upload CV / Resume *
@@ -230,15 +257,19 @@ export default function Register() {
                             <input
                                 type="file"
                                 onChange={(e) => handleFileChange(e, setCvFile)}
-                                accept=".pdf,.doc,.docx"
+                                accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
                                 required
                                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-orange-500 file:text-white hover:file:bg-orange-600"
                             />
-                            <p className="text-sm text-gray-500 mt-1">Accepted formats: PDF, DOC, DOCX - <span className="text-red-500">Required</span></p>
-                            {cvFile && <p className="text-sm text-green-600 mt-1">✓ {cvFile.name} uploaded</p>}
+                            <p className="text-sm text-gray-500 mt-1">Accepted: PDF, DOC, DOCX, JPG, PNG - <span className="text-red-500">Required</span></p>
+                            {cvFile && (
+                                <p className="text-sm text-green-600 mt-1">
+                                    ✓ {cvFile.name} ({(cvFile.size / 1024 / 1024).toFixed(1)} MB)
+                                </p>
+                            )}
                         </div>
 
-                        {/* ID Document - Combined Optional Upload (No Label) */}
+                        {/* ID Document Upload */}
                         <div className="mb-6">
                             <input
                                 type="file"
@@ -247,7 +278,11 @@ export default function Register() {
                                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-orange-500 file:text-white hover:file:bg-orange-600"
                             />
                             <p className="text-sm text-gray-500 mt-1">Accepted: JPG, PNG, PDF - Upload ID Card or Passport (Optional)</p>
-                            {idDocumentFile && <p className="text-sm text-green-600 mt-1">✓ {idDocumentFile.name} uploaded</p>}
+                            {idDocumentFile && (
+                                <p className="text-sm text-green-600 mt-1">
+                                    ✓ {idDocumentFile.name} ({(idDocumentFile.size / 1024 / 1024).toFixed(1)} MB)
+                                </p>
+                            )}
                         </div>
 
                         {/* Additional Message */}
@@ -263,20 +298,24 @@ export default function Register() {
                             />
                         </div>
 
-                        {/* Error Message */}
                         {error && (
                             <div className="mb-4 p-3 bg-red-100 text-red-700 rounded-lg">
-                                {error}
+                                ❌ {error}
                             </div>
                         )}
 
-                        {/* Submit Button */}
+                        {uploading && (
+                            <div className="mb-4 p-3 bg-blue-100 text-blue-700 rounded-lg">
+                                ⏳ Uploading file... {uploadProgress > 0 && `${uploadProgress}%`}
+                            </div>
+                        )}
+
                         <button
                             type="submit"
-                            disabled={submitting}
+                            disabled={submitting || uploading}
                             className="w-full bg-gradient-to-r from-blue-900 to-orange-600 text-white font-bold py-3 px-6 rounded-lg hover:shadow-lg transition duration-300 disabled:opacity-50"
                         >
-                            {submitting ? 'Submitting...' : 'Submit Registration'}
+                            {submitting ? 'Submitting...' : uploading ? 'Uploading...' : 'Submit Registration'}
                         </button>
 
                         <p className="text-center text-gray-500 text-sm mt-4">

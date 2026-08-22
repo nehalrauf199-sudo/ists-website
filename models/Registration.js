@@ -8,11 +8,17 @@ const RegistrationSchema = new mongoose.Schema({
     education: { type: String, default: 'Not specified' },
     experience: { type: String, default: '' },
     message: { type: String, default: '' },
-    cv: { type: String, required: true },
+
+    // CV fields
+    cvUrl: { type: String, required: true },
     cvFileName: { type: String },
-    cvFileType: { type: String },
-    idDocument: { type: String },
+    cvFileSize: { type: Number },
+
+    // ID Document fields
+    idDocumentUrl: { type: String },
     idDocumentFileName: { type: String },
+    idDocumentFileSize: { type: Number },
+
     status: {
         type: String,
         enum: ['pending', 'approved', 'rejected'],
