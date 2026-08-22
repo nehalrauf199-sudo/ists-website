@@ -313,19 +313,27 @@ export default function AdminDashboard() {
                                                             <td className="p-4 text-sm max-w-xs truncate">{reg.course}</td>
                                                             <td className="p-4">
                                                                 <div className="space-y-1">
-                                                                    {reg.cv && (
-                                                                        <a href={reg.cv} download={reg.cvFileName || 'cv'} className="text-orange-600 text-xs hover:underline block">📄 CV</a>
+                                                                    {/* ✅ UPDATED: Check for Blob URLs */}
+                                                                    {reg.cvUrl && (
+                                                                        <a href={reg.cvUrl} target="_blank" className="text-orange-600 text-xs hover:underline block">📄 CV</a>
                                                                     )}
-                                                                    {reg.idFront && (
-                                                                        <a href={reg.idFront} download={reg.idFrontFileName || 'id-front'} className="text-blue-600 text-xs hover:underline block">🪪 ID Front</a>
+                                                                    {reg.idDocumentUrl && (
+                                                                        <a href={reg.idDocumentUrl} target="_blank" className="text-blue-600 text-xs hover:underline block">🪪 ID/Passport</a>
                                                                     )}
-                                                                    {reg.idBack && (
-                                                                        <a href={reg.idBack} download={reg.idBackFileName || 'id-back'} className="text-blue-600 text-xs hover:underline block">🪪 ID Back</a>
+                                                                    {/* ⚠️ OLD FIELDS (for backward compatibility) */}
+                                                                    {reg.cv && !reg.cvUrl && (
+                                                                        <a href={reg.cv} download={reg.cvFileName || 'cv'} className="text-orange-600 text-xs hover:underline block">📄 CV (old)</a>
                                                                     )}
-                                                                    {reg.passport && (
-                                                                        <a href={reg.passport} download={reg.passportFileName || 'passport'} className="text-green-600 text-xs hover:underline block">🛂 Passport</a>
+                                                                    {reg.idFront && !reg.idDocumentUrl && (
+                                                                        <a href={reg.idFront} download={reg.idFrontFileName || 'id-front'} className="text-blue-600 text-xs hover:underline block">🪪 ID Front (old)</a>
                                                                     )}
-                                                                    {!reg.cv && !reg.idFront && !reg.idBack && !reg.passport && (
+                                                                    {reg.idBack && !reg.idDocumentUrl && (
+                                                                        <a href={reg.idBack} download={reg.idBackFileName || 'id-back'} className="text-blue-600 text-xs hover:underline block">🪪 ID Back (old)</a>
+                                                                    )}
+                                                                    {reg.passport && !reg.idDocumentUrl && (
+                                                                        <a href={reg.passport} download={reg.passportFileName || 'passport'} className="text-green-600 text-xs hover:underline block">🛂 Passport (old)</a>
+                                                                    )}
+                                                                    {!reg.cvUrl && !reg.idDocumentUrl && !reg.cv && !reg.idFront && !reg.idBack && !reg.passport && (
                                                                         <span className="text-gray-400 text-xs">No files</span>
                                                                     )}
                                                                 </div>
