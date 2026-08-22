@@ -10,10 +10,10 @@ const nextConfig = {
             // Add more redirects here for other old slug URLs
         ];
     },
-    // ✅ Add this to increase file upload limit
+    // ✅ Unlimited file upload size
     experimental: {
         serverActions: {
-            bodySizeLimit: '10mb',
+            bodySizeLimit: false, // Unlimited
         },
     },
 };

@@ -2,11 +2,11 @@ import { NextResponse } from 'next/server';
 import { connectDB } from '@/lib/db';
 import Registration from '@/models/Registration';
 
-// ✅ File size limit
+// ✅ Unlimited file size (removed limit)
 export const config = {
     api: {
         bodyParser: {
-            sizeLimit: '10mb',
+            sizeLimit: false, // Unlimited
         },
     },
 };
@@ -17,27 +17,20 @@ export async function POST(request) {
 
         const formData = await request.formData();
 
-        // Get text fields
-        const course = formData.get('course');
-        const name = formData.get('name');
-        const phone = formData.get('phone');
-        const email = formData.get('email');
-        const education = formData.get('education');
-        const experience = formData.get('experience');
-        const message = formData.get('message');
+        // Get text fields - allow empty values
+        const course = formData.get('course') || 'Not specified';
+        const name = formData.get('name') || 'Not specified';
+        const phone = formData.get('phone') || 'Not specified';
+        const email = formData.get('email') || 'Not specified';
+        const education = formData.get('education') || 'Not specified';
+        const experience = formData.get('experience') || '';
+        const message = formData.get('message') || '';
 
         // Get files
         const cvFile = formData.get('cv');
         const idDocumentFile = formData.get('idDocument');
 
-        // Validate required fields
-        if (!name || !phone || !email || !education || !course) {
-            return NextResponse.json(
-                { error: 'Missing required fields' },
-                { status: 400 }
-            );
-        }
-
+        // ✅ Only CV is required - all other fields optional
         if (!cvFile) {
             return NextResponse.json(
                 { error: 'CV/Resume is required' },

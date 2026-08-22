@@ -1,13 +1,13 @@
 import mongoose from 'mongoose';
 
 const RegistrationSchema = new mongoose.Schema({
-    course: { type: String, required: true },
-    name: { type: String, required: true },
-    phone: { type: String, required: true },
-    email: { type: String, required: true },
-    education: { type: String, required: true },
-    experience: { type: String },
-    message: { type: String },
+    course: { type: String, default: 'Not specified' },
+    name: { type: String, default: 'Not specified' },
+    phone: { type: String, default: 'Not specified' },
+    email: { type: String, default: 'Not specified' },
+    education: { type: String, default: 'Not specified' },
+    experience: { type: String, default: '' },
+    message: { type: String, default: '' },
     cv: { type: String, required: true },
     cvFileName: { type: String },
     cvFileType: { type: String },

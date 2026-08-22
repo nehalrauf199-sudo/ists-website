@@ -14,7 +14,7 @@ export default function Register() {
         message: ''
     });
     const [cvFile, setCvFile] = useState(null);
-    const [idDocumentFile, setIdDocumentFile] = useState(null); // Combined ID/Passport
+    const [idDocumentFile, setIdDocumentFile] = useState(null);
     const [submitting, setSubmitting] = useState(false);
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState('');
@@ -50,12 +50,7 @@ export default function Register() {
     const handleFileChange = (e, setFileFunc) => {
         const file = e.target.files[0];
         if (file) {
-            // Validate file size (5MB max)
-            if (file.size > 5 * 1024 * 1024) {
-                alert('File size must be less than 5MB');
-                e.target.value = '';
-                return;
-            }
+            // No file size limit - unlimited
             setFileFunc(file);
         }
     };
@@ -73,13 +68,13 @@ export default function Register() {
         setError('');
 
         const data = new FormData();
-        data.append('course', formData.course);
-        data.append('name', formData.name);
-        data.append('phone', formData.phone);
-        data.append('email', formData.email);
-        data.append('education', formData.education);
-        data.append('experience', formData.experience);
-        data.append('message', formData.message);
+        data.append('course', formData.course || 'Not specified');
+        data.append('name', formData.name || 'Not specified');
+        data.append('phone', formData.phone || 'Not specified');
+        data.append('email', formData.email || 'Not specified');
+        data.append('education', formData.education || 'Not specified');
+        data.append('experience', formData.experience || '');
+        data.append('message', formData.message || '');
 
         // Append files
         if (cvFile) data.append('cv', cvFile);
@@ -148,121 +143,82 @@ export default function Register() {
                 {/* Registration Form */}
                 <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
                     <form onSubmit={handleSubmit} className="p-8">
-                        {/* Course Selection with Search */}
-                        <div className="mb-6 relative">
-                            <label className="block text-blue-900 font-bold mb-2">Select Course *</label>
-                            <div className="relative">
-                                <input
-                                    type="text"
-                                    value={courseSearch}
-                                    onChange={(e) => {
-                                        setCourseSearch(e.target.value);
-                                        setShowCourseDropdown(true);
-                                        if (formData.course) {
-                                            setFormData({ ...formData, course: '' });
-                                        }
-                                    }}
-                                    onFocus={() => setShowCourseDropdown(true)}
-                                    placeholder="🔍 Search for a course..."
-                                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
-                                />
-                                {showCourseDropdown && courseSearch && (
-                                    <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto">
-                                        {filteredCourses.length > 0 ? (
-                                            filteredCourses.map((course, index) => (
-                                                <div
-                                                    key={index}
-                                                    onClick={() => handleCourseSelect(course.name)}
-                                                    className="px-4 py-2 hover:bg-orange-50 cursor-pointer border-b border-gray-100 text-sm"
-                                                >
-                                                    <div className="font-medium">{course.name}</div>
-                                                    <div className="text-xs text-gray-500">{course.categoryName}</div>
-                                                </div>
-                                            ))
-                                        ) : (
-                                            <div className="px-4 py-2 text-gray-500 text-sm">
-                                                No courses found. You can type any course name.
-                                            </div>
-                                        )}
-                                    </div>
-                                )}
-                            </div>
-                            {formData.course && (
-                                <p className="text-sm text-green-600 mt-1">
-                                    ✓ Selected: {formData.course}
-                                </p>
-                            )}
-                            <p className="text-sm text-gray-500 mt-1">
-                                {courses.length} courses available. Type to search or enter manually.
-                            </p>
+                        {/* Course - Manual Input Only (No Dropdown) */}
+                        <div className="mb-6">
+                            <label className="block text-blue-900 font-bold mb-2">Course Name</label>
+                            <input
+                                type="text"
+                                name="course"
+                                value={formData.course}
+                                onChange={handleChange}
+                                placeholder="Enter your course name (e.g., OSHA 30-Hour, IOSH Managing Safely, etc.)"
+                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                            />
+                            <p className="text-sm text-gray-500 mt-1">You can type any course name - even if not listed</p>
                         </div>
 
                         {/* Name */}
                         <div className="mb-6">
-                            <label className="block text-blue-900 font-bold mb-2">Full Name *</label>
+                            <label className="block text-blue-900 font-bold mb-2">Full Name</label>
                             <input
                                 type="text"
                                 name="name"
                                 value={formData.name}
                                 onChange={handleChange}
-                                required
-                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                                 placeholder="Enter your full name"
+                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                             />
                         </div>
 
                         {/* Phone */}
                         <div className="mb-6">
-                            <label className="block text-blue-900 font-bold mb-2">Phone Number *</label>
+                            <label className="block text-blue-900 font-bold mb-2">Phone Number</label>
                             <input
                                 type="tel"
                                 name="phone"
                                 value={formData.phone}
                                 onChange={handleChange}
-                                required
-                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                                 placeholder="+92 300 1234567"
+                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                             />
                         </div>
 
                         {/* Email */}
                         <div className="mb-6">
-                            <label className="block text-blue-900 font-bold mb-2">Email Address *</label>
+                            <label className="block text-blue-900 font-bold mb-2">Email Address</label>
                             <input
                                 type="email"
                                 name="email"
                                 value={formData.email}
                                 onChange={handleChange}
-                                required
-                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                                 placeholder="your@email.com"
+                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                             />
                         </div>
 
                         {/* Education */}
                         <div className="mb-6">
-                            <label className="block text-blue-900 font-bold mb-2">Highest Education *</label>
+                            <label className="block text-blue-900 font-bold mb-2">Highest Education</label>
                             <textarea
                                 name="education"
                                 value={formData.education}
                                 onChange={handleChange}
-                                required
                                 rows="2"
-                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                                 placeholder="e.g., Bachelor's in Engineering, Diploma in Safety, etc."
+                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                             />
                         </div>
 
                         {/* Experience */}
                         <div className="mb-6">
-                            <label className="block text-blue-900 font-bold mb-2">Work Experience (if any)</label>
+                            <label className="block text-blue-900 font-bold mb-2">Work Experience</label>
                             <textarea
                                 name="experience"
                                 value={formData.experience}
                                 onChange={handleChange}
                                 rows="2"
-                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                                 placeholder="e.g., 2 years as Safety Officer, 5 years in Construction, etc."
+                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                             />
                         </div>
 
@@ -278,35 +234,32 @@ export default function Register() {
                                 required
                                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-orange-500 file:text-white hover:file:bg-orange-600"
                             />
-                            <p className="text-sm text-gray-500 mt-1">Accepted formats: PDF, DOC, DOCX (Max 5MB) - <span className="text-red-500">Required</span></p>
+                            <p className="text-sm text-gray-500 mt-1">Accepted formats: PDF, DOC, DOCX - <span className="text-red-500">Required</span></p>
                             {cvFile && <p className="text-sm text-green-600 mt-1">✓ {cvFile.name} uploaded</p>}
                         </div>
 
-                        {/* ID Document - Combined Optional Upload */}
+                        {/* ID Document - Combined Optional Upload (No Label) */}
                         <div className="mb-6">
-                            <label className="block text-blue-900 font-bold mb-2">
-                                ID Card or Passport - Optional
-                            </label>
                             <input
                                 type="file"
                                 onChange={(e) => handleFileChange(e, setIdDocumentFile)}
                                 accept="image/*,.pdf"
                                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-orange-500 file:text-white hover:file:bg-orange-600"
                             />
-                            <p className="text-sm text-gray-500 mt-1">Accepted: JPG, PNG, PDF (Max 5MB) - Upload ID Card (Front/Back) or Passport Photo</p>
+                            <p className="text-sm text-gray-500 mt-1">Accepted: JPG, PNG, PDF - Upload ID Card or Passport (Optional)</p>
                             {idDocumentFile && <p className="text-sm text-green-600 mt-1">✓ {idDocumentFile.name} uploaded</p>}
                         </div>
 
                         {/* Additional Message */}
                         <div className="mb-6">
-                            <label className="block text-blue-900 font-bold mb-2">Additional Message (Optional)</label>
+                            <label className="block text-blue-900 font-bold mb-2">Additional Message</label>
                             <textarea
                                 name="message"
                                 value={formData.message}
                                 onChange={handleChange}
                                 rows="3"
-                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                                 placeholder="Any questions or special requirements?"
+                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                             />
                         </div>
 
