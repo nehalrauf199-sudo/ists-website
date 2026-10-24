@@ -73,24 +73,11 @@ export default function CategoryPage({ params }) {
                             className="block"
                         >
                             <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 border border-gray-100">
-                                {/* Course Image */}
-                                <div className="relative h-48 bg-gray-200">
-                                    {course.image ? (
-                                        <img
-                                            src={course.image}
-                                            alt={course.name}
-                                            className="w-full h-full object-cover"
-                                            loading="lazy"
-                                        />
-                                    ) : (
-                                        <div className="w-full h-full flex items-center justify-center bg-gradient-to-r from-orange-400 to-orange-600">
-                                            <span className="text-white text-lg font-semibold">
-                                                {categoryData.name}
-                                            </span>
-                                        </div>
-                                    )}
+                                {/* ✅ ICON INSTEAD OF IMAGE */}
+                                <div className="relative h-48 bg-gradient-to-br from-blue-900 to-orange-600 flex items-center justify-center">
+                                    <Icon className="w-24 h-24 text-white opacity-80" />
                                     {/* Duration Badge */}
-                                    <div className="absolute bottom-3 right-3 bg-blue-900 text-white px-3 py-1 rounded-full text-xs font-medium">
+                                    <div className="absolute bottom-3 right-3 bg-white text-blue-900 px-3 py-1 rounded-full text-xs font-medium">
                                         {course.duration || 'Flexible Duration'}
                                     </div>
                                 </div>

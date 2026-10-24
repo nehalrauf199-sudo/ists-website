@@ -13,7 +13,6 @@ export default function Register() {
         message: ''
     });
     const [cvFile, setCvFile] = useState(null);
-    const [idDocumentFile, setIdDocumentFile] = useState(null);
     const [submitting, setSubmitting] = useState(false);
     const [uploading, setUploading] = useState(false);
     const [success, setSuccess] = useState(false);
@@ -85,14 +84,8 @@ export default function Register() {
         setError('');
 
         try {
-            // Upload CV first
+            // Upload CV
             const cvUrl = await uploadFile(cvFile);
-
-            // Upload ID document if exists
-            let idUrl = null;
-            if (idDocumentFile) {
-                idUrl = await uploadFile(idDocumentFile);
-            }
 
             // Save registration to database
             const response = await fetch('/api/register', {
@@ -110,10 +103,7 @@ export default function Register() {
                     message: formData.message || '',
                     cvUrl: cvUrl,
                     cvFileName: cvFile.name,
-                    cvFileSize: cvFile.size,
-                    idDocumentUrl: idUrl,
-                    idDocumentFileName: idDocumentFile?.name,
-                    idDocumentFileSize: idDocumentFile?.size
+                    cvFileSize: cvFile.size
                 })
             });
 
@@ -129,7 +119,6 @@ export default function Register() {
                     message: ''
                 });
                 setCvFile(null);
-                setIdDocumentFile(null);
                 document.querySelectorAll('input[type="file"]').forEach(input => input.value = '');
             } else {
                 const result = await response.json();
@@ -249,7 +238,7 @@ export default function Register() {
                             />
                         </div>
 
-                        {/* CV Upload */}
+                        {/* CV Upload - ONLY FILE UPLOAD */}
                         <div className="mb-6">
                             <label className="block text-blue-900 font-bold mb-2">
                                 Upload CV / Resume *
@@ -265,22 +254,6 @@ export default function Register() {
                             {cvFile && (
                                 <p className="text-sm text-green-600 mt-1">
                                     ✓ {cvFile.name} ({(cvFile.size / 1024 / 1024).toFixed(1)} MB)
-                                </p>
-                            )}
-                        </div>
-
-                        {/* ID Document Upload */}
-                        <div className="mb-6">
-                            <input
-                                type="file"
-                                onChange={(e) => handleFileChange(e, setIdDocumentFile)}
-                                accept="image/*,.pdf"
-                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-orange-500 file:text-white hover:file:bg-orange-600"
-                            />
-                            <p className="text-sm text-gray-500 mt-1">Accepted: JPG, PNG, PDF - Upload ID Card or Passport (Optional)</p>
-                            {idDocumentFile && (
-                                <p className="text-sm text-green-600 mt-1">
-                                    ✓ {idDocumentFile.name} ({(idDocumentFile.size / 1024 / 1024).toFixed(1)} MB)
                                 </p>
                             )}
                         </div>
